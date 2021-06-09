@@ -8,7 +8,6 @@ import AlogCategoryList from './AlogCategoryList';
 function AlogCategory(props) {
 
     const categorySample = props.categorySample;
-    const categoryDefault = props.categoryDefault;
     const langTitle = {
         ko:{
             droplist: ["최신순","조회순","좋아요순","퍼가기순","훈훈알순"],
@@ -22,8 +21,8 @@ function AlogCategory(props) {
     }
 
     const [name, changeName] = useState(0);
+    const [highlight, setHighlight] = useState(0);
 
-    const [alogCategory, setAlogCategory] = useState(categoryDefault);
 
     return (
         <CategoryWrap>
@@ -36,24 +35,23 @@ function AlogCategory(props) {
                         <DropList onClick={ ()=>{ changeName(2); } }>{droplist[2]}</DropList>
                         <DropList onClick={ ()=>{ changeName(3); } }>{droplist[3]}</DropList>
                         <DropList onClick={ ()=>{ changeName(4); } }>{droplist[4]}</DropList>
-                    </DropdownBox> : 
+                    </DropdownBox> 
+                    : 
                     <ShowBox>
                         <TabContent name={name} droplist={droplist}/>
                     </ShowBox>
                     }
             </Sort>
-            <CategoryBox onClickCapture={() => {setAlogCategory(categorySample)}}>
-                {alogCategory.map( (category, i) => {
+            <CategoryBox >
+                {categorySample.map( (category, index) => {
                     return (
-                    <AlogCategoryEl  imgList={category} key={i} select={i} alogCategory={alogCategory} 
-                    setAlogCategory={setAlogCategory} categorySample={categorySample}  />
+                    <AlogCategoryEl  imgList={category} key={category.id} highlight={highlight} setHighlight={setHighlight}
+                      selected={index} />
                     )
                 })}
             </CategoryBox>
             <CategoryListBox>
-                {props.alogCategoryList.map(list => (
-                    <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
-                ))}
+                <ContentsBox highlight={highlight} setHighlight={setHighlight} alogCategoryList0={props.alogCategoryList0} alogCategoryList1={props.alogCategoryList1} alogCategoryList2={props.alogCategoryList2} alogCategoryList3={props.alogCategoryList3} alogCategoryList4={props.alogCategoryList4} alogCategoryList5={props.alogCategoryList5} alogCategoryList6={props.alogCategoryList6} alogCategoryList7={props.alogCategoryList7} alogCategoryList8={props.alogCategoryList8} alogCategoryList9={props.alogCategoryList9} alogCategoryList10={props.alogCategoryList10} />
             </CategoryListBox>
         </CategoryWrap>
     );
@@ -70,9 +68,123 @@ function TabContent(props){
        return <DropList>{props.droplist[3]}<Triangle/></DropList>
     } else if (props.name === 4){ 
        return <DropList>{props.droplist[4]}<Triangle/></DropList>
-        } else { 
+    } else { 
         return <DropList>{props.droplist[0]}<Triangle/></DropList>
-      }
+    }
+}
+
+function ContentsBox(props){
+    if(props.highlight === 0){
+        return(
+        <>
+        {
+            props.alogCategoryList0.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 1){
+        return(
+        <>
+        {
+            props.alogCategoryList1.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 2){
+        return(
+        <>
+        {
+            props.alogCategoryList2.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 3){
+        return(
+        <>
+        {
+            props.alogCategoryList3.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 4){
+        return(
+        <>
+        {
+            props.alogCategoryList4.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 5){
+        return(
+        <>
+        {
+            props.alogCategoryList5.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 6){
+        return(
+        <>
+        {
+            props.alogCategoryList6.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 7){
+        return(
+        <>
+        {
+            props.alogCategoryList7.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 8){
+        return(
+        <>
+        {
+            props.alogCategoryList8.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 9){
+        return(
+        <>
+        {
+            props.alogCategoryList9.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }else if(props.highlight === 10){
+        return(
+        <>
+        {
+            props.alogCategoryList10.map(list => (
+            <AlogCategoryList cateList={list} key={list.id}></AlogCategoryList>
+            ))
+        }
+        </>
+        )
+    }
 }
 
 const Sort = styled.nav`
