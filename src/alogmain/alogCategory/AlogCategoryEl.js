@@ -1,48 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-// img:'category03_off.svg',
-//             img_on: 'category03_on.svg',
-//             text: '생활',
-//             state:false
-
-const ClickCategory = (alogCategory, setAlogCategory, categorySample, select) => {
-    const one = [{ 
-        img: alogCategory[select].img,
-        img_on: alogCategory[select].img_on,
-        text : alogCategory[select].text,
-        state : true
-    }];
-    
-    const B =   alogCategory.filter( (x, idx) => {
-        return idx < select;
-    } );
-    const D=   alogCategory.filter( (x, idx) => {
-        return idx > select;
-    } );
-
-    setAlogCategory(B.concat(one).concat(D));
-
-
-}
-
-
 function AlogCategoryEl(props) {
+
+    const [place, setPlace] = useState(false);
+
+    useEffect(()=>{
+        if (props.highlight === props.selected) {
+            setPlace(true);
+        } else {
+            setPlace(false);
+        }
+    }, [props.highlight]);
+
     return (
         <CategoryElDiv onClick={() => {
-            console.log("e");
-            ClickCategory(props.alogCategory, props.setAlogCategory, props.categorySample, props.select );
+            props.setHighlight(props.selected);
         }}
         >
             <CategoryImg
                 src={
-                    props.imgList.state === false
+                    place === false
                     ? process.env.PUBLIC_URL + '/images/category/' + props.imgList.img
                     : process.env.PUBLIC_URL + '/images/category/' + props.imgList.img_on
                     }
             >
             </CategoryImg>
-            <CategoryText>{props.imgList.text}</CategoryText>
+            <CategoryText place={place}>{props.imgList.text}</CategoryText>
         </CategoryElDiv>
     );
 }
@@ -74,7 +58,7 @@ const CategoryText = styled.span`
     top:100%;
     left:0;
     font-weight:bold;
-    color:#444;
+    color:${props => props.place === true ?"#fd0031":"#444"};
     letter-spacing:-2px;
 
     @media (min-width:480px) {
