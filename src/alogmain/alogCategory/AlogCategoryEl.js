@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
+// img:'category03_off.svg',
+//             img_on: 'category03_on.svg',
+//             text: '생활',
+//             state:false
+
+const ClickCategory = (alogCategory, setAlogCategory, categorySample, select) => {
+    const one = [{ 
+        img: alogCategory[select].img,
+        img_on: alogCategory[select].img_on,
+        text : alogCategory[select].text,
+        state : true
+    }];
+    
+    const B =   alogCategory.filter( (x, idx) => {
+        return idx < select;
+    } );
+    const D=   alogCategory.filter( (x, idx) => {
+        return idx > select;
+    } );
+
+    setAlogCategory(B.concat(one).concat(D));
+
+
+}
+
+
 function AlogCategoryEl(props) {
-
-    const [place, setPlace] = useState(false);
-
-    useEffect(()=>{
-        if (props.highlight === props.selected) {
-            setPlace(true);
-        } else {
-            setPlace(false);
-        }
-    }, [props.highlight]);
-
     return (
         <CategoryElDiv onClick={() => {
-            props.setHighlight(props.selected);
+            console.log("e");
+            ClickCategory(props.alogCategory, props.setAlogCategory, props.categorySample, props.select );
         }}
         >
             <CategoryImg
                 src={
-                    place === false
+                    props.imgList.state === false
                     ? process.env.PUBLIC_URL + '/images/category/' + props.imgList.img
                     : process.env.PUBLIC_URL + '/images/category/' + props.imgList.img_on
                     }
             >
             </CategoryImg>
-            <CategoryText place={place}>{props.imgList.text}</CategoryText>
+            <CategoryText>{props.imgList.text}</CategoryText>
         </CategoryElDiv>
     );
 }
@@ -58,7 +74,7 @@ const CategoryText = styled.span`
     top:100%;
     left:0;
     font-weight:bold;
-    color:${props => props.place === true ?"#fd0031":"#444"};
+    color:#444;
     letter-spacing:-2px;
 
     @media (min-width:480px) {
