@@ -44,7 +44,37 @@ import AlogFooter from '../alogfooter/AlogFooter';
                     title: '오늘은 금요일이다.',
                     writer: 'Vivien',
                     bgimg: 'bg05.jpg'
-                }
+                },
+                {
+                    id: 6,
+                    title: '오늘은 금요일이다.',
+                    writer: 'Vivien',
+                    bgimg: 'bg01.jpg'
+                },
+                {
+                    id: 7,
+                    title: '오늘은 금요일이다.',
+                    writer: 'Vivien',
+                    bgimg: 'bg02.jpg'
+                },
+                {
+                    id: 8,
+                    title: '오늘은 금요일이다.',
+                    writer: 'Vivien',
+                    bgimg: 'bg03.jpg'
+                },
+                {
+                    id: 9,
+                    title: '오늘은 금요일이다.',
+                    writer: 'Vivien',
+                    bgimg: 'bg04.jpg'
+                },
+                {
+                    id: 10,
+                    title: '오늘은 금요일이다.',
+                    writer: 'Vivien',
+                    bgimg: 'bg05.jpg'
+                },
             ],
             alogCategoryList: [
                 {
