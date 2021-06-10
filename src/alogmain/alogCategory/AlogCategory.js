@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AlogCategoryEl from './AlogCategoryEl';
 import AlogCategoryList from './AlogCategoryList';
@@ -6,6 +6,8 @@ import AlogCategoryList from './AlogCategoryList';
 
 
 function AlogCategory(props) {
+
+ 
 
     const categorySample = props.categorySample;
     const langTitle = {
@@ -23,6 +25,186 @@ function AlogCategory(props) {
     const [name, changeName] = useState(0);
     const [highlight, setHighlight] = useState(0);
 
+    function sortHour(){ 
+        props.alogCategoryList0.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList1.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList2.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList3.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList4.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList5.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList6.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList7.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList8.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList9.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+        props.alogCategoryList10.sort(function(a, b){
+        return a.hour - b.hour;
+        });
+    }
+    function sortInquire(){ 
+        props.alogCategoryList0.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList1.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList2.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList3.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList4.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList5.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList6.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList7.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList8.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList9.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+        props.alogCategoryList10.sort(function(a, b){
+        return b.inquire - a.inquire;
+        });
+    }
+    function sortGood(){ 
+        props.alogCategoryList0.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList1.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList2.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList3.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList4.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList5.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList6.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList7.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList8.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList9.sort(function(a, b){
+        return b.good - a.good;
+        });
+        props.alogCategoryList10.sort(function(a, b){
+        return b.good - a.good;
+        });
+    }
+    function sortTake(){ 
+        props.alogCategoryList0.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList1.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList2.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList3.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList4.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList5.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList6.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList7.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList8.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList9.sort(function(a, b){
+        return b.take - a.take;
+        });
+        props.alogCategoryList10.sort(function(a, b){
+        return b.take - a.take;
+        });
+    }
+    function sortHun(){ 
+        props.alogCategoryList0.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList1.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList2.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList3.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList4.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList5.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList6.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList7.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList8.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList9.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+        props.alogCategoryList10.sort(function(a, b){
+        return b.hun - a.hun;
+        });
+    }
+
+  
+        useEffect(()=>{
+            sortHour();
+        },[]);
 
     return (
         <CategoryWrap>
@@ -30,11 +212,11 @@ function AlogCategory(props) {
             <Sort onClick={showMenu}>
             {isShow ? 
                     <DropdownBox>
-                        <DropList onClick={ ()=>{ changeName(0); } }>{droplist[0]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(1); } }>{droplist[1]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(2); } }>{droplist[2]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(3); } }>{droplist[3]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(4); } }>{droplist[4]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(0); sortHour() } }>{droplist[0]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(1); sortInquire() } }>{droplist[1]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(2); sortGood() } }>{droplist[2]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(3); sortTake() } }>{droplist[3]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(4); sortHun() } }>{droplist[4]}</DropList>
                     </DropdownBox> 
                     : 
                     <ShowBox>
