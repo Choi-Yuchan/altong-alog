@@ -29,9 +29,14 @@ const langHamburger = {
         today: 1173,
       },
     ],
-    alarmContent : ["천대리님이 훈훈알을 1,000알 증정했습니다."],
+    alarm:{
+        alarmNoticeFront : "새롭게 공지 된 사항이",
+        alarmNoticeCount: 2,
+        alarmNoticeBack : "건 있습니다."
+    },
     mentoAlarm : [
-      {id: '우주인', 
+    { 
+      id: '우주인', 
       data:"개발자의 삶이란...", 
       profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,
       home:'/personalMain',
@@ -61,7 +66,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
   const visitorCount = langHamburger.ko.visitorCount;
-  const alarm = langHamburger.ko.alarmContent;
+  const alarm = langHamburger.ko.alarmNotice;
   const mentoAlarm = langHamburger.ko.mentoAlarm;
   const ButtonText = langHamburger.ko.buttonText;
   const logoAlt = langHamburger.ko.logoAlt;
