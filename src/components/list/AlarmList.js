@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { stop } from '../function/stop';
+import { Link } from 'react-router-dom';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -23,13 +24,17 @@ const ListTitle = styled.p`
 `;
 
 const Content = styled.div`
-    max-height:240px;
+    max-height:140px;
     background-color:#eee;
     padding:0.625em 0.5em;
     margin-top:0.625rem;
     overflow:scroll;
     display:none;
-    height:100px;
+    height:140px;
+    
+    ::-webkit-scrollbar {
+    display: none; 
+}
 
     @media (min-width: 480px){
         max-height:300px;
@@ -39,66 +44,84 @@ const Content = styled.div`
 const ShowContent = styled(Content)`
     display:block;
 `;
-const Alarm = styled.div`
-    background-color:#fefefe;
-    border:1px solid #707070;
+const Alarm = styled(Link)`
+    color:#333;
+    background-color:${ props => props.alarm ? "#fefefe" : "#F8D3D3"};
+    border:${ props => props.alarm ? "1px solid #333" : "0"};
     border-radius: 15px;
-    display:flex;
+    display:${ props => props.count !== 0 ? "flex" : "none"};
     flex-direction:column;
     padding:0.625em 0.5em;
+    margin-bottom:10px;
 `;
 
-const AlarmTop = styled.div`
+const AlarmNotice = styled.div`
     display:flex;
+    position:relative;
     align-items:center;
+    width:100%;
 `;
 const AlarmText = styled.div`
-    padding-right:0.5rem;
-    font-size:0.875rem;
+    width:100%;
+    font-size:0.7rem;
     text-align:left;
-    white-space:normal;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    line-height: 1.2; 
-    height: 2.4em;
-    word-wrap: break-word; 
-    display: -webkit-box; 
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
+    line-height: 3; 
+    height: 2em;
+    padding-left:5px;
+
+    @media all and (min-width:800px){
+        font-size:0.8rem;
+        padding-left:10px;  
+    }
 `;
 
 const AlarmTime = styled.p`
     font-size:0.625rem;
     text-align:right;
+    margin-top:5px;
 `;
-const CloseButton = styled.button`
-    display:block;
-    color:#bebebe;
-    border-radius:50%;
-    border-style:none;
-    background:url(${process.env.PUBLIC_URL + `/images/close-button.svg`}) center;
-    background-repeat:no-repeat;
-    width:1rem;
-    height:1rem;
-`;
-const Arrow = styled.img`
+const CloseButton = styled.div`
+    color:#888;
+    width:0.5rem;
+    height:0.5rem;
     position:absolute;
-    right:30px;
-    width:20px;
-    transform:rotate(90deg);
+    right:0; top:-5px;
 `;
-export const AlarmList = ({title, alarm, arrow}) => {
-    const [isActive, setIsActive] = useState(false);
-    const [isClose, setClose] = useState(true);
 
+const Count = styled.span`
+    color:#fd0031;
+    font-weight:bold;
+`;
+
+const All = styled(Link)`
+    border-radius:20px;
+    background:#fefefe;
+    font-size:10px;
+    color:#333;
+    text-decoration:none;
+    display:block;
+    width:30%;
+    height:20px;
+    line-height: 1.8;
+    margin:15px auto 0;
+`;
+    const [isActive, setIsActive] = useState(false);
+    const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
         e.preventDefault();
         setIsActive(!isActive);
     };
 
-    const close = (e) => {
-        setClose(!isClose);
+    const closeAlarm = (e) => {
+        setAlarmClose(!alarmClose);
         e.nativeEvent.stopImmediatePropagation();
+    }
+
+    const [alarm, setAlarm] = useState(alarmArray);
+    console.log(alarm);
+
+    const onRemove = (id) => {
+        setAlarm(alarm.filter(alarm => alarm.id !== id));
     }
 
     return(  
@@ -106,16 +129,23 @@ export const AlarmList = ({title, alarm, arrow}) => {
             <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
             (<ShowContent>
-                {isClose ? 
-                (<Alarm onClick={stop}>
-                    <AlarmTop>
-                        <AlarmText>
-                            {alarm}
+                <>
+                {alarmClose && 
+                alarm.map(alarm => { return(
+                    <Alarm onClick={(e)=>{stop(e); closeNav()}} key={alarm.id} alarm={alarm.state} count={alarm.Count} to={alarm.href}>
+                        <AlarmNotice>
+                            <AlarmText>
+                                {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
                             </AlarmText>
-                        <CloseButton onClick={(e) => close(e)}></CloseButton>
-                    </AlarmTop>            
-                    <AlarmTime>10분 전</AlarmTime>
-                </Alarm>):(null)}
+                            <CloseButton onClick={(e) => {stop(e); e.preventDefault(); onRemove(alarm.id)}}>x</CloseButton>
+                        </AlarmNotice>            
+                        <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
+                    </Alarm>
+                    )
+                })
+                }
+                <All to="/" onClick={()=>{ closeNav(); }}>전체보기</All>
+                </>
             </ShowContent>):(
                 <Content></Content>
             )}       

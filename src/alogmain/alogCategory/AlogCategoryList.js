@@ -9,7 +9,7 @@ function AlogCategoryList(props) {
             <CategoryListImg imgurl={process.env.PUBLIC_URL + '/images/' + props.cateList.img}></CategoryListImg>
             <CategoryListText>{props.cateList.text}</CategoryListText>
             <CategoryListBy>
-                <CategoryTime>{props.cateList.hour}{props.cateList.time} {props.cateList.inquire} {props.cateList.hun}</CategoryTime>
+                <CategoryTime>{props.cateList.hour}{props.cateList.time}</CategoryTime>
                 <CategoryBy>By {props.cateList.nickname}</CategoryBy>
             </CategoryListBy>
             </Link>
