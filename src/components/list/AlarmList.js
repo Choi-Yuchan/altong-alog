@@ -15,6 +15,7 @@ const ActiveList = styled.li`
 `;
 
 const ListTitle = styled.p`
+    position: relative;
     :hover,:active,:focus{
     color:#FF4A4A;
     font-weight:bold;
@@ -80,8 +81,13 @@ const CloseButton = styled.button`
     width:1rem;
     height:1rem;
 `;
-
-export const AlarmList = ({title, alarm}) => {
+const Arrow = styled.img`
+    position:absolute;
+    right:30px;
+    width:20px;
+    transform:rotate(90deg);
+`;
+export const AlarmList = ({title, alarm, arrow}) => {
     const [isActive, setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
 
@@ -97,7 +103,7 @@ export const AlarmList = ({title, alarm}) => {
 
     return(  
         <ActiveList onClick={OpenList} >
-            <ListTitle>{title}</ListTitle>
+            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
             (<ShowContent>
                 {isClose ? 

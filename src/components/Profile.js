@@ -10,10 +10,15 @@ const SideProfile = styled.div`
 const ImageBox = styled.div`
   width:30vw;
   height:30vw;
-
+  
   @media (min-width:480px){
-      width:10vw;
-      height:10vw;
+      width:20vw;
+      height:20vw;
+  }
+
+  @media (min-width:800px){
+      width:160px;
+      height:160px;
   }
 `;
 
