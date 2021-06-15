@@ -66,7 +66,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
   const visitorCount = langHamburger.ko.visitorCount;
-  const alarm = langHamburger.ko.alarmNotice;
+  const alarm = langHamburger.ko.alarm;
   const mentoAlarm = langHamburger.ko.mentoAlarm;
   const ButtonText = langHamburger.ko.buttonText;
   const logoAlt = langHamburger.ko.logoAlt;
@@ -149,7 +149,7 @@ const Container = styled.div`
 `;
 
 const SideMenu = styled.nav`
-  width:63.55%;
+  width:80%;
   height:100vh;
   background-color:#fefefe;
   box-shadow:0 0.1em 0.2em rgba(0,0,0,0.7);

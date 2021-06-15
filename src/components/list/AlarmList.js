@@ -81,6 +81,9 @@ const CloseButton = styled.button`
     height:1rem;
 `;
 
+const Count = styled.span`
+    color:#fd0031;
+`;
 export const AlarmList = ({title, alarm}) => {
     const [isActive, setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
@@ -104,8 +107,8 @@ export const AlarmList = ({title, alarm}) => {
                 (<Alarm onClick={stop}>
                     <AlarmTop>
                         <AlarmText>
-                            {alarm}
-                            </AlarmText>
+                            {alarm.alarmNoticeFront} <Count>{alarm.alarmNoticeCount}</Count> {alarm.alarmNoticeBack}
+                        </AlarmText>
                         <CloseButton onClick={(e) => close(e)}></CloseButton>
                     </AlarmTop>            
                     <AlarmTime>10분 전</AlarmTime>
