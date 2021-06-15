@@ -16,6 +16,7 @@ const ActiveList = styled.li`
 `;
 
 const ListTitle = styled.p`
+    position: relative;
     :hover,:active,:focus{
     color:#FF4A4A;
     font-weight:bold;
@@ -104,8 +105,6 @@ const All = styled(Link)`
     line-height: 1.8;
     margin:15px auto 0;
 `;
-
-export const AlarmList = ({title, alarmArray, closeNav}) => {
     const [isActive, setIsActive] = useState(false);
     const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
@@ -127,7 +126,7 @@ export const AlarmList = ({title, alarmArray, closeNav}) => {
 
     return(  
         <ActiveList onClick={OpenList} >
-            <ListTitle>{title}</ListTitle>
+            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
             (<ShowContent>
                 <>

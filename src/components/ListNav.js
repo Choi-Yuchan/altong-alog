@@ -12,7 +12,7 @@ const Partition = styled.div`
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex:1.5;
+  flex:0.5;
 `;
 const AlogList = styled.ul`
     display:flex;
@@ -20,17 +20,13 @@ const AlogList = styled.ul`
     align-items:center;
     width:100%;
     text-align:center;
+    font-weight:bold;
 `;
 
-const ListNav = ({title, alarmArray, mentoID, mento, mentoImg, mentoHome, dataUrl, closeNav}) => {
 
     return(
         <Partition>
             <AlogList>
-                <AlarmList title={title[0]} alarmArray={alarmArray} closeNav={closeNav}></AlarmList>
-                <UpdateList title={title[1]} id={mentoID} img={mentoImg} mento={mento} dataUrl={dataUrl} ></UpdateList>
-                <MentoList title={title[2]} id={mentoID} img={mentoImg} home={mentoHome}></MentoList>
-                <VisitedList title={title[3]} id={mentoID} img={mentoImg} mento={mento} dataUrl={dataUrl}></VisitedList>  
             </AlogList>
         </Partition>
     );

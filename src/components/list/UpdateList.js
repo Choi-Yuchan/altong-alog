@@ -105,7 +105,14 @@ const CloseButton = styled.button`
     height:1rem;
 `;
 
-export const UpdateList = ({title, mento, id, img, dataUrl}) => {
+const Arrow = styled.img`
+    position:absolute;
+    right:30px;
+    width:20px;
+    transform:rotate(90deg);
+`;
+
+export const UpdateList = ({title, mento, id, img, dataUrl, arrow}) => {
     const [isActive,setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
 
@@ -123,7 +130,7 @@ export const UpdateList = ({title, mento, id, img, dataUrl}) => {
 
     return(  
         <ActiveList onClick={OpenList}>
-            <ListTitle>{title}</ListTitle>
+            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
             (<ShowContent>
                 {isClose ?
