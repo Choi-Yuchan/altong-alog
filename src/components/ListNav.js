@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 import { AlarmList } from './list/AlarmList';
 import { MentoList } from './list/MentoList';
@@ -24,12 +22,12 @@ const AlogList = styled.ul`
     text-align:center;
 `;
 
-const ListNav = ({title, alarm, mentoID, mento, mentoImg, mentoHome, dataUrl}) => {
+const ListNav = ({title, alarmArray, mentoID, mento, mentoImg, mentoHome, dataUrl, closeNav}) => {
 
     return(
         <Partition>
             <AlogList>
-                <AlarmList title={title[0]} alarm={alarm}></AlarmList>
+                <AlarmList title={title[0]} alarmArray={alarmArray} closeNav={closeNav}></AlarmList>
                 <UpdateList title={title[1]} id={mentoID} img={mentoImg} mento={mento} dataUrl={dataUrl} ></UpdateList>
                 <MentoList title={title[2]} id={mentoID} img={mentoImg} home={mentoHome}></MentoList>
                 <VisitedList title={title[3]} id={mentoID} img={mentoImg} mento={mento} dataUrl={dataUrl}></VisitedList>  

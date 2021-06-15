@@ -29,12 +29,7 @@ const langHamburger = {
         today: 1173,
       },
     ],
-    alarm:{
-        alarmNoticeFront : "새롭게 공지 된 사항이",
-        alarmNoticeCount: 2,
-        alarmNoticeBack : "건 있습니다."
-    },
-    mentoAlarm : [
+    mentoAlarm: [
     { 
       id: '우주인', 
       data:"개발자의 삶이란...", 
@@ -60,16 +55,103 @@ const langHamburger = {
   },
 }
 
+const alarmArray = [
+  {
+    id:1,
+    Front : "새롭게 공지 된 사항이",
+    Count: 2,
+    Back : "건 있습니다.",
+    time:10,
+    minutes:"분 전",
+    state:false,
+    href:""
+},
+ {
+    id:2,
+    Front : "내 알록달록 중",
+    Count: 1,
+    Back : "개를 퍼갔습니다!",
+    time: 11,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+{
+    id:3,
+    Front : "내 알록달록에",
+    Count: 0,
+    Back : "개의 댓글이 달렸습니다.",
+    time:20,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+{
+    id:4,
+    Front : "훈훈알 수입이",
+    Count: 0,
+    Back : "건 발생했습니다.",
+    time:18,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+ {
+    id:5,
+    Front : "새 쪽지가",
+    Count: 0,
+    Back : "건 있습니다.",
+    time:16,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+{
+    id:6,
+    Front : "새로운 멘토로",
+    Count: 1,
+    Back : "명이 선정하셨습니다!",
+    time:40,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+{
+    id:7,
+    Front : "환불이",
+    Count: 0,
+    Back : "건 발생했습니다.",
+    time:4,
+    minutes:"분 전",
+    state:true,
+    href:""
+},
+{
+    id:8,
+    Front : "수정된 달록이",
+    Count: 1,
+    Back : "건 있습니다.",
+    time:13,
+    minutes:"분 전",
+    state:true,
+    href:""
+}
+
+]
+
 
 function Hamburger({naviRef, isActive, setIsActive}) {
   const grade = langHamburger.ko.grade;
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
   const visitorCount = langHamburger.ko.visitorCount;
-  const alarm = langHamburger.ko.alarm;
   const mentoAlarm = langHamburger.ko.mentoAlarm;
   const ButtonText = langHamburger.ko.buttonText;
   const logoAlt = langHamburger.ko.logoAlt;
+  
+  alarmArray.sort(function(a,b){
+    return a.time - b.time
+  });
 
   const closeNav = () => {
     setIsActive(!isActive);
@@ -99,12 +181,13 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         </ButtonSection>
 
         <ListNav title={listTitle} 
-        alarm={alarm} 
+        alarmArray={alarmArray}
         mentoID={mentoAlarm[0].id}
         mento={mentoAlarm[0].data} 
         mentoImg={mentoAlarm[0].profile}
         mentoHome={mentoAlarm[0].home}
         dataUrl={mentoAlarm[0].dataUrl}
+        closeNav={closeNav}
         />
 
         <Statistic 
