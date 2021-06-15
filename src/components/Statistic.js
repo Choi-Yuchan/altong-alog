@@ -5,7 +5,7 @@ const StatsBox = styled.div`
   flex-flow:column wrap;
   align-items:center;
   justify-content:center;
-  flex:1;
+  flex:0.5;
   padding:0 0.5rem 1rem;
 `;
 

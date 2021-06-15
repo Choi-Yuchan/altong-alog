@@ -42,9 +42,10 @@ const langHamburger = {
     listTitle : [
       "알림",
       "멘토 새 글",
-      "멘토 목록",
+      "즐겨찾기 멘토 목록",
       "최근 본 알록달록"
     ],
+    listTitleArrow: `${process.env.PUBLIC_URL + '/images/arrow.png'}`,
     buttonText : [
       "내 알록달록",
       "글쓰기",
@@ -60,6 +61,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
   const grade = langHamburger.ko.grade;
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
+  const listTitleArrow = langHamburger.ko.listTitleArrow;
   const visitorCount = langHamburger.ko.visitorCount;
   const alarm = langHamburger.ko.alarmContent;
   const mentoAlarm = langHamburger.ko.mentoAlarm;
@@ -75,7 +77,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
       {isActive ? 
       <>
       <Wrap onClick = { (e) => {e.preventDefault(); closeNav(); } }></Wrap>
-      <SideMenu ref={naviRef} >
+      <SideMenu ref={naviRef}>
         <CloseBox>
           <CloseButton onClick={() => closeNav()} src={process.env.PUBLIC_URL + `/images/close-button.svg`}></CloseButton>
         </CloseBox>
@@ -90,10 +92,11 @@ function Hamburger({naviRef, isActive, setIsActive}) {
 
         <ButtonSection>
           <Button to="/personalMain" onClick = { () => { closeNav(); } }>{ButtonText[0]}</Button>
-          <Button to="/writing" onClick = { ( ) => { closeNav(); } }>{ButtonText[1]}</Button>
+          <Button to="/writing" onClick = { ( ) => { closeNav(); } }>{ButtonText[1]} <WriteIcon src={process.env.PUBLIC_URL + '/images/que_icon.svg'}></WriteIcon></Button>
         </ButtonSection>
 
-        <ListNav title={listTitle} 
+        <ListNav className="list" title={listTitle}
+        arrow={listTitleArrow} 
         alarm={alarm} 
         mentoID={mentoAlarm[0].id}
         mento={mentoAlarm[0].data} 
@@ -144,7 +147,7 @@ const Container = styled.div`
 `;
 
 const SideMenu = styled.nav`
-  width:63.55%;
+  width:80%;
   height:100vh;
   background-color:#fefefe;
   box-shadow:0 0.1em 0.2em rgba(0,0,0,0.7);
@@ -194,9 +197,11 @@ const ButtonSection = styled.div`
   }
 `;
 const Button = styled(Link)`
+  height:18px;
   text-decoration:none;
   color:#707070;
   font-size:1rem;
+  line-height: 1.1;
   font-weight:bold;
   padding: 0.5em 1em;
   border:1px solid rgba(0,0,0,.2);
@@ -251,6 +256,10 @@ const LButton = styled(Link)`
 `;
 const LogoImg = styled.img`
   padding-right:0.5em;
+`;
+
+const WriteIcon = styled.img`
+ width:15px;
 `;
 
 export default Hamburger;

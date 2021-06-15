@@ -96,7 +96,13 @@ const useInput = (initialValue) => {
     return { value, onChange };
 };
 
-export const MentoList = ({title, id, img, home}) => {
+const Arrow = styled.img`
+    position:absolute;
+    right:30px;
+    width:20px;
+    transform:rotate(90deg);
+`;
+export const MentoList = ({title, id, img, home, arrow}) => {
     const [isActive,setIsActive] = useState(false);
 
     const OpenList = () => {
@@ -122,7 +128,7 @@ export const MentoList = ({title, id, img, home}) => {
     return(  
         <ActiveList onClick={() => OpenList()
         }>
-            <ListTitle>{title}</ListTitle>
+            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
             (<ShowContent>
                 <SearchBar onClick={stop}>
