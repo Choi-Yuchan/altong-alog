@@ -46,7 +46,7 @@ const ShowContent = styled(Content)`
 const Alarm = styled(Link)`
     color:#333;
     background-color:${ props => props.alarm ? "#fefefe" : "#F8D3D3"};
-    border:${ props => props.alarm ? "1px solid #333" : "0"};
+    border:${ props => props.alarm ? "1px solid #707070" : "0"};
     border-radius: 15px;
     display:${ props => props.count !== 0 ? "flex" : "none"};
     flex-direction:column;

@@ -30,13 +30,24 @@ const langHamburger = {
       },
     ],
     mentoAlarm: [
-    { 
-      id: '우주인', 
-      data:"개발자의 삶이란...", 
-      profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,
-      home:'/personalMain',
-      dataUrl:"/contents"
-    }
+      { 
+        id: 1, 
+        nickname:"우주인우주인우주인", // ID 변수
+        data:"개발자의 삶이란 너무나도 어렵다", // 컨텐츠 제목 
+        profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
+        dataUrl:"/contents", //클릭 시 이동하는 위치 변수
+        time:20,//시간변수
+        minutes:'분 전'//고정
+      },
+      { 
+        id: 2, 
+        nickname:"화성인",
+        data:"저녁이 있는 삶", 
+        profile:`${process.env.PUBLIC_URL + '/images/face.png'}`,
+        dataUrl:"/contents",
+        time:30,
+        minutes:'분 전'
+      }
     ],
     //고정
     listTitle : [
@@ -154,6 +165,9 @@ function Hamburger({naviRef, isActive, setIsActive}) {
   alarmArray.sort(function(a,b){
     return a.time - b.time
   });
+  mentoAlarm.sort(function(a,b){
+    return a.time - b.time
+  });
 
   const closeNav = () => {
     setIsActive(!isActive);
@@ -185,11 +199,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         <ListNav className="list" title={listTitle}
         alarmArray={alarmArray}
         arrow={listTitleArrow} 
-        mentoID={mentoAlarm[0].id}
-        mento={mentoAlarm[0].data} 
-        mentoImg={mentoAlarm[0].profile}
-        mentoHome={mentoAlarm[0].home}
-        dataUrl={mentoAlarm[0].dataUrl}
+        mentoAlarm={mentoAlarm}
         closeNav={closeNav}
         />
 
@@ -206,7 +216,6 @@ function Hamburger({naviRef, isActive, setIsActive}) {
             </LButton>
           <LButton to="/" onClick = { () => { closeNav(); } }>{ButtonText[3]}</LButton>
         </LSection>
-       
       </SideMenu>
       </>
       :
