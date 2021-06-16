@@ -47,7 +47,7 @@ const MentoProfile = styled(Link)`
     display: flex;
     justify-content:left;
     align-items: center;
-    padding: 1.5em 0 0.375em 0.5em;
+    padding: 1em 0 0.375em 0.5em;
     text-decoration: none;
     flex-direction: row;
     color:#707070;
