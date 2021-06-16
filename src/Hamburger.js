@@ -188,6 +188,26 @@ const bookmarkMento = [
     href:"/contents" 
   }
 ]
+const visited = [
+  { 
+    id: 1, 
+    nickname:"우주인우주인우주인", // ID 변수
+    data:"개발자의 삶이란 너무나도 어렵다", // 컨텐츠 제목 
+    profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
+    dataUrl:"/contents", //클릭 시 이동하는 위치 변수
+    time:20,//시간변수
+    minutes:'분 전'//고정
+  },
+  { 
+    id: 2, 
+    nickname:"화성인",
+    data:"저녁이 있는 삶", 
+    profile:`${process.env.PUBLIC_URL + '/images/face.png'}`,
+    dataUrl:"/contents",
+    time:30,
+    minutes:'분 전'
+  }
+]
 
 function Hamburger({naviRef, isActive, setIsActive}) {
   const grade = langHamburger.ko.grade;
@@ -203,6 +223,9 @@ function Hamburger({naviRef, isActive, setIsActive}) {
     return a.time - b.time
   });
   mentoAlarm.sort(function(a,b){
+    return a.time - b.time
+  });
+  visited.sort(function(a,b){
     return a.time - b.time
   });
   bookmarkMento.sort(function(a, b) { // 오름차순
@@ -241,6 +264,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         arrow={listTitleArrow} 
         mentoAlarm={mentoAlarm}
         bookmarkMento={bookmarkMento}
+        visited={visited}
         closeNav={closeNav}
         />
 

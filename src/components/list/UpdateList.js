@@ -105,6 +105,7 @@ const CloseButton = styled.button`
     width:1rem;
     height:1rem;
     margin-top:-5px;
+    cursor:pointer;
 `;
 
 const Arrow = styled.img`
