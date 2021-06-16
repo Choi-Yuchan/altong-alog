@@ -20,14 +20,17 @@ const ListTitle = styled.p`
     }
 `;
 const Content = styled.div`
-    max-height:240px;
+    max-height:140px;
     background-color:#eee;
     padding:0.625em 0.5em;
     margin-top:0.625rem;
     overflow:scroll;
     display:none;
-    height:100px;
-
+    height:140px;
+    
+    ::-webkit-scrollbar {
+    display: none; 
+}
     @media (min-width: 480px){
         max-height:300px;
     }
@@ -44,37 +47,33 @@ const Mento = styled(Link)`
     border:1px solid #707070;
     border-radius: 15px;
     display:flex;
-    flex-direction:column;
     padding:0.625em 0.5em;
+    margin-bottom:10px;
 `;
-
-const MentoTop = styled.div`
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
-`;
-
-const MentoBot = styled.div`
-    display:flex;
-    justify-content:space-between;
-    padding:0 0.5rem;
-
-    @media(min-width:600px){
-        padding:0 1.25rem;
-    }
+const MentoImgDiv = styled.div`
+    flex-basis:20%;
 `;
 const MentoImg = styled.img`
     width:40px;
     height:40px;
     padding-right:5px;
+    border-radius:50%;
 `;
 
 const MentoID = styled.h5`
     font-size:0.75rem;
     font-weight:bold;
+    flex-basis: 25%;
+    line-height:3.5;
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
 `;
 const MentoText = styled.div`
-    padding-right:0.5rem;
     font-size:0.75rem;
     font-weight:bold;
     text-align:left;
@@ -87,11 +86,13 @@ const MentoText = styled.div`
     display: -webkit-box; 
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
+    margin-top:5px;
 `;
 
 const MentoTime = styled.p`
     font-size:0.625rem;
     text-align:right;
+    margin-top:5px;
 `;
 
 const CloseButton = styled.button`
@@ -103,6 +104,7 @@ const CloseButton = styled.button`
     background-repeat:no-repeat;
     width:1rem;
     height:1rem;
+    margin-top:-5px;
 `;
 
 const Arrow = styled.img`
@@ -112,7 +114,13 @@ const Arrow = styled.img`
     transform:rotate(90deg);
 `;
 
-export const UpdateList = ({title, mento, id, img, dataUrl, arrow}) => {
+const RightPart = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-basis: 55%;
+`;
+export const UpdateList = ({title, mentoAlarm, arrow, closeNav}) => {
     const [isActive,setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
 
@@ -124,29 +132,31 @@ export const UpdateList = ({title, mento, id, img, dataUrl, arrow}) => {
         setClose(!isClose);
         e.nativeEvent.stopImmediatePropagation();
     }
-    function exit() {
-        document.getElementById("Con").style.display="none";
+    const [mento, setMento] = useState(mentoAlarm);
+    const onRemove = (id) => {
+        setMento(mento.filter(mento => mento.id !== id));
     }
 
     return(  
         <ActiveList onClick={OpenList}>
             <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
             {isActive ? 
+
             (<ShowContent>
-                {isClose ?
-                (<Mento to={dataUrl} onClick={stop}>
-                    <MentoTop onClick={exit}>
-                        <MentoImg src={img} alt="프로필"></MentoImg>
-                        <MentoText>
-                            {mento}
-                        </MentoText>
-                        <CloseButton onClick={(e) => close(e)}/>
-                    </MentoTop>
-                    <MentoBot onClick={exit}>
-                        <MentoID>{id}</MentoID>            
-                        <MentoTime>10분 전</MentoTime>
-                    </MentoBot>
-                </Mento>) : (null)}
+                {isClose &&
+                mento.map((mento)=>{
+                    return(
+                        <Mento to={mento.dataUrl} onClick={(e)=>{e.stopPropagation(); closeNav()}}>
+                            <MentoImgDiv><MentoImg src={mento.profile} alt="프로필"></MentoImg></MentoImgDiv>
+                            <MentoID>{mento.nickname}</MentoID>
+                            <RightPart>
+                                <CloseButton onClick={(e) => {stop(e); e.preventDefault(); onRemove(mento.id)}}/>  
+                                <MentoText>"{mento.data}"</MentoText>
+                                <MentoTime>{mento.time}{mento.minutes}</MentoTime>
+                            </RightPart>
+                        </Mento>
+                    )})
+                }
             </ShowContent>):(
                 <Content></Content>
             )}       
