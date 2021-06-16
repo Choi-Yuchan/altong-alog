@@ -17,18 +17,13 @@ const langHamburger = {
       profileAlt:"프로필",
       countryAlt:"국기",
     },
-    visitorCount: [
+    visitorCount:
       {
-        total: 15890,
-        yesterday: 245,
-        today: 128,
-      },
-      {
-        total: 47090,
-        yesterday: 1098,
-        today: 1173,
-      },
-    ],
+        total: 158900, // 총 방문자 변수
+        yesterday: 24500, // 어제 방문자 변수
+        today: 12800, // 오늘 방문자 변수
+      }
+    ,
     mentoAlarm: [
       { 
         id: 1, 
@@ -269,9 +264,9 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         />
 
         <Statistic 
-        total={visitorCount[1].total} 
-        yesterday={visitorCount[1].yesterday}
-        today={visitorCount[1].today}>
+        total={visitorCount.total} 
+        yesterday={visitorCount.yesterday}
+        today={visitorCount.today}>
         </Statistic>
 
         <LSection> 

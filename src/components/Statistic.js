@@ -41,13 +41,16 @@ const langStatistic = {
 export const Statistic = ({total, yesterday, today}) =>{
     const listText = langStatistic.ko.listText;
     const persons = langStatistic.ko.persons;
+    const totals = total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    const yesterdays = yesterday.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    const todays = today.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
     return(
         <StatsBox>
             <VisitorList>
-                <List>{listText[0]} : {total}{persons}</List>
-                <List>{listText[1]} : {yesterday}{persons}</List>
-                <List>{listText[2]} : {today}{persons}</List>
+                <List>{listText[0]} : {totals}{persons}</List>
+                <List>{listText[1]} : {yesterdays}{persons}</List>
+                <List>{listText[2]} : {todays}{persons}</List>
             </VisitorList>
         </StatsBox>
     );
