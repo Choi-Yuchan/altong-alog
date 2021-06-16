@@ -150,7 +150,32 @@ const alarmArray = [
 }
 
 ]
-
+const bookmarkMento = [
+  { 
+    id: 1, 
+    nickname:"우주에서 온 외계인", // ID 변수
+    profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
+    href:"/contents" //클릭 시 이동하는 해당 ID의 알록달록 메인
+  },
+  { 
+    id: 2, 
+    nickname:"KOREA Team",
+    profile:`${process.env.PUBLIC_URL + '/images/face.png'}`,
+    href:"/contents" 
+  },
+  { 
+    id: 3, 
+    nickname:"가나다라마바사", // ID 변수
+    profile:`${process.env.PUBLIC_URL + '/images/face.png'}`,
+    href:"/contents" 
+  },
+  { 
+    id: 4, 
+    nickname:"Apple Pie",
+    profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
+    href:"/contents" 
+  }
+]
 
 function Hamburger({naviRef, isActive, setIsActive}) {
   const grade = langHamburger.ko.grade;
@@ -161,12 +186,15 @@ function Hamburger({naviRef, isActive, setIsActive}) {
   const mentoAlarm = langHamburger.ko.mentoAlarm;
   const ButtonText = langHamburger.ko.buttonText;
   const logoAlt = langHamburger.ko.logoAlt;
-  
+
   alarmArray.sort(function(a,b){
     return a.time - b.time
   });
   mentoAlarm.sort(function(a,b){
     return a.time - b.time
+  });
+  bookmarkMento.sort(function(a, b) { // 오름차순
+    return a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0;  
   });
 
   const closeNav = () => {
@@ -190,16 +218,17 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         countryImg={userData.countryImg}
         profileAlt={userData.profileAlt}
         countryAlt={userData.countryAlt}/>
-
         <ButtonSection>
           <Button to="/personalMain" onClick = { () => { closeNav(); } }>{ButtonText[0]}</Button>
           <Button to="/writing" onClick = { ( ) => { closeNav(); } }>{ButtonText[1]} <WriteIcon src={process.env.PUBLIC_URL + '/images/que_icon.svg'}></WriteIcon></Button>
         </ButtonSection>
 
-        <ListNav className="list" title={listTitle}
+        <ListNav className="list" 
+        title={listTitle}
         alarmArray={alarmArray}
         arrow={listTitleArrow} 
         mentoAlarm={mentoAlarm}
+        bookmarkMento={bookmarkMento}
         closeNav={closeNav}
         />
 
