@@ -174,6 +174,18 @@ const bookmarkMento = [
     nickname:"Apple Pie",
     profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
     href:"/contents" 
+  },
+  { 
+    id: 5, 
+    nickname:"아리스토텔레스", // ID 변수
+    profile:`${process.env.PUBLIC_URL + '/images/face.png'}`,
+    href:"/contents" 
+  },
+  { 
+    id: 6, 
+    nickname:"Samsung",
+    profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,//프로필 이미지 변수
+    href:"/contents" 
   }
 ]
 
