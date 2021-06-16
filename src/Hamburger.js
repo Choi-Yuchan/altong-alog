@@ -60,7 +60,7 @@ const alarmArray = [
   {
     id:1,
     Front : "새롭게 공지 된 사항이",
-    Count: 2,
+    Count: 0,
     Back : "건 있습니다.",
     time:10,
     minutes:"분 전",
@@ -90,7 +90,7 @@ const alarmArray = [
 {
     id:4,
     Front : "훈훈알 수입이",
-    Count: 0,
+    Count: 4,
     Back : "건 발생했습니다.",
     time:18,
     minutes:"분 전",
@@ -182,6 +182,9 @@ function Hamburger({naviRef, isActive, setIsActive}) {
           <Button to="/writing" onClick = { ( ) => { closeNav(); } }>{ButtonText[1]} <WriteIcon src={process.env.PUBLIC_URL + '/images/que_icon.svg'}></WriteIcon></Button>
         </ButtonSection>
 
+        <ListNav className="list" title={listTitle}
+        alarmArray={alarmArray}
+        arrow={listTitleArrow} 
         mentoID={mentoAlarm[0].id}
         mento={mentoAlarm[0].data} 
         mentoImg={mentoAlarm[0].profile}

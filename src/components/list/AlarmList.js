@@ -35,7 +35,6 @@ const Content = styled.div`
     ::-webkit-scrollbar {
     display: none; 
 }
-
     @media (min-width: 480px){
         max-height:300px;
     }
@@ -68,7 +67,6 @@ const AlarmText = styled.div`
     line-height: 3; 
     height: 2em;
     padding-left:5px;
-
     @media all and (min-width:800px){
         font-size:0.8rem;
         padding-left:10px;  
@@ -93,6 +91,13 @@ const Count = styled.span`
     font-weight:bold;
 `;
 
+const Arrow = styled.img`
+    position:absolute;
+    right:30px;
+    width:20px;
+    transform:rotate(90deg);
+`;
+
 const All = styled(Link)`
     border-radius:20px;
     background:#fefefe;
@@ -105,6 +110,8 @@ const All = styled(Link)`
     line-height: 1.8;
     margin:15px auto 0;
 `;
+
+export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
     const [isActive, setIsActive] = useState(false);
     const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
@@ -118,8 +125,6 @@ const All = styled(Link)`
     }
 
     const [alarm, setAlarm] = useState(alarmArray);
-    console.log(alarm);
-
     const onRemove = (id) => {
         setAlarm(alarm.filter(alarm => alarm.id !== id));
     }
