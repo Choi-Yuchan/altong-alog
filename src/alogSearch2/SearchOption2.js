@@ -1,116 +1,98 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-const langSearchOption2 = {
-    ko:{//고정
-        select:"최신 순",
-        //고정
-        menuList: ['최신 순', '조회 순', '퍼가기 많은 순']
-
-    }
-}
 function SearchOption2() {
-    const firstOption = langSearchOption2.ko.select;
-
-    const [ oplist, setOplist] = useState(false);
-    const onClick = () => {
-        if (oplist === true) {
-            setOplist(false);
-        } else {
-            setOplist(true);
-        }
-    };
-    const menuList = langSearchOption2.ko.menuList;
-    const [select, setSelect ] = useState(firstOption);
-
 
     return (
         <OptionBox>
-            <OptionSelect onClick={onClick}>
-                {select}
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9">
-                    <path id="down" data-name="down" d="M6,0l6,9H0Z" transform="translate(12 9) rotate(180)" fill="#fe607e"/>
-                </svg>
-            </OptionSelect>
-            <OptionUl oplist={oplist}>
-                <OptionLi onClick={() => {setSelect(menuList[0]); setOplist(false);}}>{menuList[0]}</OptionLi>
-                <OptionLi onClick={() => {setSelect(menuList[1]); setOplist(false);}}>{menuList[1]}</OptionLi>
-                <OptionLi onClick={() => {setSelect(menuList[2]); setOplist(false);}}>{menuList[2]}</OptionLi>
-            </OptionUl>
+            <OptionTitle>옵션 선택</OptionTitle>
+            <SelectBox>
+                <div>
+                    <input type="radio" name="rank" id="recent" defaultChecked></input>
+                    <label htmlFor="recent">최신순</label>
+                </div>
+                <div>
+                    <input type="radio" name="rank" id="view"></input>
+                    <label htmlFor="view">조회순</label>
+                </div>
+                <div>
+                    <input type="radio" name="rank" id="load"></input>
+                    <label htmlFor="load">퍼가기순</label>
+                </div>
+                <div>
+                    <input type="radio" name="rank" id="good"></input>
+                    <label htmlFor="good">좋아요순</label>
+                </div>
+                <div>
+                    <input type="radio" name="rank" id="hunhun"></input>
+                    <label htmlFor="hunhun">훈훈알 순</label>
+                </div>
+            </SelectBox>
         </OptionBox>
     );
 }
 
-const slideDown = keyframes`
-    from {
-        height:0;
-        transform:scaleY(0);
-    }
-    to {
-        height:80px;
-        transform:scaleY(1);
-    }
-`;
-const slideUp = keyframes`
-    from {
-        height:80px;
-        transform:scaleY(1);
-    }
-    to {
-        height:0;
-        transform:scaleY(0);
-    }
-`;
 
 const OptionBox = styled.div`
+    padding:10px;
+`;
+const OptionTitle = styled.p`
+    font-weight:bold;
+    margin-bottom:10px;
+`;
+const SelectBox = styled.div`
     display:flex;
-    justify-content: flex-end;
-    width:95%;
-    max-width:800px;
-    padding:0.3125rem;
-    position:relative;
-    margin:0.625rem auto 0;
-`;
-const OptionSelect = styled.p`
-    border:1px solid #fd0031;
-    width:6.25rem;
-    padding:0.375rem 0.625rem;
-    font-size:0.875rem;
-    cursor:pointer;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-const OptionUl = styled.ul`
-    position:absolute;
-    top:88%;
-    right:5px;
-    z-index:99;
-    background:#ffffff;
-    font-size:0.875rem;
-    border:1px solid #333;
-    transition:all 0.3s;
-    transform-origin: center top;
-    height:0;
-    transform:scaleY(0);
+    flex-wrap:wrap;
+    align-items:center;
 
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-name: ${(props) => props.oplist === true ? slideDown : slideUp};
-    animation-fill-mode: forwards;
-`;
-const OptionLi = styled.li`
-    padding:0.3125rem;
-    font-size:0.875rem;
-    width:6.25rem;
-    padding:0.375rem 0.625rem;
-    cursor:pointer;
-    transition:all 0.3s;
+    div {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    input + label {
+        font-size:13px;
+        white-space:nowrap;
+        margin-right:3px;
+        margin-bottom:5px;
+        margin-top:5px;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        position:relative;
 
-    &:hover {
-        background:#eee;
+        ::before {
+            content:'';
+            display:block;
+            width:15px;
+            height:15px;
+            border:1px solid #999;
+            border-radius:50%;
+            margin-right:3px;
+            background:#fff;
+            transition:all 0.3s;
+        }
+        ::after {
+            content:'';
+            display:block;
+            width:7px;
+            height:7px;
+            position:absolute;
+            top:5px;
+            left:5px;
+            background:#fff;
+            border-radius:50%;
+        }
+    }
+    input:checked + label {
+        ::before {
+            background:skyblue;
+        }
+    }
+    input {
+        display:none;
     }
 `;
 
 
-export default SearchOption2;
+export default React.memo(SearchOption2);

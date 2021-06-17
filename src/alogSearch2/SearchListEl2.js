@@ -42,6 +42,8 @@ const ListBox = styled.div`
     background-repeat:no-repeat;
     position:relative;
     margin:2%;
+    border-radius:3px;
+    overflow:hidden;
 
     &::after {
     content:"";
@@ -52,7 +54,7 @@ const ListBox = styled.div`
     z-index:1;
   } 
     @media (min-width:480px) {
-        width:30%;
+        width:35%;
     }
 `;
 const ListContain = styled.div`
@@ -77,9 +79,12 @@ const ListText = styled.p`
     font-weight:bold;
     font-size:1rem;
     color:#505050;
-    width:80%;
-    margin:2rem 0;
+    width:85%;
+    margin:2rem 0 1.5rem;
     text-align:center;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 `;
 const ListProfile = styled.div`
     width:5rem;
@@ -102,7 +107,7 @@ const ListBy = styled.p`
     color:#ffffff;
     position:relative;
     z-index:2;
-    margin:2rem 0;
+    margin:1.5rem 0 2rem;
 `;
 const ListActive = styled.div`
     width:100%;
@@ -147,4 +152,4 @@ const Language = styled.img`
     z-index:4;
 `;
 
-export default SearchListEl2;
+export default React.memo(SearchListEl2);

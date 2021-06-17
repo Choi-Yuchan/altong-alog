@@ -1,73 +1,34 @@
-import React from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import SearchListEl2 from './SearchListEl2';
 import PageCount2 from './PageCount2';
 import SearchOption2 from './SearchOption2';
+import SampleJson from './SampleJson';
 
-const langAlogSearch2 = {
-    ko:{
-        searchResult : [
-            {
-                id:1,
-                text: "강아지를 키워보자",
-                profile: 'profile01.jpg',
-                nickname: 'Vivien',
-                backImg: 'bg06.jpg',
-                time: '14분 전',
-                check: '6',
-                reply: '12',
-            },
-            {
-                id:1,
-                text: "강아지를 키워보자",
-                profile: 'profile01.jpg',
-                nickname: 'Vivien',
-                backImg: 'bg06.jpg',
-                time: '14분 전',
-                check: '6',
-                reply: '12',
-            },
-            {
-                id:1,
-                text: "강아지를 키워보자",
-                profile: 'profile01.jpg',
-                nickname: 'Vivien',
-                backImg: 'bg06.jpg',
-                time: '14분 전',
-                check: '6',
-                reply: '12',
-            },
-            {
-                id:1,
-                text: "강아지를 키워보자",
-                profile: 'profile01.jpg',
-                nickname: 'Vivien',
-                backImg: 'bg06.jpg',
-                time: '14분 전',
-                check: '6',
-                reply: '12',
-            }
-        ],
+const Json = (props, text) => {
+    if ( text === '') {
+        return <div>검색 결과가 없습니다.</div>
+    } else {
+        return props.filter((data)=> data.text.toLowerCase().includes(text.toLowerCase()) )
+        .map(data=> <SearchListEl2 result={data} key={data.id} />);
     }
+
 }
-function AlogSearch2() {
 
-    const searchResult = langAlogSearch2.ko.searchResult;
 
-    const searchCount = searchResult.length;
+function AlogSearch2(props) {
 
+    // const searchCount = SampleJson.length;
 
     return (
         <SearchBox>
             <SearchOption2></SearchOption2>
             <SearchWrap>
                 <SearchListDiv>
-                    {searchResult.map(result => (
-                        <SearchListEl2 result={result} key={result.id} />
-                    ))}
+                    { Json(SampleJson, props.text) }
                 </SearchListDiv>
             </SearchWrap>
-            { searchCount > 6 && <PageCount2 /> }
+            {/* { searchCount > 6 && <PageCount2 /> } */}
         </SearchBox>
     );
 }
@@ -88,11 +49,12 @@ const SearchListDiv = styled.div`
     width:90%;
     display:flex;
     flex-wrap: wrap;
-    justify-content:space-around;
+    margin:0 auto;
+    justify-content:space-between;
 
 @media (min-width:800px) {
-    width:80%;
+    width:70%;
 }
 `;
 
-export default AlogSearch2;
+export default React.memo(AlogSearch2);

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from 'styled-components';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useMemo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
 import AlogSearch2 from './alogSearch2/AlogSearch2';
@@ -16,16 +16,14 @@ import './App.css';
 import AlogMainPopup from './AlogMainPopup';
 
 function App() {
-  const [shows, setShows] = useState(false);
-  
-  const clicks = () => {
-    setShows(!shows);
-  }
 
   const naviRef= useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(naviRef, false);
 
   const defaultBgImg = 'logo.jpg'; // 폴더 기본 배경 이미지
+
+  const [text, setText] = useState('');
+  const [openInput, setOpenInput] = useState(false);
 
   return(
     
@@ -33,7 +31,11 @@ function App() {
       {/* <AlogMainPopup></AlogMainPopup>   */}
     <Container>
       <ScrollToTop>
-      <AlogHeader isActive={isActive} setIsActive={setIsActive}/>
+      <AlogHeader 
+        isActive={isActive} setIsActive={setIsActive} 
+        text={text} setText={setText} 
+        openInput={openInput} setOpenInput={setOpenInput}
+      />
       <Hamburger  isActive={isActive} setIsActive={setIsActive}/>    
       <Route path="/" exact={true} component={AlogMain} />
       <Route
@@ -46,7 +48,7 @@ function App() {
       />
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
-      <Route path="/search" component={AlogSearch2} />
+      <Route path={"/search/"+ text} render={()=> <AlogSearch2 text={text} setText={setText} />} />
       </ScrollToTop>
     </Container>
     </Wrap>

@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import HeaderSearchOption from './HeaderSearchOption';
+import { Link } from 'react-router-dom';
 
-function LinkIcon() {
+function LinkIcon(props) {
+    const [searchText, setSearchText] = useState('');
+    const searchValue = (e) => {
+        setSearchText(e.target.value);
+    };  
+    const press = (e) => {
+        if (e.key === "Enter") {
+            //210617 엔터 키 검색 기능 중지
+        }
+    }
 
-    const [openInput, setOpenInput] = useState(false);
-
-    // const open = () => {
-    //     openInput === true ? setOpenInput(false) : setOpenInput(true)
-    // }
-    //검색 아이콘 내용 입력 후 검색 시 AlogSeach2로 연결
     return (
         <LinkIconBox>
             <SearchDiv>
-                <SearchIcon src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} onClick={()=>{setOpenInput(!openInput)}} ></SearchIcon>
-                <SearchBox open={openInput}>
-                    <HeaderSearchOption openInput={openInput}></HeaderSearchOption>
+                <SearchIcon src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} onClick={()=>{props.setOpenInput(true); }} />
+                { props.openInput && 
+                    <SLink 
+                        onClick={()=> { props.setOpenInput(false); props.setText(searchText); setSearchText(''); }} 
+                        to={'/search/'+ searchText} 
+                        className="movePage"
+                    >
+                    </SLink> }
+                <SearchBox open={props.openInput}>
+                    <HeaderSearchOption openInput={props.openInput}></HeaderSearchOption>
                     <SearchInput 
                         type='search' 
                         placeholder="검색어를 입력해 주세요."
-                        // open={openInput}
+                        value={searchText}
+                        onChange={searchValue}
+                        onKeyDown={press}
                     ></SearchInput>
                 </SearchBox>
             </SearchDiv>
@@ -84,6 +97,14 @@ const SearchBox = styled.div`
     max-width:${props=>props.open ? '20rem':'0'};
     overflow:hidden;
     transition:all 0.3s;
+`;
+const SLink = styled(Link)`
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
 `;
 
 export default LinkIcon;
