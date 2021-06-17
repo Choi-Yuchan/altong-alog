@@ -77,7 +77,7 @@ const alarmArray = [
     id:2,
     Front : "내 알록달록 중",
     Count: 1,
-    Back : "개를 퍼갔습니다!",
+    Back : "회를 퍼갔습니다!",
     time: 11,
     minutes:"분 전",
     state:true,
