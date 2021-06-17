@@ -149,7 +149,7 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
                     )
                 })
                 }
-                <All to="/" onClick={()=>{ closeNav(); }}>전체보기</All>
+                <All to="/notice"  onClick={()=>{ closeNav(); }}>전체보기</All>
                 </>
             </ShowContent>):(
                 <Content></Content>

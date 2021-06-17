@@ -14,6 +14,7 @@ import AlogWrite from './alogWrite/AlogWrite';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 import AlogMainPopup from './AlogMainPopup';
+import Notice from './Notice';
 
 function App() {
   const [shows, setShows] = useState(false);
@@ -47,6 +48,7 @@ function App() {
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
       <Route path="/search" component={AlogSearch2} />
+      <Route path="/notice" component={Notice} />
       </ScrollToTop>
     </Container>
     </Wrap>
