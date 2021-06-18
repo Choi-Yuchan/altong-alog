@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import NoticeData from '../../NoticeData.json';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -85,20 +86,23 @@ const Arrow = styled.img`
     width:20px;
     transform:rotate(90deg);
 `;
-export const MentoList = ({title, arrow, bookmarkMento, closeNav}) => {
+
+
+export const MentoList = ({title, arrow, closeNav}) => {
     const [isActive,setIsActive] = useState(false);
 
     const OpenList = () => {
         setIsActive(!isActive);
     }
 
-    const name = useInput("");
-
     const onSubmit = (e) => {
         e.stopPropagation();
         console.log("submitted search result!");
     }
-
+    const bookmarkMento = NoticeData.ko.bookmarkMento;
+    bookmarkMento.sort(function(a, b) { // 오름차순
+        return a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0;  
+      });
     return(  
         <ActiveList onClick={() => OpenList()}>
             <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>

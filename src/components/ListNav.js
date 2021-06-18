@@ -23,15 +23,15 @@ const AlogList = styled.ul`
     font-weight:bold;
 `;
 
-const ListNav = ({title, alarmArray, mentoAlarm, dataUrl, arrow, closeNav, bookmarkMento, visited}) => {
+const ListNav = ({title, arrow, closeNav}) => {
 
     return(
         <Partition>
             <AlogList>
-                <AlarmList title={title[0]} alarmArray={alarmArray} arrow={arrow} closeNav={closeNav}></AlarmList>
-                <UpdateList title={title[1]} mentoAlarm={mentoAlarm} arrow={arrow} closeNav={closeNav}></UpdateList>
-                <MentoList title={title[2]} arrow={arrow} closeNav={closeNav} bookmarkMento={bookmarkMento}></MentoList>
-                <VisitedList title={title[3]} arrow={arrow} closeNav={closeNav} visited={visited}></VisitedList>  
+                <AlarmList title={title[0]} arrow={arrow} closeNav={closeNav}></AlarmList>
+                <UpdateList title={title[1]} arrow={arrow} closeNav={closeNav}></UpdateList>
+                <MentoList title={title[2]} arrow={arrow} closeNav={closeNav}></MentoList>
+                <VisitedList title={title[3]} arrow={arrow} closeNav={closeNav}></VisitedList>  
             </AlogList>
         </Partition>
     );

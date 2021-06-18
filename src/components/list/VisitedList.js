@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { stop } from '../function/stop';
+import NoticeData from '../../NoticeData.json';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -122,7 +123,7 @@ const RightPart = styled.div`
     flex-basis: 55%;
 `;
 
-export const VisitedList = ({title, visited, arrow, closeNav}) => {
+export const VisitedList = ({title, arrow, closeNav}) => {
     const [isActive,setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
 
@@ -134,11 +135,16 @@ export const VisitedList = ({title, visited, arrow, closeNav}) => {
         setClose(!isClose);
         e.nativeEvent.stopImmediatePropagation();
     }
+
+    const visited = NoticeData.ko.visited;
+
     const [visit, setVisit] = useState(visited);
     const onRemove = (id) => {
         setVisit(visit.filter(visit => visit.id !== id));
     }
-
+    visited.sort(function(a,b){
+        return a.time - b.time
+      });
     return(  
         <ActiveList onClick={OpenList}>
             <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>

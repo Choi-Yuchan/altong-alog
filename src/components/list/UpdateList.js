@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { stop } from '../function/stop';
+import NoticeData from '../../NoticeData.json';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -121,7 +122,7 @@ const RightPart = styled.div`
     align-items: flex-end;
     flex-basis: 55%;
 `;
-export const UpdateList = ({title, mentoAlarm, arrow, closeNav}) => {
+export const UpdateList = ({title, arrow, closeNav}) => {
     const [isActive,setIsActive] = useState(false);
     const [isClose, setClose] = useState(true);
 
@@ -133,11 +134,15 @@ export const UpdateList = ({title, mentoAlarm, arrow, closeNav}) => {
         setClose(!isClose);
         e.nativeEvent.stopImmediatePropagation();
     }
+
+    const mentoAlarm = NoticeData.ko.mentoAlarm;
     const [mento, setMento] = useState(mentoAlarm);
     const onRemove = (id) => {
         setMento(mento.filter(mento => mento.id !== id));
     }
-
+    mentoAlarm.sort(function(a,b){
+        return a.time - b.time
+      });
     return(  
         <ActiveList onClick={OpenList}>
             <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>

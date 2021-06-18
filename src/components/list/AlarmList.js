@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { stop } from '../function/stop';
 import { Link } from 'react-router-dom';
+import NoticeData from '../../NoticeData.json';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -45,10 +46,20 @@ const ShowContent = styled(Content)`
 `;
 const Alarm = styled(Link)`
     color:#333;
-    background-color:${ props => props.alarm ? "#fefefe" : "#F8D3D3"};
-    border:${ props => props.alarm ? "1px solid #707070" : "0"};
+    background-color:#fefefe;
+    border:1px solid #707070;
     border-radius: 15px;
     display:${ props => props.count !== 0 ? "flex" : "none"};
+    flex-direction:column;
+    padding:0.625em 0.5em;
+    margin-bottom:10px;
+`;
+
+const NotiAlarm = styled.a`
+    color:#333;
+    background-color:#F8D3D3;
+    border-radius: 15px;
+    display:${ props => props.count !== 0 || props.state == true ? "flex" : "none"};
     flex-direction:column;
     padding:0.625em 0.5em;
     margin-bottom:10px;
@@ -111,7 +122,7 @@ const All = styled(Link)`
     margin:15px auto 0;
 `;
 
-export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
+export const AlarmList = ({title, arrow, closeNav}) => {
     const [isActive, setIsActive] = useState(false);
     const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
@@ -123,11 +134,21 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
         setAlarmClose(!alarmClose);
         e.nativeEvent.stopImmediatePropagation();
     }
-
+    const alarmArray = NoticeData.ko.alarmArray;
     const [alarm, setAlarm] = useState(alarmArray);
     const onRemove = (id) => {
         setAlarm(alarm.filter(alarm => alarm.id !== id));
     }
+    const notice = NoticeData.ko.notice;
+
+    const [tun, setTun] = useState(notice);
+    function tun2(){
+        setTun({...tun, state:false});
+    }
+
+    alarmArray.sort(function(a,b){
+        return a.time - b.time
+      });
 
     return(  
         <ActiveList onClick={OpenList} >
@@ -135,9 +156,21 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
             {isActive ? 
             (<ShowContent>
                 <>
-                {alarmClose && 
+                {
+                alarmClose &&
+                 <>
+                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={notice.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={notice.state}>
+                <AlarmNotice>
+                    <AlarmText>
+                        {notice.Front} <Count>{notice.Count}</Count>{notice.Back}
+                    </AlarmText>
+                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); tun2()}}>x</CloseButton>
+                </AlarmNotice>            
+                <AlarmTime>{notice.time}{notice.minutes}</AlarmTime>
+                 </NotiAlarm>
+                 {
                 alarm.map(alarm => { return(
-                    <Alarm onClick={(e)=>{stop(e); closeNav()}} key={alarm.id} alarm={alarm.state} count={alarm.Count} to={alarm.href}>
+                    <Alarm onClick={(e)=>{stop(e); closeNav()}} key={alarm.id} count={alarm.Count} to={alarm.href}>
                         <AlarmNotice>
                             <AlarmText>
                                 {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
@@ -148,6 +181,8 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
                     </Alarm>
                     )
                 })
+                }
+                </>
                 }
                 <All to="/notice"  onClick={()=>{ closeNav(); }}>전체보기</All>
                 </>

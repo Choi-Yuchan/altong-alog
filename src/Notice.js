@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import NoticeData from './NoticeData.json';
 
 const Title = styled.div`
     font-size: 18px Cabin;
@@ -65,88 +66,22 @@ const ConTextSpan = styled.span`
     text-align:left;
 `;
 
-const notice = {
-    Front : "새롭게 공지 된 사항이",
-    Count: 1,
-    Back : "건 있습니다.",
-    href:"",
-    contentImg:`${process.env.PUBLIC_URL + '/images/icon_notice.png'}`
-}
-
-const noticeArray = [
-    {
-        id:1,
-        Front : "내 알록달록 중",
-        Count: 1,
-        Back : "회를 퍼갔습니다!",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_ans_choice.png'}`
-    },
-    {
-        id:2,
-        Front : "내 알록달록에",
-        Count: 0,
-        Back : "개의 댓글이 달렸습니다.",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_cmt_regist.png'}`
-    },
-    {
-        id:3,
-        Front : "훈훈알 수입이",
-        Count: 4,
-        Back : "건 발생했습니다.",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_love.png'}`
-    },
-    {
-        id:4,
-        Front : "새 쪽지가",
-        Count: 0,
-        Back : "건 있습니다.",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_message.png'}`
-    },
-    {
-        id:5,
-        Front : "새로운 멘토로",
-        Count: 1,
-        Back : "명이 선정하셨습니다!",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_add_mento.png'}`
-    },
-    {
-        id:6,
-        Front : "환불이",
-        Count: 0,
-        Back : "건 발생했습니다.",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_almoney_paying.png'}`
-    },
-    {
-        id:7,
-        Front : "수정된 달록이",
-        Count: 1,
-        Back : "건 있습니다.",
-        href:"",
-        contentImg:`${process.env.PUBLIC_URL + '/images/icon_edit.png'}`
-    }
-  ];
-
 const Notice = () => {
    
+    const notice = NoticeData.ko.notice;
     const [zero, setZero] = useState(notice);
     function Zero(){
         setZero({...zero, Count:0});
     }
-    console.log(zero);
-    
-    const [count, setCount] = useState(noticeArray);
+
+    const alarmArray = NoticeData.ko.alarmArray;
+    const [count, setCount] = useState(alarmArray);
     function change(i) {
-        const count = [...noticeArray];
+        const count = [...alarmArray];
         count[i].Count = 0;
         setCount( count );
     }
-
+    console.log(count);
     return(
         <>
             <Title>알림</Title>
@@ -154,10 +89,10 @@ const Notice = () => {
                 <ConImg src={zero.contentImg} /><ConText>{zero.Front} <ConTextSpan>{zero.Count}</ConTextSpan>{zero.Back}</ConText>
             </ConNotice>
             {
-                count.map((notice, i)=>{
+                count.map((count, i)=>{
                     return(
-                    <Contents to={notice.href} count={notice.Count} onClick={(e)=>{ change(i); e.preventDefault()}}>
-                        <ConImg src={notice.contentImg} /><ConText>{notice.Front} <ConTextSpan>{notice.Count}</ConTextSpan>{notice.Back}</ConText>
+                    <Contents to={count.href} count={count.Count} onClick={(e)=>{ change(i); e.preventDefault()}}>
+                        <ConImg src={count.contentImg} /><ConText>{count.Front} <ConTextSpan>{count.Count}</ConTextSpan>{count.Back}</ConText>
                     </Contents>
                     )
                 })
