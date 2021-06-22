@@ -1,6 +1,8 @@
 
 {
     "ko" : {
+    "alarm" : "알림", 
+
     "mentoAlarm" : [
         { 
         "id": 1, 
@@ -24,9 +26,9 @@
 
     "notice" : {
         "Front" : "새롭게 공지 된 사항이",
-        "Count" : 3,
+        "Count" : 1,
         "Back" : "건 있습니다.",
-        "href" : "",
+        "href" : "http://www.altong.com/default/cs/notice/notice?Page=1",
         "time" : 10,
         "minutes" : "분 전",
         "contentImg" : "/images/icon_notice.png",
@@ -41,7 +43,7 @@
         "Back" : "회를 퍼갔습니다!",
         "time": 11,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/paste",
         "contentImg" :"/images/icon_ans_choice.png"
         
     },
@@ -52,7 +54,7 @@
         "Back" : "개의 댓글이 달렸습니다.",
         "time":20,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/reply",
         "contentImg":"/images/icon_cmt_regist.png"
     },
     {
@@ -68,11 +70,11 @@
     {
         "id":4,
         "Front": "새 쪽지가",
-        "Count": 0,
+        "Count": 1,
         "Back": "건 있습니다.",
         "time":16,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/message",
         "contentImg":"/images/icon_message.png"
     },
     {
@@ -88,11 +90,11 @@
     {
         "id":6,
         "Front": "환불이",
-        "Count": 0,
+        "Count": 1,
         "Back": "건 발생했습니다.",
         "time":4,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/refund",
         "contentImg":"/images/icon_almoney_paying.png"
     },
     {
@@ -102,7 +104,7 @@
         "Back" : "건 있습니다.",
         "time":13,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/modify",
         "contentImg":"/images/icon_edit.png"
     }
     

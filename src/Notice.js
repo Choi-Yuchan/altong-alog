@@ -67,7 +67,7 @@ const ConTextSpan = styled.span`
 `;
 
 const Notice = () => {
-   
+    const alarm = NoticeData.ko.alarm;
     const notice = NoticeData.ko.notice;
     const [zero, setZero] = useState(notice);
     function Zero(){
@@ -84,14 +84,14 @@ const Notice = () => {
     console.log(count);
     return(
         <>
-            <Title>알림</Title>
-            <ConNotice count={zero.Count} onClick={()=>{ Zero(); }}>
+            <Title>{alarm}</Title>
+            <ConNotice count={zero.Count} onClick={()=>{ Zero(); }} href={zero.href}>
                 <ConImg src={zero.contentImg} /><ConText>{zero.Front} <ConTextSpan>{zero.Count}</ConTextSpan>{zero.Back}</ConText>
             </ConNotice>
             {
                 count.map((count, i)=>{
                     return(
-                    <Contents to={count.href} count={count.Count} onClick={(e)=>{ change(i); e.preventDefault()}}>
+                    <Contents to={count.href} count={count.Count} onClick={()=>{ change(i); }}>
                         <ConImg src={count.contentImg} /><ConText>{count.Front} <ConTextSpan>{count.Count}</ConTextSpan>{count.Back}</ConText>
                     </Contents>
                     )
