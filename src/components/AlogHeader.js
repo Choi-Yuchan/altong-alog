@@ -35,7 +35,6 @@ const HeaderDiv = styled.div`
     width:100%;
     max-width:800px;
     height:45px;
-    border-bottom:1px solid #333;
     transition:all 0.3s;
     position:fixed;
     top:0;

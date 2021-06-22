@@ -59,7 +59,7 @@ const NotiAlarm = styled.a`
     color:#333;
     background-color:#F8D3D3;
     border-radius: 15px;
-    display:${ props => props.count !== 0 || props.state == true ? "flex" : "none"};
+    display:${ props => props.count !== 0 && props.state == true ? "flex" : "none"};
     flex-direction:column;
     padding:0.625em 0.5em;
     margin-bottom:10px;
@@ -130,10 +130,6 @@ export const AlarmList = ({title, arrow, closeNav}) => {
         setIsActive(!isActive);
     };
 
-    const closeAlarm = (e) => {
-        setAlarmClose(!alarmClose);
-        e.nativeEvent.stopImmediatePropagation();
-    }
     const alarmArray = NoticeData.ko.alarmArray;
     const [alarm, setAlarm] = useState(alarmArray);
     const onRemove = (id) => {
@@ -141,11 +137,10 @@ export const AlarmList = ({title, arrow, closeNav}) => {
     }
     const notice = NoticeData.ko.notice;
 
-    const [tun, setTun] = useState(notice);
-    function tun2(){
-        setTun({...tun, state:false});
+    const [turn, setTurn] = useState(notice);
+    function turn2(){
+        setTurn({...turn, state:false});
     }
-
     alarmArray.sort(function(a,b){
         return a.time - b.time
       });
@@ -159,14 +154,14 @@ export const AlarmList = ({title, arrow, closeNav}) => {
                 {
                 alarmClose &&
                  <>
-                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={notice.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={notice.state}>
+                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={turn.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={turn.state}>
                 <AlarmNotice>
                     <AlarmText>
-                        {notice.Front} <Count>{notice.Count}</Count>{notice.Back}
+                        {turn.Front} <Count>{turn.Count}</Count>{turn.Back}
                     </AlarmText>
-                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); tun2()}}>x</CloseButton>
+                    <CloseButton onClick={(e) => { turn2(); stop(e); e.preventDefault() }}>x</CloseButton>
                 </AlarmNotice>            
-                <AlarmTime>{notice.time}{notice.minutes}</AlarmTime>
+                <AlarmTime>{turn.time}{turn.minutes}</AlarmTime>
                  </NotiAlarm>
                  {
                 alarm.map(alarm => { return(
