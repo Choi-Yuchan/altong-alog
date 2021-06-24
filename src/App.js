@@ -19,6 +19,7 @@ import NoticeReply from './noticeLists/NoticeReply';
 import NoticeRefund from './noticeLists/NoticeRefund';
 import NoticeModify from './noticeLists/NoticeModify';
 import NoticeMessage from './noticeLists/NoticeMessage';
+import NoticeHun from './noticeLists/NoticeHun';
 
 function App() {
   const [shows, setShows] = useState(false);
@@ -53,6 +54,7 @@ function App() {
         <Route path="/notice/refund" component={NoticeRefund} />
         <Route path="/notice/modify" component={NoticeModify} />
         <Route path="/notice/message" component={NoticeMessage} />
+        <Route path="/notice/hun" component={NoticeHun} />
       </Switch>
       </ScrollToTop>
     </Container>
