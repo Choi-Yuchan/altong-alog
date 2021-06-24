@@ -43,8 +43,6 @@ const Language =styled.img`
     }
 `;
 
-
-
 const Sentences = styled.div`
     color:#333333;
     font-size:12px;
@@ -83,12 +81,13 @@ const SubSentences = styled.div`
         font-size:15px;
     }
 `;    
-const NoticeModify_Contents = ({modify, to}) => {
+const NoticeModify_Contents = ({modify, to, number, pop}) => {
 
     const [show, setShow] = useState(true);
-
+    
     return(
-            <Contents to = {to}>
+            <>
+            <Contents to = {to} onClick={(e)=>{e.preventDefault(); e.stopPropagation(); pop(number)} }>
                 <LogoDiv><Logo src={ modify.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
                     <Sentences>
                        <MainSentences>{modify.title}</MainSentences>
@@ -99,6 +98,7 @@ const NoticeModify_Contents = ({modify, to}) => {
                         onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
                     </LanDiv>
             </Contents>
+            </>
     )
 };
 

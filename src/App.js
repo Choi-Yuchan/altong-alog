@@ -64,14 +64,15 @@ function App() {
 }
 
 const Wrap = styled.div`
-    width:100%; height:100%;
+    width:100%; height:auto;
     position:relative;
 `;
 
 const Container = styled.div`
-  width:100%; 
+  width:100%; height:auto;
   margin:0 auto;
   max-width:800px;
+  position:relative;
   padding-top:45px; 
 
   @media all and (min-width:480px) { padding-top:60px; }

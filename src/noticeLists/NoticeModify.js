@@ -1,8 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeModifyData from '../NoticeModifyData.json';
+import NoticeModifyAlert from './NoticeModifyAlert';
 import NoticeModify_Contents from './NoticeModify_Contents';
 
+const Wrap = styled.div`
+    width:100%; height:100%;
+    position:relative;
+`;
 const TopTitle = styled.div`
     font-size: 18px Cabin;
     text-align: center;
@@ -40,19 +45,39 @@ const NoticeModify  = () => {
     const Title = NoticeModifyData.ko.modifyTitle;
     const modifyArray = NoticeModifyData.ko.modifyArray;
 
+    const [alert, setAlert] = useState(modifyArray);
+    function popOpen(i) {
+        const states = [...modifyArray];
+        states[i].popState = true;
+        setAlert( states );
+    }
+    function popClose(i) {
+        const states2 = [...modifyArray];
+        states2[i].popState = false;
+        setAlert( states2 );
+    }
+
+
     return(
-        <>
+        <Wrap>
         <TopTitle>{alarm}</TopTitle>
         <GrayContents>{Title.Front}<GrayContentsCount>{modifyArray.length}</GrayContentsCount>{Title.Back}</GrayContents>
         {
-            modifyArray.map((modify)=>{
+            alert.map((modify, i)=>{
                 return(
-                    <NoticeModify_Contents key={modify.id} to={modify.href} modify={modify}></NoticeModify_Contents>
+                    <>
+                    {  
+                        modify.popState === true ?
+                        <NoticeModifyAlert modify={modify} number={i} popClose={popClose} />
+                        : null
+                    }
+                    <NoticeModify_Contents key={modify.id} modify={modify} number={i} pop={popOpen}></NoticeModify_Contents>
+                    </>
                 )
             })
         }
         
-        </>
+        </Wrap>
     )
 };
 
