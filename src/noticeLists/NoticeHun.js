@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import NoticeMessageData from '../NoticeMessageData.json';
-import NoticeMessage_popup from './NoticeMessage_popup';
+import NoticeHunData from '../NoticeHunData.json';
 import TimeToggle from '../TimeToggle';
+import { Link } from 'react-router-dom';
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -73,6 +73,9 @@ const Account = styled.div`
         font-size:12px;
         padding-left:0;
      }
+     @media screen and (min-width: 800px){
+        flex-basis: 23%;
+    }
 `;
 const Photo = styled.img`
     width:40px; height:40px;
@@ -83,6 +86,31 @@ const Photo = styled.img`
         width:30px; height:30px;
      }
 `;
+const Wrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+`;
+const Grade = styled.div`
+    border:1px solid #fd0031;
+    color:#fd0031;
+    border-radius: 10px;
+    padding:1px;
+    width:45px;
+    font-size:10px;
+    text-align: center;
+`;
+const Direct = styled(Link)`
+    color:#666666;
+    font-size:10px;
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+`;
 const Nickname = styled.span`
     white-space:normal;
     overflow:hidden;
@@ -91,27 +119,25 @@ const Nickname = styled.span`
     display: -webkit-box; 
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
-    color:#666666;
     font-weight: 600;
+    font-size:13px;
+    padding:3px 0 3px 0;
+    color:#666666;
 `;
 
-const Word = styled.div`
+const Hun = styled.div`
     font-size:13px;
-    text-align:left;
-    flex-basis: 40%;
-    white-space:normal;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    word-wrap: break-word; 
-    display: -webkit-box; 
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
+    text-align:center;
+    flex-basis: 50%;
     color:#666666;
     font-weight: 600;
 
     @media screen and (max-width: 480px){
         font-size:12px;
      }
+    @media screen and (min-width: 800px){
+        flex-basis: 57%;
+    }
 `;
 const Day = styled.div`
     font-size:13px;
@@ -123,7 +149,6 @@ const Day = styled.div`
     @media screen and (max-width: 480px){
         font-size:12px;
         text-align:center;
-        flex-basis: 25%;
      }
 `;
 const Close = styled.div`
@@ -135,27 +160,27 @@ const Close = styled.div`
         margin-left:0px;
      }
 `;
-const NoticeMessage  = () => {
+const NoticeHun  = () => {
     
-    const alarm = NoticeMessageData.ko.alarm;
-    const Title = NoticeMessageData.ko.messageTitle;
-    const messageArray = NoticeMessageData.ko.messageArray;
+    const alarm = NoticeHunData.ko.alarm;
+    const Title = NoticeHunData.ko.hunTitle;
+    const hunArray = NoticeHunData.ko.hunArray;
 
-    const [message, setMessage] = useState(messageArray);
+    const [HunAl, setHunAl] = useState(hunArray);
     function change(i) {
-        const states = [...messageArray];
+        const states = [...hunArray];
         states[i].state = false;
         states[i].popState = true;
-        setMessage( states );
+        setHunAl( states );
     }
-    const [show, setShow] = useState(messageArray);
-    function change2(i) {
-        const states = [...messageArray];
+    const [show, setShow] = useState(hunArray);
+    function CloseWindow(i) {
+        const states = [...hunArray];
         states[i].state = false;
-        setMessage( states );
+        setHunAl( states );
     }
 
-    messageArray.sort(function(a,b){
+    hunArray.sort(function(a,b){
         return b.date - a.date
       });
 
@@ -163,22 +188,25 @@ const NoticeMessage  = () => {
         <>
         <TopTitle>{alarm}</TopTitle>
         <GrayContents>
-            <Member>{Title.member}</Member><Contents>{Title.contents}</Contents><Dates>{Title.date}</Dates>
+            <Member>{Title.member}</Member><Contents>{Title.give}</Contents><Dates>{Title.date}</Dates>
         </GrayContents>
         {
-            message.map((text, i)=>{
+            HunAl.map((hunAl, i)=>{
                 return(
                     <>
-                    { text.popState === true ?
-                    <NoticeMessage_popup message={text}></NoticeMessage_popup>
-                    : null
-                    }
                     { show &&
-                    <Elements state={text.state} key={text.id} onClick={ () => { change(i); } }>
-                        <Account><Photo src={text.profileImg}/><Nickname>{text.account}</Nickname></Account>
-                        <Word>{text.word}</Word>
-                        <Day>{TimeToggle(text.date)}</Day>
-                        <Close onClick={ (e) => { e.stopPropagation(); change2(i); } }>X</Close>
+                    <Elements state={hunAl.state} key={hunAl.id} onClick={ () => { change(i); } }>
+                        <Account>
+                            <Photo src={hunAl.profileImg}/>
+                            <Wrap>
+                                <Grade>{hunAl.grade}</Grade>
+                                <Nickname>{hunAl.account}</Nickname>
+                                <Direct to={hunAl.href}>{hunAl.direct}</Direct>
+                            </Wrap>
+                        </Account>
+                        <Hun>{hunAl.hun.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}{hunAl.al}</Hun>
+                        <Day>{TimeToggle(hunAl.date)}</Day>
+                        <Close onClick={ (e) => { e.stopPropagation(); CloseWindow(i); } }>X</Close>
                     </Elements>
                     }
                     </>
@@ -189,4 +217,4 @@ const NoticeMessage  = () => {
     )
 };
 
-export default NoticeMessage;
+export default NoticeHun;

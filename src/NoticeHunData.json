@@ -1,0 +1,51 @@
+{
+    "ko" : {
+        "alarm" : "훈훈알",
+        "hunTitle" : {
+            "member" : "회원",
+            "give" : "지급한 훈훈알 수",
+            "date" : "지급일시"
+        },
+
+        "hunArray" : [
+                {
+                    "id" :1,
+                    "profileImg":"/images/profile-image.png",
+                    "account" : "순자바오",
+                    "href":"",
+                    "date":1617199521130,
+                    "state":true,
+                    "al":"알",
+                    "hun":3000000,
+                    "direct":"알록달록 바로가기 >",
+                    "grade":"알천사"
+                },
+                {
+                    "id" :2,
+                    "profileImg":"/images/korea.png",
+                    "account" : "호날두",
+                    "href":"",
+                    "date":170000000000,
+                    "state":true,
+                    "al":"알",
+                    "hun":5000000,
+                    "direct":"알록달록 바로가기 >",
+                    "grade":"알통페인"
+                },
+                {
+                    "id" :3,
+                    "profileImg":"/images/face.png",
+                    "account" : "디디바오",
+                    "href":"",
+                    "date":145210000000,
+                    "state":true,
+                    "al":"알",
+                    "hun":4000000,
+                    "direct":"알록달록 바로가기 >",
+                    "grade":"대천사장"
+                }
+        ]
+    }
+}
+
+

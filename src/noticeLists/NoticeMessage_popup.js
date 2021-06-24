@@ -93,6 +93,7 @@ const Area = styled.textarea`
     outline: none;
     padding:20px;
     box-sizing: border-box;
+    color:#666666;
 `;
 
 const Icons = styled.div`
