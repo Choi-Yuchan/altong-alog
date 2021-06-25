@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import React, { useCallback, useState, useRef, useMemo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
-import AlogSearch2 from './alogSearch2/AlogSearch2';
+import AlogMainSearch from './alogMainSearch/AlogMainSearch';
 import AlogPersonalMain from './AlogPersonalMain';
 import AlogPersonalcontents from './AlogPersonalContents';
 import AlogHeader from './components/AlogHeader';
@@ -24,6 +24,7 @@ function App() {
 
   const [text, setText] = useState('');
   const [openInput, setOpenInput] = useState(false);
+  const [searchOption, setSearchOption] = useState(1);
 
   return(
     
@@ -35,6 +36,7 @@ function App() {
         isActive={isActive} setIsActive={setIsActive} 
         text={text} setText={setText} 
         openInput={openInput} setOpenInput={setOpenInput}
+        setSearchOption={setSearchOption}
       />
       <Hamburger  isActive={isActive} setIsActive={setIsActive}/>    
       <Route path="/" exact={true} component={AlogMain} />
@@ -48,7 +50,7 @@ function App() {
       />
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
-      <Route path={"/search/"+ text} render={()=> <AlogSearch2 text={text} setText={setText} />} />
+      <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
       </ScrollToTop>
     </Container>
     </Wrap>

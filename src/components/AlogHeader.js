@@ -24,6 +24,7 @@ function AlogHeader(props) {
                 <LinkIcon 
                     text={props.text} setText={props.setText} 
                     openInput={props.openInput} setOpenInput={props.setOpenInput}
+                    setSearchOption={props.setSearchOption}
                 />
             </HeaderBox>
         </HeaderDiv>

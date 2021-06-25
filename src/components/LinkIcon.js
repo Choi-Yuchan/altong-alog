@@ -8,31 +8,31 @@ function LinkIcon(props) {
     const searchValue = (e) => {
         setSearchText(e.target.value);
     };  
-    const press = (e) => {
-        if (e.key === "Enter") {
-            //210617 엔터 키 검색 기능 중지
-        }
+    const onSubmit = () => {
+        props.setOpenInput(false);
+        props.setText(searchText);
+        setSearchText('');
     }
 
     return (
         <LinkIconBox>
-            <SearchDiv>
+            <SearchDiv onSubmit={onSubmit}>
                 <SearchIcon src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} onClick={()=>{props.setOpenInput(true); }} />
                 { props.openInput && 
                     <SLink 
                         onClick={()=> { props.setOpenInput(false); props.setText(searchText); setSearchText(''); }} 
-                        to={'/search/'+ searchText} 
-                        className="movePage"
+                        to={'/search/'+ searchText}
                     >
-                    </SLink> }
+                        <SLinkButton type="submit"></SLinkButton>
+                    </SLink>
+                }
                 <SearchBox open={props.openInput}>
-                    <HeaderSearchOption openInput={props.openInput}></HeaderSearchOption>
+                    <HeaderSearchOption openInput={props.openInput} setSearchOption={props.setSearchOption}></HeaderSearchOption>
                     <SearchInput 
                         type='search' 
                         placeholder="검색어를 입력해 주세요."
                         value={searchText}
                         onChange={searchValue}
-                        onKeyDown={press}
                     ></SearchInput>
                 </SearchBox>
             </SearchDiv>
@@ -53,7 +53,7 @@ const LinkIconBox = styled.div`
         width:4.063rem;
     }
 `;
-const SearchDiv = styled.div`
+const SearchDiv = styled.form`
     width: 1.563rem;
     position:relative;
 
@@ -97,6 +97,16 @@ const SearchBox = styled.div`
     max-width:${props=>props.open ? '20rem':'0'};
     overflow:hidden;
     transition:all 0.3s;
+`;
+const SLinkButton = styled.button`
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    border:0;
+    background:transparent;
 `;
 const SLink = styled(Link)`
     display:block;
