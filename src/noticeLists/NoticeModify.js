@@ -57,6 +57,9 @@ const NoticeModify  = () => {
         setAlert( states2 );
     }
 
+    modifyArray.sort(function(a,b){
+        return b.date - a.date
+      });
 
     return(
         <Wrap>

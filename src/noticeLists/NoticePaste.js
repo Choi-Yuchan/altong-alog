@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticePasteData from '../NoticePasteData.json';
 import NoticePaste_Contents from './NoticePaste_Contents';
@@ -43,11 +43,11 @@ const NoticePaste  = () => {
     return(
         <>
         <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{pasteArray.length}</GrayContentsCount>{Title.Back}</GrayContents>
+        <GrayContents>{Title.Front}<GrayContentsCount>{pasteArray.length}</GrayContentsCount>{pasteArray.Back}</GrayContents>
         {
-            pasteArray.map((paste)=>{
+            pasteArray.map((Paste)=>{
                 return(
-                    <NoticePaste_Contents key={paste.id} to={paste.href} paste={paste}></NoticePaste_Contents>
+                    <NoticePaste_Contents key={Paste.id} to={Paste.href} paste={Paste}></NoticePaste_Contents>
                 )
             })
         }
