@@ -100,7 +100,7 @@ const NoticeModifyAlert = ({modify, number, popClose}) => {
             <Contents>
                 <Title>{notice}</Title>
                 <Word><Thick>'{modify.nickname}'</Thick>{who} <Thick>{modify.title}</Thick>{because} {TimeToggle(modify.date)}{time}</Word>
-                <CheckBox><CheckBtn to={modify.href}>{check}</CheckBtn></CheckBox>
+                <CheckBox><CheckBtn to={modify.href} onClick={()=>{popClose(number)}}>{check}</CheckBtn></CheckBox>
             </Contents>
         </Wrap>        
     )

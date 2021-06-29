@@ -177,7 +177,7 @@ const NoticeHun  = () => {
     function CloseWindow(i) {
         const states = [...hunArray];
         states[i].state = false;
-        setHunAl( states );
+        setShow( states );
     }
 
     hunArray.sort(function(a,b){

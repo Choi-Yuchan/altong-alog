@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeRefundData from '../NoticeRefundData.json';
 import NoticeRefund_Contents from './NoticeRefund_Contents';
@@ -45,9 +45,9 @@ const NoticeRefund  = () => {
         <TopTitle>{alarm}</TopTitle>
         <GrayContents>{Title.Front}<GrayContentsCount>{RefundArray.length}</GrayContentsCount>{Title.Back}</GrayContents>
         {
-            RefundArray.map((refund)=>{
+            RefundArray.map((refund, i)=>{
                 return(
-                    <NoticeRefund_Contents key={refund.id} to={refund.href} refund={refund}></NoticeRefund_Contents>
+                    <NoticeRefund_Contents key={refund.id} to={refund.href} refund={refund} onClick={()=>{}}></NoticeRefund_Contents>
                 )
             })
         }
