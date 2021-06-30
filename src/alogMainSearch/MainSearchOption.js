@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-function SearchOption2({setSelectSort}) {
+function MainSearchOption({setSelectSort}) {
 
     return (
         <OptionBox>
@@ -95,4 +95,4 @@ const SelectBox = styled.div`
 `;
 
 
-export default React.memo(SearchOption2);
+export default React.memo(MainSearchOption);

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchPageCount from './SearchPageCount';
 import MainSearchOption from './MainSearchOption';
@@ -14,47 +14,50 @@ function AlogMainSearch(props) {
     const total = Math.ceil(posts.length/per); // 필요한 페이지의 수
     const countSize = 5; // 페이지 숫자 수
 
-
     const indexOfLast = currentPage * per; //검색 리스트에서 보여지는 마지막 인덱스 번호
     const indexOfFirst = indexOfLast - per; // 검색 리스트에서 보여지는 첫번째 인덱스 번호
-    const [remains, setRemains] = useState(currentPage%countSize);
-    useEffect(()=>{
-        if (currentPage%countSize === 0) {
-            return setRemains(5);
-        } else {
-            return setRemains(currentPage%countSize);
-        }
-    }, [currentPage]);
-    const firstCountSize = currentPage - remains + 1; //페이징 최초 숫자
-    const lastCountSize = currentPage - currentPage%countSize + countSize; //페이징 마지막 숫자
-    const [lastNumber, setLastNumber] = useState(lastCountSize);
-    console.log(posts.length);
-    console.log(total);
 
-    useEffect(()=>{
-        if (lastCountSize > total) {
-            setLastNumber(total);
-        } else {
-            setLastNumber(lastCountSize)
-        }
-    }, [lastCountSize, lastNumber]);
-
-    
-    const pageNumber = []; //페이지 번호 배열
-    
-    for (let i = firstCountSize; i <= lastNumber; i++) {
-        pageNumber.push(i);
+    const createArr = (n) => {
+        const iArr = new Array(n);
+        for (let i = 0; i < n; i++) iArr[i] = i+1;
+        return iArr;
     }
-    console.log(firstCountSize);
+    const [blockNum, setBlockNum] = useState(0);
 
+    const v = blockNum*countSize;
+    const iArr = createArr(total);
+    let pArr = iArr.slice(v, countSize+v);
 
-
+    const nextPage = () => {
+        if (currentPage >= total)
+            return
+        if(countSize*(blockNum+1) < (currentPage+1)) {
+            setBlockNum(n=>n+1);
+        }
+        setCurrentPage(n=>n+1);
+    }
+    const prevPage = () => {
+        if (currentPage <= 1) 
+            return;
+        if((currentPage - 1) <= total*blockNum) {
+            setBlockNum(n=>n-1);
+        }
+        setCurrentPage(n=>n-1);
+    }
+    const firstPage = () => {
+        setBlockNum(0);
+        setCurrentPage(1);
+    }
+    const lastPage = () => {
+        setBlockNum(Math.ceil(total/countSize) - 1);
+        setCurrentPage(total);
+    }
 
     return (
         <SearchBox>
-            <MainSearchOption setSelectSort={setSelectSort}></MainSearchOption>
             <SearchWrap>
-                <SearchListDiv>
+                <MainSearchOption setSelectSort={setSelectSort}></MainSearchOption>
+                <SearchListDiv text={props.text}>
                     <SearchJsonList 
                         list={SampleJson} 
                         text={props.text} 
@@ -66,7 +69,16 @@ function AlogMainSearch(props) {
                     />
                 </SearchListDiv>
             </SearchWrap>
-            <SearchPageCount pageNumber={pageNumber} currentPage={currentPage} setCurrentPage={setCurrentPage} count={posts.length}/>
+            <SearchPageCount 
+                pageNumber={pArr} 
+                currentPage={currentPage} 
+                setCurrentPage={setCurrentPage} 
+                count={posts.length} 
+                nextPage={nextPage} 
+                prevPage={prevPage} 
+                firstPage={firstPage} 
+                lastPage={lastPage} 
+            />
         </SearchBox>
     );
 }
@@ -75,20 +87,25 @@ const SearchBox = styled.div`
     width:100%;
     max-width:800px;
     margin:0 auto;
+    display:flex;
+    min-height: calc(100vh - 60px);
+    flex-direction:column;
 `;
 const SearchWrap = styled.div`
     width:100%;
     max-width:800px;
     margin:0 auto;
     display:flex;
-    justify-content: center;
+    flex-direction:column;
+    flex:1;
 `;
 const SearchListDiv = styled.div`
     width:90%;
     display:flex;
     flex-wrap: wrap;
     margin:0 auto;
-    justify-content:space-between;
+    justify-content:${props => props.text === '' ? 'center' : 'space-between'};
+    align-items: ${props => props.text === '' ? 'center' : 'stretch'};
 
 @media (min-width:800px) {
     width:70%;

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import MainSearchListEl from "./MainSearchListEl";
 
 function SearchJsonList({list, text, option, select, indexOfLast, indexOfFirst, setPosts}) {
@@ -31,7 +32,7 @@ function SearchJsonList({list, text, option, select, indexOfLast, indexOfFirst, 
             })
         } else if (select === 'hunhun') {
             return searchTitle.sort(function (a, b) {
-                return b.hunAl - b.hunAl
+                return b.hunAl - a.hunAl
             })
         }
     };
@@ -55,7 +56,7 @@ function SearchJsonList({list, text, option, select, indexOfLast, indexOfFirst, 
             })
         } else if (select === 'hunhun') {
             return searchText.sort(function (a, b) {
-                return b.hunAl - b.hunAl
+                return b.hunAl - a.hunAl
             })
         }
     };
@@ -78,7 +79,7 @@ function SearchJsonList({list, text, option, select, indexOfLast, indexOfFirst, 
             })
         } else if (select === 'hunhun') {
             return searchNick.sort(function (a, b) {
-                return b.hunAl - b.hunAl
+                return b.hunAl - a.hunAl
             })
         }
     };
@@ -136,29 +137,35 @@ function SearchJsonList({list, text, option, select, indexOfLast, indexOfFirst, 
 
     if (option === 1) {
         if (TitleCount === 0 || text === '') {
-            return <div>검색 결과가 없습니다.</div>
+            return <NoneSearch>검색 결과가 없습니다.</NoneSearch>
         } else {
             return searchTitleOption().slice(indexOfFirst, indexOfLast).map(data => <MainSearchListEl result={data} key={data.id} />)
         }
     } else if (option === 2) {
         if (TextCount === 0 || text === '') {
-            return <div>검색 결과가 없습니다.</div>
+            return <NoneSearch>검색 결과가 없습니다.</NoneSearch>
         } else {
             return serachTextOption().slice(indexOfFirst, indexOfLast).map(data => <MainSearchListEl result={data} key={data.id} />)
         }
     } else if (option === 3) {
         if (NickCount === 0 || text === '') {
-            return <div>검색 결과가 없습니다.</div>
+            return <NoneSearch>검색 결과가 없습니다.</NoneSearch>
         } else {
             return serachNickOption().slice(indexOfFirst, indexOfLast).map(data => <MainSearchListEl result={data} key={data.id} />)
         }
     } else if (option === 4) {
         if (TitleTextCount === 0 || text === '') {
-            return <div>검색 결과가 없습니다.</div>
+            return <NoneSearch>검색 결과가 없습니다.</NoneSearch>
         } else {
             return serarchTitleTextOption().slice(indexOfFirst, indexOfLast).map(data => <MainSearchListEl result={data} key={data.id} />)
         }
     }
 }
+
+const NoneSearch = styled.div`
+    font-weight:bold;
+    font-style:italic;
+    margin-top:40%;
+`;
 
 export default React.memo(SearchJsonList);
