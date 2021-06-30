@@ -2,6 +2,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { stop } from '../function/stop';
 import { Link } from 'react-router-dom';
+import NoticeData from '../../NoticeData.json';
+import NoticeHunData from '../../NoticeHunData.json';
+import NoticeMessageData from '../../NoticeMessageData.json';
+import NoticeModifyData from '../../NoticeModifyData.json';
+import NoticePasteData from '../../NoticePasteData.json';
+import NoticeRefundData from '../../NoticeRefundData.json';
+import NoticeReplyData from '../../NoticeReplyData.json';
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -45,10 +52,20 @@ const ShowContent = styled(Content)`
 `;
 const Alarm = styled(Link)`
     color:#333;
-    background-color:${ props => props.alarm ? "#fefefe" : "#F8D3D3"};
-    border:${ props => props.alarm ? "1px solid #333" : "0"};
+    background-color:#fefefe;
+    border:1px solid #707070;
     border-radius: 15px;
     display:${ props => props.count !== 0 ? "flex" : "none"};
+    flex-direction:column;
+    padding:0.625em 0.5em;
+    margin-bottom:10px;
+`;
+
+const NotiAlarm = styled.a`
+    color:#333;
+    background-color:#F8D3D3;
+    border-radius: 15px;
+    display:${ props => props.count !== 0 && props.state == true ? "flex" : "none"};
     flex-direction:column;
     padding:0.625em 0.5em;
     margin-bottom:10px;
@@ -111,7 +128,7 @@ const All = styled(Link)`
     margin:15px auto 0;
 `;
 
-export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
+export const AlarmList = ({title, arrow, closeNav}) => {
     const [isActive, setIsActive] = useState(false);
     const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
@@ -119,15 +136,49 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
         setIsActive(!isActive);
     };
 
-    const closeAlarm = (e) => {
-        setAlarmClose(!alarmClose);
-        e.nativeEvent.stopImmediatePropagation();
+    const alarmArray = NoticeData.ko.alarmArray;
+    const [alarm, setAlarm] = useState(alarmArray);
+    function hide(i) {
+        const state = [...alarmArray];
+        state[i].state = false;
+        setAlarm( state );
     }
 
-    const [alarm, setAlarm] = useState(alarmArray);
-    const onRemove = (id) => {
-        setAlarm(alarm.filter(alarm => alarm.id !== id));
+    const notice = NoticeData.ko.notice;
+    const [turn, setTurn] = useState(notice);
+    function hideNotice(){
+        setTurn({...turn, state:false});
     }
+
+    alarmArray.sort(function(a,b){
+        return a.time - b.time
+      });
+    
+    // 각 배열 컨턴츠 갯수 
+    const refundArray = NoticeRefundData.ko.refundArray;
+    const replyArray = NoticeReplyData.ko.ReplyArray;
+    const hunArray = NoticeHunData.ko.hunArray;
+    const modifyArray = NoticeModifyData.ko.modifyArray;
+    const pasteArray = NoticePasteData.ko.pasteArray;
+    const messageArray = NoticeMessageData.ko.messageArray;
+
+
+    const refundLength = refundArray.length;
+    const replyLength = replyArray.length;
+    const hunLength = hunArray.length;
+    const modifyLength = modifyArray.length;
+    const pasteLength = pasteArray.length;
+    const messageLength = messageArray.length;
+
+    alarm[0].Count = refundLength;
+    alarm[1].Count = pasteLength;
+    alarm[2].Count = modifyLength;
+    alarm[3].Count = messageLength;
+    alarm[4].Count = hunLength;
+    alarm[5].Count = replyLength;
+    alarm[6].Count = replyLength;
+
+    console.log(alarm);
 
     return(  
         <ActiveList onClick={OpenList} >
@@ -135,21 +186,39 @@ export const AlarmList = ({title, alarmArray, arrow, closeNav}) => {
             {isActive ? 
             (<ShowContent>
                 <>
-                {alarmClose && 
-                alarm.map(alarm => { return(
-                    <Alarm onClick={(e)=>{stop(e); closeNav()}} key={alarm.id} alarm={alarm.state} count={alarm.Count} to={alarm.href}>
-                        <AlarmNotice>
-                            <AlarmText>
-                                {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
-                            </AlarmText>
-                            <CloseButton onClick={(e) => {stop(e); e.preventDefault(); onRemove(alarm.id)}}>x</CloseButton>
-                        </AlarmNotice>            
-                        <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
-                    </Alarm>
-                    )
-                })
+                {
+                alarmClose &&
+                 <>
+                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={turn.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={turn.state}>
+                <AlarmNotice>
+                    <AlarmText>
+                        {turn.Front} <Count>{turn.Count}</Count>{turn.Back}
+                    </AlarmText>
+                    <CloseButton onClick={(e) => { hideNotice(); stop(e); e.preventDefault() }}>x</CloseButton>
+                </AlarmNotice>            
+                <AlarmTime>{turn.time}{turn.minutes}</AlarmTime>
+                 </NotiAlarm>
+                 {
+                    alarm.map((alarm, i) => { return(
+                        <>
+                        { alarm.state && 
+                            <Alarm onClick={(e)=>{stop(e); closeNav(); hide(i)}} key={alarm.id} count={alarm.Count} to={alarm.href} state={alarm.state} >
+                                <AlarmNotice>
+                                    <AlarmText>
+                                        {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
+                                    </AlarmText>
+                                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); hide(i)}}>x</CloseButton>
+                                </AlarmNotice>            
+                                <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
+                            </Alarm>
+                        }
+                        </>
+                        )
+                    })
                 }
-                <All to="/" onClick={()=>{ closeNav(); }}>전체보기</All>
+                </>
+                }
+                <All to="/notice"  onClick={()=>{ closeNav(); }}>전체보기</All>
                 </>
             </ShowContent>):(
                 <Content></Content>

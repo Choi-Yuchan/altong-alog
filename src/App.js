@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from 'styled-components';
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useState, useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
 import AlogMainSearch from './alogMainSearch/AlogMainSearch';
@@ -13,13 +13,19 @@ import Hamburger from './Hamburger';
 import AlogWrite from './alogWrite/AlogWrite';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
-import AlogMainPopup from './AlogMainPopup';
+import Notice from './Notice';
+import NoticePaste from './noticeLists/NoticePaste';
+import NoticeReply from './noticeLists/NoticeReply';
+import NoticeRefund from './noticeLists/NoticeRefund';
+import NoticeModify from './noticeLists/NoticeModify';
+import NoticeMessage from './noticeLists/NoticeMessage';
+import NoticeHun from './noticeLists/NoticeHun';
 
 function App() {
-
+  const [shows, setShows] = useState(false);
+  const clicks = () => { setShows(!shows); }
   const naviRef= useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(naviRef, false);
-
   const defaultBgImg = 'logo.jpg'; // 폴더 기본 배경 이미지
 
   const [text, setText] = useState('');
@@ -29,17 +35,16 @@ function App() {
   return(
     
     <Wrap>
-      {/* <AlogMainPopup></AlogMainPopup>   */}
     <Container>
-      <ScrollToTop>
       <AlogHeader 
         isActive={isActive} setIsActive={setIsActive} 
         text={text} setText={setText} 
         openInput={openInput} setOpenInput={setOpenInput}
         setSearchOption={setSearchOption}
       />
-      <Hamburger  isActive={isActive} setIsActive={setIsActive}/>    
-      <Route path="/" exact={true} component={AlogMain} />
+      <Hamburger  isActive={isActive} setIsActive={setIsActive}/>
+      <ScrollToTop>    
+      <Route exact path="/" component={AlogMain} />
       <Route
         path='/personalMain'
         render={() => <AlogPersonalMain bgImg={defaultBgImg} />}
@@ -51,21 +56,32 @@ function App() {
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
       <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
+      <Switch>
+        <Route exact path="/notice" component={Notice} />
+        <Route path="/notice/paste" component={NoticePaste} />
+        <Route path="/notice/reply" component={NoticeReply} />
+        <Route path="/notice/refund" component={NoticeRefund} />
+        <Route path="/notice/modify" component={NoticeModify} />
+        <Route path="/notice/message" component={NoticeMessage} />
+        <Route path="/notice/hun" component={NoticeHun} />
+      </Switch>
       </ScrollToTop>
     </Container>
     </Wrap>
+  
   )
 }
 
 const Wrap = styled.div`
-    width:100%; height:100%;
+    width:100%; height:auto;
     position:relative;
 `;
 
 const Container = styled.div`
-  width:100%; 
+  width:100%; height:auto;
   margin:0 auto;
   max-width:800px;
+  position:relative;
   padding-top:45px; 
 
   @media all and (min-width:480px) { padding-top:60px; }

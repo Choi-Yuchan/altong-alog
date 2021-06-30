@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import ListNav from './components/ListNav';
 import Profile from './components/Profile';
 import { Statistic } from './components/Statistic';
-import {CSSTransition} from 'react-transition-group';
-
 
 const langHamburger = {
   ko:{
@@ -17,28 +15,13 @@ const langHamburger = {
       profileAlt:"프로필",
       countryAlt:"국기",
     },
-    visitorCount: [
+    visitorCount:
       {
-        total: 15890,
-        yesterday: 245,
-        today: 128,
-      },
-      {
-        total: 47090,
-        yesterday: 1098,
-        today: 1173,
-      },
-    ],
-    mentoAlarm: [
-    { 
-      id: '우주인', 
-      data:"개발자의 삶이란...", 
-      profile:`${process.env.PUBLIC_URL + '/images/profile-image.png'}`,
-      home:'/personalMain',
-      dataUrl:"/contents"
-    }
-    ],
-    //고정
+        total: 158900, // 총 방문자 변수
+        yesterday: 24500, // 어제 방문자 변수
+        today: 12800, // 오늘 방문자 변수
+      }
+    ,
     listTitle : [
       "알림",
       "멘토 새 글",
@@ -56,105 +39,16 @@ const langHamburger = {
   },
 }
 
-const alarmArray = [
-  {
-    id:1,
-    Front : "새롭게 공지 된 사항이",
-    Count: 0,
-    Back : "건 있습니다.",
-    time:10,
-    minutes:"분 전",
-    state:false,
-    href:""
-},
- {
-    id:2,
-    Front : "내 알록달록 중",
-    Count: 1,
-    Back : "개를 퍼갔습니다!",
-    time: 11,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
-{
-    id:3,
-    Front : "내 알록달록에",
-    Count: 0,
-    Back : "개의 댓글이 달렸습니다.",
-    time:20,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
-{
-    id:4,
-    Front : "훈훈알 수입이",
-    Count: 4,
-    Back : "건 발생했습니다.",
-    time:18,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
- {
-    id:5,
-    Front : "새 쪽지가",
-    Count: 0,
-    Back : "건 있습니다.",
-    time:16,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
-{
-    id:6,
-    Front : "새로운 멘토로",
-    Count: 1,
-    Back : "명이 선정하셨습니다!",
-    time:40,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
-{
-    id:7,
-    Front : "환불이",
-    Count: 0,
-    Back : "건 발생했습니다.",
-    time:4,
-    minutes:"분 전",
-    state:true,
-    href:""
-},
-{
-    id:8,
-    Front : "수정된 달록이",
-    Count: 1,
-    Back : "건 있습니다.",
-    time:13,
-    minutes:"분 전",
-    state:true,
-    href:""
-}
-
-]
-
-
 function Hamburger({naviRef, isActive, setIsActive}) {
   const grade = langHamburger.ko.grade;
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
   const listTitleArrow = langHamburger.ko.listTitleArrow;
   const visitorCount = langHamburger.ko.visitorCount;
-  const mentoAlarm = langHamburger.ko.mentoAlarm;
   const ButtonText = langHamburger.ko.buttonText;
   const logoAlt = langHamburger.ko.logoAlt;
-  
-  alarmArray.sort(function(a,b){
-    return a.time - b.time
-  });
 
+  
   const closeNav = () => {
     setIsActive(!isActive);
   }
@@ -176,29 +70,21 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         countryImg={userData.countryImg}
         profileAlt={userData.profileAlt}
         countryAlt={userData.countryAlt}/>
-
         <ButtonSection>
           <Button to="/personalMain" onClick = { () => { closeNav(); } }>{ButtonText[0]}</Button>
           <Button to="/writing" onClick = { ( ) => { closeNav(); } }>{ButtonText[1]} <WriteIcon src={process.env.PUBLIC_URL + '/images/que_icon.svg'}></WriteIcon></Button>
         </ButtonSection>
-
-        <ListNav className="list" title={listTitle}
-        alarmArray={alarmArray}
+        <ListNav 
+        className="list" 
+        title={listTitle}
         arrow={listTitleArrow} 
-        mentoID={mentoAlarm[0].id}
-        mento={mentoAlarm[0].data} 
-        mentoImg={mentoAlarm[0].profile}
-        mentoHome={mentoAlarm[0].home}
-        dataUrl={mentoAlarm[0].dataUrl}
         closeNav={closeNav}
         />
-
         <Statistic 
-        total={visitorCount[1].total} 
-        yesterday={visitorCount[1].yesterday}
-        today={visitorCount[1].today}>
+        total={visitorCount.total} 
+        yesterday={visitorCount.yesterday}
+        today={visitorCount.today}>
         </Statistic>
-
         <LSection> 
           <LButton to="/" onClick = { () => { closeNav(); } }>
             <LogoImg src={process.env.PUBLIC_URL + `/images/altong-logo.svg`} alt={logoAlt}/>
@@ -206,7 +92,6 @@ function Hamburger({naviRef, isActive, setIsActive}) {
             </LButton>
           <LButton to="/" onClick = { () => { closeNav(); } }>{ButtonText[3]}</LButton>
         </LSection>
-       
       </SideMenu>
       </>
       :
