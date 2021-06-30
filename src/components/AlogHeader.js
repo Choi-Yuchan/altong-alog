@@ -8,10 +8,6 @@ function AlogHeader(props) {
     const isActive = props.isActive;
     const setIsActive = props.setIsActive;
 
-    const lanLogo = {
-        ko : { logo:"알록달록" }
-    }
-    const logo = lanLogo.ko.logo;
     const openNav = () =>{
         setIsActive(!isActive);
         document.getElementById("Con").style.display="block";
@@ -24,8 +20,12 @@ function AlogHeader(props) {
                 <Hambur onClick={() => openNav()} src={process.env.PUBLIC_URL + '/images/hambur.png'}></Hambur>
                 <a href="http://www.altong.com/"><img src={process.env.PUBLIC_URL + '/images/logo.png'}/></a>
                 </div>
-                <Link to="/"><AlogLogo>{ logo }</AlogLogo></Link>
-                <LinkIcon />
+                <Link to="/"><AlogLogo>알록달록</AlogLogo></Link>
+                <LinkIcon 
+                    text={props.text} setText={props.setText} 
+                    openInput={props.openInput} setOpenInput={props.setOpenInput}
+                    setSearchOption={props.setSearchOption}
+                />
             </HeaderBox>
         </HeaderDiv>
     );

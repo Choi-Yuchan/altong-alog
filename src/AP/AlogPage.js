@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Space from './space/Space';
 import Alpage from './alpage/Alpage';
 import New from './new/New';
-import AlogSearch2 from '../alogSearch2/AlogSearch2';
+import AlogMainSearch from '../alogMainSearch/AlogMainSearch';
 import AlogProfile from '../alogprofile/AlogProfile';
 
 
@@ -25,7 +25,7 @@ function AlogPage() {
       <Space/>
       <AlogProfile />
       <New/>
-      <AlogSearch2/>
+      <AlogMainSearch/>
     </Container>
   );
 };
