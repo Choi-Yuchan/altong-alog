@@ -41,7 +41,7 @@ function HeaderSearchOption(props) {
             <OptionBox select={select}>
                 {
                     array.map((list)=>{
-                       return <OptionList key={list.id} onClick={()=>{setChange(list.text); setSelect(!select);}}>{list.text}</OptionList>
+                       return <OptionList key={list.id} onClick={()=>{setChange(list.text); setSelect(!select); props.setSearchOption(list.id)}}>{list.text}</OptionList>
                     })
                 }
             </OptionBox>

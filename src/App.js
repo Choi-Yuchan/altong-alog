@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
-import AlogSearch2 from './alogSearch2/AlogSearch2';
+import AlogMainSearch from './alogMainSearch/AlogMainSearch';
 import AlogPersonalMain from './AlogPersonalMain';
 import AlogPersonalcontents from './AlogPersonalContents';
 import AlogHeader from './components/AlogHeader';
@@ -93,6 +93,10 @@ function App() {
     }
   }, [body]);
 
+  const [text, setText] = useState('');
+  const [openInput, setOpenInput] = useState(false);
+  const [searchOption, setSearchOption] = useState(1);
+
   return(
     
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
@@ -111,7 +115,7 @@ function App() {
       />
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
-      <Route path="/search" component={AlogSearch2} />
+      <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
       <Switch>
         <Route exact path="/notice" component={Notice} />
         <Route

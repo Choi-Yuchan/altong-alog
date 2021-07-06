@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import HeaderSearchOption from './HeaderSearchOption';
+import { Link } from 'react-router-dom';
 
-function LinkIcon() {
+function LinkIcon(props) {
+    const [searchText, setSearchText] = useState('');
+    const searchValue = (e) => {
+        setSearchText(e.target.value);
+    };  
+    const onSubmit = () => {
+        props.setOpenInput(false);
+        props.setText(searchText);
+        setSearchText('');
+    }
 
-    const [openInput, setOpenInput] = useState(false);
-
-    // const open = () => {
-    //     openInput === true ? setOpenInput(false) : setOpenInput(true)
-    // }
-    //검색 아이콘 내용 입력 후 검색 시 AlogSeach2로 연결
     return (
         <LinkIconBox>
-            <SearchDiv>
-                <SearchIcon src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} onClick={()=>{setOpenInput(!openInput)}} ></SearchIcon>
-                <SearchBox open={openInput}>
-                    <HeaderSearchOption openInput={openInput}></HeaderSearchOption>
+            <SearchDiv onSubmit={onSubmit}>
+                <SearchIcon src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} onClick={()=>{props.setOpenInput(true); }} />
+                { props.openInput && 
+                    <SLink 
+                        onClick={()=> { props.setOpenInput(false); props.setText(searchText); setSearchText(''); }} 
+                        to={'/search/'+ searchText}
+                    >
+                        <SLinkButton type="submit"></SLinkButton>
+                    </SLink>
+                }
+                <SearchBox open={props.openInput}>
+                    <HeaderSearchOption openInput={props.openInput} setSearchOption={props.setSearchOption}></HeaderSearchOption>
                     <SearchInput 
                         type='search' 
                         placeholder="검색어를 입력해 주세요."
-                        // open={openInput}
+                        value={searchText}
+                        onChange={searchValue}
                     ></SearchInput>
                 </SearchBox>
             </SearchDiv>
@@ -40,7 +53,7 @@ const LinkIconBox = styled.div`
         width:4.063rem;
     }
 `;
-const SearchDiv = styled.div`
+const SearchDiv = styled.form`
     width: 1.563rem;
     position:relative;
 
@@ -84,6 +97,24 @@ const SearchBox = styled.div`
     max-width:${props=>props.open ? '20rem':'0'};
     overflow:hidden;
     transition:all 0.3s;
+`;
+const SLinkButton = styled.button`
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    border:0;
+    background:transparent;
+`;
+const SLink = styled(Link)`
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
 `;
 
 export default LinkIcon;
