@@ -34,24 +34,26 @@ const GrayContents = styled.div`
     }
 `;
 
-const NoticeRefund  = () => {
+const NoticeRefund  = ({onRemoveRefund, usersRefund, setUsersRefund, whyArray}) => {
 
     const alarm = NoticeRefundData.ko.alarm;
     const Title = NoticeRefundData.ko.refundTitle;
-    const RefundArray = NoticeRefundData.ko.refundArray;
+
+    usersRefund.sort(function(a,b){
+        return b.date - a.date
+      });
 
     return(
         <>
         <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{RefundArray.length}</GrayContentsCount>{Title.Back}</GrayContents>
-        {
-            RefundArray.map((refund, i)=>{
-                return(
-                    <NoticeRefund_Contents key={refund.id} to={refund.href} refund={refund} onClick={()=>{}}></NoticeRefund_Contents>
-                )
-            })
-        }
-        
+        <GrayContents>{Title.Front}<GrayContentsCount>{usersRefund.length}</GrayContentsCount>{Title.Back}</GrayContents>
+            {
+                usersRefund.map((refund)=>{
+                    return(
+                        <NoticeRefund_Contents key={refund.id} to={refund.href} refund={refund} onRemoveRefund={onRemoveRefund} whyArray={whyArray}></NoticeRefund_Contents>
+                    )
+                })
+            }
         </>
     )
 };

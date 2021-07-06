@@ -39,7 +39,7 @@ const langHamburger = {
   },
 }
 
-function Hamburger({naviRef, isActive, setIsActive}) {
+function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, usersModify, usersReply, usersPaste, usersMessage, usersMento}) {
   const grade = langHamburger.ko.grade;
   const userData = langHamburger.ko.userData;
   const listTitle = langHamburger.ko.listTitle;
@@ -57,7 +57,7 @@ function Hamburger({naviRef, isActive, setIsActive}) {
     <Container id='Con'>
       {isActive ? 
       <>
-      <Wrap onClick = { (e) => {e.preventDefault(); closeNav(); } }></Wrap>
+      <Wrap onClick = { (e) => {e.preventDefault(); closeNav();} }></Wrap>
       <SideMenu ref={naviRef}>
         <CloseBox>
           <CloseButton onClick={() => closeNav()} src={process.env.PUBLIC_URL + `/images/close-button.svg`}></CloseButton>
@@ -79,6 +79,13 @@ function Hamburger({naviRef, isActive, setIsActive}) {
         title={listTitle}
         arrow={listTitleArrow} 
         closeNav={closeNav}
+        usersRefund={usersRefund} 
+        usersModify={usersModify}
+        usersReply={usersReply}
+        usersPaste={usersPaste}
+        usersMento={usersMento}
+        usersMessage={usersMessage}
+        usersHun={usersHun}
         />
         <Statistic 
         total={visitorCount.total} 

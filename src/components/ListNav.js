@@ -23,12 +23,12 @@ const AlogList = styled.ul`
     font-weight:bold;
 `;
 
-const ListNav = ({title, arrow, closeNav}) => {
+const ListNav = ({title, arrow, closeNav, usersRefund, usersModify, usersReply, usersPaste, usersHun, usersMessage, usersMento}) => {
 
     return(
         <Partition>
             <AlogList>
-                <AlarmList title={title[0]} arrow={arrow} closeNav={closeNav}></AlarmList>
+                <AlarmList title={title[0]} arrow={arrow} closeNav={closeNav} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersMento={usersMento} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage}></AlarmList>
                 <UpdateList title={title[1]} arrow={arrow} closeNav={closeNav}></UpdateList>
                 <MentoList title={title[2]} arrow={arrow} closeNav={closeNav}></MentoList>
                 <VisitedList title={title[3]} arrow={arrow} closeNav={closeNav}></VisitedList>  

@@ -82,7 +82,7 @@
         "Back" : "명이 선정하셨습니다!",
         "time":40,
         "minutes":"분 전",
-        "href":"",
+        "href":"/notice/mento",
         "contentImg":"/images/icon_add_mento.png",
         "state":true
     },

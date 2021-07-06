@@ -34,7 +34,7 @@ const GrayContents = styled.div`
     }
 `;
 
-const NoticePaste  = () => {
+const NoticePaste  = ({onRemovePaste, usersPaste}) => {
     
     const alarm = NoticePasteData.ko.alarm;
     const Title = NoticePasteData.ko.pasteTitle;
@@ -43,11 +43,11 @@ const NoticePaste  = () => {
     return(
         <>
         <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{pasteArray.length}</GrayContentsCount>{pasteArray.Back}</GrayContents>
+        <GrayContents>{Title.Front}<GrayContentsCount>{usersPaste.length}</GrayContentsCount>{pasteArray.Back}</GrayContents>
         {
-            pasteArray.map((Paste)=>{
+            usersPaste.map((Paste)=>{
                 return(
-                    <NoticePaste_Contents key={Paste.id} to={Paste.href} paste={Paste}></NoticePaste_Contents>
+                    <NoticePaste_Contents key={Paste.id} to={Paste.href} paste={Paste} onRemovePaste={onRemovePaste}></NoticePaste_Contents>
                 )
             })
         }

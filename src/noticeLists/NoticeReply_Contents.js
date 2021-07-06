@@ -83,12 +83,12 @@ const SubSentences = styled.div`
         font-size:15px;
     }
 `;    
-const NoticeReply_Contents = ({reply, to}) => {
+const NoticeReply_Contents = ({reply, to, onRemoveReply}) => {
 
     const [show, setShow] = useState(true);
 
     return(
-            <Contents to = {to}>
+            <Contents to = {to} onClick={()=>{onRemoveReply(reply.id)}}>{/* 클릭 시 해당 컨텐츠로 이동 */}
                 <LogoDiv><Logo src={ reply.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
                     <Sentences>
                        <MainSentences>{reply.title}</MainSentences>
@@ -96,7 +96,7 @@ const NoticeReply_Contents = ({reply, to}) => {
                        </Sentences>
                     <LanDiv>
                         <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
-                        onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
+                        onClick={(e)=>{e.preventDefault(); e.stopPropagation(); setShow(!show)}}></Language>
                     </LanDiv>
             </Contents>
     )
