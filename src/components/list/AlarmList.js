@@ -128,7 +128,7 @@ const All = styled(Link)`
     margin:15px auto 0;
 `;
 
-export const AlarmList = ({title, arrow, closeNav}) => {
+export const AlarmList = ({title, arrow, closeNav, usersRefund, usersHun, usersModify, usersReply, usersPaste, usersMento, usersMessage}) => {
     const [isActive, setIsActive] = useState(false);
     const [alarmClose, setAlarmClose] = useState(true);
     const OpenList = (e) => {
@@ -155,20 +155,18 @@ export const AlarmList = ({title, arrow, closeNav}) => {
       });
     
     // 각 배열 컨턴츠 갯수 
-    const refundArray = NoticeRefundData.ko.refundArray;
     const replyArray = NoticeReplyData.ko.ReplyArray;
     const hunArray = NoticeHunData.ko.hunArray;
-    const modifyArray = NoticeModifyData.ko.modifyArray;
     const pasteArray = NoticePasteData.ko.pasteArray;
     const messageArray = NoticeMessageData.ko.messageArray;
 
-
-    const refundLength = refundArray.length;
-    const replyLength = replyArray.length;
-    const hunLength = hunArray.length;
-    const modifyLength = modifyArray.length;
-    const pasteLength = pasteArray.length;
-    const messageLength = messageArray.length;
+    const refundLength = usersRefund.length;
+    const replyLength = usersReply.length;
+    const hunLength = usersHun.length;
+    const modifyLength = usersModify.length;
+    const pasteLength = usersPaste.length;
+    const messageLength = usersMessage.length;
+    const mentoLength = usersMento.length;
 
     alarm[0].Count = refundLength;
     alarm[1].Count = pasteLength;
@@ -176,9 +174,7 @@ export const AlarmList = ({title, arrow, closeNav}) => {
     alarm[3].Count = messageLength;
     alarm[4].Count = hunLength;
     alarm[5].Count = replyLength;
-    alarm[6].Count = replyLength;
-
-    console.log(alarm);
+    alarm[6].Count = mentoLength;
 
     return(  
         <ActiveList onClick={OpenList} >

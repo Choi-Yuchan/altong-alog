@@ -2,32 +2,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const langAlogMessage ={
-    ko:{
-        userID: ["Vivien"],
-        //고정
-        titleText: "님에게 메시지 보내기",
-        sendBtn:"보내기",
-        cancelBtn:"취소",
-    }
-}
-function AlogMessage ({close, setClose}) {
+function AlogMessage ({close, setClose, List}) {
 
-    const nickName = langAlogMessage.ko.userID;
-    const titleText = langAlogMessage.ko.titleText;
-    const sendBtn = langAlogMessage.ko.sendBtn;
-    const cancelBtn = langAlogMessage.ko.cancelBtn
     return (
         <>
             { close ?
             <Frame>
-                <Title><span>{nickName}</span>{titleText}</Title>
+                <Title><span>{List.nickname}</span>님에게 메시지 보내기</Title>
                 <Form action="#">
                 <TxtArea></TxtArea>
                 </Form>
                 <ButtonFrame>
-                    <Send>{sendBtn}</Send>
-                    <Cancel onClick={ () => { setClose(!close) } }>{cancelBtn}</Cancel>
+                    <Send onClick={ () => { setClose(!close) }}>보내기</Send>
+                    <Cancel onClick={ () => { setClose(!close) } }>취소</Cancel>
                 </ButtonFrame>
             </Frame>
             :null
@@ -38,11 +25,17 @@ function AlogMessage ({close, setClose}) {
 
 const Title = styled.div`
     width:80%; height:20px;
-    font-size:1em;
-    line-height:20px;
+    font-size:0.8em;
+    line-height:30px;
     color:#707070;
     text-align:center;
     margin:0 auto 20px;
+    position:relative;
+
+    @media all and (min-width:480px){
+        font-size:1em;
+        line-height:25px;
+    }
 `;
 
 const TxtArea = styled.textarea`

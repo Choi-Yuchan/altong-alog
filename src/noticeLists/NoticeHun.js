@@ -160,7 +160,7 @@ const Close = styled.div`
         margin-left:0px;
      }
 `;
-const NoticeHun  = () => {
+const NoticeHun  = ({onRemoveHun, usersHun}) => {
     
     const alarm = NoticeHunData.ko.alarm;
     const Title = NoticeHunData.ko.hunTitle;
@@ -191,11 +191,11 @@ const NoticeHun  = () => {
             <Member>{Title.member}</Member><Contents>{Title.give}</Contents><Dates>{Title.date}</Dates>
         </GrayContents>
         {
-            HunAl.map((hunAl, i)=>{
+            usersHun.map((hunAl, i)=>{
                 return(
                     <>
                     { show &&
-                    <Elements state={hunAl.state} key={hunAl.id} onClick={ () => { change(i); } }>
+                    <Elements state={hunAl.state} key={hunAl.id} onClick={ () => { change(i); onRemoveHun(hunAl.id)} }>{/* 클릭 시 해당 내용 확인으로 간주, 삭제*/}
                         <Account>
                             <Photo src={hunAl.profileImg}/>
                             <Wrap>

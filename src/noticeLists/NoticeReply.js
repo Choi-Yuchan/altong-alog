@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeReplyData from '../NoticeReplyData.json';
 import NoticeReply_Contents from './NoticeReply_Contents';
@@ -34,20 +34,19 @@ const GrayContents = styled.div`
     }
 `;
 
-const NoticeReply  = () => {
+const NoticeReply  = ({onRemoveReply, usersReply, setUserModify}) => {
 
     const alarm = NoticeReplyData.ko.alarm;
     const Title = NoticeReplyData.ko.ReplyTitle;
-    const ReplyArray = NoticeReplyData.ko.ReplyArray;
 
     return(
         <>
         <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{ReplyArray.length}</GrayContentsCount>{Title.Back}</GrayContents>
-        {
-            ReplyArray.map((reply)=>{
+        <GrayContents>{Title.Front}<GrayContentsCount>{usersReply.length}</GrayContentsCount>{Title.Back}</GrayContents>
+        { 
+            usersReply.map((reply)=>{
                 return(
-                    <NoticeReply_Contents key={reply.id} to={reply.href} reply={reply}></NoticeReply_Contents>
+                    <NoticeReply_Contents key={reply.id} to={reply.href} reply={reply} onRemoveReply={onRemoveReply}></NoticeReply_Contents>
                 )
             })
         }

@@ -6,7 +6,6 @@ function TimeToggle(props) {
     const hours = upDate.getHours();
     const minutes = upDate.getMinutes();
     const seconds = upDate.getSeconds();
-    console.log(props);
     const monthText = () => {
         if (month < 10) {
         return '0' + month;

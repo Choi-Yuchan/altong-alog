@@ -43,8 +43,6 @@ const Language =styled.img`
     }
 `;
 
-
-
 const Sentences = styled.div`
     color:#333333;
     font-size:12px;
@@ -83,12 +81,12 @@ const SubSentences = styled.div`
         font-size:15px;
     }
 `;    
-const NoticePaste_Contents = ({paste, to}) => {
+const NoticePaste_Contents = ({paste, to, onRemovePaste}) => {
 
     const [show, setShow] = useState(true);
 
     return(
-            <Contents to = {to}>
+            <Contents to = "/" onClick={()=>{onRemovePaste(paste.id)}}>{/* 클릭 시 해당 퍼가기 된 컨텐츠로 이동 */}
                 <LogoDiv><Logo src={ paste.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
                     <Sentences>
                        <MainSentences>{paste.title}</MainSentences>
