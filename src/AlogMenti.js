@@ -100,7 +100,8 @@ function AlogMenti () {
     return (
         <>
         { close ?
-            <MentiBox>
+        <WrapLabel onClick={()=>{setClose(false)}}>
+            <MentiBox onClick={(e) => e.stopPropagation()}>
                 <ExitFrame><Exit src={process.env.PUBLIC_URL + '/images/close-button.svg'} onClick = { () => { setClose(!close) } }></Exit></ExitFrame>
                 <Nick>'<span>{ userID }</span>'{menti}(<span>{MentiInfo.length}</span>{people})</Nick>
                 <Wrap>
@@ -135,11 +136,20 @@ function AlogMenti () {
                     }
                 </Contents>
             </MentiBox>
+            </WrapLabel>
         : null    
         }
     </>
     )
 };
+
+const WrapLabel = styled.div`
+    width:100vw; height:100vh;
+    position:fixed;
+    background:transparent;
+    left:0; top:0;
+    z-index:999;
+`;
 const ExitFrame = styled.div`
     width:100%; height:20px;
     position:relative;

@@ -9,21 +9,30 @@ function AlogMessage ({close, setClose, List}) {
     return (
         <>
             { close ?
-            <Frame>
-                <Title><Nickname>{List.nickname}</Nickname> {sendTo}</Title>
-                <Form action="#">
-                <TxtArea></TxtArea>
-                </Form>
-                <ButtonFrame>
-                    <Cancel onClick={ () => { setClose(!close) } }>{cancel}</Cancel>
-                    <Send onClick={ () => { setClose(!close) }}>{sentBtn}</Send>
-                </ButtonFrame>
-            </Frame>
+            <Wrap onClick={()=>{setClose(false)}}>
+                <Frame onClick={(e) => e.stopPropagation()}>
+                    <Title><Nickname>{List.nickname}</Nickname> {sendTo}</Title>
+                    <Form action="#">
+                    <TxtArea></TxtArea>
+                    </Form>
+                    <ButtonFrame>
+                        <Cancel onClick={ () => { setClose(!close) } }>{cancel}</Cancel>
+                        <Send onClick={ () => { setClose(!close) }}>{sentBtn}</Send>
+                    </ButtonFrame>
+                </Frame>
+            </Wrap>
             :null
             }
         </>
     )
 };
+const Wrap = styled.div`
+    width:100vw; height:100vh;
+    position:fixed;
+    background:transparent;
+    left:0; top:0;
+    z-index:999;
+`;
 const Nickname = styled.span`
     color:#eb639d;
     overflow: hidden;
@@ -75,10 +84,6 @@ const Frame = styled.div`
     padding: 15px;
     border:1px solid #707070;
     z-index:9999;
-
-    @media all and (min-height:800px){
-        top:70%;
-    }
 `;
 
 const ButtonFrame = styled.div`

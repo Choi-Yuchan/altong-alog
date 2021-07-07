@@ -107,9 +107,16 @@ function App() {
       <Route exact path="/" component={AlogMain} />
       <Route
         path='/personalMain'
-        render={() => <AlogPersonalMain bgImg={defaultBgImg} />}
+        render={() => <AlogPersonalMain bgImg={defaultBgImg}/>}
       />
-      <Route path="/contents" component={AlogPage} />
+      <Route
+        path='/personalContents'
+        render={() => <AlogPersonalcontents bgImg={defaultBgImg}/>}
+      />
+      <Route
+        path="/contents"
+        render={() => <AlogPage body={body} setBody={setBody} />}
+         />
       <Route path="/writing" component={AlogWrite} />
       <Route path="/refund" component={Refund}/>
       <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />

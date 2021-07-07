@@ -100,7 +100,8 @@ function AlogMento () {
     return (
         <>
         { close ?
-            <MentoBox>
+            <WrapLabel onClick={()=>{setClose(false)}}>
+            <MentoBox onClick={(e) => e.stopPropagation()}>
                 <ExitFrame><Exit src={process.env.PUBLIC_URL + '/images/close-button.svg'} onClick = { () => { setClose(!close) } }></Exit></ExitFrame>
                 <Nick>'<span>{ userID }</span>'{mento}(<span>{MentoInfo.length}</span>{people})</Nick>
                 <Wrap>
@@ -129,17 +130,25 @@ function AlogMento () {
                                 <Star src={info.state === true ? process.env.PUBLIC_URL + '/images/star.png':process.env.PUBLIC_URL + '/images/star_on.png'}
                                 onClick={(e)=>{e.preventDefault(); star(i)}}></Star>
                             </UserInfo>
-                            </Label>
+                            </Label>                            
                              )
                         )
                     }
                 </Contents>
             </MentoBox>
+            </WrapLabel>
         : null    
         }
     </>
     )
 };
+const WrapLabel = styled.div`
+    width:100vw; height:100vh;
+    position:fixed;
+    background:transparent;
+    left:0; top:0;
+    z-index:999;
+`;
 const ExitFrame = styled.div`
     width:100%; height:20px;
     position:relative;
@@ -155,8 +164,8 @@ const MentoBox = styled.div`
     background:#fefefe;
     margin:120px auto 0 ;
     border:1px solid rgba(0,0,0,.3);
-    position:fixed;
-    z-index:99;
+    position:absolute;
+    z-index:9999;
     left:50%; top:-5%;
     transform: translateX(-50%);
     overflow: scroll;

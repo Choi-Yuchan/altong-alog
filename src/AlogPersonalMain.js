@@ -4,7 +4,7 @@ import AlogFixSectionFolder from './AlogFixSectionFolder';
 import AlogFolderSection from './AlogFolderSection';
 import AlogProfile from './alogprofile/AlogProfile';
 
-function AlogPersonalMain (props) {
+function AlogPersonalMain ({bgImg}) {
 
     const [show, setShow] = useState(false);
     const click = () => {
@@ -15,7 +15,7 @@ function AlogPersonalMain (props) {
         <>
             <AlogProfile></AlogProfile>
             <AlogFixSectionFolder show = { show } click ={ click }></AlogFixSectionFolder>
-            <AlogFolderSection show = { show } bgImg={props.bgImg}></AlogFolderSection>
+            <AlogFolderSection show = { show } bgImg={bgImg}></AlogFolderSection>
         </>
     );
 };
