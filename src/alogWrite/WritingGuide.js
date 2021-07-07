@@ -98,6 +98,7 @@ const PopupArticle = styled.article`
 `;
 const PopupTitle = styled.h3`
     font-size: 1em;
+    font-weight: bold;
     padding: 1em 0;
 `;
 const PopupSubtitle = styled.h6`
@@ -137,7 +138,7 @@ const StartBtn = styled.button`
     font-size: 0.75rem;
     font-weight: bold;
     border-radius: 1rem;
-    border:1px solid black;
+    border:1px solid #ababab;
     padding: 2px 8px;
 `;
 
