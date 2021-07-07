@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import NoticeMessageData from '../NoticeMessageData.json';
 import NoticeMessageContents from './NoticeMessageContents';
+import NoticeMessagePop from './NoticeMessagePop';
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -48,11 +49,15 @@ const NoticeMessage  = ({onRemoveMessage, usersMessage}) => {
     
     const alarm = NoticeMessageData.ko.alarm;
     const Title = NoticeMessageData.ko.messageTitle;
+    const [pop, setPop] = useState(false); 
 
     usersMessage.sort(function(a,b){
         return b.date - a.date
       });
 
+    const [message, setMessage] = useState();
+
+    const usersMessageLength = usersMessage.length - 1;
     return(
         <>
         <TopTitle>{alarm}</TopTitle>
@@ -60,14 +65,15 @@ const NoticeMessage  = ({onRemoveMessage, usersMessage}) => {
             <Member>{Title.member}</Member><Contents>{Title.contents}</Contents><Dates>{Title.date}</Dates>
         </GrayContents>
         {
-            usersMessage.map((text)=>{
+            usersMessage.map((text, index)=>{
                 return(
                     <>
-                        <NoticeMessageContents text={text} onRemoveMessage={onRemoveMessage}></NoticeMessageContents>
+                        <NoticeMessageContents text={text} onRemoveMessage={onRemoveMessage} setMessage={setMessage} count={index} key={text.id} pop={pop} setPop={setPop}></NoticeMessageContents>
                     </>
                 );
             })
         }
+        <NoticeMessagePop onRemoveMessage={onRemoveMessage} usersMessage={usersMessage[message]} message={message} setMessage={setMessage} pop={pop} setPop={setPop} number={usersMessageLength}></NoticeMessagePop>
         </>
     )
 };
