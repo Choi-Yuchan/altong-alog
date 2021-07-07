@@ -141,39 +141,52 @@ function AlogWrite() {
                 <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
                 <StartBtn>알록달록 시작하기</StartBtn>
             </PopupContainer>
+
             <WriteTitle>{title}</WriteTitle>
             <WriteSettingBox>
-                <WriteContent>
-                    <WriteSelect onClick={onClick}>
-                        {check}
-                        <DownIcon></DownIcon>
-                    </WriteSelect>
-                    <WriteOptionBox oplist={oplist}>
-                        {folder.map(group => 
-                        <WriteOption onClick={ () => {setCheck(group); setOplist(false);}}>{group}</WriteOption>
+                <WriteSettingBoxTop>
+                    <WriteContent>
+                        <WriteSelect onClick={onClick}>
+                            {check}
+                            <DownIcon></DownIcon>
+                        </WriteSelect>
+                        <WriteOptionBox oplist={oplist}>
+                            {folder.map(group => 
+                            <WriteOption value={group} onClick={ () => {setCheck(group); setOplist(false);}}>{group}</WriteOption>
+                                )}
+                        </WriteOptionBox>
+                    </WriteContent>
+                    <WriteContent>
+                        <WriteSelect onClick={onClick2}>
+                            <WriteSpan>
+                                {select2 === '' ? null: <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + select2 + '_off.svg'}></OptionIcon>}
+                                {select}
+                            </WriteSpan>
+                            <DownIcon></DownIcon>
+                        </WriteSelect>
+                        <WriteOptionBox oplist={oplist2}>
+                            {option.map(opt => 
+                            <WriteOption value={opt.name} onClick={ () => {setSelect(opt.name); setSelect2(opt.img); setOplist2(false);}}>
+                                <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + opt.img + '_off.svg'}></OptionIcon>
+                                {opt.name}
+                            </WriteOption>
                             )}
-                    </WriteOptionBox>
-                </WriteContent>
-                <WriteContent>
-                    <WriteSelect onClick={onClick2}>
-                        <WriteSpan>
-                            {select2 === '' ? null: <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + select2 + '_off.svg'}></OptionIcon>}
-                            {select}
-                        </WriteSpan>
-                        <DownIcon></DownIcon>
-                    </WriteSelect>
-                    <WriteOptionBox oplist={oplist2}>
-                        {option.map(opt => 
-                        <WriteOption onClick={ () => {setSelect(opt.name); setSelect2(opt.img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + opt.img + '_off.svg'}></OptionIcon>
-                            {opt.name}
-                        </WriteOption>
-                        )}
-                    </WriteOptionBox>
-                </WriteContent>
-                <BackgroundBtn>{textContent.bgEdit}</BackgroundBtn>           
+                        </WriteOptionBox>
+                    </WriteContent>
+                    <BackgroundBtn>{textContent.bgEdit}</BackgroundBtn>
+                </WriteSettingBoxTop>
+                <WriteSettingBoxBottom>
+                    <LanguageSelect>
+                        <LanguageOption value="">-- Select one --</LanguageOption>
+                        <LanguageOption value="korean">한국어</LanguageOption>
+                        <LanguageOption value="English">English</LanguageOption>
+                    </LanguageSelect>
+                    <GuideLanguage>
+                        사용 언어를 선택해주세요.
+                    </GuideLanguage>
+                </WriteSettingBoxBottom>
             </WriteSettingBox>
-            <WriteTitleInput type='text' placeholder={textContent.titleText}></WriteTitleInput>
+            <WriteTitleInput type='text' placeholder={textContent.titleText}/>
             <EditorBox>
                 <AlogWriteEditor />
             </EditorBox>
@@ -199,6 +212,26 @@ function AlogWrite() {
         </WriteDiv>
     );
 }
+const LanguageSelect = styled.select`
+    width: 100px;
+    margin-left: 1rem;
+    padding: 0.25em 0.5em;
+    font-size: 0.625rem;
+
+    @media (min-width: 480px){
+        width: 150px;
+        font-size: 0.875rem;
+    }
+`;
+const LanguageOption = styled.option`
+`;
+const GuideLanguage = styled.p`
+    margin-left: 1rem;
+
+    @media (min-width: 480px){
+        font-size: 0.875rem;
+    }
+`;
 const ValueInfo = styled.div`
     width: 240px;
     display: ${props => props.show === true ? "block" : "none"};
@@ -334,11 +367,26 @@ const WriteTitle = styled.p`
 `;
 const WriteSettingBox = styled.div`
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     justify-content:space-evenly;
     align-items:center;
     margin-bottom:1.25rem;
     `;
+const WriteSettingBoxTop = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+`;
+const WriteSettingBoxBottom = styled(WriteSettingBoxTop)`
+    font-size: 0.75rem;
+    margin: 0.75rem auto;
+    justify-content: flex-start;
+    
+    @media (min-width: 760px){
+        margin: 1rem auto;
+    } 
+`;
 const WriteContent = styled.div`
     position:relative;
     @media (min-width: 480px){
@@ -448,13 +496,13 @@ const WriteSpan = styled.span`
 
 const WriteTitleInput = styled.input`
     display:block;
-    margin:0 auto;
-    margin-bottom:1.25rem;
-    border:0;
-    border-bottom:1px solid #707070;
+    margin:0 auto 1.25rem;
+    padding: 0.5em 0;
+    border: none;
+    border-bottom: 1px solid #707070;
     width:90%;
-    font-size:1rem;
-    outline:none;
+    font-size: 1rem;
+    outline: none;
 `;
 const EditorBox = styled.div`
     width:100%;
