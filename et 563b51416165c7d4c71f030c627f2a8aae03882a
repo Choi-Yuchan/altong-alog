@@ -1,0 +1,456 @@
+[33mcommit 563b51416165c7d4c71f030c627f2a8aae03882a[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/57-my-alog-page[m[33m)[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Wed Jul 7 18:00:31 2021 +0900
+
+    Revert "my alog page publishing #57#58#59#62"
+    
+    This reverts commit c803a0c5baa638f90226eeffd03825ba79718f92.
+
+[33mcommit c803a0c5baa638f90226eeffd03825ba79718f92[m[33m ([m[1;31morigin/feature/57-my-alog-page[m[33m)[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Wed Jul 7 17:45:35 2021 +0900
+
+    my alog page publishing #57#58#59#62
+
+[33mcommit 5b1e3e1fc3ebd544e248fe1383a19cac5ef786df[m[33m ([m[1;32mdevelop[m[33m)[m
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Tue Jul 6 11:34:24 2021 +0900
+
+    Feature/56 profile settings (#76)
+    
+    * 210702 프로필 설정 기본배경이미지 선택 진행중
+    
+    * profile settings popup publishing #56
+
+[33mcommit 93146c97e2c340987f384578d6a924154b095931[m
+Merge: a7fc4f7 4f48f8f
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jul 6 11:32:16 2021 +0900
+
+    Merge pull request #74 from altongTeam/feature/52-making-mento-menti-page
+    
+    connect jsons and add mento menti pages
+
+[33mcommit 4f48f8f1809a8b08061036bb6d68f0144d206a2e[m
+Merge: 6ea5973 a7fc4f7
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jul 6 11:31:56 2021 +0900
+
+    Merge branch 'develop' into feature/52-making-mento-menti-page
+
+[33mcommit 6ea597382bef6025af4483d307391ed4ce28a232[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jul 6 11:29:31 2021 +0900
+
+    connect jsons and add mento menti pages
+
+[33mcommit a7fc4f701cf24939d91ebad4aec16b851baab572[m
+Merge: 1c27617 6e557f7
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 30 18:44:18 2021 +0900
+
+    Merge pull request #55 from altongTeam/feature/27-search-page
+    
+    Feature/27 search page
+
+[33mcommit 6e557f7b8325136b84c9ae699b3d9192eb060829[m[33m ([m[1;31morigin/feature/27-search-page[m[33m, [m[1;32mfeature/27-search-page[m[33m)[m
+Merge: 4b17c82 1c27617
+Author: homanok8 <homanok8@gamil.com>
+Date:   Wed Jun 30 18:24:04 2021 +0900
+
+    검색페이지 #27
+
+[33mcommit 4b17c8212cacab4dff3e1608e93177f9c31e54a1[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Wed Jun 30 17:07:58 2021 +0900
+
+    search page #27
+
+[33mcommit 1c27617b99ed882ed1cb44244787b9c6165d41e9[m[33m ([m[1;31morigin/feature/52-making-mento-menti-page[m[33m)[m
+Merge: f44db7e 04f2bf0
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jun 29 18:25:22 2021 +0900
+
+    Merge pull request #51 from altongTeam/feature/50-notice-hide-add
+    
+    notice hide add
+
+[33mcommit 04f2bf0f3065f463efbb6841adbd3180a8b78a62[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 29 18:24:41 2021 +0900
+
+    notice hide add
+
+[33mcommit e144b398b5ddac53860ef7639a022113f1e5a4f6[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Fri Jun 25 18:53:29 2021 +0900
+
+    210625 작업 진행중...
+
+[33mcommit f44db7e02a9c937f568dce60adae7bb23a27bbae[m
+Merge: fe94411 82ba1c5
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Thu Jun 24 18:39:42 2021 +0900
+
+    Merge pull request #49 from altongTeam/feature/48-refund-modify-change
+    
+    modify popup add
+
+[33mcommit 82ba1c520103f646a5a3e6b2ce82416b7a4df4e6[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Thu Jun 24 18:39:06 2021 +0900
+
+    modify popup add
+
+[33mcommit fe9441179bebe34ac2ed02076fdb11773c62ad87[m
+Merge: 3bc3110 cf2ec33
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Thu Jun 24 12:17:44 2021 +0900
+
+    Merge pull request #47 from altongTeam/feature/46-making-hunPage
+    
+    add hun page
+
+[33mcommit cf2ec33917aaf922bd6f7ee1eed5d9b1d2bf753f[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Thu Jun 24 12:17:45 2021 +0900
+
+    add hun page
+
+[33mcommit 3bc31109a98060daa9bf2add4c5cb3c41f0ca15f[m
+Merge: d1692f4 3cf0bb7
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Thu Jun 24 11:10:32 2021 +0900
+
+    Merge pull request #44 from altongTeam/feature/43-making-message-part
+    
+    making message part on notice
+
+[33mcommit 3cf0bb76f3fc2a62552e4eb8e3cc4a7a3456fb0a[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Thu Jun 24 11:10:20 2021 +0900
+
+    making message part on notice
+
+[33mcommit d1692f4883c7012e15ee831775dacf21dae03847[m
+Merge: 8727e72 eb31cfa
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jun 22 16:07:33 2021 +0900
+
+    Merge pull request #42 from altongTeam/feature/41-making-paste-page
+    
+    making Notice elements(paste, refund, reply, modify)
+
+[33mcommit eb31cfaca5da17f1820ba07493dad8228c5af761[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 22 16:04:15 2021 +0900
+
+    making Notice elements(paste, refund, reply, modify)
+
+[33mcommit 8727e7274464ca144b2c30cf54b1e83b7141014d[m
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Fri Jun 18 11:48:02 2021 +0900
+
+    add json elements (#40)
+
+[33mcommit 443de498e22a02ff53f44daac63a0362f81eac2d[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Thu Jun 17 18:45:45 2021 +0900
+
+    LinkIcon.js 13줄 엔터 키 검색 기능 작업 중지
+
+[33mcommit bc139e36a2fea3327d6f8dbf679807be9dcb0b83[m
+Merge: b095a2d 2d9dd5d
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Thu Jun 17 15:19:14 2021 +0900
+
+    Merge pull request #38 from altongTeam/feature/37-noticepage-add
+    
+    notice part making
+
+[33mcommit 2d9dd5dbc87d3729d753f6ee837eb2863bb73fbc[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Thu Jun 17 15:18:57 2021 +0900
+
+    notice part making
+
+[33mcommit b095a2d9529222a01fb6ca36b73a54de0b744711[m
+Merge: 5aac79f 7b61966
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 17:10:39 2021 +0900
+
+    Merge pull request #36 from altongTeam/feature/35-comma
+    
+    #35 comma add
+
+[33mcommit 7b61966cd50f9ea4385197264d7f619a57254674[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 17:10:21 2021 +0900
+
+    #35 comma add
+
+[33mcommit 5aac79f21b0b38cbc9ce3c7eb5f4055de2369d44[m
+Merge: 65cc510 dae5ca9
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 16:31:10 2021 +0900
+
+    Merge pull request #34 from altongTeam/feature/33-recent-add
+    
+    recent contents feature add #33
+
+[33mcommit dae5ca96a328fe149aa13cb91ef95bd8e8e0ea13[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 16:30:48 2021 +0900
+
+    recent contents feature add #33
+
+[33mcommit 65cc5100c5214329b0a754ed66a4f8f5011213c7[m
+Merge: 5663c4a 3bff1a5
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 15:51:37 2021 +0900
+
+    Merge pull request #32 from altongTeam/bugfix/31-fix
+    
+    #31 add 2more contents
+
+[33mcommit 3bff1a5a08a35f0be17e5639cb06f04c2f6e8da3[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 15:51:20 2021 +0900
+
+    #31 add 2more contents
+
+[33mcommit 5663c4a54b7608fa0555aa4651a8e2b694e54915[m
+Merge: 35cb202 f155c28
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 15:42:36 2021 +0900
+
+    Merge pull request #30 from altongTeam/feature/29-bookmark-feature
+    
+    bookmark feature add and fix #29
+
+[33mcommit f155c2850837f34aac87ec244050a9345ff156f6[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 15:41:27 2021 +0900
+
+    bookmark feature add and fix #29
+
+[33mcommit 35cb202b4566ba5977cc046a5cafcd0ac61c6a28[m
+Merge: 2fdc448 b28a515
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 14:03:48 2021 +0900
+
+    Merge pull request #28 from altongTeam/feature/23-mento-new-contents-add
+    
+    mento new contents add feature #23
+
+[33mcommit b28a5155ff2af438487cc3656b2c3d182765466d[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 14:02:31 2021 +0900
+
+    mento new contents add feature #23
+
+[33mcommit 2fdc448f180e2a0ea9b45196e6061c4e249d5821[m[33m ([m[1;31morigin/feature/23-mento-new-contents-fix[m[33m)[m
+Merge: c2e86b7 b2b3634
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 16 11:33:36 2021 +0900
+
+    Merge pull request #26 from altongTeam/bugfix/24-alarm-bugfix
+    
+    Notice part fixed #24
+
+[33mcommit b2b36344af98b7d0660e5d06658fc800ac4619cd[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 16 11:32:37 2021 +0900
+
+    Notice part fixed #24
+
+[33mcommit c2e86b70bf4e796d630b0052f283b43b335b48ed[m
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Wed Jun 16 11:23:39 2021 +0900
+
+    Feature/9 search option (#25)
+    
+    * 푸시 테스트
+    
+    * search-option #9
+
+[33mcommit 41c292e4b4b7bb4ce1c23e4e18f19f305441c206[m[33m ([m[1;31morigin/bugfix/24-alarm-bugfix[m[33m)[m
+Merge: ddc1641 561c03c
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jun 15 18:51:25 2021 +0900
+
+    Merge pull request #22 from altongTeam/feature/19-hamburger-alarm-fix
+    
+    Feature/19 hamburger alarm fix
+
+[33mcommit 561c03c6d5da45f6a6b5bf63202c14c701e8f3e3[m
+Merge: 6b9261c ddc1641
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jun 15 18:49:54 2021 +0900
+
+    Merge branch 'develop' into feature/19-hamburger-alarm-fix
+
+[33mcommit 6b9261cccca25d226e2022f9be1dcc881cbe1079[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 15 18:47:34 2021 +0900
+
+    add hamburger-alarm function
+
+[33mcommit ddc16419271579c1261ba24854e4c3c693a61f28[m
+Merge: b738bcc bb4ba4c
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Tue Jun 15 13:51:39 2021 +0900
+
+    Merge pull request #21 from altongTeam/feature/20-hamburger-publishing
+    
+    hamburger publishing elements complete
+
+[33mcommit bb4ba4c5b145d957c20614d72d66e27875084496[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 15 13:44:49 2021 +0900
+
+    hamburger publishing elements complete
+
+[33mcommit 31e911693e30652b03d977ab7b6fb673aeff6bc8[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 15 11:31:11 2021 +0900
+
+    add alarm elements 10%
+
+[33mcommit 203de9c8be202c4ba19d6259867ad62f7847e785[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Tue Jun 15 10:58:45 2021 +0900
+
+    alarm change
+
+[33mcommit b738bcc7c7d26190c08e33e9d91d66c24e37909d[m
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Thu Jun 10 16:28:35 2021 +0900
+
+    category sort feature add (#18)
+    
+    * category sort feature add
+    
+    * category sort fix
+
+[33mcommit 30e0894fe34b037dca67782e85e7d6337aa4b1c5[m
+Merge: 11c3ebb 817c92a
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Wed Jun 9 18:35:07 2021 +0900
+
+    Merge pull request #16 from askePhoenix/feature/15-category-section-change
+    
+    category section change
+
+[33mcommit 817c92a40662f65d9fb604a86e7eb268ba874442[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 9 18:33:53 2021 +0900
+
+    category section change
+
+[33mcommit 11c3ebbfd6b52a27b6b4df70bba2c0b604cada15[m
+Merge: 2bbe27a 7346962
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Wed Jun 9 18:01:22 2021 +0900
+
+    Merge pull request #13 from askePhoenix/feature/7-category-exposure
+    
+    Merge pull request #12 from askePhoenix/revert-10-feature/7-category-…
+
+[33mcommit 73469624062b39bc91c7a573632e5f4602c0d537[m
+Merge: 5285938 4f60493
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 9 18:00:02 2021 +0900
+
+    Merge pull request #12 from askePhoenix/revert-10-feature/7-category-exposure
+    
+    Revert 10 feature/7 category exposure
+
+[33mcommit 2bbe27a433a058e652cc5c6c3c537cc45526e1e4[m
+Merge: 62e0a03 4f60493
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 9 17:54:18 2021 +0900
+
+    Merge pull request #11 from askePhoenix/revert-10-feature/7-category-exposure
+    
+    Revert 10 feature/7 category exposure
+
+[33mcommit 4f60493e99fd70cd7854b08e7e2d4f10018096d0[m
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Wed Jun 9 17:50:22 2021 +0900
+
+    Revert "Main category clicked function #7"
+
+[33mcommit 3145635bdabbe45a2aa4fd104de3b222876bd99c[m
+Merge: a32939d 5285938
+Author: homanok8 <77427358+homanok8@users.noreply.github.com>
+Date:   Wed Jun 9 17:44:41 2021 +0900
+
+    Merge pull request #10 from askePhoenix/feature/7-category-exposure
+    
+    Main category clicked function #7
+
+[33mcommit 528593820f0eb7a87a81ea782da9ef7eb1ebeb74[m
+Author: ingu8349 <ingu8349@gmail.com>
+Date:   Wed Jun 9 17:42:29 2021 +0900
+
+    Main category clicked function #7
+
+[33mcommit 62e0a0324e3a791418517f70fa44488932aa06cb[m
+Merge: 54d1dfc 30cd08b
+Author: ingu8349 <78517819+ingu8349@users.noreply.github.com>
+Date:   Wed Jun 9 17:08:40 2021 +0900
+
+    Merge pull request #8 from askePhoenix/feature/6-main-slide
+    
+    메인 대문글 슬라이드 #6
+
+[33mcommit 30cd08bbce8ce649b960bd2d7f801eb251b8cc98[m[33m ([m[1;32mfeature/6-main-slide[m[33m)[m
+Author: homanok8 <homanok8@gamil.com>
+Date:   Wed Jun 9 14:19:26 2021 +0900
+
+    메인 대문글 슬라이드 #6
+
+[33mcommit a32939daadf03c2901ce13dbabbb7d1a4e60e7a5[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 121710d 54d1dfc
+Author: askeundaia <48040020+askeundaia@users.noreply.github.com>
+Date:   Tue Jun 1 17:39:58 2021 +0900
+
+    Merge pull request #4 from askePhoenix/develop
+    
+    Develop
+
+[33mcommit 54d1dfc57b2d670ec05cd66c38e7c80a02e4ae73[m
+Merge: c074e59 0ee5a4c
+Author: Choi-Yuchan <67131983+Choi-Yuchan@users.noreply.github.com>
+Date:   Tue Jun 1 11:45:53 2021 +0900
+
+    Merge pull request #3 from askePhoenix/feature/2-issue-template
+    
+    add issue template #2
+
+[33mcommit 0ee5a4c988c61427ff07ec4a77a75c2bdef913e0[m
+Author: askePhoenix <73146032+askePhoenix@users.noreply.github.com>
+Date:   Tue Jun 1 11:29:42 2021 +0900
+
+    add issue template #2
+
+[33mcommit c074e599349f2a3d6454c86f9f57a75c28be8c85[m
+Author: askePhoenix <73146032+askePhoenix@users.noreply.github.com>
+Date:   Tue Jun 1 11:26:11 2021 +0900
+
+    Revert "add issue template #2"
+    
+    This reverts commit f909b3875b697ddf19b344dc1df2e00bc43ec9b7.
+
+[33mcommit f909b3875b697ddf19b344dc1df2e00bc43ec9b7[m
+Author: askePhoenix <73146032+askePhoenix@users.noreply.github.com>
+Date:   Tue Jun 1 11:18:39 2021 +0900
+
+    add issue template #2
+
+[33mcommit 121710dc194735672ac8774e441205bfe741573d[m[33m ([m[1;33mtag: 0.1[m[33m)[m
+Author: askePhoenix <73146032+askePhoenix@users.noreply.github.com>
+Date:   Tue Jun 1 11:05:54 2021 +0900
+
+    upload alog 0.1

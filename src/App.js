@@ -4,8 +4,7 @@ import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
 import AlogMainSearch from './alogMainSearch/AlogMainSearch';
-import AlogPersonalMain from './AlogPersonalMain';
-import AlogPersonalcontents from './AlogPersonalContents';
+import AlogPersonalMain from './AP/myMainAlog/AlogPersonalMain';
 import AlogHeader from './components/AlogHeader';
 import { useDetectOutsideClick } from './components/function/useDetectOutsideClick'
 import AlogPage from './AP/AlogPage';
@@ -102,17 +101,13 @@ function App() {
     
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
     <Container>
-      <AlogHeader isActive={isActive} setIsActive={setIsActive}/>
+      <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} />
       <Hamburger  isActive={isActive} setIsActive={setIsActive} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage} usersMento={usersMento}/>
       <ScrollToTop>    
       <Route exact path="/" component={AlogMain} />
       <Route
         path='/personalMain'
         render={() => <AlogPersonalMain bgImg={defaultBgImg} />}
-      />
-      <Route
-        path='/personalContents'
-        render={() => <AlogPersonalcontents bgImg={defaultBgImg} />}
       />
       <Route path="/contents" component={AlogPage} />
       <Route path="/writing" component={AlogWrite} />
