@@ -2,81 +2,63 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import AlogWriteEditor from './AlogWriteEditor';
 
-const langWritText = {
-    ko:{
-        title: '알록달록 글쓰기',
-        option: [
-            {
-                id:1,
-                img: '02',
-                name: '배움'
-            },
-            {
-                id:2,
-                img: '03',
-                name: '생활'
-            },
-            {
-                id:3,
-                img: '04',
-                name: '건강'
-            },
-            {
-                id:4,
-                img: '05',
-                name: '고민'
-            },
-            {
-                id:5,
-                img: '06',
-                name: '문예'
-            },
-            {
-                id:6,
-                img: '07',
-                name: '세상'
-            },
-            {
-                id:7,
-                img: '08',
-                name: '돈'
-            },
-            {
-                id:8,
-                img: '09',
-                name: '컴/폰'
-            },
-            {
-                id:9,
-                img: '10',
-                name: '스포츠'
-            },
-            {
-                id:10,
-                img: '11',
-                name: '게임'
-            },
-        ],
-        folder: ["전체","여행, 그 모든 것", "축구이야기","맛집"],
-        selectDfault:{
-            select1: "폴더명",
-            select2: "카테고리 설정"
-        },
-        otherText:{
-            titleText: '제목',
-            worth: '가치',
-            money: '알',
-            save: '등록하기'
-        }
-    }
-}
-
 function AlogWrite() {
-    const title = langWritText.ko.title;
-    const option = langWritText.ko.option;
-    const folder = langWritText.ko.folder;
-    const selectDfault = langWritText.ko.selectDfault;
-    const otherText = langWritText.ko.otherText;
+    const title = '알록달록 글쓰기';
+    const option = [
+        {
+            id:1,
+            img: '02',
+            name: '배움'
+        },
+        {
+            id:2,
+            img: '03',
+            name: '생활'
+        },
+        {
+            id:3,
+            img: '04',
+            name: '건강'
+        },
+        {
+            id:4,
+            img: '05',
+            name: '고민'
+        },
+        {
+            id:5,
+            img: '06',
+            name: '문예'
+        },
+        {
+            id:6,
+            img: '07',
+            name: '세상'
+        },
+        {
+            id:7,
+            img: '08',
+            name: '돈'
+        },
+        {
+            id:8,
+            img: '09',
+            name: '컴/폰'
+        },
+        {
+            id:9,
+            img: '10',
+            name: '스포츠'
+        },
+        {
+            id:10,
+            img: '11',
+            name: '게임'
+        },
+    ];
+    const folder = ["전체","여행, 그 모든 것", "축구이야기","맛집"];
+    const selectDfault = { select1: "그룹명", select2: "카테고리"};
+    const textContent = { titleText: '제목', worth: '가치', money: '알', save: '등록하기', bgEdit: "배경설정"};
 
     const [ oplist, setOplist] = useState(false);
     const [ oplist2, setOplist2] = useState(false);
@@ -99,7 +81,7 @@ function AlogWrite() {
 
     const [select, setSelect] = useState(selectDfault.select2);
     const [select2, setSelect2] = useState('');
-
+    const [showInfo, setShowInfo] = useState(false);
 
 
     return (
@@ -167,11 +149,9 @@ function AlogWrite() {
                         <DownIcon></DownIcon>
                     </WriteSelect>
                     <WriteOptionBox oplist={oplist}>
-                        <WriteOption onClick={ () => {setCheck(folder[0]); setOplist(false);}}>{folder[0]}</WriteOption>
-                        <WriteOption onClick={ () => {setCheck(folder[1]); setOplist(false);}}>{folder[1]}</WriteOption>
-                        <WriteOption onClick={ () => {setCheck(folder[2]); setOplist(false);}}>{folder[2]}</WriteOption>
-                        <WriteOption onClick={ () => {setCheck(folder[3]); setOplist(false);}}>{folder[3]}</WriteOption>
-                        <WriteOption onClick={ () => {setCheck(folder[4]); setOplist(false);}}>{folder[4]}</WriteOption>
+                        {folder.map(group => 
+                        <WriteOption onClick={ () => {setCheck(group); setOplist(false);}}>{group}</WriteOption>
+                            )}
                     </WriteOptionBox>
                 </WriteContent>
                 <WriteContent>
@@ -183,72 +163,58 @@ function AlogWrite() {
                         <DownIcon></DownIcon>
                     </WriteSelect>
                     <WriteOptionBox oplist={oplist2}>
-                        <WriteOption onClick={ () => {setSelect(option[0].name); setSelect2(option[0].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[0].img + '_off.svg'}></OptionIcon>
-                            {option[0].name}
+                        {option.map(opt => 
+                        <WriteOption onClick={ () => {setSelect(opt.name); setSelect2(opt.img); setOplist2(false);}}>
+                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + opt.img + '_off.svg'}></OptionIcon>
+                            {opt.name}
                         </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[1].name); setSelect2(option[1].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[1].img + '_off.svg'}></OptionIcon>
-                            {option[1].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[2].name); setSelect2(option[2].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[2].img + '_off.svg'}></OptionIcon>
-                            {option[2].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[3].name); setSelect2(option[3].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[3].img + '_off.svg'}></OptionIcon>
-                            {option[3].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[4].name); setSelect2(option[4].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[4].img + '_off.svg'}></OptionIcon>
-                            {option[4].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[5].name); setSelect2(option[5].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[5].img + '_off.svg'}></OptionIcon>
-                            {option[5].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[6].name); setSelect2(option[6].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[6].img + '_off.svg'}></OptionIcon>
-                            {option[6].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[7].name); setSelect2(option[7].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[7].img + '_off.svg'}></OptionIcon>
-                            {option[7].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[8].name); setSelect2(option[8].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[8].img + '_off.svg'}></OptionIcon>
-                            {option[8].name}
-                        </WriteOption>
-                        <WriteOption onClick={ () => {setSelect(option[8].name); setSelect2(option[8].img); setOplist2(false);}}>
-                            <OptionIcon src={process.env.PUBLIC_URL + '/images/category/category' + option[9].img + '_off.svg'}></OptionIcon>
-                            {option[9].name}
-                        </WriteOption>
+                        )}
                     </WriteOptionBox>
                 </WriteContent>
-                <WriteLabel>
-                    <WriteLabelImg src={process.env.PUBLIC_URL + '/images/fileUpload.png'}></WriteLabelImg>
-                    <WriteFileInput type="file"></WriteFileInput>
-                </WriteLabel>
+                <BackgroundBtn>{textContent.bgEdit}</BackgroundBtn>           
             </WriteSettingBox>
-            <WriteTitleInput type='text' placeholder={otherText.titleText}></WriteTitleInput>
+            <WriteTitleInput type='text' placeholder={textContent.titleText}></WriteTitleInput>
             <EditorBox>
                 <AlogWriteEditor />
             </EditorBox>
             <WorthBox>
-                <WorthSpan>{otherText.worth}</WorthSpan>
+                    <QueIcon onClick = {() => setShowInfo(!showInfo)}>
+                        <ValueInfo show={showInfo}> 
+                            내 글의 가치를 부여하고, 판매 해 보세요.<br/>
+                            원글이 퍼가기 된 후에는 가치 수정이 불가능합니다.
+                        </ValueInfo>
+                        ?
+                    </QueIcon>
+                <WorthSpan>{textContent.worth}</WorthSpan>
                 <WorthInput
-                    type="number"
-                    min="0"
-                    max="100000"
-                    placeholder="0~100,000"
-                    step="100"
+                type="number"
+                min="0"
+                max="100000"
+                placeholder="0 ~ 100,000"
+                step="100"
                 ></WorthInput>
-                <WorthSpan>{otherText.money}</WorthSpan>
+                <WorthSpan>{textContent.money}</WorthSpan>
             </WorthBox>
-            <WriteBotton>{otherText.save}</WriteBotton>
+            <WriteBtn>{textContent.save}</WriteBtn>
         </WriteDiv>
     );
 }
+const ValueInfo = styled.div`
+    width: 240px;
+    display: ${props => props.show === true ? "block" : "none"};
+    position: absolute;
+    bottom: 2rem;
+    left: -1rem;
+    font-size: 0.625rem;
+    border: 1px solid #ababab;
+    border-radius: 1rem;
+    background-color: #fff;
+    padding: 5px;
+    @media (min-width: 480px){
+        width: 300px;
+        font-size: 0.75rem;
+    }
+`;
 const PopupContainer = styled.div`
     position:absolute;
     display:none;
@@ -353,6 +319,7 @@ const WriteDiv = styled.div`
     width:95%;
     max-width:800px;
     margin:0 auto;
+    padding-bottom: 50px;
 `;
 const WriteTitle = styled.p`
     font-size:1.125rem;
@@ -368,32 +335,39 @@ const WriteTitle = styled.p`
 const WriteSettingBox = styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:center;
+    justify-content:space-evenly;
     align-items:center;
     margin-bottom:1.25rem;
     `;
 const WriteContent = styled.div`
-    width:9rem;
     position:relative;
-    margin-left:0.9375rem;
+    @media (min-width: 480px){
+        width: 30%;
+    }
 `;
 const WriteSelect = styled.p`
     width:100%;
-    border:1px solid #333;
-    cursor:pointer;
-    padding:0.3125rem 0.625rem;
+    border:1px solid #ababab;
+    cursor: pointer;
+    padding:0.325rem 0.625rem;
     box-sizing:border-box;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    font-size:0.875rem;
+    font-size:0.75rem;
+    font-weight: bold;
     color:#707070;
+    @media (min-width: 480px){
+        font-size: 0.875rem;
+        padding: 0.75rem 0.875rem;
+    }
 `;
 const DownIcon = styled.i`
     display:block;
     width:0.625rem;
     height:0.625rem;
     box-sizing:border-box;
+    margin-left:1rem;
     border-left:2px solid #707070;
     border-bottom:2px solid #707070;
     transform:rotate(-45deg);
@@ -403,13 +377,16 @@ const WriteOptionBox = styled.ul`
     position:absolute;
     top:100%;
     left:0;
-    border:1px solid #333;
-    box-sizing:border-box;
-    background:#fff;
+    border:1px solid #ababab;
+    border-top: none;
+    border-bottom: none;
+    box-sizing: border-box;
+    background: #fff;
     z-index:9;
     transition:all 0.3s;
     transform-origin: center top;
     height:0;
+    font-weight: bold;
     transform:scaleY(0);
 
     animation-duration: 0.2s;
@@ -418,18 +395,28 @@ const WriteOptionBox = styled.ul`
     animation-fill-mode: forwards;
 `;
 const WriteOption = styled.li`
-    cursor:pointer;
-    padding:0.3125rem 0.625rem;
+    width: 100%;
+    cursor: pointer;
+    padding:0.35rem 0.625rem;
     display:flex;
     flex-direction:row;
     align-items:center;
     transition:all 0.3s;
     box-sizing:border-box;
-    font-size:0.875rem;
+    font-size:0.75rem;
     color:#707070;
+    border-bottom:1px solid #ababab;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
         background:#eee;
+    }
+
+    @media (min-width: 480px){
+        font-size: 0.875rem;
+        padding: 0.75rem 0.875rem;
     }
 `;
 const OptionIcon = styled.img`
@@ -437,20 +424,28 @@ const OptionIcon = styled.img`
     width:1rem;
     margin-right:0.625rem;
 `;
-const WriteLabel = styled.label`
-    margin-left:0.9375rem;
-    cursor:pointer;
-`;
-const WriteFileInput = styled.input`
-    display:none;
+const BackgroundBtn = styled.button`
+    background: none;
+    border: 1px solid #ababab;
+    color: #707070;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    
+    @media (min-width: 480px){
+        width: 20%;
+        padding: 0.75rem 0.825rem;
+        font-size: 0.875rem;
+    }
 `;
 const WriteSpan = styled.span`
     display:flex;
+    font-size: 0.75rem;
+    @media (min-width:480px){
+        font-size: 0.875rem;
+    }
 `;
-const WriteLabelImg = styled.img`
-    display:block;
-    width: 1.8rem;
-`;
+
 const WriteTitleInput = styled.input`
     display:block;
     margin:0 auto;
@@ -463,6 +458,9 @@ const WriteTitleInput = styled.input`
 `;
 const EditorBox = styled.div`
     width:100%;
+    @media (min-width: 480px){
+        margin-bottom: 50px;
+    }
 `;
 const WorthBox = styled.div`
     margin:5rem 0 2.5rem;
@@ -476,7 +474,21 @@ const WorthBox = styled.div`
 `;
 const WorthSpan = styled.span`
     font-size:0.9375rem;
+    font-weight: bold;
     color:#707070;
+`;
+const QueIcon = styled.i`
+    display: block;
+    position: relative;
+    width: 1.2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    color: #707070;
+    border: 1px solid #ababab;
+    border-radius: 50%;
+    cursor: pointer;
 `;
 const WorthInput = styled.input`
     margin:0 0.625rem;
@@ -492,13 +504,12 @@ const WorthInput = styled.input`
         text-align:center;
     }
 `;
-const WriteBotton = styled.button`
+const WriteBtn = styled.button`
     display:block;
     width:100%;
-    max-width:720px;
-    margin:0 auto 50px;
-    border:1px solid #999;
-    height:35px;
+    margin:0 auto;
+    border:2px solid #ababab;
+    padding: 10px 20px;
     background:#fff;
     border-radius:20px;
     font-size:0.9375rem;
@@ -511,6 +522,10 @@ const WriteBotton = styled.button`
     &:hover {
         background:#666;
         color:#fff;
+    }
+
+    @media (min-width: 480px){
+        width: 35%;
     }
 `;
 
