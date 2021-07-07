@@ -4,8 +4,7 @@ import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AlogMain from './alogmain/AlogMain';
 import AlogMainSearch from './alogMainSearch/AlogMainSearch';
-import AlogPersonalMain from './AlogPersonalMain';
-import AlogPersonalcontents from './AlogPersonalContents';
+import AlogPersonalMain from './AP/myMainAlog/AlogPersonalMain';
 import AlogHeader from './components/AlogHeader';
 import { useDetectOutsideClick } from './components/function/useDetectOutsideClick'
 import AlogPage from './AP/AlogPage';
@@ -29,6 +28,7 @@ import NoticeMessageData from './NoticeMessageData.json';
 import NoticeMentoData from './NoticeMentoData.json'; 
 import NoticeMentiData from './NoticeMentiData.json'; 
 import NoticeHunData from './NoticeHunData.json'; 
+import Refund from './refund/Refund';
 
 function App() {
   const [shows, setShows] = useState(false);
@@ -101,7 +101,7 @@ function App() {
     
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
     <Container>
-      <AlogHeader isActive={isActive} setIsActive={setIsActive}/>
+      <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} />
       <Hamburger  isActive={isActive} setIsActive={setIsActive} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage} usersMento={usersMento}/>
       <ScrollToTop>    
       <Route exact path="/" component={AlogMain} />
@@ -118,6 +118,7 @@ function App() {
         render={() => <AlogPage body={body} setBody={setBody} />}
          />
       <Route path="/writing" component={AlogWrite} />
+      <Route path="/refund" component={Refund}/>
       <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
       <Switch>
         <Route exact path="/notice" component={Notice} />

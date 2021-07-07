@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BgImgPopup from './profileSetting/BgImgPopup';
 import PreviewProfile from './profileSetting/PreviewProfile';
+import PreviewMyGroup from './profileSetting/PreviewMyGroup';
 
 function DefaultBgImgEl({img, number}) {
     return (
@@ -13,7 +14,7 @@ function DefaultBgImgEl({img, number}) {
     )
 }
 
-function AlogProfileSetting (props) {
+function AlogProfileSetting ({setOpend, bgSetting}) {
     const colorSample = [ 
         {id:1, color:'#EE748D' },
         {id:2, color:'#F0A962' },
@@ -63,20 +64,25 @@ function AlogProfileSetting (props) {
     const rand2 = Math.floor(Math.random()*bgImgCount);
 
     const [popupOpen, setPopupOpen] = useState(false);
+    const groupSampleBgImg = defaultBgImage[1].img;
     
 
     return (
         <>
-        <SettingWrap onClick={()=>{props.setOpend(false)}}>
+        <SettingWrap onClick={()=>{setOpend(false)}}>
             <Setting onClick={(e)=>{e.stopPropagation();}}>
                 <Title>프로필 설정하기</Title>
-                <span className="subheading">소개글</span>
-                <IntroInput type="text" placeholder="공백, 띄어스기 포함 최대 30자까지 입력 할 수 있습니다." maxLength="30"  />
-                <span className="subheading">해시태그 설정</span>
-                <HashTagBox>
-                    <p>태그당 최대 5글자까지 입력 할 수 있습니다.</p>
-                    <HashTagInputBox># <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /></HashTagInputBox>
-                </HashTagBox>
+                {!bgSetting &&
+                    <>
+                        <span className="subheading">소개글</span>
+                        <IntroInput type="text" placeholder="공백, 띄어스기 포함 최대 30자까지 입력 할 수 있습니다." maxLength="30"  />
+                        <span className="subheading">해시태그 설정</span>
+                        <HashTagBox>
+                            <p>태그당 최대 5글자까지 입력 할 수 있습니다.</p>
+                            <HashTagInputBox># <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /></HashTagInputBox>
+                        </HashTagBox>
+                    </>
+                }
                 <span className="subheading">배경색 선택</span>
                 <BgColorBox>
                     {colorSample.map(color => <BgColorEl key={color.id} color={color.color} /> )}
@@ -95,7 +101,7 @@ function AlogProfileSetting (props) {
                     <FileInput type="file" accept='image/*' id="image_file" />
                 </FileInputBox>
                 <span className="subheading">미리보기</span>
-                <PreviewProfile />
+                {bgSetting ? <PreviewMyGroup sample={groupSampleBgImg} /> : <PreviewProfile />}
                 <SettingBtnBox>
                     <SettingBtn>저장</SettingBtn>
                     <SettingBtn onClick={()=>{props.setOpend(false)}}>취소</SettingBtn>
