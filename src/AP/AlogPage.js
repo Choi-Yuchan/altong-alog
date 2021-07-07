@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Space from './space/Space';
-import Alpage from './alpage/Alpage';
+import Alpage from './myMainAlog/Alpage';
 import New from './new/New';
 import AlogMainSearch from '../alogMainSearch/AlogMainSearch';
 import AlogProfile from '../alogprofile/AlogProfile';
