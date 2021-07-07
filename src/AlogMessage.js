@@ -3,18 +3,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 function AlogMessage ({close, setClose, List}) {
-
+    const sendTo = "님께 쪽지 보내기 ";
+    const cancel = "취소";
+    const sentBtn = "보내기";
     return (
         <>
             { close ?
             <Frame>
-                <Title><span>{List.nickname}</span>님에게 메시지 보내기</Title>
+                <Title><Nickname>{List.nickname}</Nickname> {sendTo}</Title>
                 <Form action="#">
                 <TxtArea></TxtArea>
                 </Form>
                 <ButtonFrame>
-                    <Send onClick={ () => { setClose(!close) }}>보내기</Send>
-                    <Cancel onClick={ () => { setClose(!close) } }>취소</Cancel>
+                    <Cancel onClick={ () => { setClose(!close) } }>{cancel}</Cancel>
+                    <Send onClick={ () => { setClose(!close) }}>{sentBtn}</Send>
                 </ButtonFrame>
             </Frame>
             :null
@@ -22,7 +24,12 @@ function AlogMessage ({close, setClose, List}) {
         </>
     )
 };
-
+const Nickname = styled.span`
+    color:#eb639d;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`;
 const Title = styled.div`
     width:80%; height:20px;
     font-size:0.8em;
@@ -31,6 +38,7 @@ const Title = styled.div`
     text-align:center;
     margin:0 auto 20px;
     position:relative;
+    font-weight:bold;
 
     @media all and (min-width:480px){
         font-size:1em;
@@ -61,13 +69,16 @@ const Frame = styled.div`
     width: 80%;
     max-width: 400px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
     padding: 15px;
     border:1px solid #707070;
     z-index:9999;
+
+    @media all and (min-height:800px){
+        top:70%;
+    }
 `;
 
 const ButtonFrame = styled.div`
@@ -80,7 +91,8 @@ const ButtonFrame = styled.div`
 `;
 
 const Send = styled.div`
-    border:1px solid #707070;
+    border:1px solid #fd0031;
+    color:#fd0031;
     border-radius:25px;
     width:30%;
     cursor:pointer;
