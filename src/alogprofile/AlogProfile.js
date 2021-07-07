@@ -61,10 +61,12 @@ function AlogProfile () {
     const HunEgg = () => {
         SetHun(!hun);
     }
-
+    
     // 내가 로그인 했을 때만 노출됨.
     const selfLogin = true;
 
+    const [state, setState] = useState(true);
+    
     return (
         <>
         <Back>
@@ -96,9 +98,9 @@ function AlogProfile () {
                 </Intro>
                 <Icons>
                     <MentoBox>
-                        <Mento  onClick={ () => { Openert() }}>{mento} <span>{ add }</span>{many}</Mento>
+                        <Wrap onClick={ () => { Openert() }}><Mento>{mento}</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
                         { Opent ? <AlogMento />: null }
-                        <Menti onClick={ () => { Openerts() }}>{menti} <span>100</span>{many}</Menti>
+                        <Wrap onClick={ () => { Openerts() }}><Mento>{menti}</Mento><Count>100</Count><Dot state={state}/></Wrap>
                         { Opents ? <AlogMenti />: null }
                         {/* { message ? <AlogMessage /> : null } */}
                     </MentoBox>
@@ -232,7 +234,7 @@ const Grade = styled.div`
 const Intro = styled.div`
     display:flex;
     flex-direction:column;
-    justify-content: center
+    justify-content: center;
 `;
 
 const Sentence = styled.div`
@@ -258,20 +260,56 @@ const ProfileBottom = styled.div`
 const MentoBox = styled.div`
     display:flex;
     font-size:0.9em;
+    justify-content: space-between;
+
+    @media (min-width:768px) {
+        width:150px;
+        margin-right:20px;
+    }
+`;
+const Wrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight:bold;
+    color:#555;
+    position:relative;
+    justify-content: space-around;
+    cursor: pointer;
+
+    :nth-child(1){
+        margin-right: 10px;
+    }
+    @media (min-width:768px) {
+        flex-direction: row;
+    }
+`;
+const Dot = styled.div`
+    position:absolute;
+    left:-2px; top:-2px;
+    width:8px; height:8px;
+    background:${props => props.state === true ? '#fd0031' : '#ccc'};
+    border-radius: 50%;
+`;
+const Mento = styled.div`
+    font-size:12px;
+    padding:2px 10px;
+    cursor:pointer;
+    white-space:nowrap;
+    letter-spacing:-0.5px;
+    background: #ddd;
+    border-radius: 10px;
+    margin-bottom: 3px;
+    
+    @media (min-width:768px) {
+        margin-bottom: 0px;   
+    }
 `;
 
-const Mento = styled.div`
-    font-weight:bold;
-    cursor:pointer;
-    margin-right:0.6rem;
-    white-space:nowrap;
-    letter-spacing:-0.5px;
-`;
-const Menti = styled.div`
-    font-weight:bold;
-    cursor:pointer;
-    white-space:nowrap;
-    letter-spacing:-0.5px;
+const Count = styled.span`
+     @media (min-width:768px) {
+        margin-left: 10px;   
+    }
 `;
 
 const Icons = styled.div`
