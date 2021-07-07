@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import HunPopup from '../../HunPopup';
+import { Link } from 'react-router-dom';
 
 const SpaceTxt = styled.div`
     width:100%;
@@ -14,39 +14,22 @@ const SpaceTxt = styled.div`
 `;
 const ButtonBox = styled.div`
     text-align:right;
-    margin-bottom:3.5rem;
-
-    @media all and (min-width:500px){
-        margin-bottom:5.5rem;
-    }
-    @media all and (min-width:600px){
-        margin-bottom:7rem;
-    } 
 `;      
 
 const StyledBtn = styled.button`
-    margin-top:30px;
     font-size:0.625rem;
     width:60px;
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 15px;
     padding: 5px 10px;
     background-color:#fefefe;
-    box-sizing:border-box;
-    :not(:last-child){
-    margin-right:10px;
-    position: relative;
-    cursor:pointer;
-    outline:none;
+    position:relative;
+    margin-right:5px;
+    cursor: pointer;
+    :last-child{
+        margin-right: 0;
     }
 `;
-
-const Hun = styled(StyledBtn)`
-    width:80px;
-    outline:none;
-    cursor: pointer;
-`;
-
 
 const Count =styled.div`
     width:30px;
@@ -57,7 +40,6 @@ const Count =styled.div`
     right:0;
     color:#fff;
     border-radius:15px;
-
 `;
 const CommentBox =styled.div`
     width:95%;
@@ -135,7 +117,6 @@ const Left=styled.div`
 const ProImg=styled.img`
     width:100%;
     cursor:pointer;
-
 `;
 
 const Flag =styled.img`
@@ -183,7 +164,6 @@ const CommentInner3=styled.div`
     margin-top:0.3rem;
 `;
 
-
 const Nick=styled.div`
     margin-right:0.5rem;
 `;
@@ -199,14 +179,6 @@ const Emgc=styled.img`
     cursor:pointer;
 `;
 
-const HunHun=styled.img`
-    width:0.875rem;
-    margin-right:0.5rem;
-    cursor:pointer;
-
-    
-
-`;
 const Goood = styled.div`
     width:0.875rem;
     cursor:pointer;
@@ -226,36 +198,96 @@ const Sad=styled.img`
     width:0.875rem;
     cursor:pointer;
 `;
+const Wrap = styled.div`
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:30px 5px;
+`;
+const LanguageCon = styled.div`
+    display:flex;
+    font-size:14px;
+`;
+const Origin = styled.div`
+    width:40px; height:40px;
+    border-radius: 50%;
+    border:${props => props.color === false ? '1.5px solid #777' :  '1.5px solid #fd0031'};
+    line-height:40px;
+    color:${props => props.color === false ? '#777' :  '#fd0031'};
+    text-align:center;
+    cursor:pointer;
+`;
+const Ai = styled.div`
+    width:40px; height:40px;
+    border-radius: 50%;
+    border:${props => props.color === true ? '1.5px solid #777' :  '1.5px solid #fd0031'};
+    line-height:40px;
+    color:${props => props.color === true ? '#777' :  '#fd0031'};
+    text-align:center;
+    cursor:pointer;
+`;
+const Line =styled.div`
+    width:1.5px; height:30px;
+    margin:5px 10px 0;
+    background: #777;
+`;
+const Caution = styled.div`
+    display:flex;
+    font-size:10px;
+    width:90%;
+    margin:0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+const Back = styled.div`
+    font-weight:bold;
+    white-space:nowrap;
 
+`;
+const Id = styled.div`
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    text-align:center;
+`;
+const Title = styled.div`
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    flex-grow:1;
+    text-align:center;
+`;
+const BackTo = styled(Link)`
+    color:blue;
+    white-space:nowrap;
 
-
-const langSpace = {
-    ko:{
-        //고정
-        allText : ["퍼가기","좋아요","댓글","훈훈알주기"],
-
-        userData : {
-            profileImg:`${process.env.PUBLIC_URL + '/images/Untitled-1.png'}`,
-            flag:`${process.env.PUBLIC_URL + '/images/flag.png'}`,
-            country:"KOR",
-        },
-        //고정
-        CommentSave : ["등록"],
-
-        Reply : ["미래의 휴대전화라 기대하면서 댓글 봤습니다."],
-        Nick : ["닉네임"],
-        Hour : ["24일전"]
-
-
-    }
-};
-
-
-
-
-
+`;
 function Space() {
-
+    const langSpace = {
+        ko:{
+            //고정
+            allText : ["퍼가기","좋아요","댓글"],
+    
+            userData : {
+                profileImg:`${process.env.PUBLIC_URL + '/images/Untitled-1.png'}`,
+                flag:`${process.env.PUBLIC_URL + '/images/flag.png'}`,
+                country:"KOR",
+            },
+            //고정
+            CommentSave : ["등록"],
+    
+            Reply : ["미래의 휴대전화라 기대하면서 댓글 봤습니다."],
+            Nick : ["닉네임"],
+            Hour : ["24일전"]
+        }
+    };
     const [open, setOpen] = useState(false);
 
     const free = () => {
@@ -298,6 +330,13 @@ function Space() {
         SetOpen(!Open);
     }
 
+    const [color, setColor] = useState(true);
+    const origin = "원본";
+    const ai = "AI";
+    const original = "원 알록";
+    const nickname = "순자러버";
+    const title = "알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자";
+    const backTo = "원문가기";
 
     return (
         <>
@@ -325,14 +364,17 @@ function Space() {
             g software l ike Aldus PageMaker including versio
             ns of Lorem Ipsum 
         </SpaceTxt>
-        
+        <Caution><Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title><BackTo to="/">{backTo}</BackTo></Caution>{/* 원본 알록으로 이동하기*/}
+        <Wrap>
+            <LanguageCon>
+                <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
+            </LanguageCon>
         <ButtonBox>
             <StyledBtn onClick={plus}>{allText[0]}<Count>{count}</Count></StyledBtn>
             <StyledBtn onClick={plus2} >{allText[1]}<Count> {count2}</Count></StyledBtn>
             <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
-            <Hun onClick={ Opener }>{allText[3]}</Hun>
-            <HunPopup hunAl = {Open} setHunAl = {SetOpen}></HunPopup>
         </ButtonBox>
+        </Wrap>
 
         { open === true &&
         <CommentBox>
@@ -355,7 +397,6 @@ function Space() {
                             <Nick>{nick}</Nick>
                             <Hour>{realtime}</Hour>
                             <Emgc src={process.env.PUBLIC_URL + '/images/atm_more_3.svg'}></Emgc>
-                            <HunHun onClick={ () => { SetOpen(!Open) } } src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}></HunHun>
                             <Goood onClick={()=>{ goodShow(); }}>
                             { good === true 
                                 ? <Good src={process.env.PUBLIC_URL + '/images/smile.svg'}></Good>

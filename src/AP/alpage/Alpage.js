@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import HunPopup from '../../HunPopup';
 import AlogFolderMaking from './AlogFolderMaking';
 
 
@@ -41,12 +42,9 @@ const Global =styled.img`
   z-index:2;
 `;
 
-
-
 const Logo = styled.img`
-  width:35px;
-  height:38px;
-  margin-right:10px;
+  width:5px; height:25px;
+  margin-right:15px;
   cursor:pointer;
 `;
 
@@ -55,13 +53,19 @@ const Title = styled.div`
   font-size:1.5rem;
   color:#fefefe;
   font-weight:bold;
-  width:50%;
+  width:80%;
   position:absolute;
   text-align:center;
   top:30%;
   left:50%;
   transform:translateX(-50%);
-
+  white-space:normal;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-wrap: break-word; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
 `;
 
 const SubTitle = styled.div`
@@ -181,48 +185,110 @@ const Makingp = styled.p`
   font-size:0.75rem;
 
 `;
+const Icons = styled.div`
+width:100%; height:38px;
+display:flex;
+justify-content:flex-end;
+align-items: center;
+`;
 
-const langAlpage = {
-  ko:{
-    allData : 
-    {
-        title: "알통이여 영원하라",
-        date: "2021.04.14",
-        money: "100,000",
-      }
-    ,
-      //고정
-      H : ["폴더를 선택해주세요"],
+const Frame = styled.div`
+display:flex;
+width:100%; height:38px;
+justify-content:space-between;
+position:absolute;
+left:0; top:10px;
+`;
 
-      Option :["여행, 그 모든 것","음악"],
-      //고정
-      SaveBtn : ["저장"],
-      //고정
-      Makingp : ["새폴더 만들기"],
-      //고정
-      Value : ["알"],
-      //고정
-      confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
-      
+const Hunhun = styled.div`
+width:50px; height:100%;
+margin-left:10px;
+display:flex;
+flex-direction:row;
+`;
 
-  },
-};
+const HunhunImg = styled.img`
+width:20px;
+margin-top:px;  
+`;
+const HunhunCount = styled.span`
+display:inline-block;
+line-height:38px;
+color:#fd0031;
+margin-left:5px;
+font-size:1rem;
+`;
 
-function Alpage() {
+const DropMenu = styled.div`
+    width:120px; height:120px;
+    position:absolute;
+    right:30px; top:15px;
+    z-index:9999;
+    display:flex;
+    flex-direction: column;
 
+    @media all and (min-width:480px){
+      right:50px;
+  }
+`;
+const Menus = styled.div`
+  flex-basis:25%;
+  background:#fefefe;
+  text-align:center;
+  line-height: 30px;
+  border:1px solid #777;
+  font-size: 12px;
+  box-sizing: border-box;
+    :hover{
+      background:#ccc;
+    }
+    :nth-child(2), :nth-child(3), :nth-child(4){
+      border-top:none;
+    }
+  
+  @media all and (min-width:480px){
+    font-size:14px;
+    width:140px; height:120px;
+  }
+`;
+
+function Alpage({body, setBody}) {
+  const langAlpage = {
+    ko:{
+      allData : 
+      {
+          title: "알통이여 영원하라 알통이여 영원하라 알통이여 영원하라 알통이여 영원하라",
+          date: "2021.04.14",
+          money: "100,000",
+        }
+      ,
+        //고정
+        H : ["폴더를 선택해주세요"],
+  
+        Option :["여행, 그 모든 것","음악"],
+        //고정
+        SaveBtn : ["저장"],
+        //고정
+        Makingp : ["새폴더 만들기"],
+        //고정
+        Value : ["알"],
+        //고정
+        confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
+    }
+  };
+  const hunAl = "훈훈알";
+  const call ="신고";
+  const modify ="수정";
+  const refund = "환불";
   const [isShow, setIsShow] = useState(false);
 
   const titleShow = () => {
     setIsShow(!isShow);
   }
-
   const [colorIs, setColorShow] = useState(false);
-
   const colorShow = () => {
     setColorShow(!colorIs);
-
   }
-
 
   const allDate2 = langAlpage.ko.allData;
   const chooseFolder = langAlpage.ko.H;
@@ -232,48 +298,26 @@ function Alpage() {
   const egg =langAlpage.ko.Value;
   const mention = langAlpage.ko.confirmMention;
 
-
   const [globalIs,setGlobal] = useState(false);
 
   const globalShow = () => {
     setGlobal(!globalIs);
   }
 
-  const Icons = styled.div`
-    width:100%; height:38px;
-    display:flex;
-    justify-content:flex-end;
-    
-  `;
-
-  const Frame = styled.div`
-    display:flex;
-    width:100%; height:38px;
-    justify-content:space-between;
-    position:absolute;
-    left:0; top:10px;
-  `;
-
-  const Hunhun = styled.div`
-    width:50px; height:100%;
-    margin-left:10px;
-    display:flex;
-    flex-direction:row;
-  `;
-
-  const HunhunImg = styled.img`
-    width:20px;
-    margin-top:px;  
-  `;
-  const HunhunCount = styled.span`
-    display:inline-block;
-    line-height:38px;
-    color:#fd0031;
-    margin-left:5px;
-    font-size:1rem;
-  `;
+  const [showMenu, setShowMenu] = useState(false);
 
   const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
+
+  const [hun, SetHun] = useState(false);
+    const HunEgg = () => {
+        SetHun(!hun);
+    }
+
+  useEffect(()=>{
+    if (body === true) {
+      setShowMenu(false);
+    }
+  }, [body, showMenu])
   return (
     <Box>
       <Frame>
@@ -281,13 +325,16 @@ function Alpage() {
         <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>1,000</HunhunCount></Hunhun>
       }
       <Icons>
-      <GlobalIcon onClick={globalShow}>
-        { globalIs === true 
-          ? <Global src={process.env.PUBLIC_URL + '/images/language_on.svg'}></Global>
-          : <Global src={process.env.PUBLIC_URL + '/images/language.svg'}></Global>
-        }
-      </GlobalIcon>
-      <Logo onClick={() => titleShow() } src={process.env.PUBLIC_URL + '/images/alog.png'}></Logo>
+      <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
+      { showMenu &&
+      <DropMenu>
+        <Menus onClick={()=>{HunEgg()}}>{hunAl}</Menus>
+        <Menus>{call}</Menus>
+        <Menus>{modify}</Menus>
+        <Menus>{refund}</Menus>
+      </DropMenu>
+      }
+      <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
       </Icons>
       </Frame>
       {isShow ? (
@@ -323,9 +370,6 @@ function Alpage() {
       </SubTitle>
         {colorIs === true ?  <AlogFolderMaking></AlogFolderMaking> : null}
     </Box>
-  
-
-
   );
 };
 

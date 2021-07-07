@@ -5,7 +5,7 @@ import AlogProfile from './alogprofile/AlogProfile';
 import AlogProfileBg from './alogprofile/AlogProfileBG';
 import AlogWordSection from './AlogWordSection';
 
-function AlogPersonalcontents (props) {
+function AlogPersonalcontents ({bgImg}) {
 
     const [show, setShow] = useState(false);
     const click = () => {
@@ -16,8 +16,8 @@ function AlogPersonalcontents (props) {
         <>
             <AlogProfileBg></AlogProfileBg>
             <AlogProfile></AlogProfile>
-            <AlogFixSectionContents show= { show } click ={ click } ></AlogFixSectionContents>
-            <AlogWordSection show = { show } bgImg={ props.bgImg }></AlogWordSection>
+            <AlogFixSectionContents show= { show } click ={ click }></AlogFixSectionContents>
+            <AlogWordSection show = { show } bgImg={ bgImg }></AlogWordSection>
         </>
     );
 };

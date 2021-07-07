@@ -15,13 +15,11 @@ const Container = styled.div`
   margin:0 auto;
 `;
 
-
-
-function AlogPage() {
+function AlogPage({body, setBody}) {
 
   return (
     <Container>
-      <Alpage/>
+      <Alpage body={body} setBody={setBody}/>
       <Space/>
       <AlogProfile />
       <New/>

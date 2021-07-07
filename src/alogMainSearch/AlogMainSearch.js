@@ -58,7 +58,7 @@ function AlogMainSearch(props) {
             <SearchWrap>
                 <MainSearchOption setSelectSort={setSelectSort}></MainSearchOption>
                 <SearchListDiv text={props.text}>
-                    <SearchJsonList 
+                    {/* <SearchJsonList 
                         list={SampleJson} 
                         text={props.text} 
                         option={props.searchOption} 
@@ -66,7 +66,7 @@ function AlogMainSearch(props) {
                         indexOfLast={indexOfLast}
                         indexOfFirst={indexOfFirst}
                         setPosts={setPosts}
-                    />
+                    /> */}
                 </SearchListDiv>
             </SearchWrap>
             <SearchPageCount 

@@ -25,9 +25,10 @@ function HunPopup({hunAl, setHunAl}) {
     const confirm = langHunPopup.ko.confirm;
 
     return (
-        <HunPopupWrap>
+        <HunPopupWrap >
             { hunAl ? 
-            <HunPopupBox>
+            <Wrap onClick={()=>{setHunAl(false)}}>
+            <HunPopupBox onClick={(e) => e.stopPropagation()}>
                 <HunTitle>{title}</HunTitle>
                 <HunText>{huntext}<br/>{total} <HunSpan>{hunhunal}</HunSpan>{textEnd}</HunText>
                 <HunInputBox>
@@ -39,6 +40,7 @@ function HunPopup({hunAl, setHunAl}) {
                     <HunBtnR onClick={()=>{setHunAl(!hunAl)}}>{confirm}</HunBtnR>
                 </HunBtnBox>
             </HunPopupBox>
+            </Wrap>
             : null}
         </HunPopupWrap>
     );
@@ -47,13 +49,21 @@ function HunPopup({hunAl, setHunAl}) {
 const HunPopupWrap = styled.div`
 `;
 
+const Wrap = styled.div`
+    width:100vw; height:100vh;
+    position:fixed;
+    background:transparent;
+    left:0; top:0;
+    z-index:999;
+`;
+
 const HunPopupBox = styled.div`
     z-index:3;
     background:#fefefe;
     border:0.5px solid #bebebe;
     width:90%;
     max-width:320px;
-    position:fixed;
+    position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
