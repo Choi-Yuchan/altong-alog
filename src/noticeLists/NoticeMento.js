@@ -24,6 +24,7 @@ const MentoBox = styled.div`
     font-weight: bold;
     line-height: 4;
     text-align: center;
+    cursor:pointer;
 
     @media all and (min-width:480px){
         font-size: 16px;
@@ -38,6 +39,7 @@ const MentiBox = styled.div`
     font-weight: bold;
     line-height: 4;
     text-align: center;
+    cursor:pointer;
 
     @media all and (min-width:480px){
         font-size: 16px;

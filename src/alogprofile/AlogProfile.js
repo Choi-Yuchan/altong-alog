@@ -66,6 +66,7 @@ function AlogProfile () {
     const selfLogin = true;
 
     const [state, setState] = useState(true);
+    const Account = {nickname :"사용자"};
     
     return (
         <>
@@ -108,14 +109,14 @@ function AlogProfile () {
                         <Images show={show} src={show?process.env.PUBLIC_URL + '/images/add-mento.png':process.env.PUBLIC_URL + '/images/added-mento.png'} 
                             onClick={ 
                                 ()=> {
-                                    addChange(add + 1 );
+                                    addChange(add + 1);
                                     setShow(false);
                                 }
                             } />
                         <Images src={process.env.PUBLIC_URL + '/images/hun.svg'} onClick={ () => { HunEgg() }}/>
                         {/* { hun ? <HunPopup />: null } */}
                         <Images src={process.env.PUBLIC_URL + '/images/message.svg'} onClick={ () => { messages() } } />
-                        <AlogMessage close={message} setClose={messageOpen} />
+                        <AlogMessage close={message} setClose={messageOpen} List={Account}/>
                         <HunPopup hunAl={hun} setHunAl={SetHun} />
                     </ThreeIcons>
                 </Icons>
@@ -342,6 +343,7 @@ const ThreeIcons = styled.div`
 const Images = styled.img`
     width:25px;
     margin-right:0.5rem;
+    cursor: pointer;
 
     @media (min-width:480px) {
         width:30px;
