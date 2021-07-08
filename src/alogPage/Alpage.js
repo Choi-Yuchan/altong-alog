@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HunPopup from '../components/HunPopup';
 import AlpageContents from '../components/AlpageContents';
+import AlpageContentsTutorial from '../components/AlpageContentsTutorial';
 
 const Box = styled.div`
   height: 223px;
@@ -234,17 +235,11 @@ const Menus = styled.div`
   }
 `;
 
-function Alpage({body, setBody}) {
+function Alpage({body, setBody, Contents}) {
+  
   const langAlpage = {
     ko:{
-      allData : 
-      {
-          title: "알통이여 영원하라 알통이여 영원하라 알통이여 영원하라 알통이여 영원하라",
-          date: "2021.04.14",
-          money: "100,000",
-        }
-      ,
-        //고정
+              //고정
         H : ["폴더를 선택해주세요"],
 
         Option :["여행, 그 모든 것","음악"],
@@ -258,7 +253,6 @@ function Alpage({body, setBody}) {
         confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
     }
   };
-  const allDate2 = langAlpage.ko.allData;
   const chooseFolder = langAlpage.ko.H;
   const titleName =langAlpage.ko.Option;
   const save =langAlpage.ko.SaveBtn;
@@ -304,7 +298,7 @@ function Alpage({body, setBody}) {
       <Box>
         <Frame>
           { BringHunhunAl &&
-          <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>1,000</HunhunCount></Hunhun>
+          <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>{Contents[0].hunhun}</HunhunCount></Hunhun>
         }
         <Icons>
         <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
@@ -316,7 +310,8 @@ function Alpage({body, setBody}) {
           <Menus>{refund}</Menus>
         </DropMenu>
         }
-        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      </Icons>
+        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      
+        </Icons>
         </Frame>
         {isShow ? (
           <Folder>
@@ -339,19 +334,24 @@ function Alpage({body, setBody}) {
             </MakingBox>  
         </Folder>) : null}
         <Title>
-          {allDate2.title}
+          {Contents[0].title}
         </Title>
         <SubTitle>
           <Date>
-          {allDate2.date}
+          {Contents[0].date}
           </Date>
           <Value>
-            Value : {allDate2.money}{egg}
+            Value : {Contents[0].value}{egg}
           </Value>
         </SubTitle>
           {/* {colorIs === true ?   : null} */}
       </Box>
-      <AlpageContents></AlpageContents>
+      { Contents[0].id === 0 ?
+      <AlpageContentsTutorial Contents={Contents}></AlpageContentsTutorial>
+      :
+      <AlpageContents Contents={Contents}></AlpageContents>  
+      }
+      
     </>
   );
 };

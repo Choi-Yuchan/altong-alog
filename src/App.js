@@ -113,7 +113,7 @@ function App() {
       <Route
         path="/contents"
         render={() => <AlogPage body={body} setBody={setBody} />}
-         />
+      />
       <Route path="/writing" component={AlogWrite} />
       <Route path="/refund" component={Refund}/>
       <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
