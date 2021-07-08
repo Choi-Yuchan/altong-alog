@@ -238,14 +238,17 @@ const Caution = styled.div`
     margin:0 auto;
     flex-direction: row;
     justify-content: space-between;
+
+    @media all and (min-width:768px){
+        font-size:12px;
+    }
 `;
 const Back = styled.div`
     font-weight:bold;
     white-space:nowrap;
-
+    text-align:left;
 `;
 const Id = styled.div`
-    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
     word-wrap: break-word; 
@@ -261,15 +264,15 @@ const Title = styled.div`
     display: -webkit-box; 
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
-    flex-grow:1;
+    flex-grow:0.5;
     text-align:center;
 `;
 const BackTo = styled(Link)`
     color:blue;
     white-space:nowrap;
-
+    font-weight:bold;
 `;
-function Space() {
+function AlpageContents() {
     const langSpace = {
         ko:{
             //고정
@@ -424,5 +427,5 @@ function Space() {
 
 
 
-export default Space;
+export default AlpageContents;
 
