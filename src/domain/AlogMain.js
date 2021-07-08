@@ -751,7 +751,9 @@ function AlogMain(props) {
     return (
         <>
             <AlogIntro>{mainText.mainTitle}</AlogIntro>
-            <AlogSlider content={alogSliderContents} count={count} />
+            <AlogSliderCoverDiv>
+                <AlogSlider content={alogSliderContents} count={count} />
+            </AlogSliderCoverDiv>
             <AlogCategory alogCategoryList0={alogCategoryList0} alogCategoryList1={alogCategoryList1} alogCategoryList2={alogCategoryList2} alogCategoryList3={alogCategoryList3} 
             alogCategoryList4={alogCategoryList4} alogCategoryList5={alogCategoryList5} alogCategoryList6={alogCategoryList6} alogCategoryList7={alogCategoryList7}
             alogCategoryList8={alogCategoryList8} alogCategoryList9={alogCategoryList9} alogCategoryList10={alogCategoryList10} categorySample={categorySample} title={mainText.category}
@@ -776,6 +778,11 @@ const AlogIntro = styled.p`
         font-size: 1.375rem;
         margin:1.563rem auto 1.875rem;
     }
+`;
+const AlogSliderCoverDiv = styled.div`
+    height:49vh;
+    max-width:800px;
+    margin:0 auto;
 `;
 
 export default AlogMain;

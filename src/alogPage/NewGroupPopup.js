@@ -130,7 +130,7 @@ const NewGroupPopupBox = styled.div`
         padding:20px;
     }
 `;
-const GroupPopTitle = styled.p`
+const GroupPopTitle = styled.div`
     font-size:1rem;
     font-weight:bold;
     color:#707070;

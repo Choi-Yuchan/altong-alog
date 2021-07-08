@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import AlogSlider from '../alogslider/AlogSlider';
 
-function MyMainAlogSlide() {
+function MyMainAlogSlide({content, count}) {
     return (
-        <DefaultSlideBox>
-            <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
-            <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
-        </DefaultSlideBox>
+        count === 0
+            ? <DefaultSlideBox>
+                <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
+                <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
+            </DefaultSlideBox>
+            : <MyMainAlogSlideDiv>
+                <AlogSlider content={content} count={count}/>
+            </MyMainAlogSlideDiv>
     );
 }
 
@@ -48,6 +53,12 @@ const DefaultSlideEl = styled.p`
         width:25%;
         height:200px;
     }
+`;
+
+const MyMainAlogSlideDiv = styled.div`
+    height:250px;
+    max-width:800px;
+    margin:0 auto 20px;
 `;
 
 export default MyMainAlogSlide;

@@ -7,36 +7,12 @@ import AlogMessage from '../components/AlogMessage';
 import HunPopup from '../components/HunPopup';
 import { Link } from 'react-router-dom';
 
-const langAlogProfile = {
-    ko:{
-        userID: ["Vivien"],
-        grade:"알천사",
-        intro:"님의 알록달록에 오신걸 환영합니다.",
-        hashtag1:"음주",
-        hashtag2:"여행",
-        hashtag3:"축구",
-        statistic:"통계 보러가기",
-        mento:"멘토",
-        menti:"멘티",
-        write:"글쓰기",
-        make:"폴더를<br>생성해주세요",
-        many:"명"
-    }
-}
-
 function AlogProfile () {
-    const nickname = langAlogProfile.ko.userID;
-    const grade = langAlogProfile.ko.grade;
-    const intro = langAlogProfile.ko.intro;
-    const hashtag1 = langAlogProfile.ko.hashtag1;
-    const hashtag2 = langAlogProfile.ko.hashtag2;
-    const hashtag3 = langAlogProfile.ko.hashtag3;
-    const statistic = langAlogProfile.ko.statistic;
-    const mento = langAlogProfile.ko.mento;
-    const menti = langAlogProfile.ko.menti;
-    const write = langAlogProfile.ko.write;
-    const make = langAlogProfile.ko.make;
-    const many = langAlogProfile.ko.many;
+    const nickname = "Vivien";
+    const grade = "알천사";
+    const hashtag1 = "음주";
+    const hashtag2 = "여행";
+    const hashtag3 = "축구";
 
     const [add, addChange] = useState(0);
     const [show, setShow] = useState(true);
@@ -94,14 +70,14 @@ function AlogProfile () {
             </Nickname>
             <ProfileBottom>
                 <Intro>
-                    <Sentence>{nickname}{intro}</Sentence>
+                    <Sentence>{nickname} 님의 알록달록에 오신걸 환영합니다.</Sentence>
                     <Hashtag># <span>{hashtag1}</span> # <span>{hashtag2}</span> # <span>{hashtag3}</span></Hashtag>
                 </Intro>
                 <Icons>
                     <MentoBox>
-                        <Wrap onClick={ () => { Openert() }}><Mento>{mento}</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
+                        <Wrap onClick={ () => { Openert() }}><Mento>멘토</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
                         { Opent ? <AlogMento />: null }
-                        <Wrap onClick={ () => { Openerts() }}><Mento>{menti}</Mento><Count>100</Count><Dot state={state}/></Wrap>
+                        <Wrap onClick={ () => { Openerts() }}><Mento>멘티</Mento><Count>100</Count><Dot state={state}/></Wrap>
                         { Opents ? <AlogMenti />: null }
                         {/* { message ? <AlogMessage /> : null } */}
                     </MentoBox>
@@ -125,6 +101,8 @@ function AlogProfile () {
         </>
     );
 };
+
+export default AlogProfile;
 
 const Back = styled.div`
     width:100%; height:50vw;
@@ -170,15 +148,10 @@ const PicContainer = styled.div `
         right:30px;
     }
 `;
-
 const Pic = styled.img`
     width:100%;
     height:100%;
 `;
-
-const Set = styled.div`
-`;
-
 const SetPicFrame = styled.div`
     padding:0.3rem;
     width:1.2rem;
@@ -188,13 +161,11 @@ const SetPic = styled.img`
     width:100%;
     cursor:pointer;
 `;
-
 const Nickname = styled.div`
     display:flex;
     align-items:center;
     padding-left:0.8rem;
 `;
-
 const NicknameID = styled.span`
     font-size:1.5em;
     font-weight:bold;
@@ -205,7 +176,6 @@ const NicknameID = styled.span`
         font-size:2em;
     }
 `;
-
 // const Country = styled.div`
 //     display:inline-block;
 //     width:19px; height:30px;
@@ -222,7 +192,6 @@ const NicknameID = styled.span`
 //     font-weight:bold;
 //     font-size:10px;
 // `; 
-
 const Grade = styled.div`
     font-size:11px;
     border:1px solid #ff4a4a;
@@ -231,13 +200,11 @@ const Grade = styled.div`
     border-radius:20px;
     margin:0 0.5rem;
 `;
-
 const Intro = styled.div`
     display:flex;
     flex-direction:column;
     justify-content: center;
 `;
-
 const Sentence = styled.div`
     font-size:0.8em;
     color:#707070;
@@ -257,7 +224,6 @@ const ProfileBottom = styled.div`
         padding:1.5rem 0.9rem 1rem;
     }
 `;
-
 const MentoBox = styled.div`
     display:flex;
     font-size:0.9em;
@@ -306,19 +272,16 @@ const Mento = styled.div`
         margin-bottom: 0px;   
     }
 `;
-
 const Count = styled.span`
      @media (min-width:768px) {
         margin-left: 10px;   
     }
 `;
-
 const Icons = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
 `;
-
 const Hashtag = styled.div`
     font-size:0.8rem;
 
@@ -333,7 +296,6 @@ const Statics = styled.div`
     border-radius:30px;
     cursor:pointer;
 `;
-
 const ThreeIcons = styled.div`
     display:flex;
     align-items:center;
@@ -349,7 +311,3 @@ const Images = styled.img`
         width:30px;
     }
 `;
-
-
-
-export default AlogProfile;

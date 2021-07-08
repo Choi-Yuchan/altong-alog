@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide}) {
+function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect}) {
 
     const [myAlogSelectSlide, setMyAlogSelectSlide] = useState(false);
-    const [mySelect, setMySelect] = useState('게시글');
 
     return (
         <MyAlogSettingBox>
