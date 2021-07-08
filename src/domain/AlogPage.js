@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
-import Space from '../components/Space';
 import Alpage from '../alogPage/Alpage';
 import AlogMainSearch from './AlogMainSearch';
 import AlogProfile from '../alogprofile/AlogProfile';
-
 
 const Container = styled.div`
   width:100%;
@@ -19,7 +16,6 @@ function AlogPage({body, setBody}) {
   return (
     <Container>
       <Alpage body={body} setBody={setBody}/>
-      <Space/>
       <AlogProfile />
       <AlogMainSearch/>
     </Container>
