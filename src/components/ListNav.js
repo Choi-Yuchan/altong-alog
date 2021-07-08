@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { AlarmList } from './list/AlarmList';
-import { MentoList } from './list/MentoList';
-import { VisitedList } from './list/VisitedList';
-import { UpdateList} from './list/UpdateList';
+import { AlarmList } from './hamburgerList/AlarmList';
+import { MentoList } from './hamburgerList/MentoList';
+import { VisitedList } from './hamburgerList/VisitedList';
+import { UpdateList} from './hamburgerList/UpdateList';
 
 
 const Partition = styled.div`

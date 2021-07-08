@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import NoticeMessageData from '../NoticeMessageData.json';
+import NoticeMessageData from '../dummydata/NoticeMessageData.json';
 import NoticeMessageContents from './NoticeMessageContents';
 import NoticeMessagePop from './NoticeMessagePop';
 

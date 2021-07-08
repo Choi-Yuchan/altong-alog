@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import NoticeRefundData from '../NoticeRefundData.json';
+import NoticeRefundData from '../dummydata/NoticeRefundData.json';
 import NoticeRefund_Contents from './NoticeRefund_Contents';
 
 const TopTitle = styled.div`

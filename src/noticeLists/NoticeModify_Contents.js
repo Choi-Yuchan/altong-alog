@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import TimeToggle from '../TimeToggle';
+import TimeToggle from '../components/function/TimeToggle';
 
 const Contents = styled(Link)`
     border: 1px solid #c4c4c4;

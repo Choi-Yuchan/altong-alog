@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import TimeToggle from '../TimeToggle';
+import TimeToggle from '../components/function/TimeToggle';
 
 const Elements = styled.div`
     border: 1px solid #c4c4c4;

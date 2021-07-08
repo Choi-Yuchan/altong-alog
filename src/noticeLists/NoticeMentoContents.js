@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import AlogMessage from '../AlogMessage';
+import AlogMessage from '../components/AlogMessage';
 
 const MentoContents = styled.div`
     position:relative;

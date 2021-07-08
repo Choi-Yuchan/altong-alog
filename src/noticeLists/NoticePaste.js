@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import NoticePasteData from '../NoticePasteData.json';
+import NoticePasteData from '../dummydata/NoticePasteData.json';
 import NoticePaste_Contents from './NoticePaste_Contents';
 
 const TopTitle = styled.div`

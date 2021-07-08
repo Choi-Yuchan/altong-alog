@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LinkIcon from './LinkIcon';
 import { Route, Link } from 'react-router-dom';
-import AlogMain from '../alogmain/AlogMain'; 
+import AlogMain from '../domain/AlogMain'; 
 
 function AlogHeader(props) {
     const isActive = props.isActive;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentsEl from './ContentsEl';
-import AlogPage from '../../AP/AlogPage';
+import AlogPage from '../../domain/AlogPage';
 
 
 

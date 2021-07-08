@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import AlogTutorial from '../AlogTutorial';
+import AlogTutorial from '../components/AlogTutorial';
 
 function AlogFooter() {
 

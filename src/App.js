@@ -1,18 +1,18 @@
 /* eslint-disable */
 import styled from 'styled-components';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AlogMain from './alogmain/AlogMain';
-import AlogMainSearch from './alogMainSearch/AlogMainSearch';
-import AlogPersonalMain from './AP/myMainAlog/AlogPersonalMain';
+import AlogMain from './domain/AlogMain';
+import AlogMainSearch from './domain/AlogMainSearch';
+import AlogPersonalMain from './domain/AlogPersonalMain';
 import AlogHeader from './components/AlogHeader';
 import { useDetectOutsideClick } from './components/function/useDetectOutsideClick'
-import AlogPage from './AP/AlogPage';
-import Hamburger from './Hamburger';
-import AlogWrite from './alogWrite/AlogWrite';
-import ScrollToTop from './ScrollToTop';
-import './App.css';
-import Notice from './Notice';
+import AlogPage from './domain/AlogPage';
+import Hamburger from './components/Hamburger';
+import AlogWrite from './domain/AlogWrite';
+import ScrollToTop from './components/function/ScrollToTop';
+import './style/App.css';
+import Notice from './domain/Notice';
 import NoticePaste from './noticeLists/NoticePaste';
 import NoticeReply from './noticeLists/NoticeReply';
 import NoticeRefund from './noticeLists/NoticeRefund';
@@ -20,15 +20,15 @@ import NoticeModify from './noticeLists/NoticeModify';
 import NoticeMessage from './noticeLists/NoticeMessage';
 import NoticeMento from './noticeLists/NoticeMento';
 import NoticeHun from './noticeLists/NoticeHun';
-import NoticeRefundData from './NoticeRefundData.json'; 
-import NoticeModifyData from './NoticeModifyData.json'; 
-import NoticeReplyData from './NoticeReplyData.json'; 
-import NoticePasteData from './NoticePasteData.json'; 
-import NoticeMessageData from './NoticeMessageData.json'; 
-import NoticeMentoData from './NoticeMentoData.json'; 
-import NoticeMentiData from './NoticeMentiData.json'; 
-import NoticeHunData from './NoticeHunData.json'; 
-import Refund from './refund/Refund';
+import NoticeRefundData from './dummydata/NoticeRefundData.json'; 
+import NoticeModifyData from './dummydata/NoticeModifyData.json'; 
+import NoticeReplyData from './dummydata/NoticeReplyData.json'; 
+import NoticePasteData from './dummydata/NoticePasteData.json'; 
+import NoticeMessageData from './dummydata/NoticeMessageData.json'; 
+import NoticeMentoData from './dummydata/NoticeMentoData.json'; 
+import NoticeMentiData from './dummydata/NoticeMentiData.json'; 
+import NoticeHunData from './dummydata/NoticeHunData.json'; 
+import Refund from './domain/Refund';
 
 function App() {
   const [shows, setShows] = useState(false);
@@ -108,10 +108,6 @@ function App() {
       <Route
         path='/personalMain'
         render={() => <AlogPersonalMain bgImg={defaultBgImg}/>}
-      />
-      <Route
-        path='/personalContents'
-        render={() => <AlogPersonalcontents bgImg={defaultBgImg}/>}
       />
       <Route
         path="/contents"
