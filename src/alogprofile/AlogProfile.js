@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import AlogProfileSetting from '../AlogProfileSetting';
-import AlogMento from '../AlogMento';
-import AlogMenti from '../AlogMenti';
-import AlogMessage from '../AlogMessage';
-import HunPopup from '../HunPopup';
+import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
+import AlogMento from '../components/AlogMento';
+import AlogMenti from '../components/AlogMenti';
+import AlogMessage from '../components/AlogMessage';
+import HunPopup from '../components/HunPopup';
 import { Link } from 'react-router-dom';
 
 const langAlogProfile = {

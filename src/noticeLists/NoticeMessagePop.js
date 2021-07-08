@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TimeToggle from '../TimeToggle';
+import TimeToggle from '../components/function/TimeToggle';
 
 const Wrap = styled.div`
     width:100%; height:100vh;

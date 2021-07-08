@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoticeModifyData from '../NoticeModifyData.json';
+import NoticeModifyData from '../dummydata/NoticeModifyData.json';
 import NoticeModify_Contents from './NoticeModify_Contents';
 
 const Wrap = styled.div`

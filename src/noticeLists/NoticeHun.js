@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import NoticeHunData from '../NoticeHunData.json';
-import TimeToggle from '../TimeToggle';
+import NoticeHunData from '../dummydata/NoticeHunData.json';
+import TimeToggle from '../components/function/TimeToggle';
 import { Link } from 'react-router-dom';
 
 const TopTitle = styled.div`
