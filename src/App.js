@@ -30,6 +30,7 @@ import NoticeMentiData from './dummydata/NoticeMentiData.json';
 import NoticeHunData from './dummydata/NoticeHunData.json'; 
 import Refund from './domain/Refund';
 
+
 function App() {
   const [shows, setShows] = useState(false);
   const clicks = () => { setShows(!shows); }

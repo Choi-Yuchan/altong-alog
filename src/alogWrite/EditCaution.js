@@ -10,11 +10,11 @@ const EditCaution = () => {
                     <PopupTitle>수정 전 주의사항</PopupTitle>
                     <PopupSubtitle>1) 수정시 지불 금액</PopupSubtitle>
                     <PopupPara> 
-                        ㈜알통은 원작자의 무분별한 글 수정을 방지하기 위해 1회 수정당 <span>100알</span>을 차감하고 있습니다.
+                        ㈜알통은 원작자의 무분별한 글 수정을 방지하기 위해 1회 수정당 <RedText>100알</RedText>을 차감하고 있습니다.
                     </PopupPara>
                     <PopupSubtitle>2) 최초 수정 후 환불조치</PopupSubtitle>
                     <PopupPara>
-                        ㈜알통은 고객이 어떤 이유에서든 구매한 글에 만족하지 않을 경우 <span>환불</span>을 보장해 드립니다. 대부분의 달록글에
+                        ㈜알통은 고객이 어떤 이유에서든 구매한 글에 만족하지 않을 경우 <RedText>환불</RedText>을 보장해 드립니다. 대부분의 달록글에
                         대해서는 이 환불 정책이 적용됩니다. 수정이 최초 1회 발생 할 시, 다른 퍼간 회원으로 하여금 달록글에 대하여 환불 조치가 
                         발생할 수 있습니다. 그러니 수정을 하실 때는 신중하게 부탁드립니다.
                     </PopupPara>
@@ -86,6 +86,10 @@ const PopupPara = styled.p`
     padding-bottom:1em;
     line-height:1.3;
     text-align: left;
+`;
+const RedText = styled.span`
+    color: red;
+    font-weight: bold;
 `;
 const CheckBox = styled.input`
 `;
