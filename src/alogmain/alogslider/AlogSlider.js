@@ -26,7 +26,7 @@ function AlogSlider(props) {
     useEffect(() => {
         slideRef.current.style.transition = "all 0.5s ease-in-out";
         slideRef.current.style.transform = `translateX(-${moveSize}%)`;
-    }, [currentSlide]);
+    }, [currentSlide, moveSize]);
 
     return (
         <SliderDiv>
@@ -50,9 +50,7 @@ function AlogSlider(props) {
 
 const SliderDiv = styled.div`
     width:100%;
-    height:49vh;
-    max-width:800px;
-    margin:0 auto;
+    height:100%;
     position:relative;
 `;
 const SliderContainer = styled.div`
