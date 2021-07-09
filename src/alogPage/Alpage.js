@@ -2,7 +2,147 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HunPopup from '../components/HunPopup';
 import AlpageContents from '../components/AlpageContents';
-import AlpageContentsTutorial from '../components/AlpageContentsTutorial';
+import ScrapCaution from './ScrapCaution';
+import ScrapOptionBox from './ScrapOptionBox';
+import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
+import NewGroupPopup from './NewGroupPopup';
+
+function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting}) {
+  const langAlpage = {
+    ko:{
+      allData : 
+      {
+          title: "알통이여 영원하라 알통이여 영원하라 알통이여 영원하라 알통이여 영원하라",
+          date: "2021.04.14",
+          money: "100,000",
+        }
+      ,
+        //고정
+        H : ["폴더를 선택해주세요"],
+
+        Option :["여행, 그 모든 것","음악"],
+        //고정
+        SaveBtn : ["저장"],
+        //고정
+        Makingp : ["새폴더 만들기"],
+        //고정
+        Value : ["알"],
+        //고정
+        confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
+    }
+  };
+  const allDate2 = langAlpage.ko.allData;
+  const chooseFolder = langAlpage.ko.H;
+  const titleName =langAlpage.ko.Option;
+  const save =langAlpage.ko.SaveBtn;
+  const folder =langAlpage.ko.Makingp;
+  const egg =langAlpage.ko.Value;
+  const mention = langAlpage.ko.confirmMention;
+  const hunAl = "훈훈알";
+  const call ="신고";
+  const modify ="수정";
+  const refund = "환불";
+
+  const [isShow, setIsShow] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const titleShow = () => {
+    setIsShow(!isShow);
+  }
+
+  const [colorIs, setColorShow] = useState(false);
+  const colorShow = () => {
+    setColorShow(!colorIs);
+  }
+  const [viewCaution, setViewCaution] = useState(false);
+  const [scrapOption, setScrapOption] = useState(false);
+
+  useEffect(()=>{
+    if (body === true) {
+      setShowMenu(false);
+    }
+  }, [body, showMenu])
+
+  const [hun, SetHun] = useState(false);
+  const HunEgg = () => {
+      SetHun(!hun);
+  }
+
+  const [showNewGroup, setShowNewGroup] = useState(false);
+  const [showBgEdit, setShowBgEdit] = useState(false);
+
+  const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
+
+  return (
+    <>
+        {viewCaution === true &&
+        <ScrapCaution viewCaution={viewCaution} setViewCaution={setViewCaution}/>
+        }
+          {showNewGroup === true && <NewGroupPopup 
+          newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
+          checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
+          opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting}
+          />}
+          {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
+      <Box onClick={() => {setScrapOption(false)}}>
+        {scrapOption === true && 
+          <ScrapOptionBox setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
+          setMyAlogSlide={setMyAlogSlide}
+          />
+        }
+        <Frame>
+          { BringHunhunAl &&
+          <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>1,000</HunhunCount></Hunhun>
+        }
+        <Icons>
+        <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
+        { showMenu &&
+        <DropMenu>
+          <Menus onClick={()=>{HunEgg()}}>{hunAl}</Menus>
+          <Menus>{call}</Menus>
+          <Menus>{modify}</Menus>
+          <Menus>{refund}</Menus>
+        </DropMenu>
+        }
+        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      </Icons>
+        </Frame>
+        {isShow ? (
+          <Folder>
+            <Close src={process.env.PUBLIC_URL + '/images/close-button.svg'}  onClick={() => titleShow()}></Close>
+            <H>{chooseFolder}</H>
+            <SelectBox>
+              <Select>
+                <Option>
+                  {titleName[0]}
+                </Option>
+                <Option>
+                  {titleName[1]}
+                </Option>
+              </Select>
+              <SaveBtn onClick={()=>{window.confirm(String(mention))}}>{save}</SaveBtn>
+            </SelectBox>
+            <MakingBox onClick={() => colorShow() }>
+              <MakingBtn src={process.env.PUBLIC_URL + '/images/add.png'} />
+              <Makingp>{folder}</Makingp> 
+            </MakingBox>  
+        </Folder>) : null}
+        <Title>
+          {allDate2.title}
+        </Title>
+        <SubTitle>
+          <Date>
+          {allDate2.date}
+          </Date>
+          <Value>
+            Value : {allDate2.money}{egg}
+          </Value>
+        </SubTitle>
+      </Box>
+      <AlpageContents 
+      viewCaution={viewCaution} setViewCaution={setViewCaution}
+      scrapOption={scrapOption} setScrapOption={setScrapOption}/>
+    </>
+  );
+};
 
 const Box = styled.div`
   height: 223px;
@@ -234,126 +374,5 @@ const Menus = styled.div`
     width:140px; height:120px;
   }
 `;
-function Alpage({body, setBody, Contents}) {
-  
-  const langAlpage = {
-    ko:{
-              //고정
-        H : ["폴더를 선택해주세요"],
-
-        Option :["여행, 그 모든 것","음악"],
-        //고정
-        SaveBtn : ["저장"],
-        //고정
-        Makingp : ["새폴더 만들기"],
-        //고정
-        Value : ["알"],
-        //고정
-        confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
-    }
-  };
-  const chooseFolder = langAlpage.ko.H;
-  const titleName =langAlpage.ko.Option;
-  const save =langAlpage.ko.SaveBtn;
-  const folder =langAlpage.ko.Makingp;
-  const egg =langAlpage.ko.Value;
-  const mention = langAlpage.ko.confirmMention;
-  const hunAl = "훈훈알";
-  const call ="신고";
-  const modify ="수정";
-  const refund = "환불";
-
-  const [isShow, setIsShow] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
-  const titleShow = () => {
-    setIsShow(!isShow);
-  }
-
-  const [colorIs, setColorShow] = useState(false);
-  const colorShow = () => {
-    setColorShow(!colorIs);
-  }
-
-  const [globalIs,setGlobal] = useState(false);
-  const globalShow = () => {
-    setGlobal(!globalIs);
-  }
-
-  useEffect(()=>{
-    if (body === true) {
-      setShowMenu(false);
-    }
-  }, [body, showMenu])
-
-  const [hun, SetHun] = useState(false);
-  const HunEgg = () => {
-      SetHun(!hun);
-  }
-
-  const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
-
-  return (
-    <>
-      <Box>
-        <Frame>
-          { BringHunhunAl &&
-          <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>{Contents[0].hunhun}</HunhunCount></Hunhun>
-        }
-        <Icons>
-        <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
-        { showMenu &&
-        <DropMenu>
-          <Menus onClick={()=>{HunEgg()}}>{hunAl}</Menus>
-          <Menus>{call}</Menus>
-          <Menus>{modify}</Menus>
-          <Menus>{refund}</Menus>
-        </DropMenu>
-        }
-        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      
-        </Icons>
-        </Frame>
-        {isShow ? (
-          <Folder>
-            <Close src={process.env.PUBLIC_URL + '/images/close-button.svg'}  onClick={() => titleShow()}></Close>
-            <H>{chooseFolder}</H>
-            <SelectBox>
-              <Select>
-                <Option>
-                  {titleName[0]}
-                </Option>
-                <Option>
-                  {titleName[1]}
-                </Option>
-              </Select>
-              <SaveBtn onClick={()=>{window.confirm(String(mention))}}>{save}</SaveBtn>
-            </SelectBox>
-            <MakingBox onClick={() => colorShow() }>
-              <MakingBtn src={process.env.PUBLIC_URL + '/images/add.png'} />
-              <Makingp>{folder}</Makingp> 
-            </MakingBox>  
-        </Folder>) : null}
-        <Title>
-          {Contents[0].title}
-        </Title>
-        <SubTitle>
-          <Date>
-          {Contents[0].date}
-          </Date>
-          <Value>
-            Value : {Contents[0].value}{egg}
-          </Value>
-        </SubTitle>
-          {/* {colorIs === true ?   : null} */}
-      </Box>
-      { Contents[0].id === 0 ?
-      <AlpageContentsTutorial Contents={Contents}></AlpageContentsTutorial>
-      :
-      <AlpageContents Contents={Contents}></AlpageContents>  
-      }
-      
-      </>
-  );
-};
-
 
 export default Alpage;

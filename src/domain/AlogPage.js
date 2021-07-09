@@ -11,7 +11,7 @@ const Container = styled.div`
   margin:0 auto;
 `;
 
-function AlogPage({body, setBody}) {
+function AlogPage({body, setBody, setNewGroup, newGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting}) {
 
   const Contents = [
   {
@@ -38,7 +38,10 @@ function AlogPage({body, setBody}) {
 
   return (
     <Container>
-      <Alpage body={body} setBody={setBody} Contents={Contents}/>
+      <Alpage body={body} setBody={setBody} newGroup={newGroup} setNewGroup={setNewGroup}
+      sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
+      opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting}
+      />
       <AlogProfile />
       <AlogMainSearch/>
     </Container>

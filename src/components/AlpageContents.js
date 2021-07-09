@@ -2,6 +2,168 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOption}) {
+    const langSpace = {
+        ko:{
+            //고정
+            allText : ["퍼가기","좋아요","댓글"],
+    
+            userData : {
+                profileImg:`${process.env.PUBLIC_URL + '/images/Untitled-1.png'}`,
+                flag:`${process.env.PUBLIC_URL + '/images/flag.png'}`,
+                country:"KOR",
+            },
+            //고정
+            CommentSave : ["등록"],
+    
+            Reply : ["미래의 휴대전화라 기대하면서 댓글 봤습니다."],
+            Nick : ["닉네임"],
+            Hour : ["24일전"]
+        }
+    };
+    const [open, setOpen] = useState(false);
+
+    const free = () => {
+      if (open === true) {
+        setOpen(false);
+      } else {
+        setOpen(true);
+      }
+    }  
+
+    const [count, setCount] = useState(0);
+
+    const handleScrap = () => {
+        const plus = () => {
+                setCount(prev => prev + 1)
+            }
+     
+        const showScrap = () => {
+            setViewCaution(!viewCaution)
+        }
+        
+        const showScrapOtion = () => {
+            setScrapOption(!scrapOption)
+        }
+
+        plus();
+        showScrap();
+        showScrapOtion();
+    }
+
+    const [count2, setCount2] = useState(0);
+
+    const plus2 = () => {
+        setCount2(prev => prev + 1)
+    }
+    
+    const allText = langSpace.ko.allText;
+    const userData = langSpace.ko.userData;
+    const savesave = langSpace.ko.CommentSave;
+    const rereply = langSpace.ko.Reply;
+    const nick = langSpace.ko.Nick;
+    const realtime =langSpace.ko.Hour;
+    const [good,goodSet] = useState(true);
+    const [sad,sadSet] = useState(true);
+
+    function goodShow(){
+        goodSet(!good);
+    }
+    function sadShow(){
+        sadSet(!sad);
+    }
+
+    const [color, setColor] = useState(true);
+    const origin = "원본";
+    const ai = "AI";
+    const original = "원 알록";
+    const nickname = "순자러버";
+    const title = "알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자";
+    const backTo = "원문가기";
+
+    return (
+        <>
+        <SpaceTxt>
+            Lorem Ipsum is simply dummy text of the print in
+            g and typesetting industry.  Lorem Ipsum has bee
+            n the industry's standard dummy text ever since t
+            he 1500s, when an unknown printer took a galley 
+            of type and scrambled it to make a type specimen 
+            book. It has survived not only five centuries, but 
+            also the leap into electronic typesetting, remaini
+            ng essentially unchanged. It was popularise in th
+            e 1960s with the release of Letraset sheets contai
+            ning Lorem Ipsum passages, and more recently w 
+            th desktop publishing software like Aldus PageMa
+            ker including versions of Lorem IpsumLorem I
+            psum is simply dummy text of the printing and ty
+            pesetting industry. Lorem Ipsum has been the ind
+            ustry's standard dummy text ever since the 1500s,
+            when an unknown printer ook a galley of type an
+            d scrambled it to make a type specimen book. 
+            It has survived sheets containing Lorem Ipsum pa
+            ssages, and more recently with desktop publishin
+            g software l ike Aldus PageMaker including versio
+            ns of Lorem Ipsum 
+        </SpaceTxt>
+        <Caution><Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title><BackTo to="/">{backTo}</BackTo></Caution>{/* 원본 알록으로 이동하기*/}
+        <Wrap>
+            <LanguageCon>
+                <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
+            </LanguageCon>
+        <ButtonBox>
+            <StyledBtn onClick={handleScrap}>{allText[0]}<Count>{count}</Count></StyledBtn>
+            <StyledBtn onClick={plus2} >{allText[1]}<Count> {count2}</Count></StyledBtn>
+            <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
+        </ButtonBox>
+        </Wrap>
+
+        { open === true &&
+        <CommentBox>
+            <Commentdiv>
+                <CommentInner>
+                    <CommentTxt></CommentTxt>
+                    <CommentSave>{savesave}</CommentSave>
+                </CommentInner>
+            </Commentdiv>
+            <Commentdiv2>
+                <CommentInner2>
+                    <Left>
+                        <ProImg src={userData.profileImg}></ProImg>
+                        <Flag src={userData.flag}></Flag>
+                        <Country>{userData.country}</Country>
+                    </Left>
+                    <Right>
+                        <Reply>{rereply}</Reply>
+                        <CommentInner3>
+                            <Nick>{nick}</Nick>
+                            <Hour>{realtime}</Hour>
+                            <Emgc src={process.env.PUBLIC_URL + '/images/atm_more_3.svg'}></Emgc>
+                            <Goood onClick={()=>{ goodShow(); }}>
+                            { good === true 
+                                ? <Good src={process.env.PUBLIC_URL + '/images/smile.svg'}></Good>
+                                : <Good src={process.env.PUBLIC_URL + '/images/smile_red.svg'}></Good>
+                            }
+                            </Goood>
+                            <Saad onClick={()=>{ sadShow(); }}>
+                            { sad === true 
+                                ? <Sad src={process.env.PUBLIC_URL + '/images/sad.svg'}></Sad>
+                                : <Sad src={process.env.PUBLIC_URL + '/images/sad_red.svg'}></Sad>
+                            }
+                            </Saad>
+                        </CommentInner3>
+                    </Right>
+                </CommentInner2>
+                
+            </Commentdiv2>
+        </CommentBox>
+        }
+        </>
+    );
+};
+
+export default AlpageContents;
+
 const SpaceTxt = styled.div`
     width:100%;
     padding:30px 20px 20px 30px;
@@ -272,159 +434,3 @@ const BackTo = styled(Link)`
     white-space:nowrap;
     font-weight:bold;
 `;
-const Tutorial = styled.div``;
-const Sub = styled.div`
-    font-size:1.2rem;
-    font-weight:bold;
-    margin:0 auto 20px;
-    text-align: center;
-    color:#777;
-`;
-
-const Word =styled.div`
-    width:90%; height:auto;
-    font-size:0.8rem;
-    line-height:2;
-    margin:0 auto 10px;
-`;
-
-function AlpageContents({Contents}) {
-    const langSpace = {
-        ko:{
-            //고정
-            allText : ["퍼가기","좋아요","댓글"],
-    
-            userData : {
-                profileImg:`${process.env.PUBLIC_URL + '/images/Untitled-1.png'}`,
-                flag:`${process.env.PUBLIC_URL + '/images/flag.png'}`,
-                country:"KOR",
-            },
-            //고정
-            CommentSave : ["등록"],
-    
-            Reply : ["미래의 휴대전화라 기대하면서 댓글 봤습니다."],
-            Nick : ["닉네임"],
-            Hour : ["24일전"]
-        }
-    };
-    const [open, setOpen] = useState(false);
-
-    const free = () => {
-      if (open === true) {
-        setOpen(false);
-      } else {
-        setOpen(true);
-      }
-    }  
-
-    const [count, setCount] = useState(0);
-
-    const plus = () => {
-        setCount(prev => prev + 1)
-    }
-
-    const [count2, setCount2] = useState(0);
-
-    const plus2 = () => {
-        setCount2(prev => prev + 1)
-    }
-    
-    const allText = langSpace.ko.allText;
-    const userData = langSpace.ko.userData;
-    const savesave = langSpace.ko.CommentSave;
-    const rereply = langSpace.ko.Reply;
-    const nick = langSpace.ko.Nick;
-    const realtime =langSpace.ko.Hour;
-    const [good,goodSet] = useState(true);
-    const [sad,sadSet] = useState(true);
-    function goodShow(){
-        goodSet(!good);
-    }
-    function sadShow(){
-        sadSet(!sad);
-    }
-
-    const [Open, SetOpen] = useState(false);
-    const Opener = () => {
-        SetOpen(!Open);
-    }
-
-    const [color, setColor] = useState(true);
-    const origin = "원본";
-    const ai = "AI";
-    const original = "원 알록";
-    const nickname = "순자러버";
-    const title = "알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자";
-    const backTo = "원문가기";
-
-    return (
-        <>
-        <SpaceTxt>
-            {Contents.text}
-        </SpaceTxt>
-        { Contents.state === 'alog' &&
-            <>
-           <Caution><Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title><BackTo to="/">{backTo}</BackTo></Caution>{/* 원본 알록으로 이동하기*/}
-           </>
-        }   
-        <Wrap>
-            <LanguageCon>
-                <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
-            </LanguageCon>
-        <ButtonBox>
-            <StyledBtn onClick={plus}>{allText[0]}<Count>{Contents.paste}</Count></StyledBtn>
-            <StyledBtn onClick={plus2} >{allText[1]}<Count>{Contents.good}</Count></StyledBtn>
-            <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
-        </ButtonBox>
-        </Wrap>
-
-        { open === true &&
-        <CommentBox>
-            <Commentdiv>
-                <CommentInner>
-                    <CommentTxt></CommentTxt>
-                    <CommentSave>{savesave}</CommentSave>
-                </CommentInner>
-            </Commentdiv>
-            <Commentdiv2>
-                <CommentInner2>
-                    <Left>
-                        <ProImg src={userData.profileImg}></ProImg>
-                        <Flag src={userData.flag}></Flag>
-                        <Country>{userData.country}</Country>
-                    </Left>
-                    <Right>
-                        <Reply>{rereply}</Reply>
-                        <CommentInner3>
-                            <Nick>{nick}</Nick>
-                            <Hour>{realtime}</Hour>
-                            <Emgc src={process.env.PUBLIC_URL + '/images/atm_more_3.svg'}></Emgc>
-                            <Goood onClick={()=>{ goodShow(); }}>
-                            { good === true 
-                                ? <Good src={process.env.PUBLIC_URL + '/images/smile.svg'}></Good>
-                                : <Good src={process.env.PUBLIC_URL + '/images/smile_red.svg'}></Good>
-                            }
-                            </Goood>
-                            <Saad onClick={()=>{ sadShow(); }}>
-                            { sad === true 
-                                ? <Sad src={process.env.PUBLIC_URL + '/images/sad.svg'}></Sad>
-                                : <Sad src={process.env.PUBLIC_URL + '/images/sad_red.svg'}></Sad>
-                            }
-                            </Saad>
-                        </CommentInner3>
-                    </Right>
-                </CommentInner2>
-                
-            </Commentdiv2>
-        </CommentBox>
-        
-        }
-
-        </>
-    );
-};
-
-
-
-export default AlpageContents;
-

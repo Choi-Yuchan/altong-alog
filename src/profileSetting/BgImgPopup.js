@@ -66,9 +66,8 @@ const PopupBox = styled.div`
     max-width:780px;
     background:#fff;
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    top:0;
+    left:0;
     display:flex;
     flex-direction:column;
     align-items:center;
