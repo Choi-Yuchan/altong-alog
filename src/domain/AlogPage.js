@@ -21,8 +21,8 @@ function AlogPage({body, setBody}) {
     date: "2021.07.18",
     value: "0",
     state:"alog",
-    paste:"0",
-    good:"3"
+    paste:0,
+    good:3
   },
   {
     id : 1,
@@ -32,8 +32,8 @@ function AlogPage({body, setBody}) {
     value: "100",
     text: "대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세대한 독립 만세",
     state:"alog",
-    paste:"8",
-    good:"81"
+    paste:8,
+    good:81
   }];
 
   return (
