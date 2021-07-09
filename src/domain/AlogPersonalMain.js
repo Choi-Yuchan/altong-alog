@@ -57,9 +57,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
     ];
     const [mySelect, setMySelect] = useState('게시글'); // 게시글 별, 그룹 별 옵션
     const [showNewGroup, setShowNewGroup] = useState(false);
-    
     const slideCount = myAlogSlideSample.length; //대문글 개수
-
 
     return (
         <>
@@ -69,6 +67,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 setCheckList={setCheckList} 
                 setMyAlogSlide={setMyAlogSlide}
                 mySelect={mySelect} setMySelect={setMySelect}
+                sample={sample}
             />
             <Route path="/personalMain" exact render={()=>
                 <>
