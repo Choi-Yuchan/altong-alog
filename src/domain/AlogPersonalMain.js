@@ -7,7 +7,7 @@ import MyMainAlogSlide from '../alogmain/myAlogMain/MyMainAlogSlide';
 import NewGroupPopup from '../alogPage/NewGroupPopup';
 import InGroupFolder from '../alogPage/InGroupFolder';
 
-function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setMyAlogSlide, myMainAlogSlide, sample, opened, setOpened, bgSetting, setBgSetting}) {
+function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setMyAlogSlide, myMainAlogSlide, sample, opened, setOpened, bgSetting, setBgSetting, setShowBgEdit, showBgEdit}) {
 
     const groupSample = [
         {
@@ -61,7 +61,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
 
     return (
         <>
-            <AlogProfile />
+            <AlogProfile setShowBgEdit={setShowBgEdit}/>
             <AlogFixSectionFolder
                 setNewGroup={setNewGroup} 
                 setCheckList={setCheckList} 
@@ -86,6 +86,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 opened={opened} setOpened={setOpened} 
                 bgSetting={bgSetting} setBgSetting={setBgSetting}
                 setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
+                setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
             />}
         </>
     );

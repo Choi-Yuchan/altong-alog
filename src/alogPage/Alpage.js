@@ -8,7 +8,7 @@ import ScrapOptionBox from './ScrapOptionBox';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
 
-function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren}) {
+function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren, showBgEdit, setShowBgEdit}) {
   const langAlpage = {
     ko:{
       allData : 
@@ -69,7 +69,6 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   }
 
   const [showNewGroup, setShowNewGroup] = useState(false);
-  const [showBgEdit, setShowBgEdit] = useState(false);
 
   const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
 
@@ -84,7 +83,7 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
           {showNewGroup === true && <NewGroupPopup 
           newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
           checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
-          opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting}
+          opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}
           />}
           {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
       <Box onClick={() => {setScrapOption(false)}}>
