@@ -1,14 +1,22 @@
 /* eslint-disable */ 
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide}) {
+function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect}) {
 
     const [myAlogSelectSlide, setMyAlogSelectSlide] = useState(false);
-    const [mySelect, setMySelect] = useState('게시글');
+    const [searchValue, setSearchValue] = useState('');
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+    }
+    const history = useHistory();
+    const handleSubmit = () => {
+        history.push(`/personalMain/MyMainSearch/${searchValue}`);
+    }
 
     return (
-        <MyAlogSettingBox>
+        <MyAlogSettingBox onSubmit={handleSubmit}>
             <NewGroupPlusBtn src={process.env.PUBLIC_URL + '/images/add.png'} alt="새 그룹 이미지 추가" onClick={()=>{setNewGroup(true); setCheckList(true);  setMyAlogSlide(false);}}></NewGroupPlusBtn>
             <MyAlogSettingBtn src={process.env.PUBLIC_URL + '/images/setting.png'} alt="내 알록달록 설정"  onClick={()=>{setNewGroup(true); setCheckList(true); setMyAlogSlide(true);}} ></MyAlogSettingBtn>
             <MyAlogSelectDiv>
@@ -19,8 +27,8 @@ function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide}) {
                 </SelectList>
             </MyAlogSelectDiv>
             <MyAlogSearchDiv>
-                <MyAlogSearchInput type="text" placeholder="알록달록 게시글 내 검색"></MyAlogSearchInput>
-                <MyAlogSearchBtn>검색</MyAlogSearchBtn>
+                <MyAlogSearchInput type="text" value={searchValue} placeholder="알록달록 게시글 내 검색" onChange={handleChange}></MyAlogSearchInput>
+                <MyAlogSearchBtn type="submit">검색</MyAlogSearchBtn>
             </MyAlogSearchDiv>
             <AlogWriteBtn src={process.env.PUBLIC_URL + '/images/que_icon.svg'} alt="내 알로그 쓰기"></AlogWriteBtn>
         </MyAlogSettingBox>
