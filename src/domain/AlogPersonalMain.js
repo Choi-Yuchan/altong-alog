@@ -55,10 +55,8 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
             bgimg: 'bg05.jpg'
         }
     ];
-    const [newGroup, setNewGroup] = useState(false); //나의 알록달록 설정 팝업 
-    const [myMainAlogSlide, setMyAlogSlide] = useState(false); //대문글 유무
-    const [checkList, setCheckList] = useState(false); //새 그룹 만들기, 기능 설정 팝업 체크아이콘 유무
     const [mySelect, setMySelect] = useState('게시글'); // 게시글 별, 그룹 별 옵션
+    const [showNewGroup, setShowNewGroup] = useState(false);
     
     const slideCount = myAlogSlideSample.length; //대문글 개수
 
@@ -88,6 +86,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 checkList={checkList} myMainAlogSlide={myMainAlogSlide} 
                 opened={opened} setOpened={setOpened} 
                 bgSetting={bgSetting} setBgSetting={setBgSetting}
+                setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
             />}
         </>
     );
