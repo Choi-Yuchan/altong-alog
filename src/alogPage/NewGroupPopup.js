@@ -4,10 +4,8 @@ import AlogDalogList from '../components/AlogDalogList';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import MyAlogGroupMove from './MyAlogGroupMove';
 
-function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide}) {
+function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened, setOpened , bgSetting , setBgSetting, setShowNewGroup}) {
 
-    const [Opend, setOpend] = useState(false); //배경설정하기 팝업
-    const [bgSetting, setBgSetting] = useState(false); //새 그룹만들기에서 배경설정 팝업 적용
     const [mySettingSearchOption, setMySettingSearchOption] = useState(false); //설정하기에서 게시글, 그룹 검색 옵션
     const [mySelect, setMySelect] = useState('게시글'); // 검색 옵션 선택
     const [mySlideConfirm, setMySlideConfirm] = useState(false); //대문글 설정 팝업
@@ -15,9 +13,14 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide}) {
     const [myAlogMove, setMyAlogMove] = useState(false); // 설정하기에서 이동 클릭 시
     const [myGroupExistence, setMyGroupExistence] = useState(true); // 나의 그룹 존재 유무
 
+    const viewBgSetting = () => {
+            setBgSetting(true);
+            setOpened(true);
+    }
+    console.log(bgSetting, opened);
     return (
         <>
-        <NewGroupPopupWrap onClick={()=>{setNewGroup(false);}}>
+        <NewGroupPopupWrap onClick={()=>{setNewGroup(false); setShowNewGroup(false)}}>
             <NewGroupPopupBox onClick={e=>e.stopPropagation()}>
                 {myMainAlogSlide 
                 ?   <GroupPopTitle>
@@ -29,7 +32,7 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide}) {
                         </div>
                     </GroupPopTitle>
                 : <>
-                    <GroupPopTitle>새 그룹 만들기 <span onClick={()=>{setBgSetting(true); setOpend(true);}}>배경설정</span></GroupPopTitle>
+                    <GroupPopTitle>새 그룹 만들기 <span onClick={viewBgSetting}>배경설정</span></GroupPopTitle>
                     <GroupNameBox>그룹 명 <GroupNameInput type="text" /></GroupNameBox>
                 </>
                 }
@@ -64,11 +67,12 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide}) {
                 </MyAlogListBox>
                 <SaveBtnBox>
                     <button>저장</button>
-                    <button onClick={()=>{setNewGroup(false);}}>취소</button>
+                    <button onClick={()=>{setNewGroup(false); setShowNewGroup(false)}}>취소</button>
                 </SaveBtnBox>
             </NewGroupPopupBox>
         </NewGroupPopupWrap>
-        {Opend && <AlogProfileSetting setOpend={setOpend} bgSetting={bgSetting} />}
+        {/* 배경설정 컴포넌트  */}
+        {opened === true && bgSetting === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting}/>}
         {/* 그룹생성 완료 시 팝업 <CompleteGroupPopup>새 그룹이 생성되었습니다.</CompleteGroupPopup> */}
         {mySlideConfirm &&
             <CompleteMySlideWrap onClick={()=>{setMySlideConfirm(false);}}>
@@ -97,6 +101,7 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide}) {
                 </SlideConfirmBox>
             </CompleteMySlideWrap>
         }
+        {/* 그룹 이동하기 */}
         {myAlogMove && <MyAlogGroupMove existence={myGroupExistence} setMyAlogMove={setMyAlogMove} />}
         </>
     );
@@ -115,15 +120,16 @@ const NewGroupPopupWrap = styled.div`
 const NewGroupPopupBox = styled.div`
     background:#fff;
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width:95%;
     max-width:600px;
     border:1px solid #ccc;
     border-radius:10px;
     padding:10px 5px;
     box-sizing:border-box;
+    z-index: 5;
 
     @media (min-width:480px) {
         width:80%;
@@ -139,7 +145,7 @@ const GroupPopTitle = styled.p`
     align-items:center;
     margin-bottom:10px;
 
-    @meida (min-width:480px) {
+    @media (min-width:480px) {
         font-size:1.25rem;
         margin-bottom:20px;
     }

@@ -1,13 +1,17 @@
 import styled from 'styled-components'
 
-const ScrapCaution = () => {
+const ScrapCaution = ({viewCaution, setViewCaution}) => {
     const AuthorId = "순자러버"
     const contentsTitle = `'알통은 무엇인가? 그것에 대해 알아봅시다.'` // 해당 컨텐츠 타이틀
     const usedAl = 300
 
+    const closePopup = () => {
+        setViewCaution(!viewCaution)
+    }
+
     return(
         <PopupContainer>
-                <CloseBtnBox>
+                <CloseBtnBox onClick={closePopup}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
@@ -36,7 +40,6 @@ const ScrapCaution = () => {
                 <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
                 <ScrapBtn>퍼가기</ScrapBtn>
             </PopupContainer>
-
     )
 }
 
@@ -45,19 +48,16 @@ const PopupContainer = styled.div`
     display:block;
     top: 45px;
     left: 0;
-    width:100%;
+    width: 100%;
+    height: 100%;
     background-color: #999;
     color:#fff;
     text-align: center;
     padding:1rem 0;
     z-index: 3;
-    
+
     @media (min-width: 480px){
         top: 60px;
-    }
-
-    @media (min-height: 760px){
-        height: 100vh;
     }
 `;
 const CloseBtnBox = styled.div`
@@ -81,7 +81,7 @@ const PopupArticle = styled.article`
     }
 `;
 const CautionPopup = styled.article`
-    background-color: #707070;
+    background-color: #c8c7c7;
     text-align: center;
     margin: 1rem;
     margin-bottom: 100px;

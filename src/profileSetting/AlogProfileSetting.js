@@ -14,7 +14,7 @@ function DefaultBgImgEl({img, number}) {
     )
 }
 
-function AlogProfileSetting ({setOpend, bgSetting}) {
+function AlogProfileSetting ({setOpened, bgSetting, setShowBgEdit}) {
     const colorSample = [ 
         {id:1, color:'#EE748D' },
         {id:2, color:'#F0A962' },
@@ -58,21 +58,22 @@ function AlogProfileSetting ({setOpend, bgSetting}) {
         { id:29, img:process.env.PUBLIC_URL + '/images/default_img29.jpg' },
         { id:30, img:process.env.PUBLIC_URL + '/images/default_img30.jpg' }
     ]
-    const [selectImg, setSelectImg] = useState(0);
+    const selectImg = 0;
     const bgImgCount = defaultBgImage.length;
     const rand1 = Math.floor(Math.random()*bgImgCount);
     const rand2 = Math.floor(Math.random()*bgImgCount);
 
     const [popupOpen, setPopupOpen] = useState(false);
     const groupSampleBgImg = defaultBgImage[1].img;
+    console.log(bgSetting)
     
 
     return (
         <>
-        <SettingWrap onClick={()=>{setOpend(false)}}>
+        <SettingWrap onClick={()=>{setOpened(false)}}>
             <Setting onClick={(e)=>{e.stopPropagation();}}>
-                <Title>프로필 설정하기</Title>
-                {!bgSetting &&
+                <Title>배경 설정하기</Title>
+                {bgSetting === false &&
                     <>
                         <span className="subheading">소개글</span>
                         <IntroInput type="text" placeholder="공백, 띄어스기 포함 최대 30자까지 입력 할 수 있습니다." maxLength="30"  />
@@ -101,10 +102,10 @@ function AlogProfileSetting ({setOpend, bgSetting}) {
                     <FileInput type="file" accept='image/*' id="image_file" />
                 </FileInputBox>
                 <span className="subheading">미리보기</span>
-                {bgSetting ? <PreviewMyGroup sample={groupSampleBgImg} /> : <PreviewProfile />}
+                {bgSetting === true ? <PreviewMyGroup sample={groupSampleBgImg} /> : <PreviewProfile />}
                 <SettingBtnBox>
                     <SettingBtn>저장</SettingBtn>
-                    <SettingBtn onClick={()=>{props.setOpend(false)}}>취소</SettingBtn>
+                    <SettingBtn onClick={()=>{setOpened(false); setShowBgEdit(false)}}>취소</SettingBtn>
                 </SettingBtnBox>
             </Setting>
         </SettingWrap>
@@ -130,7 +131,7 @@ const Setting = styled.div`
     border-radius:10px;
     position:absolute; 
     left:50%; top:50%;
-    transform:translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     box-sizing:border-box;
     display:grid;
     grid-template-columns: 1fr;
@@ -138,12 +139,14 @@ const Setting = styled.div`
     align-items: center;
     justify-items: center;
     padding:0.625rem;
+    z-index: 10;
 
     @media (min-width:480px) {
         padding:1.5rem;
         grid-template-columns:1fr 5fr;
         gap: 20px 10px;
     }
+
     .subheading {
         text-align:right;
         font-weight:bold;
@@ -212,6 +215,10 @@ const BgColorBox = styled.div`
     width:100%;
     display:flex;
     justify-content: space-around;
+
+    @media (min-width: 768px){
+        justify-content: space-evenly;
+    }
 `;
 const BgColorEl = styled.i`
     display:inline-block;
@@ -221,8 +228,10 @@ const BgColorEl = styled.i`
     transition:all 0.3s;
     cursor:pointer;
 
-    @media (min-width:480px) { width:33px; height:33px;}
-    @media (min-width:600px) {width:50px; height:50px;}
+    @media (min-width: 480px) { width:33px; height:33px;}
+    @media (min-width: 769px) {
+        width: 50px; height: 50px;
+    }
 `;
 const FileInputBox = styled.div`
     width:90%;
@@ -312,8 +321,8 @@ const BgImgElDiv = styled.div`
     position:relative;
     cursor:pointer;
 
-    @media (min-width:480px) {width:80px; height:80px;}
-    @media (min-width:600px) {width:150px; height:150px;}
+    @media (min-width: 480px) {width:80px; height:80px;}
+    @media (min-width: 768px) {width:100px; height:100px;}
 
     img {
         width:100%;

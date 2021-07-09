@@ -40,7 +40,7 @@ function AlogProfile () {
 
     const [add, addChange] = useState(0);
     const [show, setShow] = useState(true);
-    const [Opend, setOpend] = useState(false);
+    const [Opened, setOpened] = useState(false);
 
     const [Opent, SetOpent] = useState(false);
     const Openert = () => {
@@ -79,9 +79,9 @@ function AlogProfile () {
             </PicContainer>
             
             <SetPicFrame>
-            { selfLogin === true && <SetPic src={process.env.PUBLIC_URL + '/images/setting.png'} onClick={ () => { setOpend(true) }}/> }
+            { selfLogin === true && <SetPic src={process.env.PUBLIC_URL + '/images/setting.png'} onClick={ () => { setOpened(true) }}/> }
             </SetPicFrame>
-            { Opend && <AlogProfileSetting setOpend={setOpend} /> }
+            { Opened && <AlogProfileSetting setOpened={setOpened} /> }
             <Nickname>
                 {/* 국기 주석처리
                 <Country>

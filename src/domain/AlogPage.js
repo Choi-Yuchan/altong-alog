@@ -11,11 +11,14 @@ const Container = styled.div`
   margin:0 auto;
 `;
 
-function AlogPage({body, setBody}) {
+function AlogPage({body, setBody, setNewGroup, newGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting}) {
 
   return (
     <Container>
-      <Alpage body={body} setBody={setBody}/>
+      <Alpage body={body} setBody={setBody} newGroup={newGroup} setNewGroup={setNewGroup}
+      sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
+      opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting}
+      />
       <AlogProfile />
       <AlogMainSearch/>
     </Container>
