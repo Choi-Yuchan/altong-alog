@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
+import { Route } from 'react-router-dom';
 import AlogFixSectionFolder from '../alogPage/AlogFixSectionFolder';
 import AlogFolderSection from '../alogPage/AlogFolderSection';
 import AlogProfile from '../alogprofile/AlogProfile';
 import MyMainAlogSlide from '../alogmain/myAlogMain/MyMainAlogSlide';
 import NewGroupPopup from '../alogPage/NewGroupPopup';
 import InGroupFolder from '../alogPage/InGroupFolder';
-import { Route } from 'react-router-dom';
 
 function AlogPersonalMain (props) {
 
@@ -141,10 +141,8 @@ function AlogPersonalMain (props) {
     const [myMainAlogSlide, setMyAlogSlide] = useState(false); //대문글 유무
     const [checkList, setCheckList] = useState(false); //새 그룹 만들기, 기능 설정 팝업 체크아이콘 유무
     const [mySelect, setMySelect] = useState('게시글'); // 게시글 별, 그룹 별 옵션
-    const [groupFolderNumber, setGroupFolderNumber] = useState(null); //그룹폴더 클릭 시  index번호 
-    const sampleGroupContent = groupSample[groupFolderNumber];
     
-    const slideCount = myAlogSlideSample.length;
+    const slideCount = myAlogSlideSample.length; //대문글 개수
 
     return (
         <>
@@ -162,23 +160,16 @@ function AlogPersonalMain (props) {
                         sample={sample} 
                         groupSample={groupSample}
                         mySelect={mySelect}
-                        setGroupFolderNumber={setGroupFolderNumber}
                     />
                 </>
             }/>
-            <Route path="/personalMain/:groupname" render={()=>
-                <InGroupFolder 
-                    sample={sample} 
-                    sampleGroupContent={sampleGroupContent}
-                />
-            }/>
-            {newGroup && 
-                <NewGroupPopup 
-                    setNewGroup={setNewGroup} 
-                    sample={sample} 
-                    checkList={checkList} 
-                    myMainAlogSlide={myMainAlogSlide} 
-                />}
+            <Route path="/personalMain/:group" component={InGroupFolder} />
+            {newGroup && <NewGroupPopup 
+                setNewGroup={setNewGroup} 
+                sample={sample} 
+                checkList={checkList} 
+                myMainAlogSlide={myMainAlogSlide} 
+            />}
         </>
     );
 };
