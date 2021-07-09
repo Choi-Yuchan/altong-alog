@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HunPopup from '../components/HunPopup';
+import AlogSiren from '../components/AlogSiren';
 import AlpageContents from '../components/AlpageContents';
 import ScrapCaution from './ScrapCaution';
 import ScrapOptionBox from './ScrapOptionBox';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
 
-function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting}) {
+function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren}) {
   const langAlpage = {
     ko:{
       allData : 
@@ -72,6 +73,9 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
 
   const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
 
+  const SirenPop = () => {
+    setSiren(true);
+  }
   return (
     <>
         {viewCaution === true &&
@@ -97,13 +101,15 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
         <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
         { showMenu &&
         <DropMenu>
-          <Menus onClick={()=>{HunEgg()}}>{hunAl}</Menus>
-          <Menus>{call}</Menus>
+          <Menus onClick={HunEgg}>{hunAl}</Menus>
+          <Menus onClick={SirenPop}>{call}</Menus>
           <Menus>{modify}</Menus>
           <Menus>{refund}</Menus>
         </DropMenu>
         }
-        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      </Icons>
+        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
+        <AlogSiren siren={siren} setSiren={setSiren}></AlogSiren>      
+        </Icons>
         </Frame>
         {isShow ? (
           <Folder>

@@ -185,6 +185,8 @@ function App() {
   const [openInput, setOpenInput] = useState(false);
   const [searchOption, setSearchOption] = useState(1);
 
+  const [siren, setSiren] = useState(false);
+
   return(
     
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
@@ -207,7 +209,7 @@ function App() {
         render={() => 
         <AlogPage body={body} setBody={setBody} setNewGroup={setNewGroup} newGroup={newGroup}
         sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
-        opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting}
+        opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting} siren={siren} setSiren={setSiren}
         />}
          />
       <Route path="/writing" component={AlogWrite} />
