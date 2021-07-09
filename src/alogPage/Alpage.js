@@ -234,7 +234,6 @@ const Menus = styled.div`
     width:140px; height:120px;
   }
 `;
-
 function Alpage({body, setBody, Contents}) {
   
   const langAlpage = {
@@ -352,7 +351,7 @@ function Alpage({body, setBody, Contents}) {
       <AlpageContents Contents={Contents}></AlpageContents>  
       }
       
-    </>
+      </>
   );
 };
 

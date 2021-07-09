@@ -69,7 +69,6 @@ const CommentInner =styled.div`
     display:flex;
 `;
 
-
 const CommentSave =styled.button`
     flex-grow: 0;
     height: 40px;
@@ -100,7 +99,6 @@ const CommentTxt =styled.textarea`
     box-sizing:border-box;
 `;
 
-
 const CommentInner2=styled.div`
     display:flex;
     align-items:center;
@@ -126,14 +124,12 @@ const Flag =styled.img`
     bottom:20%;
 `;
 
-
 const Country =styled.p`
     text-align:center;
     font-size:0.75rem;
     font-weight:bold;
     color:#707070;
 `;
-
 
 const Right=styled.div`
     width:85%;
@@ -167,7 +163,6 @@ const CommentInner3=styled.div`
 const Nick=styled.div`
     margin-right:0.5rem;
 `;
-
 
 const Hour=styled.div`
     margin-right:0.5rem;
@@ -231,47 +226,6 @@ const Line =styled.div`
     margin:5px 10px 0;
     background: #777;
 `;
-const Caution = styled.div`
-    display:flex;
-    font-size:10px;
-    width:90%;
-    margin:0 auto;
-    flex-direction: row;
-    justify-content: space-between;
-
-    @media all and (min-width:768px){
-        font-size:12px;
-    }
-`;
-const Back = styled.div`
-    font-weight:bold;
-    white-space:nowrap;
-    text-align:left;
-`;
-const Id = styled.div`
-    overflow:hidden;
-    text-overflow:ellipsis;
-    word-wrap: break-word; 
-    display: -webkit-box; 
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
-    text-align:center;
-`;
-const Title = styled.div`
-    overflow:hidden;
-    text-overflow:ellipsis;
-    word-wrap: break-word; 
-    display: -webkit-box; 
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
-    flex-grow:0.5;
-    text-align:center;
-`;
-const BackTo = styled(Link)`
-    color:blue;
-    white-space:nowrap;
-    font-weight:bold;
-`;
 const Tutorial = styled.div``;
 const Sub = styled.div`
     font-size:1.2rem;
@@ -290,6 +244,77 @@ const Word =styled.div`
 const WordB =styled(Word)`
     font-weight:bold;
 `;
+const TutoSlideWrap = styled.div`
+  width:100%; height:auto;
+  margin:50px auto;
+  text-align: center;
+  border:1px solid #ccc;
+  padding:10px;
+  box-sizing:border-box;
+  position:relative;
+`;
+const TutoTitle=styled.div`
+    font-size:14px;
+    font-weight: bold;
+`;
+const TutoRecommend=styled.div`
+    font-size:12px;
+`;
+const RightArrow = styled.img`
+    width:30px;
+    display:${props=>props.right <= -1362 ? 'none' : 'block'};
+    position:absolute;
+    top:45%; right:-5px;
+    cursor:pointer;
+
+    @media all and (min-width:400px){
+        right:0;
+    }
+`;
+const LeftArrow = styled.img`
+    width:30px;
+    position:absolute;
+    display:${props=>props.right <= -1 ? 'block' : 'none'};
+    top:45%; left:-5px;
+    transform:rotate(180deg);
+    cursor:pointer;
+
+    @media all and (min-width:400px){
+        left:0;
+    }
+`;
+const TutoImg = styled.img`
+    width:227px;
+    position:relative;
+    z-index:99;
+
+    @media all and (min-width:440px){
+        width:325px;
+    }
+`;
+const SlideWrap = styled.div`
+    width:227px; height:500px;
+    display:flex;
+    flex-direction: row;
+    overflow:hidden;
+    margin:0 auto;
+    position:relative;
+    @media all and (min-width:440px){
+        width:325px; height:750px;
+    }
+`;
+const SlideMove = styled.div`
+    width:1816px; 
+    display:flex;
+    position:absolute;
+    left:${props=>props.right}px; top:0;
+    transition: all .3s;
+
+    @media all and (min-width:440px){
+        width:2600px;
+    }
+`;
+
 function AlpageContentsTutorial({Contents}) {
 
     const langSpace = {
@@ -310,6 +335,42 @@ function AlpageContentsTutorial({Contents}) {
             Hour : ["24일전"]
         }
     };
+
+    const SlideArray = [
+        {
+            id: 1,
+            bgimg: 'tuto_01.png',
+            alt:"튜토리얼 이미지1"
+        },{
+            id: 2,
+            bgimg: 'tuto_02.png',
+            alt:"튜토리얼 이미지2"
+        },{
+            id: 3,
+            bgimg: 'tuto_03.png',
+            alt:"튜토리얼 이미지3"
+        },{
+            id: 4,
+            bgimg: 'tuto_04.png',
+            alt:"튜토리얼 이미지4"
+        },{
+            id: 5,
+            bgimg: 'tuto_05.png',
+            alt:"튜토리얼 이미지5"
+        },{
+            id: 6,
+            bgimg: 'tuto_06.png',
+            alt:"튜토리얼 이미지6"
+        },{
+            id: 7,
+            bgimg: 'tuto_07.png',
+            alt:"튜토리얼 이미지7"
+        },{
+            id: 8,
+            bgimg: 'tuto_08.png',
+            alt:"튜토리얼 이미지8"
+        }
+    ]
     const [open, setOpen] = useState(false);
 
     const free = () => {
@@ -320,13 +381,13 @@ function AlpageContentsTutorial({Contents}) {
       }
     }  
 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(Contents[0].paste);
 
     const plus = () => {
         setCount(prev => prev + 1)
     }
 
-    const [count2, setCount2] = useState(0);
+    const [count2, setCount2] = useState(Contents[0].good);
 
     const plus2 = () => {
         setCount2(prev => prev + 1)
@@ -347,14 +408,29 @@ function AlpageContentsTutorial({Contents}) {
         sadSet(!sad);
     }
 
-    const [Open, SetOpen] = useState(false);
-    const Opener = () => {
-        SetOpen(!Open);
-    }
-
+    console.log(window);
     const [color, setColor] = useState(true);
     const origin = "원본";
     const ai = "AI";
+
+    const [right, setRight] = useState(0);
+
+    const handleSwipeRight = () => {
+        if(window.innerWidth < 440){
+            setRight(right=> right - 227)
+        }else{
+            setRight(right=> right - 325)
+        }
+    }
+
+    const handleSwipeLeft = () => {
+        if(window.innerWidth < 440){
+            setRight(right=> right + 227)
+        }else{
+            setRight(right=> right + 325)
+        }
+    }
+
     return (
         <>
         <SpaceTxt>
@@ -373,14 +449,32 @@ function AlpageContentsTutorial({Contents}) {
                     <WordB>5. 내 글을 많이 보면 볼수록 수익이 생겨요.</WordB>
                     <Word>-	내 글을 다른 유저가 퍼갔고, 다른 유저 알로그에서 누군가 내 글을 열람할 경우, 열람할 때마다 10알씩 광고수익이 생긴답니다. 그중 3알은 ㈜알통 본사로, 무료로 가져온 글의 경우, 나머지 7알에서 글의 원작자에게 5알, 내 글을 퍼간 유저에게 2알 이렇게 분배가 된답니다. 가치를 지불하고 퍼온 글의 경우에는, 글의 원작자에게 2알, 가치를 지불하고 글을 퍼간 유저에게 5알 이렇게 분배가 됩니다.</Word>
                 </Tutorial>
+                <TutoSlideWrap>
+                    <TutoTitle>기능 튜토리얼</TutoTitle>
+                    <TutoRecommend>좌우로 스와이프 해 보세요.</TutoRecommend>
+                    <SlideWrap>
+                    <SlideMove right={right}>
+                    {
+                        SlideArray.map((slider)=>{
+                            return(
+                            <TutoImg src={process.env.PUBLIC_URL + '/images/' + slider.bgimg} alt={slider.alt}></TutoImg>
+                            )
+                        }
+                        )
+                    }
+                    </SlideMove>
+                    </SlideWrap>
+                    <RightArrow right={right} onClick={handleSwipeRight}src={process.env.PUBLIC_URL + '/images/arrow.png'}></RightArrow>
+                    <LeftArrow right={right} onClick={handleSwipeLeft}src={process.env.PUBLIC_URL + '/images/arrow.png'}></LeftArrow>
+                </TutoSlideWrap>
         </SpaceTxt>  
         <Wrap>
             <LanguageCon>
                 <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
             </LanguageCon>
         <ButtonBox>
-            <StyledBtn onClick={plus}>{allText[0]}<Count>{Contents[0].paste}</Count></StyledBtn>
-            <StyledBtn onClick={plus2} >{allText[1]}<Count>{Contents[0].good}</Count></StyledBtn>
+            <StyledBtn onClick={plus}>{allText[0]}<Count>{count}</Count></StyledBtn>
+            <StyledBtn onClick={plus2} >{allText[1]}<Count>{count2}</Count></StyledBtn>
             <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
         </ButtonBox>
         </Wrap>
