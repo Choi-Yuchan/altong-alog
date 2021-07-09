@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function AlogDalogGroup({backImg, name, contents, setGroupFolderNumber, selectGroup}) {
+function AlogDalogGroup({backImg, name, contents}) {
     return (
-        <AlogGroupBox to={`/personalMain/${name}`} onClick={()=>{setGroupFolderNumber(selectGroup);}} >
+        <AlogGroupBox to={`/personalMain/${name}`} >
             <GroupBackImg src={backImg} />
             <GroupInfoBox>
                 <GroupName>{name}</GroupName>
