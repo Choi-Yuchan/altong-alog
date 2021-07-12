@@ -20,15 +20,10 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       ,
         //고정
         H : ["폴더를 선택해주세요"],
-
         Option :["여행, 그 모든 것","음악"],
-        //고정
         SaveBtn : ["저장"],
-        //고정
         Makingp : ["새폴더 만들기"],
-        //고정
         Value : ["알"],
-        //고정
         confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
     }
   };
@@ -54,8 +49,11 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   const colorShow = () => {
     setColorShow(!colorIs);
   }
-  const [viewCaution, setViewCaution] = useState(false);
-  const [scrapOption, setScrapOption] = useState(false);
+  const [viewCaution, setViewCaution] = useState(false); // 퍼가기 주의사항 팝업 상태
+  const [scrapOption, setScrapOption] = useState(false); // 퍼가기 시 옵션 창 상태
+  const [scrapComplete, setScrapComplete] = useState(false); // 퍼가기 완료 됐을 때 알림창 상태
+  const [scrapDisable, setScrapDisable] = useState(false); // 나의 '알록' 퍼가기 했을 때 경고창 상태
+  const [deletedOrigin, setDeletedOrigin] = useState(false); // 원문가기 클릭 시 원문이 삭제되었을 경우 
 
   useEffect(()=>{
     if (body === true) {
@@ -77,19 +75,22 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   }
   return (
     <>
-        {viewCaution === true &&
-        <ScrapCaution viewCaution={viewCaution} setViewCaution={setViewCaution}/>
-        }
-          {showNewGroup === true && <NewGroupPopup 
-          newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
-          checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
-          opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}
-          />}
-          {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
+
+      {/* 퍼가기 전 유의사항 페이지 */}
+      {viewCaution === true &&<ScrapCaution viewCaution={viewCaution} setViewCaution={setViewCaution}/>}
+      {/* 그룹 선택 및 만들기 팝업 */}
+      {showNewGroup === true && <NewGroupPopup 
+      newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
+      checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
+      opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting}
+      />}
+      {/* 그룹 배경 설정 */}
+      {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
+      
       <Box onClick={() => {setScrapOption(false)}}>
         {scrapOption === true && 
           <ScrapOptionBox setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
-          setMyAlogSlide={setMyAlogSlide}
+          setMyAlogSlide={setMyAlogSlide} scrapComplete={scrapComplete} setScrapComplete={setScrapComplete}
           />
         }
         <Frame>
@@ -144,10 +145,71 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       </Box>
       <AlpageContents 
       viewCaution={viewCaution} setViewCaution={setViewCaution}
-      scrapOption={scrapOption} setScrapOption={setScrapOption}/>
+      scrapOption={scrapOption} setScrapOption={setScrapOption}
+      deletedOrigin={deletedOrigin} setDeletedOrigin={setDeletedOrigin}
+      scrapDisable={scrapDisable} setScrapDisable={setScrapDisable}
+      />
+      { scrapComplete === true &&
+      <CompleteMySlideWrap>
+        <SlideConfirmBox>
+          <ConfirmText>원 알록 순자러버님의</ConfirmText>
+          <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
+          <ConfirmText>글이 퍼가기 <span>완료</span>되었습니다.</ConfirmText>
+        </SlideConfirmBox>
+      </CompleteMySlideWrap>
+      }
+      { scrapDisable === true &&
+      <CompleteMySlideWrap>
+        <SlideConfirmBox>
+          <ConfirmText>나의 <span>알록</span>은 퍼가기 하실 수 없습니다.</ConfirmText>
+        </SlideConfirmBox>
+      </CompleteMySlideWrap>
+      }
+      { deletedOrigin === true &&
+      <CompleteMySlideWrap>
+        <SlideConfirmBox>
+          <ConfirmText>순자러버님의</ConfirmText>
+          <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
+          <ConfirmText>원 알록이 <span>삭제</span>되었습니다.</ConfirmText>
+        </SlideConfirmBox>
+      </CompleteMySlideWrap>
+      }
     </>
   );
 };
+const CompleteMySlideWrap = styled.div`
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:99999;
+`;
+const SlideConfirmBox = styled.div`
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(85,85,85, 0.7);
+    color:#fff;
+    width:90%;
+    min-height:150px;
+    max-width:300px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    padding:10px 2rem;
+`;
+const ConfirmText = styled.p`
+    font-size:14px;
+    margin:10px 0;
+
+    span {
+      font-weight: bold;
+      color:#fd0031;
+    }
+`;
 
 const Box = styled.div`
   height: 223px;

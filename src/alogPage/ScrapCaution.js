@@ -38,7 +38,7 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
                     </PopupPara>
                 </CautionPopup>
                 <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                <ScrapBtn>퍼가기</ScrapBtn>
+                <ScrapBtn onClick={closePopup}>퍼가기</ScrapBtn>
             </PopupContainer>
     )
 }
