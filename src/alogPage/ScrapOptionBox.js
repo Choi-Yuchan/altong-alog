@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
 
-const ScrapOptionBox = ({setShowNewGroup, showNewGroup, setShowBgEdit, showBgEdit, setMyAlogSlide}) => {
+const ScrapOptionBox = ({setShowNewGroup, showNewGroup, setShowBgEdit, showBgEdit, setMyAlogSlide, scrapComplete, setScrapComplete}) => {
 
+  const completeScrap = () => {
+    setScrapComplete(!scrapComplete)
+  }
     return(
         <ScrapOptConatiner>
             <ScrapOptBox>
@@ -11,7 +14,7 @@ const ScrapOptionBox = ({setShowNewGroup, showNewGroup, setShowBgEdit, showBgEdi
                 <SelectGroup>
                 <GroupOption> 여행 그 모든 것 (15) </GroupOption>
                 </SelectGroup>
-                <GroupSaveBtn>저장</GroupSaveBtn>
+                <GroupSaveBtn onClick={completeScrap}>저장</GroupSaveBtn>
             </SelectGroupBox>
             <ScrapOptBtnBox>
                 <PlusBtn>+</PlusBtn>

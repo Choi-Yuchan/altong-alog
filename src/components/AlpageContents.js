@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOption}) {
+function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOption, setDeletedOrigin, deletedOrigin, scrapDisable, setScrapDisable}) {
     const langSpace = {
         ko:{
             //고정
@@ -46,6 +46,10 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
             setScrapOption(!scrapOption)
         }
 
+        // if(userData.id === sequence){
+        //     setScrapDisable(true);
+        // } 본인이 작성한 글일 경우 퍼가기 불가 알림창 띄우기
+
         plus();
         showScrap();
         showScrapOtion();
@@ -81,6 +85,12 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
     const title = "알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자";
     const backTo = "원문가기";
 
+    const goToOriginal = (e) => {
+        e. preventDefault();
+        // if(userData.seq === false) 본래 알록이 삭제되었을 경우
+        setDeletedOrigin(!deletedOrigin);
+    }
+
     return (
         <>
         <SpaceTxt>
@@ -106,7 +116,10 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
             g software l ike Aldus PageMaker including versio
             ns of Lorem Ipsum 
         </SpaceTxt>
-        <Caution><Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title><BackTo to="/">{backTo}</BackTo></Caution>{/* 원본 알록으로 이동하기*/}
+        <Caution>
+            <Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title>
+            <BackTo to="/" onClick={goToOriginal}>{backTo}</BackTo>
+        </Caution>{/* 원본 알록으로 이동하기*/}
         <Wrap>
             <LanguageCon>
                 <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
