@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import TimeToggle from '../components/function/TimeToggle';
 
+
 const Contents = styled(Link)`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
@@ -197,7 +198,7 @@ const NoticeModify_Contents = ({modify, to, onRemoveModify}) => {
                     <Content>
                         <Title>{notice}</Title>
                         <Word><Thick>'{modify.nickname}'</Thick>{who} <Thick>{modify.title}</Thick>{because} {TimeToggle(modify.date)}{time}</Word>
-                        <CheckBox><CheckBtn to={modify.href} onClick={()=>{ onRemoveModify(modify.id)}}>{check}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
+                        <CheckBox><CheckBtn to={modify.href} onClick={()=>{ onRemoveModify(modify.id);}}>{check}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
                     </Content>
                     </Wrap>   
                 }

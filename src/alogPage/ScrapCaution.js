@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
 
 const ScrapCaution = ({viewCaution, setViewCaution}) => {
     const AuthorId = "순자러버"
@@ -8,10 +9,10 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
     const closePopup = () => {
         setViewCaution(!viewCaution)
     }
-
+    const history = useHistory();
     return(
         <PopupContainer>
-                <CloseBtnBox onClick={closePopup}>
+                <CloseBtnBox onClick={()=>{closePopup(); history.goBack()}}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>

@@ -1,10 +1,14 @@
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
 
 const WritingGuide = () => {
+
+    const history = useHistory();
+
     return(
         <PopupContainer>
                 <CloseBtnBox>
-                    <CloseBtn>X</CloseBtn>
+                    <CloseBtn onClick={history.goBack}>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
                     <PopupTitle>I. 이용안내</PopupTitle>
@@ -62,7 +66,7 @@ const WritingGuide = () => {
 
 const PopupContainer = styled.div`
     position:absolute;
-    display:none;
+    display:block;
     top: 45px;
     left: 0;
     width:100%;
