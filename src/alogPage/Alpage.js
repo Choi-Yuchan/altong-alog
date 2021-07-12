@@ -155,7 +155,7 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       <Refund showRefund={showRefund} setShowRefund={setShowRefund}/>
       }
       { scrapComplete === true &&
-      <CompleteMySlideWrap>
+      <CompleteMySlideWrap onClick={()=>{setScrapComplete(false)}}>
         <SlideConfirmBox>
           <ConfirmText>원 알록 순자러버님의</ConfirmText>
           <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
@@ -164,14 +164,14 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       </CompleteMySlideWrap>
       }
       { scrapDisable === true &&
-      <CompleteMySlideWrap>
+      <CompleteMySlideWrap onClick={()=>{setScrapDisable(false)}}>
         <SlideConfirmBox>
           <ConfirmText>나의 <span>알록</span>은 퍼가기 하실 수 없습니다.</ConfirmText>
         </SlideConfirmBox>
       </CompleteMySlideWrap>
       }
       { deletedOrigin === true &&
-      <CompleteMySlideWrap>
+      <CompleteMySlideWrap onClick={()=>{setDeletedOrigin(false)}}>
         <SlideConfirmBox>
           <ConfirmText>순자러버님의</ConfirmText>
           <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>

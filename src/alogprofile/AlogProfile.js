@@ -57,7 +57,7 @@ function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
             <SetPicFrame>
             { selfLogin === true && <SetPic src={process.env.PUBLIC_URL + '/images/setting.png'} onClick={ () => { setOpened(true); setBgSetting(false); }}/> }
             </SetPicFrame>
-            { Opened && <AlogProfileSetting setOpened={setOpened} setShowBgEdit={setShowBgEdit} bgSetting={bgSetting} /> }
+            { Opened && <AlogProfileSetting setOpened={setOpened} setShowBgEdit={setShowBgEdit} bgSetting={bgSetting} setBgSetting={setBgSetting}/> }
             <Nickname>
                 {/* 국기 주석처리
                 <Country>
