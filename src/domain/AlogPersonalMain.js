@@ -61,7 +61,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
 
     return (
         <>
-            <AlogProfile setShowBgEdit={setShowBgEdit}/>
+            <AlogProfile setShowBgEdit={setShowBgEdit} bgSetting={bgSetting} setBgSetting={setBgSetting}/>
             <AlogFixSectionFolder
                 setNewGroup={setNewGroup} 
                 setCheckList={setCheckList} 
