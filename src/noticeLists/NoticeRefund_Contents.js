@@ -231,7 +231,7 @@ const NoticeRefund_Contents = ({refund, to, onRemoveRefund, whyArray}) => {
                         <Word><Thick>'{refund.nickname}'</Thick>{who} {because} <Thick>{refund.title}</Thick>{word} {TimeToggle(refund.date)}{time}</Word>
                         <Why>{reason}: {whyArray[0]}</Why>
                         <AreaWrap><Area placeholder="남기실 말씀이 있으면 입력해주세요."></Area></AreaWrap>
-                        <CheckBox><CheckBtn to={refund.href} onClick={()=>{ onRemoveRefund(refund.id)}}>{check}</CheckBtn></CheckBox> {/* 클릭 시 해당 환불처리 된 컨텐츠로 이동                         */}
+                        <CheckBox><CheckBtn onClick={()=>{ onRemoveRefund(refund.id)}}>{check}</CheckBtn></CheckBox> {/* 클릭 시 해당 환불처리 된 컨텐츠로 이동                         */}
                     </Content>
                     </Wrap>   
             }
