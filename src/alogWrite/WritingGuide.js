@@ -1,6 +1,17 @@
+import { useRef } from 'react'
 import styled from 'styled-components'
 
-const WritingGuide = () => {
+const WritingGuide = ({showGuide, setShowGuide}) => {
+    const checkEl = useRef();
+
+    const closePopup = () => {
+        if(checkEl.current.checked === false){
+            return window.alert("동의하기를 체크해주세요!");
+        }
+        if(checkEl.current.checked === true) 
+        {setShowGuide(!showGuide)}
+    }
+    
     return(
         <PopupContainer>
                 <CloseBtnBox>
@@ -53,8 +64,8 @@ const WritingGuide = () => {
                         방법에 따라 이용하고자 할 경우에는 반드시 권리자의 명시적 동의를 얻은 뒤 사용해야 합니다.
                     </PopupPara>
                 </PopupArticle>
-                <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                <StartBtn>알록달록 시작하기</StartBtn>
+                <CheckBoxLabel> <CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
+                <StartBtn onClick={closePopup}>알록달록 시작하기</StartBtn>
             </PopupContainer>
 
     )
@@ -62,7 +73,7 @@ const WritingGuide = () => {
 
 const PopupContainer = styled.div`
     position:absolute;
-    display:none;
+    display:block;
     top: 45px;
     left: 0;
     width:100%;

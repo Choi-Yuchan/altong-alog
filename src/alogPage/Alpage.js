@@ -7,6 +7,7 @@ import ScrapCaution from './ScrapCaution';
 import ScrapOptionBox from './ScrapOptionBox';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
+import Refund from '../domain/Refund';
 
 function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren, showBgEdit, setShowBgEdit}) {
   const langAlpage = {
@@ -54,6 +55,7 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   const [scrapComplete, setScrapComplete] = useState(false); // 퍼가기 완료 됐을 때 알림창 상태
   const [scrapDisable, setScrapDisable] = useState(false); // 나의 '알록' 퍼가기 했을 때 경고창 상태
   const [deletedOrigin, setDeletedOrigin] = useState(false); // 원문가기 클릭 시 원문이 삭제되었을 경우 
+  const [showRefund, setShowRefund] = useState(false); // 환불 요청 페이지 보여주기
 
   useEffect(()=>{
     if (body === true) {
@@ -149,6 +151,9 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       deletedOrigin={deletedOrigin} setDeletedOrigin={setDeletedOrigin}
       scrapDisable={scrapDisable} setScrapDisable={setScrapDisable}
       />
+      {showRefund === true &&
+      <Refund showRefund={showRefund} setShowRefund={setShowRefund}/>
+      }
       { scrapComplete === true &&
       <CompleteMySlideWrap>
         <SlideConfirmBox>

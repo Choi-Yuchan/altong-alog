@@ -1,14 +1,19 @@
+import { useRef } from 'react'
 import styled from 'styled-components'
 
 const ScrapCaution = ({viewCaution, setViewCaution}) => {
+    const checkEl = useRef()
     const AuthorId = "순자러버"
     const contentsTitle = `'알통은 무엇인가? 그것에 대해 알아봅시다.'` // 해당 컨텐츠 타이틀
     const usedAl = 300
 
     const closePopup = () => {
-        setViewCaution(!viewCaution)
+        if(checkEl.current.checked === false){
+            return window.alert("동의하기를 체크해주세요!");
+        }
+        if(checkEl.current.checked === true) 
+        {setViewCaution(!viewCaution)}
     }
-
     return(
         <PopupContainer>
                 <CloseBtnBox onClick={closePopup}>
@@ -37,7 +42,7 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
                         환불 하실 수 없습니다. 정말 퍼가시겠습니까?
                     </PopupPara>
                 </CautionPopup>
-                <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
+                <CheckBoxLabel for="agreement"><CheckBox ref={checkEl} type="checkbox" name="agreement"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
                 <ScrapBtn onClick={closePopup}>퍼가기</ScrapBtn>
             </PopupContainer>
     )
