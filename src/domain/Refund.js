@@ -1,7 +1,17 @@
+import { useRef } from 'react';
 import styled from 'styled-components'
 
-const Refund = () => {
+const Refund = ({showRefund, setShowRefund}) => {
     const refundReasonList = ["저작권 위반", "유해성", "장난성", "중복성", "비속어/반말", "비 정보 지식", "음해/비방", "기타"]
+    const checkEl = useRef();
+
+    const closePopup = () => {
+        if(checkEl.current.checked === false){
+            return window.alert("동의하기를 체크해주세요!");
+        }
+        if(checkEl.current.checked === true) 
+        {setShowRefund(!showRefund)}
+    }
     return(
         <PopupContainer>
                 <CloseBtnBox>
@@ -33,8 +43,8 @@ const Refund = () => {
                     <TextBox>
                         <ReasonText type="text" placeholder="남기실 말씀이 있으면 입력해주세요."/>
                     </TextBox>
-                    <CheckBoxLabel><CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                    <RefundBtn>환불신청</RefundBtn>
+                    <CheckBoxLabel><CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
+                    <RefundBtn onClick={closePopup}>환불신청</RefundBtn>
                 </RefundForm>
             </PopupContainer>
 

@@ -1,6 +1,17 @@
+import { useRef } from 'react';
 import styled from 'styled-components'
 
-const EditCaution = () => {
+const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
+    const checkEl = useRef();
+
+    const closePopup = () => {
+        if(checkEl.current.checked === false){
+            return window.alert("동의하기를 체크해주세요!");
+        }
+        if(checkEl.current.checked === true) 
+        {setShowWritingEdit(!showWritingEdit)}
+    }
+
     return(
         <PopupContainer>
                 <CloseBtnBox>
@@ -28,8 +39,8 @@ const EditCaution = () => {
                     </PopupPara>
                 </PopupArticle>
 
-                <CheckBoxLabel> <CheckBox type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                <EditBtn>수정하기</EditBtn>
+                <CheckBoxLabel> <CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
+                <EditBtn onClick={closePopup}>수정하기</EditBtn>
             </PopupContainer>
 
     )
@@ -37,7 +48,7 @@ const EditCaution = () => {
 
 const PopupContainer = styled.div`
     position:absolute;
-    display:none;
+    display:block;
     top: 45px;
     left: 0;
     width:100%;

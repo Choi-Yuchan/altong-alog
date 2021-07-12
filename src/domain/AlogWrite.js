@@ -84,15 +84,20 @@ function AlogWrite() {
     const [select, setSelect] = useState(selectDfault.select2);
     const [select2, setSelect2] = useState('');
     const [showInfo, setShowInfo] = useState(false);
-
+    const [showGuide, setShowGuide] = useState(false); // 처음 게시글 작성을 할 경우 보여줘야 하는 팝업 상태
+    const [showWritingEdit, setShowWritingEdit] = useState(false); // 수정하기로 들어왔을 경우 보여줘야 하는 팝업 상태
 
     return (
         <WriteDiv>
             {/* //WritingGuide popup은 유저가 처음 방문일 때만 띄우도록 설정해야함.*/}
-            <WritingGuide/>
+            {showGuide === true &&
+                <WritingGuide setShowGuide={setShowGuide} showGuide={showGuide}/>
+            }
 
             {/* EditCaution은 수정하기로 들어올 때 활성화 */}
-            <EditCaution/>
+            {showWritingEdit === true && 
+                <EditCaution setShowWritingEdit={setShowWritingEdit} showWritingEdit={showWritingEdit}/>
+            }
 
             <WriteTitle>{title}</WriteTitle>
             <WriteSettingBox>
