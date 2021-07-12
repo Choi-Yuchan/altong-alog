@@ -130,7 +130,6 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
             <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
         </ButtonBox>
         </Wrap>
-
         { open === true &&
         <CommentBox>
             <Commentdiv>

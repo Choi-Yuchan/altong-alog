@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
 
 const ScrapCaution = ({viewCaution, setViewCaution}) => {
     const checkEl = useRef()
@@ -14,9 +15,12 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
         if(checkEl.current.checked === true) 
         {setViewCaution(!viewCaution)}
     }
+
+    const history = useHistory();
+
     return(
         <PopupContainer>
-                <CloseBtnBox onClick={closePopup}>
+                <CloseBtnBox onClick={()=>{closePopup(); history.goBack()}}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>

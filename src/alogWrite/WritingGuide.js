@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
 
 const WritingGuide = ({showGuide, setShowGuide}) => {
     const checkEl = useRef();
@@ -12,10 +13,12 @@ const WritingGuide = ({showGuide, setShowGuide}) => {
         {setShowGuide(!showGuide)}
     }
     
+    const history = useHistory();
+
     return(
         <PopupContainer>
                 <CloseBtnBox>
-                    <CloseBtn>X</CloseBtn>
+                    <CloseBtn onClick={history.goBack}>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
                     <PopupTitle>I. 이용안내</PopupTitle>
