@@ -50,13 +50,10 @@ function InGroupFolder({match}) {
 
     const {group} = match.params;
     const groupInfo = groupData[group];
-    console.log(group)
-
 
     if (group === 'MyMainSearch') {
         return (
             <>
-                <Route path="personalMain/MyMainSearch" exact render={()=>{<NoneSearchResult>검색어를 입력 해 주세요.</NoneSearchResult>}} />
                 <Route path="/personalMain/MyMainSearch/:my_alog_search" component={MyAlogPageSearch} />
             </>
         );
@@ -158,4 +155,14 @@ const NoneGroup = styled.div`
     font-style: italic;
     margin-top:5rem;
 `;
-const NoneSearchResult = styled.div``;
+const NoneSearchResult = styled.div`
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#666;
+    font-size:1rem;
+    font-weight:bold;
+    font-style: italic;
+    margin-top:5rem;
+`;

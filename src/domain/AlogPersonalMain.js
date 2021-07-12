@@ -7,7 +7,7 @@ import MyMainAlogSlide from '../alogmain/myAlogMain/MyMainAlogSlide';
 import NewGroupPopup from '../alogPage/NewGroupPopup';
 import InGroupFolder from '../alogPage/InGroupFolder';
 
-function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setMyAlogSlide, myMainAlogSlide, sample, opened, setOpened, bgSetting, setBgSetting}) {
+function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setMyAlogSlide, myMainAlogSlide, sample, opened, setOpened, bgSetting, setBgSetting, setShowBgEdit, showBgEdit}) {
 
     const groupSample = [
         {
@@ -57,18 +57,17 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
     ];
     const [mySelect, setMySelect] = useState('게시글'); // 게시글 별, 그룹 별 옵션
     const [showNewGroup, setShowNewGroup] = useState(false);
-    
     const slideCount = myAlogSlideSample.length; //대문글 개수
-
 
     return (
         <>
-            <AlogProfile />
+            <AlogProfile setShowBgEdit={setShowBgEdit} bgSetting={bgSetting} setBgSetting={setBgSetting}/>
             <AlogFixSectionFolder
                 setNewGroup={setNewGroup} 
                 setCheckList={setCheckList} 
                 setMyAlogSlide={setMyAlogSlide}
                 mySelect={mySelect} setMySelect={setMySelect}
+                sample={sample}
             />
             <Route path="/personalMain" exact render={()=>
                 <>
@@ -87,6 +86,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 opened={opened} setOpened={setOpened} 
                 bgSetting={bgSetting} setBgSetting={setBgSetting}
                 setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
+                setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
             />}
         </>
     );

@@ -53,7 +53,7 @@ function MyAlogGroupMove({existence, setMyAlogMove}) {
                             {groupArray.map((list, index)=>
                                 <MoveGroupLi key={list.id} onClick={()=>{groupId(index)}}>
                                     <GroupIcon src={process.env.PUBLIC_URL + '/images/folder.svg'} />
-                                    <GroupName color={list.select}>{list.name}</GroupName>
+                                    <GroupName select={list.select}>{list.name}</GroupName>
                                 </MoveGroupLi>
                             )}
                         </MoveGroupBox>
@@ -131,7 +131,7 @@ const GroupIcon = styled.img`
 const GroupName = styled.span`
     font-size: 0.875rem;
     font-weight:bold;
-    color:${({color})=> color ? '#fd0031':'#666'};
+    color:${({select})=> select ? '#fd0031':'#666'};
 `;
 const MoveGroupSaveBtnBox = styled.div`
     margin-top:10px;

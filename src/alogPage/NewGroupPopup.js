@@ -4,7 +4,7 @@ import AlogDalogList from '../components/AlogDalogList';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import MyAlogGroupMove from './MyAlogGroupMove';
 
-function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened, setOpened , bgSetting , setBgSetting, setShowNewGroup}) {
+function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened, setOpened , bgSetting , setBgSetting, setShowNewGroup, setShowBgEdit}) {
 
     const [mySettingSearchOption, setMySettingSearchOption] = useState(false); //설정하기에서 게시글, 그룹 검색 옵션
     const [mySelect, setMySelect] = useState('게시글'); // 검색 옵션 선택
@@ -17,7 +17,7 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
             setBgSetting(true);
             setOpened(true);
     }
-    console.log(bgSetting, opened);
+
     return (
         <>
         <NewGroupPopupWrap onClick={()=>{setNewGroup(false); setShowNewGroup(false)}}>
@@ -72,7 +72,7 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
             </NewGroupPopupBox>
         </NewGroupPopupWrap>
         {/* 배경설정 컴포넌트  */}
-        {opened === true && bgSetting === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting}/>}
+        {opened === true && bgSetting === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
         {/* 그룹생성 완료 시 팝업 <CompleteGroupPopup>새 그룹이 생성되었습니다.</CompleteGroupPopup> */}
         {mySlideConfirm &&
             <CompleteMySlideWrap onClick={()=>{setMySlideConfirm(false);}}>

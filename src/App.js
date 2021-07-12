@@ -185,8 +185,10 @@ function App() {
   const [openInput, setOpenInput] = useState(false);
   const [searchOption, setSearchOption] = useState(1);
 
+  const [siren, setSiren] = useState(false);
+  const [showBgEdit, setShowBgEdit] = useState(false);
+
   return(
-    
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
     <Container>
       <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} />
@@ -199,7 +201,7 @@ function App() {
         <AlogPersonalMain bgImg={defaultBgImg} setNewGroup={setNewGroup} newGroup={newGroup} 
         setMyAlogSlide={setMyAlogSlide} setCheckList={setCheckList} checkList={checkList} 
         myMainAlogSlide={myMainAlogSlide} sample={sample} opened={opened} setOpened={setOpened}
-        bgSetting={bgSetting} setBgSetting={setBgSetting}
+        bgSetting={bgSetting} setBgSetting={setBgSetting} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
         />}
       />
       <Route
@@ -207,7 +209,8 @@ function App() {
         render={() => 
         <AlogPage body={body} setBody={setBody} setNewGroup={setNewGroup} newGroup={newGroup}
         sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
-        opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting}
+        opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting} siren={siren} setSiren={setSiren}
+        setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
         />}
          />
       <Route path="/writing" component={AlogWrite} />

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HunPopup from '../components/HunPopup';
+import AlogSiren from '../components/AlogSiren';
 import AlpageContents from '../components/AlpageContents';
 import ScrapCaution from './ScrapCaution';
 import ScrapOptionBox from './ScrapOptionBox';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
 
-function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting}) {
+function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren, showBgEdit, setShowBgEdit}) {
   const langAlpage = {
     ko:{
       allData : 
@@ -66,12 +67,15 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   }
 
   const [showNewGroup, setShowNewGroup] = useState(false);
-  const [showBgEdit, setShowBgEdit] = useState(false);
 
   const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
 
+  const SirenPop = () => {
+    setSiren(true);
+  }
   return (
     <>
+
       {/* 퍼가기 전 유의사항 페이지 */}
       {viewCaution === true &&<ScrapCaution viewCaution={viewCaution} setViewCaution={setViewCaution}/>}
       {/* 그룹 선택 및 만들기 팝업 */}
@@ -82,7 +86,7 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       />}
       {/* 그룹 배경 설정 */}
       {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
-
+      
       <Box onClick={() => {setScrapOption(false)}}>
         {scrapOption === true && 
           <ScrapOptionBox setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
@@ -97,13 +101,15 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
         <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
         { showMenu &&
         <DropMenu>
-          <Menus onClick={()=>{HunEgg()}}>{hunAl}</Menus>
-          <Menus>{call}</Menus>
+          <Menus onClick={HunEgg}>{hunAl}</Menus>
+          <Menus onClick={SirenPop}>{call}</Menus>
           <Menus>{modify}</Menus>
           <Menus>{refund}</Menus>
         </DropMenu>
         }
-        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>      </Icons>
+        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
+        <AlogSiren siren={siren} setSiren={setSiren}></AlogSiren>      
+        </Icons>
         </Frame>
         {isShow ? (
           <Folder>

@@ -65,14 +65,17 @@ function AlogProfileSetting ({setOpened, bgSetting, setShowBgEdit}) {
 
     const [popupOpen, setPopupOpen] = useState(false);
     const groupSampleBgImg = defaultBgImage[1].img;
-    console.log(bgSetting)
     
+    const viewBgSetting = () => {
+        setOpened(false); 
+        setShowBgEdit(false);
+    }
 
     return (
         <>
-        <SettingWrap onClick={()=>{setOpened(false)}}>
+        <SettingWrap onClick={viewBgSetting}>
             <Setting onClick={(e)=>{e.stopPropagation();}}>
-                <Title>배경 설정하기</Title>
+                <Title>{bgSetting === false ? '프로필 설정하기' : '배경 설정하기'}</Title>
                 {bgSetting === false &&
                     <>
                         <span className="subheading">소개글</span>
@@ -105,7 +108,7 @@ function AlogProfileSetting ({setOpened, bgSetting, setShowBgEdit}) {
                 {bgSetting === true ? <PreviewMyGroup sample={groupSampleBgImg} /> : <PreviewProfile />}
                 <SettingBtnBox>
                     <SettingBtn>저장</SettingBtn>
-                    <SettingBtn onClick={()=>{setOpened(false); setShowBgEdit(false)}}>취소</SettingBtn>
+                    <SettingBtn onClick={viewBgSetting}>취소</SettingBtn>
                 </SettingBtnBox>
             </Setting>
         </SettingWrap>

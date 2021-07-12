@@ -7,7 +7,7 @@ import AlogMessage from '../components/AlogMessage';
 import HunPopup from '../components/HunPopup';
 import { Link } from 'react-router-dom';
 
-function AlogProfile () {
+function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
     const nickname = "Vivien";
     const grade = "알천사";
     const hashtag1 = "음주";
@@ -55,9 +55,9 @@ function AlogProfile () {
             </PicContainer>
             
             <SetPicFrame>
-            { selfLogin === true && <SetPic src={process.env.PUBLIC_URL + '/images/setting.png'} onClick={ () => { setOpened(true) }}/> }
+            { selfLogin === true && <SetPic src={process.env.PUBLIC_URL + '/images/setting.png'} onClick={ () => { setOpened(true); setBgSetting(false); }}/> }
             </SetPicFrame>
-            { Opened && <AlogProfileSetting setOpened={setOpened} /> }
+            { Opened && <AlogProfileSetting setOpened={setOpened} setShowBgEdit={setShowBgEdit} bgSetting={bgSetting} /> }
             <Nickname>
                 {/* 국기 주석처리
                 <Country>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect}) {
+function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect, sample}) {
 
     const [myAlogSelectSlide, setMyAlogSelectSlide] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -11,8 +11,18 @@ function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySel
         setSearchValue(e.target.value);
     }
     const history = useHistory();
-    const handleSubmit = () => {
-        history.push(`/personalMain/MyMainSearch/${searchValue}`);
+    const searchArr = sample.filter(((data)=> data.title.toLowerCase().includes(searchValue.toLowerCase()) )); //내가 검색한 배열 가져오기
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (searchValue === '') { //아무것도 입력하지 않았을 때
+            return alert('검색어를 입력 해 주세요.');
+        }
+        history.push({
+            pathname: `/personalMain/MyMainSearch/${searchValue}`, //url이동
+            state: {searchArr: searchArr}                          // props 보내기
+        });
+        setSearchValue('');                                        //검색창 초기화
     }
 
     return (
@@ -146,6 +156,7 @@ const MyAlogSearchInput = styled.input`
     border:1px solid #666;
     border-radius:3px;
     box-sizing:border-box;
+    outline:none;
 `;
 const MyAlogSearchBtn = styled.button`
     position:absolute;
