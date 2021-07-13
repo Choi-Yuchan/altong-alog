@@ -190,7 +190,7 @@ function App() {
   return(
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
     <Container>
-      <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} />
+      <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} setSearchOption={setSearchOption} />
       <Hamburger  isActive={isActive} setIsActive={setIsActive} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage} usersMento={usersMento}/>
       <ScrollToTop>    
       <Route exact path="/" component={AlogMain} />

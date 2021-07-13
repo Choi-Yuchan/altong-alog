@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinkIcon from './LinkIcon';
-import { Route, Link } from 'react-router-dom';
-import AlogMain from '../domain/AlogMain'; 
+import { Link } from 'react-router-dom';
 
 function AlogHeader(props) {
     const isActive = props.isActive;
@@ -20,7 +19,7 @@ function AlogHeader(props) {
                 <Hambur onClick={() => openNav()} src={process.env.PUBLIC_URL + '/images/hambur.png'}></Hambur>
                 <a href="http://www.altong.com/"><img src={process.env.PUBLIC_URL + '/images/logo.png'}/></a>
                 </div>
-                <Link to="/"><AlogLogo>알록달록</AlogLogo></Link>
+                <AlogLogo to="/">알록달록</AlogLogo>
                 <LinkIcon 
                     text={props.text} setText={props.setText} 
                     openInput={props.openInput} setOpenInput={props.setOpenInput}
@@ -67,7 +66,7 @@ const Hambur = styled.img`
     }
 `;
 
-const AlogLogo = styled.a`
+const AlogLogo = styled(Link)`
     font-size:1.25rem;
     font-weight:bold;
     color:#707070;

@@ -4,18 +4,16 @@ import { Link } from 'react-router-dom';
 
 function AlogSliderEl(props) {
     return (
-        <SliderAlogEl imgurl={process.env.PUBLIC_URL + '/images/' + props.content.bgimg} count={props.count} >
-            <Link to="/contents">
+        <SliderAlogEl to="/contents" imgurl={process.env.PUBLIC_URL + '/images/' + props.content.bgimg} count={props.count} >
             <SliderMask>
                 <SliderTitle>{props.content.title}</SliderTitle>
                 <SliderBy>by {props.content.writer}</SliderBy>
             </SliderMask>
-            </Link>
         </SliderAlogEl>
     );
 }
 
-const SliderAlogEl = styled.a`
+const SliderAlogEl = styled(Link)`
     display:block;
     width:${props => 100/props.count}%;
     height:100%;

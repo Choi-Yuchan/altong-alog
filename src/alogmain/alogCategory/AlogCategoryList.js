@@ -1,23 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AlogCategoryList(props) {
     return (
-        <ListBox>
-            <Link to="/contents">
+        <ListBox to="/contents">
             <CategoryListImg imgurl={process.env.PUBLIC_URL + '/images/' + props.cateList.img}></CategoryListImg>
             <CategoryListText>{props.cateList.text}</CategoryListText>
             <CategoryListBy>
                 <CategoryTime>{props.cateList.hour}{props.cateList.time}</CategoryTime>
                 <CategoryBy>By {props.cateList.nickname}</CategoryBy>
             </CategoryListBy>
-            </Link>
         </ListBox>
     );
 }
 
-const ListBox = styled.a`
+const ListBox = styled(Link)`
     display:block;
     width:48%;
     margin-top:0.625rem;

@@ -1,23 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function WriterEl(props) {
     return (
-        <WriterElBox>
-            <Link to="/personalMain">
+        <WriterElBox to="/personalMain">
             <WriterProfile imgurl={process.env.PUBLIC_URL + '/images/' + props.writer.img}></WriterProfile>
             <WriterInfo>
                 <WriterNation src={process.env.PUBLIC_URL + 'images/nation/' + props.writer.nation}></WriterNation>
                 <WriterName>{props.writer.nickname}</WriterName>
             </WriterInfo>
             <NationCode>{props.writer.code}</NationCode>
-            </Link>
         </WriterElBox>
     );
 }
 
-const WriterElBox = styled.a`
+const WriterElBox = styled(Link)`
     display:block;
     border:1px solid #bfbbbb;
     width:40%;
