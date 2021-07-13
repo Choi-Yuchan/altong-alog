@@ -206,7 +206,7 @@ const NoticeMentoContents  = ({mentoList, onRemoveMento, body, setBody}) => {
                                     <Nickname>{mentoList.nickname}</Nickname>
                                 </div>
                             </Wrap>
-                                <Direct to="">{direct}</Direct>
+                                <Direct to="/personalMain">{direct}</Direct>
                         </LeftSide>
                         <RightSide>
                             <Wrap2>

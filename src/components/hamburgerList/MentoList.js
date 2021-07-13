@@ -72,21 +72,12 @@ const MentoID = styled.h5`
     flex-basis:80%;
 `;
 
-const useInput = (initialValue) => {
-    const [value, setValue] = useState(initialValue);
-    const onChange = (e) => {
-       console.log(e.target.value);
-    }
-    return { value, onChange };
-};
-
 const Arrow = styled.img`
     position:absolute;
     right:30px;
     width:20px;
     transform:rotate(90deg);
 `;
-
 
 export const MentoList = ({title, arrow, closeNav}) => {
     const [isActive,setIsActive] = useState(false);
@@ -95,10 +86,6 @@ export const MentoList = ({title, arrow, closeNav}) => {
         setIsActive(!isActive);
     }
 
-    const onSubmit = (e) => {
-        e.stopPropagation();
-        console.log("submitted search result!");
-    }
     const bookmarkMento = NoticeData.ko.bookmarkMento;
     bookmarkMento.sort(function(a, b) { // 오름차순
         return a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0;  
