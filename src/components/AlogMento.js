@@ -1,12 +1,11 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-function AlogMento () {
+function AlogMento ({setMentoPopupOpen, mentoOpen}) {
 
-    
     const MentoInfo = [
         {
             id:1,
@@ -19,7 +18,7 @@ function AlogMento () {
         },
         {
             id:2,
-            Nickname: "디디바오",
+            Nickname: "강아지",
             profit: '800',
             gun: '120',
             answer: '50',
@@ -28,7 +27,7 @@ function AlogMento () {
         },
         {
             id:3,
-            Nickname: "디디바오",
+            Nickname: "고양이",
             profit: '800',
             gun: '120',
             answer: '50',
@@ -37,7 +36,7 @@ function AlogMento () {
         },
         {
             id:4,
-            Nickname: "디디바오",
+            Nickname: "호랑이",
             profit: '800',
             gun: '120',
             answer: '50',
@@ -46,191 +45,172 @@ function AlogMento () {
         },
         {
             id:5,
-            Nickname: "디디바오",
+            Nickname: "사자",
             profit: '800',
             gun: '120',
             answer: '50',
             percent: '70',
             state:true
         },
-  
     ];
-    const 닉네임 = "사용자";
-    const [close, setClose] = useState(true);
-
-    const langMento = {
-        ko:{
-            userID:["사용자"],
-            mento:"님의 멘토",
-            people:"명",
-            grade:"알천사",
-            direct:"프로필보기>",
-            profit:"보유 알록 수",
-            answer:"보유 달록 수",
-            egg:"개",
-            per:"멘토 수",
-            percent:"멘티 수",
-            find:"찾기",
-            x:"삭제"
-        }
-    }
-    
-    const userID = langMento.ko.userID;
-    const mento = langMento.ko.mento;
-    const people = langMento.ko.people;
-    const grade = langMento.ko.grade;
-    const direct = langMento.ko.direct;
-    const profit = langMento.ko.profit;
-    const answer = langMento.ko.answer;
-    const egg = langMento.ko.egg;
-    const per = langMento.ko.per;
-    const find = langMento.ko.find;
-    const percent = langMento.ko.percent;
-    const x = langMento.ko.x;
-    
+    const userID = "사용자";
+    const grade = "알천사";
+    const direct = "프로필보기>";
     const [user, setUser] = useState(MentoInfo);
+    const [searchValue, setSearchValue] = useState('');
+    const [checkValue, setCheckValue] = useState([]);
+    const inputBlur = useRef();
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+    }
+    const handleSubmit = (e) => { //내 멘토 멘티 검색 결과 
+        e.preventDefault();
+        setUser(user.filter(((data)=> data.Nickname.toLowerCase().includes(searchValue.toLowerCase()) )));
+        setSearchValue('');
+        inputBlur.current.blur(); //검색 시도시 블러처리
+    }
     const star = (id) => {
         setUser(
-            user.map( user =>
-                user.id === id + 1 ? {...user, state: false} : user
-                )
-        )
+            user.map( user => user.id === id ? {...user, state: false} : user )
+        );
     };
-    
+    const handleCheckBox = (checked, id) => { //체크박스 input: value가 true인 아이디만 배열 추가
+        if (checked) {
+            setCheckValue([...checkValue, id]);
+        } else {
+            setCheckValue(checkValue.filter((el)=> el !== id));
+        }
+    }
+    const mentoDelete = () => { //선택한 멘토 멘티 삭제
+        for (let i = 0; i < checkValue.length; i++) {
+            setUser(user => user.filter(user=> user.id !== checkValue[i]));
+        }
+    }    
+
     return (
-        <>
-        { close ?
-            <WrapLabel onClick={()=>{setClose(false)}}>
+        <WrapLabel onClick={()=>{setMentoPopupOpen(false);}}>
             <MentoBox onClick={(e) => e.stopPropagation()}>
-                <ExitFrame><Exit src={process.env.PUBLIC_URL + '/images/close-button.svg'} onClick = { () => { setClose(!close) } }></Exit></ExitFrame>
-                <Nick>'<span>{ userID }</span>'{mento}(<span>{MentoInfo.length}</span>{people})</Nick>
-                <Wrap>
-                    <NickImg src={process.env.PUBLIC_URL + '/images/nicksearch.svg'}></NickImg><Typing type="text"></Typing><Found>{find}</Found>
-                </Wrap>
-                <Delete>{x}</Delete>
+                <Exit src={process.env.PUBLIC_URL + '/images/close-button.svg'} onClick = { () => { setMentoPopupOpen(false); } }></Exit>
+                <Nick>'<span>{ userID }</span>'{mentoOpen ? '님의 멘토' : '님의 멘티'}(<span>{MentoInfo.length}</span>명)</Nick>
+                <SearchForm onSubmit={handleSubmit}>
+                    <NickImg src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} />
+                    <Typing type="text" value={searchValue} onChange={handleChange} ref={inputBlur} onClick={()=>{setUser(MentoInfo);}} />
+                    <Found type="submit">찾기</Found>
+                </SearchForm>
+                <Delete onClick={mentoDelete}>삭제</Delete>
                 <Contents>
-                    {
-                        user.map( (info, i) => (
-                            <Label>
-                            <Check type="checkbox" name="checkDelete"></Check>
-                            <UserInfo info={info}>
-                                <Link to="/personalMain">
-                                <ImgBox>
+                    {user.length !== 0
+                        ? user.map( (info) => (
+                            <Label key={info.id}>
+                                <Check type="checkbox" name="checkDelete" onChange={(e)=>{handleCheckBox(e.target.checked, info.id)}} checked={checkValue.includes(info.id) ? true:false} />
+                                <UserInfo to="/personalMain">
                                     <PicImg src={process.env.PUBLIC_URL + '/images/back.png'} alt="해당 계정 알로그 가기"/>
-                                </ImgBox>
-                                </Link>
-                                <WordBox>
-                                    <First>
-                                        <Grade>{grade}</Grade><NickName>{info.Nickname}</NickName>
-                                    </First>
-                                    <Profile to="">{direct}</Profile> {/*해당 계정 알록달록 바로가기*/}
-                                    <Question>{profit} <span>{ info.profit }</span>{egg} | {per} <span>{ info.gun }</span>{people} </Question>
-                                    <Answer>{answer} <span>{ info.answer }</span>{egg} | {percent} <span>{ info.percent }</span>{people} </Answer>
-                                </WordBox>
-                                <Star src={info.state === true ? process.env.PUBLIC_URL + '/images/star.png':process.env.PUBLIC_URL + '/images/star_on.png'}
-                                onClick={(e)=>{e.preventDefault(); star(i)}}></Star>
-                            </UserInfo>
-                            </Label>                            
-                             )
-                        )
+                                    <WordBox>
+                                        <First>
+                                            <Grade>{grade}</Grade><NickName>{info.Nickname}</NickName>
+                                        </First>
+                                        <Profile>{direct}</Profile>
+                                        <Question>보유 알록 수 <span>{ info.profit }</span>개 | 멘토 수 <span>{ info.gun }</span>명 </Question>
+                                        <Answer>보유 달록 수 <span>{ info.answer }</span>개 | 찾기 <span>{ info.percent }</span>명 </Answer>
+                                    </WordBox>
+                                    <Star src={info.state === true ? process.env.PUBLIC_URL + '/images/star.png':process.env.PUBLIC_URL + '/images/star_on.png'}
+                                    onClick={(e)=>{e.preventDefault(); star(info.id)}}></Star>
+                                </UserInfo>
+                            </Label>
+                        ))
+                        : <NoneMento>검색 결과가 없습니다.</NoneMento>
                     }
                 </Contents>
             </MentoBox>
-            </WrapLabel>
-        : null    
-        }
-    </>
+        </WrapLabel>
     )
 };
 const WrapLabel = styled.div`
-    width:100vw; height:100vh;
+    width:100%; height:100%;
     position:fixed;
     background:transparent;
     left:0; top:0;
-    z-index:999;
+    z-index:9999;
 `;
-const ExitFrame = styled.div`
-    width:100%; height:20px;
-    position:relative;
+const MentoBox = styled.div`
+    width:85%;
+    max-width:350px;
+    height:450px;
+    background:#fefefe;
+    border:1px solid rgba(0,0,0,.3);
+    border-radius:10px;
+    padding:10px;
+    position:absolute;
+    left:50%; top:50%;
+    transform: translate(-50%,-50%);
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 `;
 const Exit = styled.img `
-    width:20px; height:20px;
+    width:20px;
+    object-fit:contain;
     position:absolute;
     right:10px; top:10px;
     cursor:pointer;
 `;
-const MentoBox = styled.div`
-    width:300px; height:450px;
-    background:#fefefe;
-    margin:120px auto 0 ;
-    border:1px solid rgba(0,0,0,.3);
-    position:absolute;
-    z-index:9999;
-    left:50%; top:-5%;
-    transform: translateX(-50%);
-    overflow: scroll;
-    ::-webkit-scrollbar {
-    display: none; 
-    }
-    @media all and (min-width:480px) {
-        padding:30px;
-    }
-    @media all and (min-height:650px) {
-        top:2%;
-    }
-    @media all and (min-height:800px) {
-        top:5%;
-    }          
-`;
 const Label = styled.label`
+    width:100%;
     display:flex;
     align-items: center;
+    justify-content:center;
 `;
 const Nick = styled.div`
-    text-align:center;
     color:#676767;
-    width:100%; height:20px; 
-    margin-top:10px;
-    font-size:1.2em;
+    margin-top:20px;
+    margin-bottom:15px;
+    font-size:1rem;
 `;
 
 const Contents = styled.div`
-    width:280px; height:400px;
-    margin:14px auto 0;
+    height:1000px;
+    overflow-y:scroll;
+    margin:5px 0;
     display:flex;
     flex-direction:column;
+    align-items:center;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
     
     @media all and (min-width:480px) {
         width:320px;
     }
 `;
 
-const UserInfo = styled.div`
-    width:280px; height:72px;
-    margin:0 auto 10px;
+const UserInfo = styled(Link)`
+    width:100%;
     border:1px solid rgba(0,0,0,.2);
     border-radius:20px;
     display:flex;
-    padding:5px 0;
+    padding:5px;
     position:relative;
+    margin-bottom:10px;
+    align-items:center;
+    justify-content:center;
 `;
 
-const ImgBox = styled.div`
-    width:52px; height:52px;
-    margin-top:8px;
-    border-radius:50%;
-    margin-left:10px;
-`;
 const PicImg = styled.img`
-    width:100%;
+    width:45px;
+    height:45px;
     border-radius:50%;
     object-fit:cover;
     cursor:pointer;
 `;
 
 const WordBox = styled.div`
-    margin-left:10px;
-    padding-top:5px;
+    margin:0 10px;
+
+    @media (min-width:480px) {
+        margin:0 20px;
+    }
 `;
 
 const Grade = styled.div`
@@ -272,31 +252,24 @@ const Answer = styled.div`
 `;
 
 const Star = styled.img`
-    width:30px; height:30px;
-    position:absolute;
-    right:10px; top:50%;
-    transform: translateY(-110%);
-
-    @media all and (min-width:480px) {
-        transform: translateY(-50%);
-    }
+    width:20px; height:20px;
+    object-fit: contain;
 `;
 
-const Wrap = styled.div`
+const SearchForm = styled.form`
     display:flex;
     align-items: center;
-    justify-content: space-evenly;
-    width:200px;
-    margin:15px auto 5px;
+    justify-content: center;
 `;
 const NickImg = styled.img`
-    width:30px;
+    width:20px;
 `;
 const Typing = styled.input`
     width:100px;
     border:none;
     border-bottom:1px solid #777; 
     :focus {outline:none;}
+    margin:0 5px;
 `;
 const Found = styled.button`
     background: #fefefe;
@@ -309,11 +282,21 @@ const Delete = styled.button`
     background: #fefefe;
     border:1px solid #777;
     border-radius:10px;
-    margin-left:250px;
     font-size: 12px;
     cursor:pointer;
+    align-self: flex-end;
+    margin-right:5px;
 `;
 
 const Check = styled.input`
+    margin-right:5px;
+    padding:0;
+`;
+const NoneMento = styled.div`
+    font-size:1rem;
+    font-weight:bold;
+    color:#666;
+    font-style: italic;
+    margin-top:3rem;
 `;
 export default AlogMento;

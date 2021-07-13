@@ -35,7 +35,7 @@ function MyAlogGroupMove({existence, setMyAlogMove}) {
     const groupId = (id) => {
         setGroupArray(
             groupArray.map(array => 
-                array.id === id + 1 ? {...array, select: true} : {...array, select: false}
+                array.id === id ? {...array, select: true} : {...array, select: false}
             )
         )
     }
@@ -50,8 +50,8 @@ function MyAlogGroupMove({existence, setMyAlogMove}) {
                             <ContentsEl>'강아지를 키워보자' 글을 이동합니다.</ContentsEl>
                         </MoveContentsBox>
                         <MoveGroupBox>
-                            {groupArray.map((list, index)=>
-                                <MoveGroupLi key={list.id} onClick={()=>{groupId(index)}}>
+                            {groupArray.map((list)=>
+                                <MoveGroupLi key={list.id} onClick={()=>{groupId(list.id)}}>
                                     <GroupIcon src={process.env.PUBLIC_URL + '/images/folder.svg'} />
                                     <GroupName select={list.select}>{list.name}</GroupName>
                                 </MoveGroupLi>

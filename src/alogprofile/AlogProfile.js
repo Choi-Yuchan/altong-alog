@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import AlogMento from '../components/AlogMento';
-import AlogMenti from '../components/AlogMenti';
 import AlogMessage from '../components/AlogMessage';
 import HunPopup from '../components/HunPopup';
 import { Link } from 'react-router-dom';
@@ -18,15 +17,8 @@ function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
     const [show, setShow] = useState(true);
     const [Opened, setOpened] = useState(false);
 
-    const [Opent, SetOpent] = useState(false);
-    const Openert = () => {
-        SetOpent(!Opent);
-    }
-
-    const [Opents, SetOpents] = useState(false);
-    const Openerts = () => {
-        SetOpents(!Opents);
-    }
+    const [mentoPopupOpen, setMentoPopupOpen] = useState(false);
+    const [mentoOpen, SetMentoOpen] = useState(true);
     
     const [message, messageOpen] = useState(false);
     const messages = () => {
@@ -75,10 +67,9 @@ function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
                 </Intro>
                 <Icons>
                     <MentoBox>
-                        <Wrap onClick={ () => { Openert() }}><Mento>멘토</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
-                        { Opent ? <AlogMento />: null }
-                        <Wrap onClick={ () => { Openerts() }}><Mento>멘티</Mento><Count>100</Count><Dot state={state}/></Wrap>
-                        { Opents ? <AlogMenti />: null }
+                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(true); }}><Mento>멘토</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
+                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(false); }}><Mento>멘티</Mento><Count>100</Count><Dot state={state}/></Wrap>
+                        { mentoPopupOpen && <AlogMento setMentoPopupOpen={setMentoPopupOpen} mentoOpen={mentoOpen} /> }
                         {/* { message ? <AlogMessage /> : null } */}
                     </MentoBox>
                     <ThreeIcons>
