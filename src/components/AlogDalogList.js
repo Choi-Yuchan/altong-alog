@@ -9,9 +9,11 @@ function AlogDalogList({backImg, title, profile, nickname, time, view, reply, co
     const [clickContent, setClickContent] = useState(false);
 
     return (
-        <ListBox to='/contents' imgurl={process.env.PUBLIC_URL + '/images/' + backImg} onClick={()=>{setClickContent(!clickContent);}}>
+        <ListBox to='/contents' imgurl={process.env.PUBLIC_URL + '/images/' + backImg} onClick={()=>{ setClickContent(!clickContent);}}>
+            <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
+            onClick={(e) => { e.preventDefault(); setShow(!show);}}/>
             <ListContain>
-                <WhiteBack></WhiteBack>
+                <WhiteBack/>
                 <ListText>{title}</ListText>
                 <ListProfile imgurl={process.env.PUBLIC_URL + '/images/' + profile}></ListProfile>
                 <ListBy>by {nickname}</ListBy>
@@ -25,15 +27,7 @@ function AlogDalogList({backImg, title, profile, nickname, time, view, reply, co
                 </>
             }
             </ListActive>     
-            <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
-                    onClick={ 
-                        (e) => {
-                            e.preventDefault();
-                            setShow(!show);
-                        }
-                    }>
-            </Language>
-            {checkList && <CheckRec check={clickContent}></CheckRec>}
+            {checkList && <CheckRec check={clickContent}/>}
         </ListBox>
     );
 }
