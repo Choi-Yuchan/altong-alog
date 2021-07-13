@@ -746,7 +746,7 @@ import AlogFooter from '../alogfooter/AlogFooter';
     const alogRecommendContents = langAlogMainText.ko.alogRecommendContents;
     const categorySample = langAlogMainText.ko.categorySample;
 
-function AlogMain(props) {
+function AlogMain() {
 
     return (
         <>

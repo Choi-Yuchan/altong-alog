@@ -113,37 +113,37 @@
             "id": 1, 
             "nickname":"우주에서 온 외계인",
             "profile":"images/profile-image.png",
-            "href":"/" 
+            "href":"/personalMain" 
         },
         {
             "id": 2, 
             "nickname":"KOREA Team",
             "profile":"/images/face.png",
-            "href":"/" 
+            "href":"/personalMain" 
         },
         { 
             "id": 3, 
             "nickname":"가나다라마바사",
             "profile":"/images/face.png",
-            "href":"/" 
+            "href":"/personalMain" 
         },
         { 
             "id": 4, 
             "nickname":"Apple Pie",
             "profile":"/images/profile-image.png",
-            "href":"/" 
+            "href":"/personalMain" 
         },
         { 
             "id": 5, 
             "nickname":"아리스토텔레스",
             "profile":"/images/face.png",
-            "href":"/" 
+            "href":"/personalMain" 
         },
         { 
             "id": 6, 
             "nickname":"Samsung",
             "profile":"/images/profile-image.png",
-            "href":"/" 
+            "href":"/personalMain" 
         }
     ],
     "visited" : [

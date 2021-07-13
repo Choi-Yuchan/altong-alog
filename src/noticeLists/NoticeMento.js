@@ -60,7 +60,6 @@ const Total = styled.div`
 const TotalNum = styled.span`
     color:#fd0031;
 `;
-const MentiContents = styled.div``;
 
 const NoticeMento  = ({onRemoveMento, usersMento, onRemoveMenti, usersMenti, body, setBody}) => {
 
