@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect, sample}) {
 
@@ -40,7 +41,7 @@ function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySel
                 <MyAlogSearchInput type="text" value={searchValue} placeholder="알록달록 게시글 내 검색" onChange={handleChange}></MyAlogSearchInput>
                 <MyAlogSearchBtn type="submit">검색</MyAlogSearchBtn>
             </MyAlogSearchDiv>
-            <AlogWriteBtn src={process.env.PUBLIC_URL + '/images/que_icon.svg'} alt="내 알로그 쓰기"></AlogWriteBtn>
+            <Link to="/writing"><AlogWriteBtn src={process.env.PUBLIC_URL + '/images/que_icon.svg'} alt="내 알로그 쓰기"></AlogWriteBtn></Link>
         </MyAlogSettingBox>
     )
 };
