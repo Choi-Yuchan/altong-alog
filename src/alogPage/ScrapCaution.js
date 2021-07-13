@@ -21,7 +21,7 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
 
     return(
         <PopupContainer>
-                <CloseBtnBox onClick={()=>{closePopup(); history.goBack()}}>
+                <CloseBtnBox onClick={()=>{history.goBack()}}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
