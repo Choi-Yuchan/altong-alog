@@ -122,7 +122,7 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
         </Caution>{/* 원본 알록으로 이동하기*/}
         <Wrap>
             <LanguageCon>
-                <Origin color={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai color={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
+                <Origin redcolor={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai redcolor={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
             </LanguageCon>
         <ButtonBox>
             <StyledBtn onClick={handleScrap}>{allText[0]}<Count>{count}</Count></StyledBtn>
@@ -385,18 +385,18 @@ const LanguageCon = styled.div`
 const Origin = styled.div`
     width:40px; height:40px;
     border-radius: 50%;
-    border:${props => props.color === false ? '1.5px solid #777' :  '1.5px solid #fd0031'};
+    border:${props => props.redcolor === false ? '1.5px solid #777' :  '1.5px solid #fd0031'};
     line-height:40px;
-    color:${props => props.color === false ? '#777' :  '#fd0031'};
+    color:${props => props.redcolor === false ? '#777' :  '#fd0031'};
     text-align:center;
     cursor:pointer;
 `;
 const Ai = styled.div`
     width:40px; height:40px;
     border-radius: 50%;
-    border:${props => props.color === true ? '1.5px solid #777' :  '1.5px solid #fd0031'};
+    border:${props => props.redcolor === true ? '1.5px solid #777' :  '1.5px solid #fd0031'};
     line-height:40px;
-    color:${props => props.color === true ? '#777' :  '#fd0031'};
+    color:${props => props.redcolor === true ? '#777' :  '#fd0031'};
     text-align:center;
     cursor:pointer;
 `;

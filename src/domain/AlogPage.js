@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Alpage from '../alogPage/Alpage';
-import AlogMainSearch from './AlogMainSearch';
 import AlogProfile from '../alogprofile/AlogProfile';
+import PrevNextContents from '../alogPage/PrevNextContents';
 
 const Container = styled.div`
   width:100%;
@@ -21,7 +21,7 @@ function AlogPage({body, setBody, setNewGroup, newGroup, sample, checkList, setM
       setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
       />
       <AlogProfile />
-      <AlogMainSearch/>
+      <PrevNextContents sample={sample} />
     </Container>
   );
 };
