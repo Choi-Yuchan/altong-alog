@@ -1,12 +1,15 @@
 import { useRef } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 
 const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
     const checkEl = useRef();
+    const history = useHistory();
 
-    const closePopup = () => {
+    const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            return window.alert("동의하기를 체크해주세요!");
+            window.alert("동의하기를 체크해주세요!");
+            e.preventDefault();
         }
         if(checkEl.current.checked === true) 
         {setShowWritingEdit(!showWritingEdit)}
@@ -14,7 +17,7 @@ const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
 
     return(
         <PopupContainer>
-                <CloseBtnBox>
+                <CloseBtnBox onClick={() => {history.goBack()}}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
@@ -40,7 +43,7 @@ const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
                 </PopupArticle>
 
                 <CheckBoxLabel> <CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                <EditBtn onClick={closePopup}>수정하기</EditBtn>
+                <EditBtn to="/writing" onClick={closePopup}>수정하기</EditBtn>
             </PopupContainer>
 
     )
@@ -112,9 +115,9 @@ const CheckBoxLabel = styled.label`
     text-align: left;
     cursor: pointer;
 `;
-const EditBtn = styled.button`
+const EditBtn = styled(Link)`
     display: block;
-    cursor: pointer;
+    width: 50px;
     margin: 1rem auto;
     background-color: #fefefe;
     color: #333;

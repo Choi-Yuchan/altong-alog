@@ -1,20 +1,23 @@
 import { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Refund = ({showRefund, setShowRefund}) => {
+    const history = useHistory();
     const refundReasonList = ["저작권 위반", "유해성", "장난성", "중복성", "비속어/반말", "비 정보 지식", "음해/비방", "기타"]
     const checkEl = useRef();
 
-    const closePopup = () => {
+    const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            return window.alert("동의하기를 체크해주세요!");
+            window.alert("동의하기를 체크해주세요!");
+            e.preventDefault();
         }
         if(checkEl.current.checked === true) 
         {setShowRefund(!showRefund)}
     }
     return(
         <PopupContainer>
-                <CloseBtnBox>
+                <CloseBtnBox onClick={() => {history.goBack()}}>
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
