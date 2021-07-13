@@ -5,9 +5,10 @@ import { useHistory } from 'react-router';
 const WritingGuide = ({showGuide, setShowGuide}) => {
     const checkEl = useRef();
 
-    const closePopup = () => {
+    const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            return window.alert("동의하기를 체크해주세요!");
+            window.alert("동의하기를 체크해주세요!");
+            e.preventDefault();
         }
         if(checkEl.current.checked === true) 
         {setShowGuide(!showGuide)}

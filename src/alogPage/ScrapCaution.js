@@ -8,9 +8,10 @@ const ScrapCaution = ({viewCaution, setViewCaution}) => {
     const contentsTitle = `'알통은 무엇인가? 그것에 대해 알아봅시다.'` // 해당 컨텐츠 타이틀
     const usedAl = 300
 
-    const closePopup = () => {
+    const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            return window.alert("동의하기를 체크해주세요!");
+            window.alert("동의하기를 체크해주세요!");
+            e.preventDefault();
         }
         if(checkEl.current.checked === true) 
         {setViewCaution(!viewCaution)}

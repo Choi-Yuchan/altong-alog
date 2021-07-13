@@ -28,7 +28,6 @@ import NoticeMessageData from './dummydata/NoticeMessageData.json';
 import NoticeMentoData from './dummydata/NoticeMentoData.json'; 
 import NoticeMentiData from './dummydata/NoticeMentiData.json'; 
 import NoticeHunData from './dummydata/NoticeHunData.json'; 
-import Refund from './domain/Refund';
 
 
 function App() {
@@ -214,7 +213,6 @@ function App() {
         />}
          />
       <Route path="/writing" component={AlogWrite} />
-      <Route path="/refund" component={Refund}/>
       <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
       <Switch>
         <Route exact path="/notice" component={Notice} />

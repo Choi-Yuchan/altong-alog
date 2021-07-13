@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import AlogWriteEditor from '../alogWrite/AlogWriteEditor';
 import WritingGuide from '../alogWrite/WritingGuide';
-import EditCaution from '../alogWrite/EditCaution';
 
 function AlogWrite() {
     const title = '알록달록 글쓰기';
@@ -85,18 +84,12 @@ function AlogWrite() {
     const [select2, setSelect2] = useState('');
     const [showInfo, setShowInfo] = useState(false);
     const [showGuide, setShowGuide] = useState(false); // 처음 게시글 작성을 할 경우 보여줘야 하는 팝업 상태
-    const [showWritingEdit, setShowWritingEdit] = useState(false); // 수정하기로 들어왔을 경우 보여줘야 하는 팝업 상태
 
     return (
         <WriteDiv>
             {/* //WritingGuide popup은 유저가 처음 방문일 때만 띄우도록 설정해야함.*/}
             {showGuide === true &&
                 <WritingGuide setShowGuide={setShowGuide} showGuide={showGuide}/>
-            }
-
-            {/* EditCaution은 수정하기로 들어올 때 활성화 */}
-            {showWritingEdit === true && 
-                <EditCaution setShowWritingEdit={setShowWritingEdit} showWritingEdit={showWritingEdit}/>
             }
 
             <WriteTitle>{title}</WriteTitle>

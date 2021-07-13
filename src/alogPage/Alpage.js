@@ -7,7 +7,8 @@ import ScrapCaution from './ScrapCaution';
 import ScrapOptionBox from './ScrapOptionBox';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
-import Refund from '../domain/Refund';
+import Refund from './Refund';
+import EditCaution from './EditCaution';
 
 function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren, showBgEdit, setShowBgEdit}) {
   const langAlpage = {
@@ -56,6 +57,15 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   const [scrapDisable, setScrapDisable] = useState(false); // 나의 '알록' 퍼가기 했을 때 경고창 상태
   const [deletedOrigin, setDeletedOrigin] = useState(false); // 원문가기 클릭 시 원문이 삭제되었을 경우 
   const [showRefund, setShowRefund] = useState(false); // 환불 요청 페이지 보여주기
+  const [showWritingEdit, setShowWritingEdit] = useState(false); // 수정하기로 들어왔을 경우 보여줘야 하는 팝업 상태
+
+  const handleRefund = () => {
+    setShowRefund(!showRefund);
+  }
+
+  const handleEdit = () => {
+    setShowWritingEdit(!showWritingEdit);
+  }
 
   useEffect(()=>{
     if (body === true) {
@@ -88,7 +98,10 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
       />}
       {/* 그룹 배경 설정 */}
       {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
-      
+      {/* EditCaution은 수정하기로 들어올 때 활성화 */}
+      {showWritingEdit === true && 
+        <EditCaution setShowWritingEdit={setShowWritingEdit} showWritingEdit={showWritingEdit}/>
+      }
       <Box onClick={() => {setScrapOption(false)}}>
         {scrapOption === true && 
           <ScrapOptionBox setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
@@ -105,8 +118,8 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
         <DropMenu>
           <Menus onClick={HunEgg}>{hunAl}</Menus>
           <Menus onClick={SirenPop}>{call}</Menus>
-          <Menus>{modify}</Menus>
-          <Menus>{refund}</Menus>
+          <Menus onClick={handleEdit}>{modify}</Menus>
+          <Menus onClick={handleRefund}>{refund}</Menus>
         </DropMenu>
         }
         <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
@@ -433,6 +446,7 @@ const Menus = styled.div`
   line-height: 30px;
   border:1px solid #777;
   font-size: 12px;
+  cursor: pointer;
   box-sizing: border-box;
     :hover{
       background:#ccc;
