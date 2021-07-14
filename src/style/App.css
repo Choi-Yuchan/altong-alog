@@ -1,5 +1,13 @@
-* { text-decoration:none; }
-html, body {
-    height:100%; 
-}
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+@import url("https://fonts.googleapis.com/earlyaccess/notosansjp.css");
+@import url("https://fonts.googleapis.com/earlyaccess/notosanssc.css");
 
+* {
+  text-decoration: none;
+}
+html,
+body {
+  height: 100%;
+  font-family: "Noto Sans", "Noto Sans KR", "Noto Sans HK", "Noto Sans JP",
+    "Noto Sans SC", "Noto Sans TC", sans-serif !important;
+}
