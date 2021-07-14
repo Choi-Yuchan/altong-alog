@@ -8,6 +8,7 @@ import AlogPersonalMain from './domain/AlogPersonalMain';
 import AlogHeader from './components/AlogHeader';
 import { useDetectOutsideClick } from './components/function/useDetectOutsideClick'
 import AlogPage from './domain/AlogPage';
+import Domang from './domain/Domang';
 import Hamburger from './components/Hamburger';
 import AlogWrite from './domain/AlogWrite';
 import ScrollToTop from './components/function/ScrollToTop';
@@ -244,6 +245,7 @@ function AlogDalog() {
         path="/notice/mento"
         render={() => <NoticeMento body={body} setBody={setBody} onRemoveMento={onRemoveMento} usersMento={usersMento} setUserMento={setUserMento} onRemoveMenti={onRemoveMenti} usersMenti={usersMenti} setUserMenti={setUserMenti}/>}
          />     
+        <Route path="/domang" component={Domang} />
       </Switch>
       </ScrollToTop>
     </Container>
