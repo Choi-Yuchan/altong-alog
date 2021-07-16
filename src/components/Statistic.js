@@ -1,4 +1,25 @@
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+
+export const Statistic = ({total, yesterday, today}) =>{
+
+    const {t} = useTranslation();
+    const listText = t('Visitors');
+    const totals = total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    const yesterdays = yesterday.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    const todays = today.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+    return(
+        <StatsBox>
+            <VisitorList>
+                <List>{listText[0]} : {totals}{listText[3]}</List>
+                <List>{listText[1]} : {yesterdays}{listText[3]}</List>
+                <List>{listText[2]} : {todays}{listText[3]}</List>
+            </VisitorList>
+        </StatsBox>
+    );
+};
 
 const StatsBox = styled.div`
   display:flex;
@@ -30,28 +51,3 @@ const List = styled.li`
         padding-bottom:0.5rem;
     }
 `;
-
-const langStatistic = {
-    ko:{
-        listText:["총 방문자","어제 방문자","오늘 방문자"],
-        persons:"명",
-    }
-}
-
-export const Statistic = ({total, yesterday, today}) =>{
-    const listText = langStatistic.ko.listText;
-    const persons = langStatistic.ko.persons;
-    const totals = total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    const yesterdays = yesterday.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    const todays = today.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-
-    return(
-        <StatsBox>
-            <VisitorList>
-                <List>{listText[0]} : {totals}{persons}</List>
-                <List>{listText[1]} : {yesterdays}{persons}</List>
-                <List>{listText[2]} : {todays}{persons}</List>
-            </VisitorList>
-        </StatsBox>
-    );
-};

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
-function DefaultBgImgEl({img, alt}) {
+function DefaultBgImgEl({img, number, alt}) {
     return (
         <BgImgElDiv>
-            <img src={img} alt={`기본배경${alt}`} />
+            <img src={img} alt={`${alt}${number}`} />
             <span><i></i></span>
         </BgImgElDiv>
     )
@@ -12,6 +13,7 @@ function DefaultBgImgEl({img, alt}) {
 
 function BgImgPopup({defaultBgImage, setPopupOpen}) {
 
+    const {t} = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
     const per = 9;
     const total = Math.ceil(defaultBgImage.length/per);
@@ -30,11 +32,11 @@ function BgImgPopup({defaultBgImage, setPopupOpen}) {
     return (
         <PopupWrap onClick={()=>{setPopupOpen(false)}}>
             <PopupBox onClick={(e)=>{e.stopPropagation();}}>
-                <PopupTitle>배경 설정하기</PopupTitle>
+                <PopupTitle>{t('Alog_Setting')[2]}</PopupTitle>
                 <SelectBox>
                     <SelectImgBox>
                         {defaultBgImage.slice(indexOfFirst, indexOfLast).map(img=>(
-                            <DefaultBgImgEl img={img.img} key={img.id} alt={img.id} />
+                            <DefaultBgImgEl img={img.img} key={img.id} number={img.id} alt={t('Alog_Setting')[0]} />
                         ))}
                     </SelectImgBox>
                     <PasingBox>
@@ -44,8 +46,8 @@ function BgImgPopup({defaultBgImage, setPopupOpen}) {
                     </PasingBox>
                 </SelectBox>
                 <BtnBox>
-                    <button>저장</button>
-                    <button onClick={()=>{setPopupOpen(false)}}>취소</button>
+                    <button>{t('Save')}</button>
+                    <button onClick={()=>{setPopupOpen(false)}}>{t('Cancel')}</button>
                 </BtnBox>
             </PopupBox>
         </PopupWrap>

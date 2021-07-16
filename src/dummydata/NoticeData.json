@@ -1,171 +1,169 @@
 
 {
     "ko" : {
-    "alarm" : "알림", 
-
-    "mentoAlarm" : [
-        { 
-        "id": 1, 
-        "nickname":"우주인우주인우주인", 
-        "data":"개발자의 삶이란 너무나도 어렵다", 
-        "profile":"/images/profile-image.png",
-        "dataUrl": "/contents", 
-        "time": 20,
-        "minutes":"분 전"
-        },
-        { 
-        "id": 2, 
-        "nickname":"화성인",
-        "data":"저녁이 있는 삶", 
-        "profile":"/images/face.png",
-        "dataUrl":"/contents",
-        "time":30,
-        "minutes":"분 전"        
-        }
-    ],
-
-    "notice" : {
-        "Front" : "새롭게 공지 된 사항이",
-        "Count" : 1,
-        "Back" : "건 있습니다.",
-        "href" : "http://www.altong.com/default/cs/notice/notice?Page=1",
-        "time" : 10,
-        "minutes" : "분 전",
-        "contentImg" : "/images/icon_notice.png",
-        "state":true
-    },
-
-    "alarmArray" : [
-    {
-        "id" :1,
-        "Front" : "내 알록달록 중",
-        "Back" : "회를 퍼갔습니다!",
-        "time": 11,
-        "minutes":"분 전",
-        "href":"/notice/paste",
-        "contentImg" :"/images/icon_ans_choice.png",
-        "state":true
-    },
-    {
-        "id" : 2,
-        "Front" : "내 알록달록에",
-        "Back" : "개의 댓글이 달렸습니다.",
-        "time":20,
-        "minutes":"분 전",
-        "href":"/notice/reply",
-        "contentImg":"/images/icon_cmt_regist.png",
-        "state":true
-    },
-    {
-        "id":3,
-        "Front" : "훈훈알 수입이",
-        "Back" : "건 발생했습니다.",
-        "time":18,
-        "minutes":"분 전",
-        "href":"/notice/hun",
-        "contentImg":"/images/icon_love.png",
-        "state":true
-    },
-    {
-        "id":4,
-        "Front": "새 쪽지가",
-        "Back": "건 있습니다.",
-        "time":16,
-        "minutes":"분 전",
-        "href":"/notice/message",
-        "contentImg":"/images/icon_message.png",
-        "state":true
-    },
-    {
-        "id":5,
-        "Front" : "새로운 멘토로",
-        "Back" : "명이 선정하셨습니다!",
-        "time":40,
-        "minutes":"분 전",
-        "href":"/notice/mento",
-        "contentImg":"/images/icon_add_mento.png",
-        "state":true
-    },
-    {
-        "id":6,
-        "Front": "환불이",
-        "Back": "건 발생했습니다.",
-        "time":4,
-        "minutes":"분 전",
-        "href":"/notice/refund",
-        "contentImg":"/images/icon_almoney_paying.png",
-        "state":true
-    },
-    {
-        "id":7,
-        "Front" : "수정된 달록이",
-        "Back" : "건 있습니다.",
-        "time":13,
-        "minutes":"분 전",
-        "href":"/notice/modify",
-        "contentImg":"/images/icon_edit.png",
-        "state":true
-    }
-    
-    ],
-    "bookmarkMento" : [
-        { 
-            "id": 1, 
-            "nickname":"우주에서 온 외계인",
-            "profile":"images/profile-image.png",
-            "href":"/personalMain" 
-        },
-        {
-            "id": 2, 
-            "nickname":"KOREA Team",
-            "profile":"/images/face.png",
-            "href":"/personalMain" 
-        },
-        { 
-            "id": 3, 
-            "nickname":"가나다라마바사",
-            "profile":"/images/face.png",
-            "href":"/personalMain" 
-        },
-        { 
-            "id": 4, 
-            "nickname":"Apple Pie",
-            "profile":"/images/profile-image.png",
-            "href":"/personalMain" 
-        },
-        { 
-            "id": 5, 
-            "nickname":"아리스토텔레스",
-            "profile":"/images/face.png",
-            "href":"/personalMain" 
-        },
-        { 
-            "id": 6, 
-            "nickname":"Samsung",
-            "profile":"/images/profile-image.png",
-            "href":"/personalMain" 
-        }
-    ],
-    "visited" : [
-        { 
+        "mentoAlarm" : [
+            { 
             "id": 1, 
             "nickname":"우주인우주인우주인", 
-            "data":"개발자의 삶이란 너무나도 어렵다",
+            "data":"개발자의 삶이란 너무나도 어렵다", 
             "profile":"/images/profile-image.png",
-            "dataUrl":"/contents", 
-            "time":20,
+            "dataUrl": "/contents", 
+            "time": 20,
             "minutes":"분 전"
-        },
-        { 
+            },
+            { 
             "id": 2, 
             "nickname":"화성인",
             "data":"저녁이 있는 삶", 
             "profile":"/images/face.png",
             "dataUrl":"/contents",
             "time":30,
-            "minutes":"분 전"
+            "minutes":"분 전"        
+            }
+        ],
+
+        "notice" : {
+            "Front" : "새롭게 공지 된 사항이",
+            "Count" : 1,
+            "Back" : "건 있습니다.",
+            "href" : "http://www.altong.com/default/cs/notice/notice?Page=1",
+            "time" : 10,
+            "minutes" : "분 전",
+            "contentImg" : "/images/icon_notice.png",
+            "state":true
+        },
+
+        "alarmArray" : [
+        {
+            "id" :1,
+            "Front" : "내 알록달록 중",
+            "Back" : "회를 퍼갔습니다!",
+            "time": 11,
+            "minutes":"분 전",
+            "href":"/notice/paste",
+            "contentImg" :"/images/icon_ans_choice.png",
+            "state":true
+        },
+        {
+            "id" : 2,
+            "Front" : "내 알록달록에",
+            "Back" : "개의 댓글이 달렸습니다.",
+            "time":20,
+            "minutes":"분 전",
+            "href":"/notice/reply",
+            "contentImg":"/images/icon_cmt_regist.png",
+            "state":true
+        },
+        {
+            "id":3,
+            "Front" : "훈훈알 수입이",
+            "Back" : "건 발생했습니다.",
+            "time":18,
+            "minutes":"분 전",
+            "href":"/notice/hun",
+            "contentImg":"/images/icon_love.png",
+            "state":true
+        },
+        {
+            "id":4,
+            "Front": "새 쪽지가",
+            "Back": "건 있습니다.",
+            "time":16,
+            "minutes":"분 전",
+            "href":"/notice/message",
+            "contentImg":"/images/icon_message.png",
+            "state":true
+        },
+        {
+            "id":5,
+            "Front" : "새로운 멘토로",
+            "Back" : "명이 선정하셨습니다!",
+            "time":40,
+            "minutes":"분 전",
+            "href":"/notice/mento",
+            "contentImg":"/images/icon_add_mento.png",
+            "state":true
+        },
+        {
+            "id":6,
+            "Front": "환불이",
+            "Back": "건 발생했습니다.",
+            "time":4,
+            "minutes":"분 전",
+            "href":"/notice/refund",
+            "contentImg":"/images/icon_almoney_paying.png",
+            "state":true
+        },
+        {
+            "id":7,
+            "Front" : "수정된 달록이",
+            "Back" : "건 있습니다.",
+            "time":13,
+            "minutes":"분 전",
+            "href":"/notice/modify",
+            "contentImg":"/images/icon_edit.png",
+            "state":true
         }
-    ]
-}
+        
+        ],
+        "bookmarkMento" : [
+            { 
+                "id": 1, 
+                "nickname":"우주에서 온 외계인",
+                "profile":"images/profile-image.png",
+                "href":"/personalMain" 
+            },
+            {
+                "id": 2, 
+                "nickname":"KOREA Team",
+                "profile":"/images/face.png",
+                "href":"/personalMain" 
+            },
+            { 
+                "id": 3, 
+                "nickname":"가나다라마바사",
+                "profile":"/images/face.png",
+                "href":"/personalMain" 
+            },
+            { 
+                "id": 4, 
+                "nickname":"Apple Pie",
+                "profile":"/images/profile-image.png",
+                "href":"/personalMain" 
+            },
+            { 
+                "id": 5, 
+                "nickname":"아리스토텔레스",
+                "profile":"/images/face.png",
+                "href":"/personalMain" 
+            },
+            { 
+                "id": 6, 
+                "nickname":"Samsung",
+                "profile":"/images/profile-image.png",
+                "href":"/personalMain" 
+            }
+        ],
+        "visited" : [
+            { 
+                "id": 1, 
+                "nickname":"우주인우주인우주인", 
+                "data":"개발자의 삶이란 너무나도 어렵다",
+                "profile":"/images/profile-image.png",
+                "dataUrl":"/contents", 
+                "time":20,
+                "minutes":"분 전"
+            },
+            { 
+                "id": 2, 
+                "nickname":"화성인",
+                "data":"저녁이 있는 삶", 
+                "profile":"/images/face.png",
+                "dataUrl":"/contents",
+                "time":30,
+                "minutes":"분 전"
+            }
+        ]
+    }
 }
 

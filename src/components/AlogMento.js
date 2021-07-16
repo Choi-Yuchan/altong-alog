@@ -2,10 +2,11 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 
 function AlogMento ({setMentoPopupOpen, mentoOpen}) {
 
+    const {t} = useTranslation();
     const MentoInfo = [
         {
             id:1,
@@ -54,8 +55,6 @@ function AlogMento ({setMentoPopupOpen, mentoOpen}) {
         },
     ];
     const userID = "사용자";
-    const grade = "알천사";
-    const direct = "프로필보기>";
     const [user, setUser] = useState(MentoInfo);
     const [searchValue, setSearchValue] = useState('');
     const [checkValue, setCheckValue] = useState([]);
@@ -91,34 +90,38 @@ function AlogMento ({setMentoPopupOpen, mentoOpen}) {
         <WrapLabel onClick={()=>{setMentoPopupOpen(false);}}>
             <MentoBox onClick={(e) => e.stopPropagation()}>
                 <Exit src={process.env.PUBLIC_URL + '/images/close-button.svg'} onClick = { () => { setMentoPopupOpen(false); } }></Exit>
-                <Nick>'<span>{ userID }</span>'{mentoOpen ? '님의 멘토' : '님의 멘티'}(<span>{MentoInfo.length}</span>명)</Nick>
+                <Nick><span>{ userID }</span>{mentoOpen ? t('My_Mento_Mentee')[1] : t('My_Mento_Mentee')[2]}(<span>{MentoInfo.length}</span>{t('My_Mento_Mentee')[10]})</Nick>
                 <SearchForm onSubmit={handleSubmit}>
                     <NickImg src={process.env.PUBLIC_URL + '/images/nicksearch.svg'} />
                     <Typing type="text" value={searchValue} onChange={handleChange} ref={inputBlur} onClick={()=>{setUser(MentoInfo);}} />
-                    <Found type="submit">찾기</Found>
+                    <Found type="submit">{t('My_Mento_Mentee')[3]}</Found>
                 </SearchForm>
-                <Delete onClick={mentoDelete}>삭제</Delete>
+                <Delete onClick={mentoDelete}>{t('My_Mento_Mentee')[4]}</Delete>
                 <Contents>
                     {user.length !== 0
                         ? user.map( (info) => (
                             <Label key={info.id}>
                                 <Check type="checkbox" name="checkDelete" onChange={(e)=>{handleCheckBox(e.target.checked, info.id)}} checked={checkValue.includes(info.id) ? true:false} />
                                 <UserInfo to="/personalMain">
-                                    <PicImg src={process.env.PUBLIC_URL + '/images/back.png'} alt="해당 계정 알로그 가기"/>
+                                    <PicImg src={process.env.PUBLIC_URL + '/images/back.png'} alt={t('Other_User')}/>
                                     <WordBox>
                                         <First>
-                                            <Grade>{grade}</Grade><NickName>{info.Nickname}</NickName>
+                                            <Grade>{t('Grade')[info.id]}</Grade><NickName>{info.Nickname}</NickName>
                                         </First>
-                                        <Profile>{direct}</Profile>
-                                        <Question>보유 알록 수 <span>{ info.profit }</span>개 | 멘토 수 <span>{ info.gun }</span>명 </Question>
-                                        <Answer>보유 달록 수 <span>{ info.answer }</span>개 | 찾기 <span>{ info.percent }</span>명 </Answer>
+                                        <Profile>{t('My_Mento_Mentee')[0]}&#62;</Profile>
+                                        <Question>
+                                            {t('My_Mento_Mentee')[5]} <span>{ info.profit }</span>{t('My_Mento_Mentee')[9]} | {t('My_Mento_Mentee')[7]} <span>{ info.gun }</span>{t('My_Mento_Mentee')[10]}
+                                        </Question>
+                                        <Answer>
+                                            {t('My_Mento_Mentee')[6]} <span>{ info.answer }</span>{t('My_Mento_Mentee')[9]} | {t('My_Mento_Mentee')[3]} <span>{ info.percent }</span>{t('My_Mento_Mentee')[10]}
+                                        </Answer>
                                     </WordBox>
                                     <Star src={info.state === true ? process.env.PUBLIC_URL + '/images/star.png':process.env.PUBLIC_URL + '/images/star_on.png'}
                                     onClick={(e)=>{e.preventDefault(); star(info.id)}}></Star>
                                 </UserInfo>
                             </Label>
                         ))
-                        : <NoneMento>검색 결과가 없습니다.</NoneMento>
+                        : <NoneMento>{t('None_Search')}</NoneMento>
                     }
                 </Contents>
             </MentoBox>

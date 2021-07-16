@@ -4,17 +4,20 @@ import styled from 'styled-components';
 import BgImgPopup from './BgImgPopup';
 import PreviewProfile from './PreviewProfile';
 import PreviewMyGroup from './PreviewMyGroup';
+import { useTranslation } from 'react-i18next';
 
-function DefaultBgImgEl({img, number}) {
+function DefaultBgImgEl({img, number, alt}) {
     return (
         <BgImgElDiv>
-            <img src={img} alt={`기본배경${number}`} />
+            <img src={img} alt={`${alt}${number}`} />
             <span><i></i></span>
         </BgImgElDiv>
     )
 }
 
 function AlogProfileSetting ({setOpened, bgSetting, setShowBgEdit}) {
+
+    const {t} = useTranslation();
     const colorSample = [ 
         {id:1, color:'#EE748D' },
         {id:2, color:'#F0A962' },
@@ -75,40 +78,40 @@ function AlogProfileSetting ({setOpened, bgSetting, setShowBgEdit}) {
         <>
         <SettingWrap onClick={viewBgSetting}>
             <Setting onClick={(e)=>{e.stopPropagation();}}>
-                <Title>{bgSetting === false ? '프로필 설정하기' : '배경 설정하기'}</Title>
+                <Title>{bgSetting === false ? t('Alog_Setting')[1] : t('Alog_Setting')[1]}</Title>
                 {bgSetting === false &&
                     <>
-                        <span className="subheading">소개글</span>
-                        <IntroInput type="text" placeholder="공백, 띄어스기 포함 최대 30자까지 입력 할 수 있습니다." maxLength="30"  />
-                        <span className="subheading">해시태그 설정</span>
+                        <span className="subheading">{t('Alog_Setting')[3]}</span>
+                        <IntroInput type="text" placeholder={t('Alog_Setting')[4]} maxLength="30"  />
+                        <span className="subheading">{t('Alog_Setting')[5]}</span>
                         <HashTagBox>
-                            <p>태그당 최대 5글자까지 입력 할 수 있습니다.</p>
+                            <p>{t('Alog_Setting')[6]}</p>
                             <HashTagInputBox># <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /> # <HashInput type="text" maxLength="5" /></HashTagInputBox>
                         </HashTagBox>
                     </>
                 }
-                <span className="subheading">배경색 선택</span>
+                <span className="subheading">{t('Alog_Setting')[7]}</span>
                 <BgColorBox>
                     {colorSample.map(color => <BgColorEl key={color.id} color={color.color} /> )}
                 </BgColorBox>
-                <span className="subheading">기본이미지</span>
+                <span className="subheading">{t('Alog_Setting')[0]}</span>
                 <DefaultImgBox>
-                    <DefaultBgImgEl img={defaultBgImage[selectImg].img} number={defaultBgImage[selectImg].id} />
-                    <DefaultBgImgEl img={defaultBgImage[rand1].img} number={defaultBgImage[rand1].id} />
-                    <DefaultBgImgEl img={defaultBgImage[rand2].img} number={defaultBgImage[rand2].id} />
+                    <DefaultBgImgEl img={defaultBgImage[selectImg].img} number={defaultBgImage[selectImg].id} alt={t('Alog_Setting')[0]} />
+                    <DefaultBgImgEl img={defaultBgImage[rand1].img} number={defaultBgImage[rand1].id} alt={t('Alog_Setting')[0]} />
+                    <DefaultBgImgEl img={defaultBgImage[rand2].img} number={defaultBgImage[rand2].id} alt={t('Alog_Setting')[0]} />
                     <MoreButton onClick={()=>{setPopupOpen(true)}}><i></i><i></i></MoreButton>
                 </DefaultImgBox>
-                <span className="subheading">배경이미지</span>
+                <span className="subheading">{t('Alog_Setting')[8]}</span>
                 <FileInputBox>
-                    <FileNameInput value="파일선택" disabled="disabled" />
-                    <FileLabel htmlFor="image_file">이미지 첨부</FileLabel>
+                    <FileNameInput value="" disabled="disabled" />
+                    <FileLabel htmlFor="image_file">{t('Alog_Setting')[9]}</FileLabel>
                     <FileInput type="file" accept='image/*' id="image_file" />
                 </FileInputBox>
-                <span className="subheading">미리보기</span>
+                <span className="subheading">{t('Alog_Setting')[10]}</span>
                 {bgSetting === true ? <PreviewMyGroup sample={groupSampleBgImg} /> : <PreviewProfile />}
                 <SettingBtnBox>
-                    <SettingBtn>저장</SettingBtn>
-                    <SettingBtn onClick={viewBgSetting}>취소</SettingBtn>
+                    <SettingBtn>{t('Save')}</SettingBtn>
+                    <SettingBtn onClick={viewBgSetting}>{t('Cancel')}</SettingBtn>
                 </SettingBtnBox>
             </Setting>
         </SettingWrap>

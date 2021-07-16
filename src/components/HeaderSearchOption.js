@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import {useTranslation} from 'react-i18next';
 
 function HeaderSearchOption(props) {
 
+    const {t} = useTranslation();
     const [select, setSelect] = useState(false);
     const array = [
         {
             id:1,
-            text: '제목'
+            text: t('Search_Option')[0]
         },
         {
             id:2,
-            text: '내용'
+            text: t('Search_Option')[1]
         },
         {
             id:3,
-            text: '작성자'
+            text: t('Search_Option')[2]
         },
         {
             id:4,
-            text: '제목+내용'
+            text: t("Search_Option")[3]
         },
     ]
 

@@ -2,20 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AlogCategoryEl from './AlogCategoryEl';
 import AlogCategoryList from './AlogCategoryList';
-
+import { useTranslation } from 'react-i18next';
 
 
 function AlogCategory(props) {
 
- 
-
+    const {t} = useTranslation();
     const categorySample = props.categorySample;
-    const langTitle = {
-        ko:{
-            droplist: ["최신순","조회순","좋아요순","퍼가기순","훈훈알순"],
-        }
-    }
-    const droplist = langTitle.ko.droplist;
+    const langTitle = t('Category_Option');
     const [isShow, setShow] = useState(false);
     const showMenu = (e) => {
         e.preventDefault();
@@ -212,15 +206,15 @@ function AlogCategory(props) {
             <Sort onClick={showMenu}>
             {isShow ? 
                     <DropdownBox>
-                        <DropList onClick={ ()=>{ changeName(0); sortHour() } }>{droplist[0]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(1); sortInquire() } }>{droplist[1]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(2); sortGood() } }>{droplist[2]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(3); sortTake() } }>{droplist[3]}</DropList>
-                        <DropList onClick={ ()=>{ changeName(4); sortHun() } }>{droplist[4]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(0); sortHour() } }>{langTitle[0]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(1); sortInquire() } }>{langTitle[1]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(2); sortGood() } }>{langTitle[2]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(3); sortTake() } }>{langTitle[3]}</DropList>
+                        <DropList onClick={ ()=>{ changeName(4); sortHun() } }>{langTitle[4]}</DropList>
                     </DropdownBox> 
                     : 
                     <ShowBox>
-                        <TabContent name={name} droplist={droplist}/>
+                        <TabContent name={name} langTitle={langTitle}/>
                     </ShowBox>
                     }
             </Sort>
@@ -241,17 +235,17 @@ function AlogCategory(props) {
 
 function TabContent(props){
     if (props.name === 0){
-      return <DropList>{props.droplist[0]}<Triangle/></DropList>
+      return <DropList>{props.langTitle[0]}<Triangle/></DropList>
     } else if (props.name === 1){
-      return <DropList>{props.droplist[1]}<Triangle/></DropList>
+      return <DropList>{props.langTitle[1]}<Triangle/></DropList>
     } else if (props.name === 2){
-      return <DropList>{props.droplist[2]}<Triangle/></DropList>
+      return <DropList>{props.langTitle[2]}<Triangle/></DropList>
     } else if (props.name === 3){ 
-       return <DropList>{props.droplist[3]}<Triangle/></DropList>
+       return <DropList>{props.langTitle[3]}<Triangle/></DropList>
     } else if (props.name === 4){ 
-       return <DropList>{props.droplist[4]}<Triangle/></DropList>
+       return <DropList>{props.langTitle[4]}<Triangle/></DropList>
     } else { 
-        return <DropList>{props.droplist[0]}<Triangle/></DropList>
+        return <DropList>{props.langTitle[0]}<Triangle/></DropList>
     }
 }
 

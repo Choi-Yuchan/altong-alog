@@ -3,17 +3,22 @@ import styled from 'styled-components';
 import ListNav from './ListNav';
 import Profile from './Profile';
 import { Statistic } from './Statistic';
+import i18n from '../config/lang/i18n';
+import { useTranslation } from 'react-i18next';
 
-const langHamburger = {
-  ko:{
-    grade : [ "알천사","나비천사","미소천사","열혈천사","황금천사","수호천사","빛의천사","천사장","대천사","대천사장","알통폐인"],
+
+function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, usersModify, usersReply, usersPaste, usersMessage, usersMento}) {
+
+  const {t} = useTranslation();
+  const langHamburger = {
+    grade : t('Grade'),
     userData : {
       id:"ingu8349",
       code:"KOR",
       profileImg:`${process.env.PUBLIC_URL + `/images/profile-image.png`}`,
       countryImg:`${process.env.PUBLIC_URL + `/images/korea.png`}`,
-      profileAlt:"프로필",
-      countryAlt:"국기",
+      profileAlt:"Profile",
+      countryAlt:"Flag",
     },
     visitorCount:
       {
@@ -22,31 +27,18 @@ const langHamburger = {
         today: 12800, // 오늘 방문자 변수
       }
     ,
-    listTitle : [
-      "알림",
-      "멘토 새 글",
-      "즐겨찾기 멘토 목록",
-      "최근 본 알록달록"
-    ],
+    listTitle : t('Notification'),
     listTitleArrow: `${process.env.PUBLIC_URL + '/images/arrow.png'}`,
-    buttonText : [
-      "내 알록달록",
-      "글쓰기",
-      "알통 가기",
-      "나의 지식발전소"
-    ],
-    logoAlt: "알통 로고",
-  },
-}
-
-function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, usersModify, usersReply, usersPaste, usersMessage, usersMento}) {
-  const grade = langHamburger.ko.grade;
-  const userData = langHamburger.ko.userData;
-  const listTitle = langHamburger.ko.listTitle;
-  const listTitleArrow = langHamburger.ko.listTitleArrow;
-  const visitorCount = langHamburger.ko.visitorCount;
-  const ButtonText = langHamburger.ko.buttonText;
-  const logoAlt = langHamburger.ko.logoAlt;
+    buttonText : t('My_AlogDalog'),
+    logoAlt: "Altong Logo",
+  }
+  const grade = langHamburger.grade;
+  const userData = langHamburger.userData;
+  const listTitle = langHamburger.listTitle;
+  const listTitleArrow = langHamburger.listTitleArrow;
+  const visitorCount = langHamburger.visitorCount;
+  const ButtonText = langHamburger.buttonText;
+  const logoAlt = langHamburger.logoAlt;
 
   
   const closeNav = () => {
@@ -63,7 +55,7 @@ function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, users
           <CloseButton onClick={() => closeNav()} src={process.env.PUBLIC_URL + `/images/close-button.svg`}></CloseButton>
         </CloseBox>
         <Profile 
-        grade={grade[0]} 
+        grade={grade[3]} 
         id={userData.id} 
         code={userData.code} 
         profileImg={userData.profileImg} 
@@ -92,6 +84,12 @@ function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, users
         yesterday={visitorCount.yesterday}
         today={visitorCount.today}>
         </Statistic>
+        <LangMenu>
+          <Langlist onClick={()=>{i18n.changeLanguage('ko')}}>한글</Langlist>/
+          <Langlist onClick={()=>{i18n.changeLanguage('en')}}>EN</Langlist>/
+          <Langlist onClick={()=>{i18n.changeLanguage('ja')}}>日本語 </Langlist>/
+          <Langlist onClick={()=>{i18n.changeLanguage('zh')}}>中文 </Langlist>
+        </LangMenu>
         <LSection> 
           <LButton to="/" onClick = { () => { closeNav(); } }>
             <LogoImg src={process.env.PUBLIC_URL + `/images/altong-logo.svg`} alt={logoAlt}/>
@@ -240,6 +238,20 @@ const LogoImg = styled.img`
 
 const WriteIcon = styled.img`
  width:15px;
+`;
+const LangMenu = styled.ul`
+  list-style:none;
+  display:felx;
+  justify-content:center;
+  align-items:center;
+  margin-top:10px;
+`;
+const Langlist = styled.li`
+  font-size:14px;
+  font-weight:bold;
+  margin:0 10px;
+  padding:0 4px;
+  cursor:pointer;
 `;
 
 export default Hamburger;

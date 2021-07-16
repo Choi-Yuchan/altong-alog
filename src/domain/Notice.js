@@ -3,6 +3,35 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import NoticeData from '../dummydata/NoticeData.json';
+import { useTranslation } from 'react-i18next';
+
+const Notice = () => {
+
+    const {t} = useTranslation();
+    const notice = NoticeData.ko.notice;
+    const alarmArray = NoticeData.ko.alarmArray;
+    const [count, setCount] = useState(alarmArray);
+  
+    return(
+        <>
+            <Title>{t('Notification')[0]}</Title>
+            <ConNotice count={notice.Count} href={notice.href}>
+                <ConImg src={notice.contentImg} /><ConText>{t('New_Notice')[0]} <ConTextSpan>{notice.Count}</ConTextSpan>{t('New_Notice')[1]}</ConText>
+            </ConNotice>
+            {
+                count.map((count)=>{
+                    return(
+                    <Contents to={count.href} count={count.Count}>
+                        <ConImg src={count.contentImg} /><ConText>{count.Front} <ConTextSpan>{count.Count}</ConTextSpan>{count.Back}</ConText>
+                    </Contents>
+                    )
+                })
+            }
+        </>
+    )
+}
+
+export default Notice;
 
 const Title = styled.div`
     font-size: 18px Cabin;
@@ -11,7 +40,6 @@ const Title = styled.div`
     color:#333333;
     font-weight: bold;
 `;
-
 const ConNotice = styled.a`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
@@ -26,7 +54,6 @@ const ConNotice = styled.a`
         padding:10px 10px 10px 20px;
     }
 `;
-
 const Contents = styled(Link)`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
@@ -41,7 +68,6 @@ const Contents = styled(Link)`
         padding:10px 10px 10px 20px;
     }
 `;
-
 const ConImg = styled.img`
     width:25px; height:23px;
     
@@ -49,7 +75,6 @@ const ConImg = styled.img`
         transform: translateY(3px);
     }
 `;
-
 const ConText = styled.div`
     font-size: 14px;
     color:#666666;
@@ -65,30 +90,3 @@ const ConTextSpan = styled.span`
     font-weight: bold;
     text-align:left;
 `;
-
-const Notice = () => {
-    const alarm = NoticeData.ko.alarm;
-    const notice = NoticeData.ko.notice;
-
-    const alarmArray = NoticeData.ko.alarmArray;
-    const [count, setCount] = useState(alarmArray);
-  
-    return(
-        <>
-            <Title>{alarm}</Title>
-            <ConNotice count={notice.Count} href={notice.href}>
-                <ConImg src={notice.contentImg} /><ConText>{notice.Front} <ConTextSpan>{notice.Count}</ConTextSpan>{notice.Back}</ConText>
-            </ConNotice>
-            {
-                count.map((count)=>{
-                    return(
-                    <Contents to={count.href} count={count.Count}>
-                        <ConImg src={count.contentImg} /><ConText>{count.Front} <ConTextSpan>{count.Count}</ConTextSpan>{count.Back}</ConText>
-                    </Contents>
-                    )
-                })
-            }
-        </>
-    )
-}
-export default Notice;

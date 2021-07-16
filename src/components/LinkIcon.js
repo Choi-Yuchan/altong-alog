@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import HeaderSearchOption from './HeaderSearchOption';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function LinkIcon(props) {
     const [searchText, setSearchText] = useState('');
@@ -13,6 +14,7 @@ function LinkIcon(props) {
         props.setText(searchText);
         setSearchText('');
     }
+    const {t} = useTranslation();
 
     return (
         <LinkIconBox>
@@ -30,7 +32,7 @@ function LinkIcon(props) {
                     <HeaderSearchOption openInput={props.openInput} setSearchOption={props.setSearchOption}></HeaderSearchOption>
                     <SearchInput 
                         type='search' 
-                        placeholder="검색어를 입력해 주세요."
+                        placeholder={t('Search_Input')}
                         value={searchText}
                         onChange={searchValue}
                     ></SearchInput>

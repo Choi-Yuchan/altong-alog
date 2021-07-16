@@ -5,8 +5,11 @@ import AlogMento from '../components/AlogMento';
 import AlogMessage from '../components/AlogMessage';
 import HunPopup from '../components/HunPopup';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
+
+    const {t} = useTranslation();
     const nickname = "Vivien";
     const grade = "알천사";
     const hashtag1 = "음주";
@@ -43,7 +46,7 @@ function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
         </Back>
         <Frame>
             <PicContainer>
-                <Pic src={process.env.PUBLIC_URL + '/images/face.png'} alt="지식발전소 메인으로 이동"></Pic>
+                <Pic src={process.env.PUBLIC_URL + '/images/face.png'} alt={t('Profile_Image')}></Pic>
             </PicContainer>
             
             <SetPicFrame>
@@ -57,18 +60,18 @@ function AlogProfile ({setShowBgEdit, bgSetting, setBgSetting}) {
                     <CountryName>KOR</CountryName>
                 </Country> */}
                 <Link to="/personalMain"><NicknameID>{nickname}</NicknameID></Link>
-                <Grade>{grade}</Grade>
-                <Statics>활동</Statics>
+                <Grade>{t('Grade')[3]}</Grade>
+                <Statics>{t('Profile_Activities')}</Statics>
             </Nickname>
             <ProfileBottom>
                 <Intro>
-                    <Sentence>{nickname} 님의 알록달록에 오신걸 환영합니다.</Sentence>
+                    <Sentence>{t('Profile_Intro')}</Sentence>
                     <Hashtag># <span>{hashtag1}</span> # <span>{hashtag2}</span> # <span>{hashtag3}</span></Hashtag>
                 </Intro>
                 <Icons>
                     <MentoBox>
-                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(true); }}><Mento>멘토</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
-                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(false); }}><Mento>멘티</Mento><Count>100</Count><Dot state={state}/></Wrap>
+                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(true); }}><Mento>{t('Notice_Mento')[1]}</Mento><Count>{ add }</Count><Dot state={state}/></Wrap>
+                        <Wrap onClick={ () => { setMentoPopupOpen(true); SetMentoOpen(false); }}><Mento>{t('Notice_Mento')[2]}</Mento><Count>100</Count><Dot state={state}/></Wrap>
                         { mentoPopupOpen && <AlogMento setMentoPopupOpen={setMentoPopupOpen} mentoOpen={mentoOpen} /> }
                         {/* { message ? <AlogMessage /> : null } */}
                     </MentoBox>

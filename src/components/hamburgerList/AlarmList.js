@@ -9,6 +9,104 @@ import NoticeModifyData from '../../dummydata/NoticeModifyData.json';
 import NoticePasteData from '../../dummydata/NoticePasteData.json';
 import NoticeRefundData from '../../dummydata/NoticeRefundData.json';
 import NoticeReplyData from '../../dummydata/NoticeReplyData.json';
+import { useTranslation } from 'react-i18next';
+
+export const AlarmList = ({title, arrow, closeNav, usersRefund, usersHun, usersModify, usersReply, usersPaste, usersMento, usersMessage}) => {
+
+    const {t} = useTranslation();
+    const [isActive, setIsActive] = useState(false);
+    const [alarmClose, setAlarmClose] = useState(true);
+    const OpenList = (e) => {
+        e.preventDefault();
+        setIsActive(!isActive);
+    };
+
+    const alarmArray = NoticeData.ko.alarmArray;
+    const [alarm, setAlarm] = useState(alarmArray);
+    function hide(i) {
+        const state = [...alarmArray];
+        state[i].state = false;
+        setAlarm( state );
+    }
+
+    const notice = NoticeData.ko.notice;
+    const [turn, setTurn] = useState(notice);
+    function hideNotice(){
+        setTurn({...turn, state:false});
+    }
+
+    alarmArray.sort(function(a,b){
+        return a.time - b.time
+      });
+    
+    // 각 배열 컨턴츠 갯수 
+    const replyArray = NoticeReplyData.ko.ReplyArray;
+    const hunArray = NoticeHunData.ko.hunArray;
+    const pasteArray = NoticePasteData.ko.pasteArray;
+    const messageArray = NoticeMessageData.ko.messageArray;
+
+    const refundLength = usersRefund.length;
+    const replyLength = usersReply.length;
+    const hunLength = usersHun.length;
+    const modifyLength = usersModify.length;
+    const pasteLength = usersPaste.length;
+    const messageLength = usersMessage.length;
+    const mentoLength = usersMento.length;
+
+    alarm[0].Count = refundLength;
+    alarm[1].Count = pasteLength;
+    alarm[2].Count = modifyLength;
+    alarm[3].Count = messageLength;
+    alarm[4].Count = hunLength;
+    alarm[5].Count = replyLength;
+    alarm[6].Count = mentoLength;
+
+    return(  
+        <ActiveList onClick={OpenList} >
+            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
+            {isActive ? 
+            (<ShowContent>
+                <>
+                {
+                alarmClose &&
+                 <>
+                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={turn.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={turn.state}>
+                <AlarmNotice>
+                    <AlarmText>
+                        {turn.Front} <Count>{turn.Count}</Count>{turn.Back}
+                    </AlarmText>
+                    <CloseButton onClick={(e) => { hideNotice(); stop(e); e.preventDefault() }}>x</CloseButton>
+                </AlarmNotice>            
+                <AlarmTime>{turn.time}{turn.minutes}</AlarmTime>
+                 </NotiAlarm>
+                 {
+                    alarm.map((alarm, i) => { return(
+                        <>
+                        { alarm.state && 
+                            <Alarm onClick={(e)=>{stop(e); closeNav(); hide(i)}} key={alarm.id} count={alarm.Count} to={alarm.href} state={alarm.state} >
+                                <AlarmNotice>
+                                    <AlarmText>
+                                        {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
+                                    </AlarmText>
+                                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); hide(i)}}>x</CloseButton>
+                                </AlarmNotice>            
+                                <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
+                            </Alarm>
+                        }
+                        </>
+                        )
+                    })
+                }
+                </>
+                }
+                <All to="/notice"  onClick={()=>{ closeNav(); }}>{t('View_All')}</All>
+                </>
+            </ShowContent>):(
+                <Content></Content>
+            )}       
+        </ActiveList>   
+    )
+} 
 
 const ActiveList = styled.li`
     padding: 0.625rem 0;
@@ -127,98 +225,3 @@ const All = styled(Link)`
     line-height: 1.8;
     margin:15px auto 0;
 `;
-
-export const AlarmList = ({title, arrow, closeNav, usersRefund, usersHun, usersModify, usersReply, usersPaste, usersMento, usersMessage}) => {
-    const [isActive, setIsActive] = useState(false);
-    const [alarmClose, setAlarmClose] = useState(true);
-    const OpenList = (e) => {
-        e.preventDefault();
-        setIsActive(!isActive);
-    };
-
-    const alarmArray = NoticeData.ko.alarmArray;
-    const [alarm, setAlarm] = useState(alarmArray);
-    function hide(i) {
-        const state = [...alarmArray];
-        state[i].state = false;
-        setAlarm( state );
-    }
-
-    const notice = NoticeData.ko.notice;
-    const [turn, setTurn] = useState(notice);
-    function hideNotice(){
-        setTurn({...turn, state:false});
-    }
-
-    alarmArray.sort(function(a,b){
-        return a.time - b.time
-      });
-    
-    // 각 배열 컨턴츠 갯수 
-    const replyArray = NoticeReplyData.ko.ReplyArray;
-    const hunArray = NoticeHunData.ko.hunArray;
-    const pasteArray = NoticePasteData.ko.pasteArray;
-    const messageArray = NoticeMessageData.ko.messageArray;
-
-    const refundLength = usersRefund.length;
-    const replyLength = usersReply.length;
-    const hunLength = usersHun.length;
-    const modifyLength = usersModify.length;
-    const pasteLength = usersPaste.length;
-    const messageLength = usersMessage.length;
-    const mentoLength = usersMento.length;
-
-    alarm[0].Count = refundLength;
-    alarm[1].Count = pasteLength;
-    alarm[2].Count = modifyLength;
-    alarm[3].Count = messageLength;
-    alarm[4].Count = hunLength;
-    alarm[5].Count = replyLength;
-    alarm[6].Count = mentoLength;
-
-    return(  
-        <ActiveList onClick={OpenList} >
-            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
-            {isActive ? 
-            (<ShowContent>
-                <>
-                {
-                alarmClose &&
-                 <>
-                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={turn.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={turn.state}>
-                <AlarmNotice>
-                    <AlarmText>
-                        {turn.Front} <Count>{turn.Count}</Count>{turn.Back}
-                    </AlarmText>
-                    <CloseButton onClick={(e) => { hideNotice(); stop(e); e.preventDefault() }}>x</CloseButton>
-                </AlarmNotice>            
-                <AlarmTime>{turn.time}{turn.minutes}</AlarmTime>
-                 </NotiAlarm>
-                 {
-                    alarm.map((alarm, i) => { return(
-                        <>
-                        { alarm.state && 
-                            <Alarm onClick={(e)=>{stop(e); closeNav(); hide(i)}} key={alarm.id} count={alarm.Count} to={alarm.href} state={alarm.state} >
-                                <AlarmNotice>
-                                    <AlarmText>
-                                        {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
-                                    </AlarmText>
-                                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); hide(i)}}>x</CloseButton>
-                                </AlarmNotice>            
-                                <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
-                            </Alarm>
-                        }
-                        </>
-                        )
-                    })
-                }
-                </>
-                }
-                <All to="/notice"  onClick={()=>{ closeNav(); }}>전체보기</All>
-                </>
-            </ShowContent>):(
-                <Content></Content>
-            )}       
-        </ActiveList>   
-    )
-} 
