@@ -2,64 +2,66 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import AlogWriteEditor from '../alogWrite/AlogWriteEditor';
 import WritingGuide from '../alogWrite/WritingGuide';
+import { useTranslation } from 'react-i18next';
 
 function AlogWrite() {
-    const title = '알록달록 글쓰기';
+
+    const {t} = useTranslation();
     const option = [
         {
             id:1,
             img: '02',
-            name: '배움'
+            name: t('Main_Category')[1]
         },
         {
             id:2,
             img: '03',
-            name: '생활'
+            name: t('Main_Category')[2]
         },
         {
             id:3,
             img: '04',
-            name: '건강'
+            name: t('Main_Category')[3]
         },
         {
             id:4,
             img: '05',
-            name: '고민'
+            name: t('Main_Category')[4]
         },
         {
             id:5,
             img: '06',
-            name: '문예'
+            name: t('Main_Category')[5]
         },
         {
             id:6,
             img: '07',
-            name: '세상'
+            name: t('Main_Category')[6]
         },
         {
             id:7,
             img: '08',
-            name: '돈'
+            name: t('Main_Category')[7]
         },
         {
             id:8,
             img: '09',
-            name: '컴/폰'
+            name: t('Main_Category')[8]
         },
         {
             id:9,
             img: '10',
-            name: '스포츠'
+            name: t('Main_Category')[9]
         },
         {
             id:10,
             img: '11',
-            name: '게임'
+            name: t('Main_Category')[10]
         },
     ];
     const folder = ["전체","여행, 그 모든 것", "축구이야기","맛집"];
-    const selectDfault = { select1: "그룹명", select2: "카테고리"};
-    const textContent = { titleText: '제목', worth: '가치', money: '알', save: '등록하기', bgEdit: "배경설정"};
+    const selectDfault = { select1: t('Write_Text')[1], select2: t('Write_Text')[2]};
+    const textContent = { titleText: t('Write_Text')[4], worth: t('Write_Text')[5], money: t('Write_Text')[6], save: t('Write_Text')[7], bgEdit: t('Write_Text')[3]};
 
     const [ oplist, setOplist] = useState(false);
     const [ oplist2, setOplist2] = useState(false);
@@ -92,7 +94,7 @@ function AlogWrite() {
                 <WritingGuide setShowGuide={setShowGuide} showGuide={showGuide}/>
             }
 
-            <WriteTitle>{title}</WriteTitle>
+            <WriteTitle>{t('Write_Text')[0]}</WriteTitle>
             <WriteSettingBox>
                 <WriteSettingBoxTop>
                     <WriteContent>
@@ -132,7 +134,7 @@ function AlogWrite() {
                         <LanguageOption value="English">English</LanguageOption>
                     </LanguageSelect>
                     <GuideLanguage>
-                        사용 언어를 선택해주세요.
+                        {t('Write_Text')[8]}
                     </GuideLanguage>
                 </WriteSettingBoxBottom>
             </WriteSettingBox>
@@ -143,8 +145,8 @@ function AlogWrite() {
             <WorthBox>
                     <QueIcon onClick = {() => setShowInfo(!showInfo)}>
                         <ValueInfo show={showInfo}> 
-                            내 글의 가치를 부여하고, 판매 해 보세요.<br/>
-                            원글이 퍼가기 된 후에는 가치 수정이 불가능합니다.
+                            {t('Write_Text')[9]}<br/>
+                            {t('Write_Text')[10]}
                         </ValueInfo>
                         ?
                     </QueIcon>

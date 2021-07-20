@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import LinkIcon from './LinkIcon';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function AlogHeader(props) {
+
+    const {t} = useTranslation();
     const isActive = props.isActive;
     const setIsActive = props.setIsActive;
 
@@ -19,7 +22,7 @@ function AlogHeader(props) {
                 <Hambur onClick={() => openNav()} src={process.env.PUBLIC_URL + '/images/hambur.png'}></Hambur>
                 <a href="http://www.altong.com/"><img src={process.env.PUBLIC_URL + '/images/logo.png'}/></a>
                 </div>
-                <AlogLogo to="/">알록달록</AlogLogo>
+                <AlogLogo to="/">{t('Logo')}</AlogLogo>
                 <LinkIcon 
                     text={props.text} setText={props.setText} 
                     openInput={props.openInput} setOpenInput={props.setOpenInput}

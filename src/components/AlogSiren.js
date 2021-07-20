@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function PopSiren({siren, setSiren}) {
+
+    const {t} = useTranslation();
     const [ radioN , setRadioN ] = useState(0);
     const [ reason , setReason ] = useState("");
 
@@ -12,28 +15,27 @@ function PopSiren({siren, setSiren}) {
         setSiren(false);
     }
 
-
     return (
         <>
         {siren === true &&
         <Wrap onClick={cancel}>
         <PopReportDiv>
-            <PopReport><ReportIcon src={process.env.PUBLIC_URL + '/images/report_icon.png'}/>신고</PopReport>
+            <PopReport><ReportIcon src={process.env.PUBLIC_URL + '/images/report_icon.png'}/>{t('Alpage_Popup')[1]}</PopReport>
             <ReportWrap>
                 <ReportForm>
                     <ReportFormContents>
                             <ContentsRow>
-                                <ContentsSubtitle>제보자</ContentsSubtitle>
+                                <ContentsSubtitle>{t('Report_Text')[0]}</ContentsSubtitle>
                                 <ContentsInfo>알통</ContentsInfo>
                             </ContentsRow>
                             <ContentsRow>
-                                <ContentsSubtitle>내용</ContentsSubtitle>
+                                <ContentsSubtitle>{t('Report_Text')[1]}</ContentsSubtitle>
                                 <ContentsInfo>알통의 발견 연예의 발견2</ContentsInfo>
                             </ContentsRow>
                     </ReportFormContents>
                 </ReportForm>
                 <ReportReason>
-                    <ReasonTitle>- 신고사유 선택</ReasonTitle>
+                    <ReasonTitle>- {t('Report_Reason')[0]}</ReasonTitle>
                     <ReasonContainer>
                         <ReasonColumn>
                             <ReasonList>
@@ -43,7 +45,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "1" ? true : false}
                                 />
-                                <ReasonLabel>저작권 침해</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[1]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -52,7 +54,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "2" ? true : false}
                                 />
-                                <ReasonLabel>유해성</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[2]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -61,7 +63,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "3" ? true : false}
                                 />
-                                <ReasonLabel>장난성</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[3]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -70,7 +72,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "4" ? true : false}
                                 />
-                                <ReasonLabel>중복성</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[4]}</ReasonLabel>
                             </ReasonList>
                         </ReasonColumn>
                         <ReasonColumn>
@@ -81,7 +83,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "5" ? true : false}
                                 />
-                                <ReasonLabel>비속어/반말</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[5]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -90,7 +92,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "6" ? true : false}
                                 />
-                                <ReasonLabel>비 정보/지식</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[6]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -99,7 +101,7 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "7" ? true : false}
                                 />
-                                <ReasonLabel>음해/비방</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[7]}</ReasonLabel>
                             </ReasonList>
                             <ReasonList>
                                 <ARInput type="radio" name="H_Reason"
@@ -108,24 +110,24 @@ function PopSiren({siren, setSiren}) {
                                     }}
                                     defaultChecked={radioN === "8" ? true : false}
                                 />
-                                <ReasonLabel>기타</ReasonLabel>
+                                <ReasonLabel>{t('Report_Reason')[8]}</ReasonLabel>
                             </ReasonList>
                         </ReasonColumn>
                     </ReasonContainer>
                     <ReasonTextBox>
-                        <ReTextarea maxlength="1000" placeholder="altong" value={reason} onChange={(e) => {handleChange(e)}}/>
+                        <ReTextarea maxlength="1000" placeholder={t('Report_Reason')[9]} value={reason} onChange={(e) => {handleChange(e)}}/>
                     </ReasonTextBox> 
                 </ReportReason>
                 <WarningDiv>
                     <WarningTitle>WARNING</WarningTitle>
-                    <WarningPara>무고한 게시물을 신고하실 경우 향후 사이트 이용시 불이익이 있을 수도 있으니 신중을 기해주세요.</WarningPara>
+                    <WarningPara>{t('Report_Reason')[10]}<br />{t('Report_Reason')[11]}</WarningPara>
                 </WarningDiv>
                 <ReportBtnBox>
-                    <DRInput value="취소"
+                    <DRInput value={t('Cancel')}
                     onChange={(e) => {handleChange(e)} }
                     onClick={cancel}
                     />
-                    <DSubmit value="제출"
+                    <DSubmit value={t('Submit')}
                      onClick={cancel}
                     onChange={(e) => {handleChange(e)}} 
                     />

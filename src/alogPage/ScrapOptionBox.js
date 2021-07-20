@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next';
 
 const ScrapOptionBox = ({setShowNewGroup, showNewGroup, setShowBgEdit, showBgEdit, setMyAlogSlide, scrapComplete, setScrapComplete}) => {
 
+  const {t} = useTranslation();
   const completeScrap = () => {
     setScrapComplete(!scrapComplete)
   }
     return(
         <ScrapOptConatiner>
             <ScrapOptBox>
-            <ScrapOptTitle>그룹을 선택해주세요.</ScrapOptTitle>
+            <ScrapOptTitle>{t('Group_Select')[0]}</ScrapOptTitle>
             <SelectGroupBox>
                 <SelectGroup>
                 <GroupOption> 여행 그 모든 것 (15) </GroupOption>
                 </SelectGroup>
-                <GroupSaveBtn onClick={completeScrap}>저장</GroupSaveBtn>
+                <GroupSaveBtn onClick={completeScrap}>{t('Save')}</GroupSaveBtn>
             </SelectGroupBox>
             <ScrapOptBtnBox>
                 <PlusBtn>+</PlusBtn>
                 <CreateBtn onClick={() => {setShowNewGroup(!showNewGroup); setMyAlogSlide(false)}}>
-                    새그룹 만들기
+                    {t('Group_Select')[1]}
                 </CreateBtn>
-                <EditBtn onClick={() =>{setShowBgEdit(!showBgEdit)}}>그룹 배경 설정</EditBtn>
+                <EditBtn onClick={() =>{setShowBgEdit(!showBgEdit)}}>{t('Group_Select')[2]}</EditBtn>
             </ScrapOptBtnBox>
             </ScrapOptBox>
 

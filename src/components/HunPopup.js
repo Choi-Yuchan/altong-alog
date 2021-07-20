@@ -1,43 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
-const langHunPopup = {
-    ko:{
-        hunhunal:"30,000",
-        //고정
-        title:"훈훈알 증정하기",
-        text:"금일 증정 가능하신 훈훈알은 총",
-        textEnd: "알 입니다.",
-        al:"알",
-        cancel:"취소",
-        confirm:"확인",
-    }
-}
 function HunPopup({hunAl, setHunAl}) {
-    const title = langHunPopup.ko.title;
-    const text = langHunPopup.ko.text;
-    const huntext = text.slice(0,14);
-    const total = text.slice(15);
-    const hunhunal = langHunPopup.ko.hunhunal;
-    const textEnd = langHunPopup.ko.textEnd;
-    const al = langHunPopup.ko.al;
-    const cancel = langHunPopup.ko.cancel;
-    const confirm = langHunPopup.ko.confirm;
+
+    const {t} = useTranslation();
+    const langHunPopup = { hunhunal:"30,000"}
+    const hunhunal = langHunPopup.hunhunal;
 
     return (
         <HunPopupWrap >
             { hunAl ? 
             <Wrap onClick={()=>{setHunAl(false)}}>
             <HunPopupBox onClick={(e) => e.stopPropagation()}>
-                <HunTitle>{title}</HunTitle>
-                <HunText>{huntext}<br/>{total} <HunSpan>{hunhunal}</HunSpan>{textEnd}</HunText>
+                <HunTitle>{t('Give_HunAl')[0]}</HunTitle>
+                <HunText>{t('Give_HunAl')[1]}<br/>{t('Give_HunAl')[2]} <HunSpan>{hunhunal}</HunSpan>{t('Give_HunAl')[3]}</HunText>
                 <HunInputBox>
                     <HunInput type="number" placeholder="300~10,000" step="100"></HunInput>
-                    <HunInputSpan>{al}</HunInputSpan>
+                    <HunInputSpan>{t('Alpage_Popup')[4]}</HunInputSpan>
                 </HunInputBox>
                 <HunBtnBox>
-                    <HunBtn onClick={()=>{setHunAl(!hunAl)}}>{cancel}</HunBtn>
-                    <HunBtnR onClick={()=>{setHunAl(!hunAl)}}>{confirm}</HunBtnR>
+                    <HunBtn onClick={()=>{setHunAl(!hunAl)}}>{t('Cancel')}</HunBtn>
+                    <HunBtnR onClick={()=>{setHunAl(!hunAl)}}>{t('Confirm')}</HunBtnR>
                 </HunBtnBox>
             </HunPopupBox>
             </Wrap>

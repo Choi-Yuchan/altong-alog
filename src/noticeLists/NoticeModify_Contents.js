@@ -5,22 +5,10 @@ import TimeToggle from '../components/function/TimeToggle';
 import { useTranslation } from 'react-i18next';
 
 const NoticeModify_Contents = ({modify, onRemove, selected}) => {
-    const language = {
-        notice : "수정알림", 
-        who : "님께서",
-        because : "글을 수정함에 따라",
-        time : "일자로 글 내용이 변경되었음을 알려 드립니다.",
-        check : "수정내용 확인하기"
-    }    
-    const notice = language.notice;
-    const who = language.who;
-    const because = language.because;
-    const time = language.time;
-    const check = language.check;
-
+    
+    const {t} = useTranslation();
     const [show, setShow] = useState(true);
     const [open, setOpen] = useState(false);
-    const {t} = useTranslation();
 
     return(
             <>
@@ -39,9 +27,9 @@ const NoticeModify_Contents = ({modify, onRemove, selected}) => {
                     <Wrap>
                     <Close onClick={()=>{setOpen(false)}}>X</Close>
                     <Content>
-                        <Title>{notice}</Title>
-                        <Word><Thick>'{modify.nickname}'</Thick>{who} <Thick>{modify.title}</Thick>{because} {TimeToggle(modify.date)}{time}</Word>
-                        <CheckBox><CheckBtn onClick={()=>{onRemove(selected); setOpen(false);}}>{check}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
+                        <Title>{t('Modify_Notice')}</Title>
+                        <Word>{t('Modify_Reason')[0]}<Thick>'{modify.nickname}'</Thick>{t('Modify_Reason')[1]} <Thick>{modify.title}</Thick>{t('Modify_Reason')[2]} {TimeToggle(modify.date)}{t('Modify_Reason')[3]}</Word>
+                        <CheckBox><CheckBtn onClick={()=>{onRemove(selected); setOpen(false);}}>{t('Modify_Confirm')}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
                     </Content>
                     </Wrap>   
                 }

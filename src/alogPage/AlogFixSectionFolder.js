@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect, sample}) {
+function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySelect, setMySelect, sample, listMenu}) {
 
+    const {t} = useTranslation();
     const [myAlogSelectSlide, setMyAlogSelectSlide] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const handleChange = (e) => {
@@ -17,7 +19,7 @@ function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySel
     const handleSubmit = (e) => {
         e.preventDefault();
         if (searchValue === '') { //아무것도 입력하지 않았을 때
-            return alert('검색어를 입력 해 주세요.');
+            return alert(t('Alog_Folder')[4]);
         }
         history.push({
             pathname: `/personalMain/MyMainSearch/${searchValue}`, //url이동
@@ -28,20 +30,20 @@ function AlogFixSectionFolder ({setNewGroup, setCheckList, setMyAlogSlide, mySel
 
     return (
         <MyAlogSettingBox onSubmit={handleSubmit}>
-            <NewGroupPlusBtn src={process.env.PUBLIC_URL + '/images/add.png'} alt="새 그룹 이미지 추가" onClick={()=>{setNewGroup(true); setCheckList(true);  setMyAlogSlide(false);}}></NewGroupPlusBtn>
-            <MyAlogSettingBtn src={process.env.PUBLIC_URL + '/images/setting.png'} alt="내 알록달록 설정"  onClick={()=>{setNewGroup(true); setCheckList(true); setMyAlogSlide(true);}} ></MyAlogSettingBtn>
+            <NewGroupPlusBtn src={process.env.PUBLIC_URL + '/images/add.png'} alt={t('Alog_Folder')[2]} onClick={()=>{setNewGroup(true); setCheckList(true);  setMyAlogSlide(false);}}></NewGroupPlusBtn>
+            <MyAlogSettingBtn src={process.env.PUBLIC_URL + '/images/setting.png'} alt={t('Alog_Folder')[3]}  onClick={()=>{setNewGroup(true); setCheckList(true); setMyAlogSlide(true);}} ></MyAlogSettingBtn>
             <MyAlogSelectDiv>
                 <SelectDefault onClick={()=>{setMyAlogSelectSlide(!myAlogSelectSlide)}}>{mySelect}<i></i></SelectDefault>
                 <SelectList open={myAlogSelectSlide}>
-                    <SelectListEl onClick={()=>{setMySelect('게시글'); setMyAlogSelectSlide(false);}}>게시글</SelectListEl>
-                    <SelectListEl onClick={()=>{setMySelect('그룹'); setMyAlogSelectSlide(false);}}>그룹</SelectListEl>
+                    <SelectListEl onClick={()=>{setMySelect(listMenu[0]); setMyAlogSelectSlide(false);}}>{listMenu[0]}</SelectListEl>
+                    <SelectListEl onClick={()=>{setMySelect(listMenu[1]); setMyAlogSelectSlide(false);}}>{listMenu[1]}</SelectListEl>
                 </SelectList>
             </MyAlogSelectDiv>
             <MyAlogSearchDiv>
-                <MyAlogSearchInput type="text" value={searchValue} placeholder="알록달록 게시글 내 검색" onChange={handleChange}></MyAlogSearchInput>
-                <MyAlogSearchBtn type="submit">검색</MyAlogSearchBtn>
+                <MyAlogSearchInput type="text" value={searchValue} placeholder={t('Alog_Folder')[5]} onChange={handleChange}></MyAlogSearchInput>
+                <MyAlogSearchBtn type="submit">{t('Alog_Folder')[7]}</MyAlogSearchBtn>
             </MyAlogSearchDiv>
-            <Link to="/writing"><AlogWriteBtn src={process.env.PUBLIC_URL + '/images/que_icon.svg'} alt="내 알로그 쓰기"></AlogWriteBtn></Link>
+            <Link to="/writing"><AlogWriteBtn src={process.env.PUBLIC_URL + '/images/que_icon.svg'} alt={t('Alog_Folder')[6]}></AlogWriteBtn></Link>
         </MyAlogSettingBox>
     )
 };

@@ -58,7 +58,7 @@ function InGroupFolder({match}) {
             </>
         );
     } else if (!groupInfo) {
-        return <NoneGroup>존재하지 않는 그룹입니다.</NoneGroup>
+        return <NoneGroup>No group</NoneGroup>
     }
     return (
         <GroupPageWrap>

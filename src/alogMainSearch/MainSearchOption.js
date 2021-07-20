@@ -1,31 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 function MainSearchOption({setSelectSort}) {
 
+    const {t} = useTranslation();
+
     return (
         <OptionBox>
-            <OptionTitle>옵션 선택</OptionTitle>
+            <OptionTitle>{t('Option_Select')}</OptionTitle>
             <SelectBox>
                 <div onClick={()=>{setSelectSort('recent')}}>
                     <input type="radio" name="rank" id="recent" defaultChecked></input>
-                    <label htmlFor="recent">최신순</label>
+                    <label htmlFor="recent">{t('Category_Option')[0]}</label>
                 </div>
                 <div onClick={()=>{setSelectSort('view')}}>
                     <input type="radio" name="rank" id="view"></input>
-                    <label htmlFor="view">조회순</label>
+                    <label htmlFor="view">{t('Category_Option')[1]}</label>
                 </div>
                 <div onClick={()=>{setSelectSort('take')}}>
                     <input type="radio" name="rank" id="take"></input>
-                    <label htmlFor="take">퍼가기순</label>
+                    <label htmlFor="take">{t('Category_Option')[3]}</label>
                 </div>
                 <div onClick={()=>{setSelectSort('good')}}>
                     <input type="radio" name="rank" id="good"></input>
-                    <label htmlFor="good">좋아요순</label>
+                    <label htmlFor="good">{t('Category_Option')[2]}</label>
                 </div>
                 <div onClick={()=>{setSelectSort('hunhun')}}>
                     <input type="radio" name="rank" id="hunhun"></input>
-                    <label htmlFor="hunhun">훈훈알 순</label>
+                    <label htmlFor="hunhun">{t('Category_Option')[4]}</label>
                 </div>
             </SelectBox>
         </OptionBox>

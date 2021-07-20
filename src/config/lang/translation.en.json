@@ -2,11 +2,15 @@
     "Search_Option":["Title", "Content", "Author", "Title & content"],
     "Search_Input": "Search for keywords.",
 
+    "Logo": "AlogDalog ",
+
     "Sample_MainTitle": "Share the values that colorful posts create in a space where values are given to hearty writings.",
 
     "Main_Title": ["AlogDalog's Categories", "AlogDalog's recommended authors", "AlogDalog's recommended posts"],
     "Main_Category": ["All", "Learning", "Life", "Health", "Trouble", "Art", "World", "Money", "IT", "Sports", "Game"],
     "Category_Option": ["By time", "By view", "By Like", "By repost", "By Warming Al"],
+
+    "Option_Select": "Select options",
     
     "Grade": ["Hidden", "Al Angel", "Butterfly Angel", "Smiling Angel", "Fiery Angel", "Golden Angel", "Guardian Angel", "Light Angel", "Chief Angel", "Archangel", "Chief Archangel", "Altong Addict"],
 
@@ -52,11 +56,93 @@
 
     "Save": "Save",
     "Cancel": "Cancel",
+    "Confirm": "Confirm",
+    "Post": "Post",
+    "Submit": "Submit",
 
     "FormatDate": ["Just now", "seconds ago", "minutes ago", "hours ago", "years ago", "months ago", "days ago"],
     
     "Refund_Reason": ["Refund notice", "requested refund and we inform you", "the refund has been processed on", ".", "Reason for refund", "Confirm"],
     "Refund_Text": "Leave a message if any.",
 
-    "Reason": ["Copyright infringement", "Harmful", "Pranky", "Repetitive", "Cussing", "Non-information/knowledge", "Defamation", "Others"]
+    "Modify_Notice": "Revision notice",
+    "Modify_Confirm": "Check your revision",
+    "Modify_Reason": ["As", "revised the original post", "on", ", the content of your Dalog has also been automatically revised."],
+
+    "Reason": ["Copyright infringement", "Harmful", "Pranky", "Repetitive", "Cussing", "Non-information/knowledge", "Defamation", "Others"],
+
+    "Alog_Folder": ["By post", "By group", "Add a new group image", "Set your AlogDalog", "Please input keyword.", "Search posts within AlogDalog", "Write my Alog", "Search"],
+    "MyAlog_Slide": ["There are no main posts.", "Please set the main posts."],
+
+    "NewGroup_Popup": ["Manage Alog and Dalog", "Set main posts", "Delete", "Move", "Create a new group", "Set background", "Group name"],
+    "NewGroup_Delete": ["Will you really ", "delete", " it?"],
+    "NewGroup_Setting": ["After deletion, you will not be able to earn any revenue from the reposted posts, so please decide carefully.", "A new group has been created.", "Your settings have been saved!"],
+    "MySlide_Setting": ["Do you want to save", "as the", "main post", "", "?"],
+
+    "Group_Move": ["Move", "The post will be moved.", "No group to move to exists."],
+
+    "Alpge_Popup": ["Warming Al", "Report", "Modify", "Refund", "Al"],
+    "Alpage_Text": ["Original post", "Orig.", "View orig."],
+    "MyDalog": ["The post has been reposted as", "Dalog", "on your AlogDalog."],
+    "MyAlog": ["You cannot repost your own", "Alog", "."],
+    "MyPost": ["The original post has been", "deleted", "."],
+    "Your": "'s",
+
+    "Take_Good": ["Repost", "Like", "Comments"],
+
+    "Please_Check": "Please check Agree.",
+    "Precaution": "Precautions before reposting",
+    "Copy_Notice_01": "1. Copyright notice",
+    "Copy_Notice_01_Content": "The rights, such as copyrights, of the works created by members and posted on AlogDalog belong to the member who created the works. Even if you pay for Al and repost it, you cannot acquire the copyright itself. Therefore, reproducing, distributing or transmitting all or part of the works without the express consent of the original author is an act of infringing on the rights of the original author and may be punished for the violation of the copyright acts.",
+    "Copy_Notice_02": "2. If an 'Alog (an original post)' is revised",
+    "Copy_Notice_02_Content": "If the original author revises an 'alog (an original post)', its 'Dalog (a post reposted from the original alog)' is automatically updated with the revised content at the same time as the notification that the Alog has been revised.",
+    "Copy_Notice_03": "3. The nature of content",
+    "Copy_Notice_03_Content": "As stated in Altong's Terms of Use and User Guide, content judged to be inappropriate may be deleted without notice by the administrator, and members who posted the content may be disadvantaged in future activities.",
+    "Copy_Notice_04": ["The original post", "will be reposted on your AlogDalog. When reposted, ", "Al is deducted and cannot be refunded unless the original post is revised. Do you really want to repost it?"],
+    "Read_Agree": "I have read it all and agree to it.",
+
+    "Give_HunAl": ["Give Warming Al", "Warming Al available for today is", "total", "Al."],
+    "Report_Text": ["Reporter", "Content"],
+    "Report_Reason": ["Select the reason", "Copyright infringing", "Harmful", "Pranky", "Repetitive", "Cussing", "Non-information/knowledge", "Defamation", "Others", "Leave a message if any.", "If you report an innocent post, you may be at a disadvantage", "when using the service. So please be prudent."],
+
+    "Change_Revision": "Precautions before revision",
+    "Change_Notice_01": "1) Al deduction for revision",
+    "Change_Notice_01_Content": ["In order to prevent the author's reckless revision of posts, ", "100 Al", " is deducted per revision."],
+    "Change_Notice_02": "2) Refund",
+    "Change_Notice_02_Content": "In principle, refunds are not allowed for the post that has been reposted after paying the value, but only if the post is revised by the author, the payer has the right to refund. Therefore, if you are an author please refrain from revising unless it is unavoidable.",
+    "Change_Notice_03": "3) Revision",
+    "Change_Notice_03_Content": "If posts are repeatedly revised without valid reasons, you may be penalized on activities.",
+    "Change_Notice_04": "4) Automatic revision of Dalog",
+    "Change_Notice_04_Content": "If the original post is revised, the revised content is also automatically reflected in reposted posts (that is, Dalogs of members who reposted the original post).",
+    "Modify": "Modify",
+
+    "Refund_Precaution": "Precautions before refund",
+    "Refund_Notice_01": "1) Refunded amount",
+    "Refund_Notice_01_Content": "100% of the paid price will be fully refunded when refunding the reposted post (Dalog).",
+    "Refund_Notice_02": "2) How to refund",
+    "Refund_Notice_02_Content": "A reposted post (Dalog) can be refunded by clicking 'Refund' on the upper right button of the post only if the original post is revised. If it is not processed within 24 hours please contact the customer center.",
+    "Refund_Select": "Select the reason for refund",
+    "Refund": "Refund application",
+
+    "Previous_Post": ["Previous post", "Next post", "There is no previous post.", "There is no next post."],
+
+    "Group_Select": ["Please select the group.", "Create a new group", "Set background"],
+
+    "Write_Text": ["Write a post", "Group name", "Categories", "Set background", "Title", "Value", "Al", "Submit", "Please select your language.", "Set the value of your post and sell it.", "※ After the original post (Alog) is reposted, its value cannot be modified."],
+
+    "Footer_Text": ["Customer Hotline", "e-mail", "Terms of Use", "Privacy Policy", "Customer service"],
+
+    "User_Guide": "AlogDalog",
+    "Guide_01": "I. User guide",
+    "Guide_01_Content_01": "AlogDalog is similar to existing blog services, but it is a new concept service in which both the author and the person who reposts the author's posts can earn profits. All matters related to use are subject to the Terms of Use you have agreed to when signing up for Altong, the knowlege sharing platform presented by Altong Inc.",
+    "Guide_01_Content_02": " - With any intellectual properties like writings, photos, music, etc. please express the words in your heart and infuse them with value.",
+    "Guide_01_Content_03": " - In AlogDalog both the author and the person who reposts his or her posts can earn profits.",
+    "Guide_01_Content_04": " - AlogDalog's users follow etiquettes. As each activity helps each other, a mature culture helps maintain a clean and high-quality service.",
+    "Guide_01_Content_05": " - Please refrain from posting inappropriate content. You may be sanctioned by the administrator.",
+    "Guide_01_Content_06": " - Please refrain from acts that are reckless or offend others.",
+    "Guide_01_Content_07": " - Please report inappropriate content. After reviewing, we will take actions to make the service more pleasant.",
+    "Guide_02": "II. Copyright-related notice",
+    "Guide_02_Content_01": " - Members should only register content created by themselves and should not infringe other rights, including others' copyrights. Members are responsible for all consequences such content may cause.",
+    "Guide_02_Content_02": " - Posting external works without the express consent of the copyright holder is an infringement of copyright, so posting such illegal works is strictly prohibited.",
+    "Guide_02_Content_03": " - Members cannot freely use the information obtained by using the service, and if you want to use it through reproduction, transmission, publication, distribution, broadcasting or other methods, you need to obtain the express consent of the right holder before using it."
 }

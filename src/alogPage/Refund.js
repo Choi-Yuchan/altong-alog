@@ -1,15 +1,27 @@
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next';
 
 const Refund = ({showRefund, setShowRefund}) => {
+
+    const {t} = useTranslation();
     const history = useHistory();
-    const refundReasonList = ["저작권 위반", "유해성", "장난성", "중복성", "비속어/반말", "비 정보 지식", "음해/비방", "기타"]
+    const refundReasonList = [
+        t('Report_Reason')[1],
+        t('Report_Reason')[2],
+        t('Report_Reason')[3],
+        t('Report_Reason')[4],
+        t('Report_Reason')[5],
+        t('Report_Reason')[6],
+        t('Report_Reason')[7],
+        t('Report_Reason')[8]
+    ]
     const checkEl = useRef();
 
     const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            window.alert("동의하기를 체크해주세요!");
+            window.alert(t('Please_Check'));
             e.preventDefault();
         }
         if(checkEl.current.checked === true) 
@@ -21,19 +33,18 @@ const Refund = ({showRefund, setShowRefund}) => {
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
-                    <PopupTitle>I. 환불 전 주의사항</PopupTitle>
-                    <PopupSubtitle>1) 환불 금액</PopupSubtitle>
-                    <PopupPara> 
-                        달록 글을 환불 할 때는 공정거래위원회의 소비자분쟁 해결 기준에 의거 수수료 10%를 공제한 후 총 90% 금액만 환급이 진행됩니다.
-                    </PopupPara>
-                    <PopupSubtitle>2) 환불 방법</PopupSubtitle>
+                    <PopupTitle>{t('Refund_Precaution')}</PopupTitle>
+                    <PopupSubtitle>{t('Refund_Notice_01')}</PopupSubtitle>
                     <PopupPara>
-                        퍼온 저작물(달록)의 환불은 원 저작물이 수정될 경우 저작물 상단 오른쪽 아이콘 내의 '환불'을 눌러 진행하실 수 있으며, 환불 요청된
-                        글은 요청 즉시 환급이 진행됩니다. 24시간 이내 처리되지 않을 시 고객센터를 통해 문의 부탁드립니다.
+                        {t('Refund_Notice_01_Content')}
+                    </PopupPara>
+                    <PopupSubtitle>{t('Refund_Notice_02')}</PopupSubtitle>
+                    <PopupPara>
+                        {t('Refund_Notice_02_Content')}
                     </PopupPara>
                 </PopupArticle>
                 <RefundForm>
-                    <PopupTitle>II. 환불 사유 선택</PopupTitle>
+                    <PopupTitle>{t('Refund_Select')}</PopupTitle>
                     <RefundReasonColumn>
                         {refundReasonList.map(list => 
                         <RefundReason>
@@ -44,10 +55,10 @@ const Refund = ({showRefund, setShowRefund}) => {
                     </RefundReasonColumn>
                     {/* text 자동으로 개행 처리 되도록 기능 추가 필요 */}
                     <TextBox>
-                        <ReasonText type="text" placeholder="남기실 말씀이 있으면 입력해주세요."/>
+                        <ReasonText type="text" placeholder={t('Report_Reason')[9]}/>
                     </TextBox>
-                    <CheckBoxLabel><CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                    <RefundBtn onClick={closePopup}>환불신청</RefundBtn>
+                    <CheckBoxLabel><CheckBox ref={checkEl} type="checkbox"/>{t('Read_Agree')}</CheckBoxLabel>
+                    <RefundBtn onClick={closePopup}>{t('Refund')}</RefundBtn>
                 </RefundForm>
             </PopupContainer>
 

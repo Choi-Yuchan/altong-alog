@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentsActive from './ContentsActive';
-
+import { useTranslation } from 'react-i18next';
 
 function ContentsInfo(props) {
+
+    const {t} = useTranslation(); 
+
     return (
         <ContentsInfoBox>
             <ContentsProfile>
                 <ContentsProfileImg imgurl={process.env.PUBLIC_URL + '/images/' + props.recommend.profile}></ContentsProfileImg>
                 <ContentsNationImg src={process.env.PUBLIC_URL + '/images/nation/' + props.recommend.nation}></ContentsNationImg>
-                <UserLv>{props.recommend.lv}</UserLv>
+                <UserLv>{t('Grade')[props.recommend.lv]}</UserLv>
                 <ContentsNickname>{props.recommend.nickname}</ContentsNickname>
             </ContentsProfile>
             <ContentsText>{props.recommend.text}</ContentsText>

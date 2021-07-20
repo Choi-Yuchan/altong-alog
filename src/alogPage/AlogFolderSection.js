@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import AlogDalogList from '../components/AlogDalogList';
 import AlogDalogGroup from '../components/AlogDalogGroup';
 
-
-function AlogFolderSection ({sample, groupSample, mySelect, setGroupFolderNumber}) {
+function AlogFolderSection ({sample, groupSample, mySelect, setGroupFolderNumber, listMenu}) {
 
     const groupCount = groupSample.length; //그룹  폴더의 개수
 
     return (
         <MyAlogSection>
-            {mySelect === '게시글'
+            {mySelect === listMenu[0]
                 ? sample.map((list)=>
                     <AlogDalogList 
                         key={list.id} 
@@ -24,7 +23,7 @@ function AlogFolderSection ({sample, groupSample, mySelect, setGroupFolderNumber
                         common={list.id}
                     />)
                 : groupCount === 0
-                    ? <NoGroupText>그룹이 없습니다.</NoGroupText>
+                    ? <NoGroupText>No group</NoGroupText>
                     : groupSample.map((list, index)=>
                         <AlogDalogGroup 
                             key={list.id}

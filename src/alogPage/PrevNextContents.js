@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import AlogDalogList from '../components/AlogDalogList';
+import { useTranslation } from 'react-i18next';
 
 function PrevNextContents({sample}) {
 
+    const {t} = useTranslation();
     const prevContents = sample[1];
     const nextContents = sample[2];
 
@@ -20,7 +22,7 @@ function PrevNextContents({sample}) {
                 reply={prevContents.reply}
                 common={prevContents.id}                
             /> */}
-            <DefaultContentsBox>이전글이 없습니다.</DefaultContentsBox>
+            <DefaultContentsBox>{t('Previous_Post')[2]}</DefaultContentsBox>
             <AlogDalogList
                 key={nextContents.id} 
                 backImg={nextContents.backImg} 
@@ -32,8 +34,8 @@ function PrevNextContents({sample}) {
                 reply={nextContents.reply}
                 common={nextContents.id}                
             />
-            <BtnBox><span>&#60; 이전글</span></BtnBox>
-            <BtnBox><span>다음글 &#62;</span></BtnBox>
+            <BtnBox><span>&#60; {t('Previous_Post')[0]}</span></BtnBox>
+            <BtnBox><span>{t('Previous_Post')[1]} &#62;</span></BtnBox>
         </PrevNextWrap>
     );
 }

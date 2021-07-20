@@ -3,19 +3,21 @@ import styled from 'styled-components';
 import AlogDalogList from '../components/AlogDalogList';
 import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import MyAlogGroupMove from './MyAlogGroupMove';
+import { useTranslation } from 'react-i18next';
 
-function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened, setOpened , bgSetting , setBgSetting, setShowNewGroup, setShowBgEdit}) {
+function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened, setOpened , bgSetting , setBgSetting, setShowNewGroup, setShowBgEdit, listMenu}) {
 
+    const {t} = useTranslation();
     const [mySettingSearchOption, setMySettingSearchOption] = useState(false); //설정하기에서 게시글, 그룹 검색 옵션
-    const [mySelect, setMySelect] = useState('게시글'); // 검색 옵션 선택
+    const [mySelect, setMySelect] = useState(listMenu[0]); // 검색 옵션 선택
     const [mySlideConfirm, setMySlideConfirm] = useState(false); //대문글 설정 팝업
     const [myAlogDelete, setMyAlogDelete] = useState(false); //설정하기에서 삭제 클릭 시
     const [myAlogMove, setMyAlogMove] = useState(false); // 설정하기에서 이동 클릭 시
     const [myGroupExistence, setMyGroupExistence] = useState(true); // 나의 그룹 존재 유무
 
     const viewBgSetting = () => {
-            setBgSetting(true);
-            setOpened(true);
+        setBgSetting(true);
+        setOpened(true);
     }
 
     return (
@@ -24,16 +26,16 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
             <NewGroupPopupBox onClick={e=>e.stopPropagation()}>
                 {myMainAlogSlide 
                 ?   <GroupPopTitle>
-                        설정화면
+                        {t('NewGroup_Popup')[0]}
                         <div>
-                            <span onClick={()=>{setMySlideConfirm(true); setMyAlogDelete(false);}}>대문글 설정</span>
-                            <span onClick={()=>{setMySlideConfirm(true); setMyAlogDelete(true);}}>삭제</span>
-                            <span onClick={()=>{setMyAlogMove(true);}}>이동</span>
+                            <span onClick={()=>{setMySlideConfirm(true); setMyAlogDelete(false);}}>{t('NewGroup_Popup')[1]}</span>
+                            <span onClick={()=>{setMySlideConfirm(true); setMyAlogDelete(true);}}>{t('NewGroup_Popup')[2]}</span>
+                            <span onClick={()=>{setMyAlogMove(true);}}>{t('NewGroup_Popup')[3]}</span>
                         </div>
                     </GroupPopTitle>
                 : <>
-                    <GroupPopTitle>새 그룹 만들기 <span onClick={viewBgSetting}>배경설정</span></GroupPopTitle>
-                    <GroupNameBox>그룹 명 <GroupNameInput type="text" /></GroupNameBox>
+                    <GroupPopTitle>{t('NewGroup_Popup')[4]} <span onClick={viewBgSetting}>{t('NewGroup_Popup')[5]}</span></GroupPopTitle>
+                    <GroupNameBox>{t('NewGroup_Popup')[6]} <GroupNameInput type="text" /></GroupNameBox>
                 </>
                 }
                 <MyAlogSearchDiv>
@@ -41,13 +43,13 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
                     <MyAlogSelectDiv>
                         <SelectDefault onClick={()=>{setMySettingSearchOption(!mySettingSearchOption)}}>{mySelect}<i></i></SelectDefault>
                         <SelectList open={mySettingSearchOption}>
-                            <SelectListEl onClick={()=>{setMySelect('게시글'); setMySettingSearchOption(false);}}>게시글</SelectListEl>
-                            <SelectListEl onClick={()=>{setMySelect('그룹'); setMySettingSearchOption(false);}}>그룹</SelectListEl>
+                            <SelectListEl onClick={()=>{setMySelect(listMenu[0]); setMySettingSearchOption(false);}}>{listMenu[0]}</SelectListEl>
+                            <SelectListEl onClick={()=>{setMySelect(listMenu[1]); setMySettingSearchOption(false);}}>{listMenu[1]}</SelectListEl>
                         </SelectList>
                     </MyAlogSelectDiv>
                 }
-                    <MyAlogSearchInput type="text" placeholder="알록달록 게시글 내 검색"></MyAlogSearchInput>
-                    <MyAlogSearchBtn>검색</MyAlogSearchBtn>
+                    <MyAlogSearchInput type="text" placeholder={t('Alog_Folder')[5]}></MyAlogSearchInput>
+                    <MyAlogSearchBtn>{t('Alog_Folder')[7]}</MyAlogSearchBtn>
                 </MyAlogSearchDiv>
                 <MyAlogListBox>
                     {sample.map(list => 
@@ -66,8 +68,8 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
                     )}
                 </MyAlogListBox>
                 <SaveBtnBox>
-                    <button>저장</button>
-                    <button onClick={()=>{setNewGroup(false); setShowNewGroup(false)}}>취소</button>
+                    <button>{t('Save')}</button>
+                    <button onClick={()=>{setNewGroup(false); setShowNewGroup(false)}}>{t('Cancel')}</button>
                 </SaveBtnBox>
             </NewGroupPopupBox>
         </NewGroupPopupWrap>
@@ -79,22 +81,23 @@ function NewGroupPopup({setNewGroup, sample, checkList, myMainAlogSlide, opened,
                 <SlideConfirmBox onClick={e=>e.stopPropagation()}>
                     {myAlogDelete
                         ? <>
-                            <ConfirmText>정말 <span>삭제</span> 하시겠습니까?</ConfirmText>
-                            <ContentsTitle>삭제 후에는 더이상 퍼가기 된 글에 대한<br />수익을 얻을 수 없습니다. 정말로 삭제 하시겠습니까?</ContentsTitle>
+                            <ConfirmText>{t('NewGroup_Delete')[0]}<span>{t('NewGroup_Delete')[1]}</span>{t('NewGroup_Delete')[2]}</ConfirmText>
+                            <ContentsTitle>{t('NewGroup_Setting')[0]}</ContentsTitle>
                             <ConfirmBtnBox>
-                                <button>확인</button>
-                                <button onClick={()=>{setMySlideConfirm(false);}}>취소</button>
+                                <button>{t('Confirm')}</button>
+                                <button onClick={()=>{setMySlideConfirm(false);}}>{t('Cancel')}</button>
                             </ConfirmBtnBox>
                         </>
                         : <>
+                            <ConfirmText>{t('MySlide_Setting')[0]}</ConfirmText>
                             <ContentsTitle>'알통을 알아보자...'</ContentsTitle>
                             <ContentsTitle>'강아지를 키워보자...'</ContentsTitle>
                             <ContentsTitle>'알통의 전반적인 운영...'</ContentsTitle>
                             <ContentsTitle>'알통 프로젝트 영원...'</ContentsTitle>
-                            <ConfirmText>글을 <span>대문글</span>로 지정 하시겠습니까?</ConfirmText>
+                            <ConfirmText>{t('MySlide_Setting')[1]} <span>{t('MySlide_Setting')[2]}</span>{t('MySlide_Setting')[3]}{t('MySlide_Setting')[4]}</ConfirmText>
                             <ConfirmBtnBox>
-                                <button>확인</button>
-                                <button onClick={()=>{setMySlideConfirm(false);}}>취소</button>
+                                <button>{t('Confirm')}</button>
+                                <button onClick={()=>{setMySlideConfirm(false);}}>{t('Cancel')}</button>
                             </ConfirmBtnBox>
                         </>
                     }

@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOption, setDeletedOrigin, deletedOrigin, scrapDisable, setScrapDisable}) {
+
+    const {t} = useTranslation();
     const langSpace = {
-        ko:{
-            //고정
-            allText : ["퍼가기","좋아요","댓글"],
-    
+        ko:{    
             userData : {
                 profileImg:`${process.env.PUBLIC_URL + '/images/Untitled-1.png'}`,
                 flag:`${process.env.PUBLIC_URL + '/images/flag.png'}`,
                 country:"KOR",
             },
-            //고정
-            CommentSave : ["등록"],
-    
             Reply : ["미래의 휴대전화라 기대하면서 댓글 봤습니다."],
             Nick : ["닉네임"],
             Hour : ["24일전"]
@@ -61,9 +58,7 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
         setCount2(prev => prev + 1)
     }
     
-    const allText = langSpace.ko.allText;
     const userData = langSpace.ko.userData;
-    const savesave = langSpace.ko.CommentSave;
     const rereply = langSpace.ko.Reply;
     const nick = langSpace.ko.Nick;
     const realtime =langSpace.ko.Hour;
@@ -78,12 +73,8 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
     }
 
     const [color, setColor] = useState(true);
-    const origin = "원본";
-    const ai = "AI";
-    const original = "원 알록";
     const nickname = "순자러버";
     const title = "알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자 알통을 알아보자";
-    const backTo = "원문가기";
 
     const goToOriginal = (e) => {
         e. preventDefault();
@@ -117,17 +108,17 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
             ns of Lorem Ipsum 
         </SpaceTxt>
         <Caution>
-            <Back>{original}</Back><Id>{nickname}</Id> <Title>'{title}'</Title>
-            <BackTo to="/" onClick={goToOriginal}>{backTo}</BackTo>
+            <Back>{t('Alpage_Text')[0]}</Back><Id>{nickname}</Id> <Title>'{title}'</Title>
+            <BackTo to="/" onClick={goToOriginal}>{t('Alpage_Text')[2]}</BackTo>
         </Caution>{/* 원본 알록으로 이동하기*/}
         <Wrap>
             <LanguageCon>
-                <Origin redcolor={color} setColor={setColor} onClick={()=>{setColor(true)}}>{origin}</Origin><Line></Line><Ai redcolor={color} setColor={setColor} onClick={()=>{setColor(false)}}>{ai}</Ai>
+                <Origin redcolor={color} setColor={setColor} onClick={()=>{setColor(true)}}>{t('Alpage_Text')[1]}</Origin><Line></Line><Ai redcolor={color} setColor={setColor} onClick={()=>{setColor(false)}}>AI</Ai>
             </LanguageCon>
         <ButtonBox>
-            <StyledBtn onClick={handleScrap}>{allText[0]}<Count>{count}</Count></StyledBtn>
-            <StyledBtn onClick={plus2} >{allText[1]}<Count> {count2}</Count></StyledBtn>
-            <StyledBtn onClick={free}>{allText[2]}</StyledBtn>
+            <StyledBtn onClick={handleScrap}>{t('Take_Good')[0]}<Count>{count}</Count></StyledBtn>
+            <StyledBtn onClick={plus2} >{t('Take_Good')[1]}<Count> {count2}</Count></StyledBtn>
+            <StyledBtn onClick={free}>{t('Take_Good')[2]}</StyledBtn>
         </ButtonBox>
         </Wrap>
         { open === true &&
@@ -135,7 +126,7 @@ function AlpageContents({viewCaution, setViewCaution, scrapOption, setScrapOptio
             <Commentdiv>
                 <CommentInner>
                     <CommentTxt></CommentTxt>
-                    <CommentSave>{savesave}</CommentSave>
+                    <CommentSave>{t('Post')}</CommentSave>
                 </CommentInner>
             </Commentdiv>
             <Commentdiv2>

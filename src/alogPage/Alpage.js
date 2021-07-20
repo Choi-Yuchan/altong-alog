@@ -9,48 +9,18 @@ import AlogProfileSetting from '../profileSetting/AlogProfileSetting';
 import NewGroupPopup from './NewGroupPopup';
 import Refund from './Refund';
 import EditCaution from './EditCaution';
+import { useTranslation } from 'react-i18next';
 
 function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyAlogSlide, myMainAlogSlide, opened, setOpened, bgSetting, setBgSetting, siren, setSiren, showBgEdit, setShowBgEdit}) {
+
+  const {t} = useTranslation();
   const langAlpage = {
-    ko:{
-      allData : 
-      {
-          title: "알통이여 영원하라 알통이여 영원하라 알통이여 영원하라 알통이여 영원하라",
-          date: "2021.04.14",
-          money: "100,000",
-        }
-      ,
-        //고정
-        H : ["폴더를 선택해주세요"],
-        Option :["여행, 그 모든 것","음악"],
-        SaveBtn : ["저장"],
-        Makingp : ["새폴더 만들기"],
-        Value : ["알"],
-        confirmMention: "퍼가시면 Value값 만큼 알이 차감됩니다, 정말로 가져가시겠습니까?",
-    }
+    title: "알통이여 영원하라 알통이여 영원하라 알통이여 영원하라 알통이여 영원하라",
+    date: "2021.04.14",
+    money: "100,000",
   };
-  const allDate2 = langAlpage.ko.allData;
-  const chooseFolder = langAlpage.ko.H;
-  const titleName =langAlpage.ko.Option;
-  const save =langAlpage.ko.SaveBtn;
-  const folder =langAlpage.ko.Makingp;
-  const egg =langAlpage.ko.Value;
-  const mention = langAlpage.ko.confirmMention;
-  const hunAl = "훈훈알";
-  const call ="신고";
-  const modify ="수정";
-  const refund = "환불";
 
-  const [isShow, setIsShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const titleShow = () => {
-    setIsShow(!isShow);
-  }
-
-  const [colorIs, setColorShow] = useState(false);
-  const colorShow = () => {
-    setColorShow(!colorIs);
-  }
   const [viewCaution, setViewCaution] = useState(false); // 퍼가기 주의사항 팝업 상태
   const [scrapOption, setScrapOption] = useState(false); // 퍼가기 시 옵션 창 상태
   const [scrapComplete, setScrapComplete] = useState(false); // 퍼가기 완료 됐을 때 알림창 상태
@@ -58,50 +28,45 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
   const [deletedOrigin, setDeletedOrigin] = useState(false); // 원문가기 클릭 시 원문이 삭제되었을 경우 
   const [showRefund, setShowRefund] = useState(false); // 환불 요청 페이지 보여주기
   const [showWritingEdit, setShowWritingEdit] = useState(false); // 수정하기로 들어왔을 경우 보여줘야 하는 팝업 상태
+  const listMenu = [t('Alog_Folder')[0], t('Alog_Folder')[1]]
 
   const handleRefund = () => {
     setShowRefund(!showRefund);
   }
-
   const handleEdit = () => {
     setShowWritingEdit(!showWritingEdit);
   }
-
   useEffect(()=>{
     if (body === true) {
       setShowMenu(false);
     }
   }, [body, showMenu])
-
   const [hun, SetHun] = useState(false);
   const HunEgg = () => {
       SetHun(!hun);
   }
-
   const [showNewGroup, setShowNewGroup] = useState(false);
-
   const BringHunhunAl = true; //훈훈알 받았을 떄 생기고, 받은 총 갯 수 표시
-
   const SirenPop = () => {
     setSiren(true);
   }
+
   return (
     <>
-
       {/* 퍼가기 전 유의사항 페이지 */}
       {viewCaution === true &&<ScrapCaution viewCaution={viewCaution} setViewCaution={setViewCaution}/>}
       {/* 그룹 선택 및 만들기 팝업 */}
-      {showNewGroup === true && <NewGroupPopup 
-      newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
-      checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
-      opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting}
-      />}
+      {showNewGroup === true && 
+        <NewGroupPopup 
+          newGroup={newGroup} setNewGroup={setNewGroup} sample={sample}
+          checkList={checkList} myMainAlogSlide={myMainAlogSlide} setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
+          opened = {opened} setOpened={setOpened} setBgSetting={setBgSetting} bgSetting={bgSetting} listMenu={listMenu}
+        />
+      }
       {/* 그룹 배경 설정 */}
       {showBgEdit === true && <AlogProfileSetting setOpened={setOpened} bgSetting={bgSetting} setShowBgEdit={setShowBgEdit}/>}
       {/* EditCaution은 수정하기로 들어올 때 활성화 */}
-      {showWritingEdit === true && 
-        <EditCaution setShowWritingEdit={setShowWritingEdit} showWritingEdit={showWritingEdit}/>
-      }
+      {showWritingEdit === true && <EditCaution setShowWritingEdit={setShowWritingEdit} showWritingEdit={showWritingEdit}/>}
       <Box onClick={() => {setScrapOption(false)}}>
         {scrapOption === true && 
           <ScrapOptionBox setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
@@ -110,87 +75,61 @@ function Alpage({body, setBody, newGroup, setNewGroup, sample, checkList, setMyA
         }
         <Frame>
           { BringHunhunAl &&
-          <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>1,000</HunhunCount></Hunhun>
-        }
-        <Icons>
-        <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
-        { showMenu &&
-        <DropMenu>
-          <Menus onClick={HunEgg}>{hunAl}</Menus>
-          <Menus onClick={SirenPop}>{call}</Menus>
-          <Menus onClick={handleEdit}>{modify}</Menus>
-          <Menus onClick={handleRefund}>{refund}</Menus>
-        </DropMenu>
-        }
-        <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
-        <AlogSiren siren={siren} setSiren={setSiren}></AlogSiren>      
-        </Icons>
+            <Hunhun><HunhunImg src={process.env.PUBLIC_URL + '/images/answer_almoney.svg'}/><HunhunCount>1,000</HunhunCount></Hunhun>
+          }
+          <Icons>
+            <Logo onClick={(e) => {e.stopPropagation(); setShowMenu(true); setBody(false)} } src={process.env.PUBLIC_URL + '/images/dot2.png'}></Logo>
+            { showMenu &&
+              <DropMenu>
+                <Menus onClick={HunEgg}>{t('Alpage_Popup')[0]}</Menus>
+                <Menus onClick={SirenPop}>{t('Alpage_Popup')[1]}</Menus>
+                <Menus onClick={handleEdit}>{t('Alpage_Popup')[2]}</Menus>
+                <Menus onClick={handleRefund}>{t('Alpage_Popup')[3]}</Menus>
+              </DropMenu>
+            }
+            <HunPopup hunAl={hun} setHunAl={SetHun}></HunPopup>
+            <AlogSiren siren={siren} setSiren={setSiren}></AlogSiren>      
+          </Icons>
         </Frame>
-        {isShow ? (
-          <Folder>
-            <Close src={process.env.PUBLIC_URL + '/images/close-button.svg'}  onClick={() => titleShow()}></Close>
-            <H>{chooseFolder}</H>
-            <SelectBox>
-              <Select>
-                <Option>
-                  {titleName[0]}
-                </Option>
-                <Option>
-                  {titleName[1]}
-                </Option>
-              </Select>
-              <SaveBtn onClick={()=>{window.confirm(String(mention))}}>{save}</SaveBtn>
-            </SelectBox>
-            <MakingBox onClick={() => colorShow() }>
-              <MakingBtn src={process.env.PUBLIC_URL + '/images/add.png'} />
-              <Makingp>{folder}</Makingp> 
-            </MakingBox>  
-        </Folder>) : null}
-        <Title>
-          {allDate2.title}
-        </Title>
+        <Title>{langAlpage.title}</Title>
         <SubTitle>
-          <Date>
-          {allDate2.date}
-          </Date>
-          <Value>
-            Value : {allDate2.money}{egg}
-          </Value>
+          <Date>{langAlpage.date}</Date>
+          <Value>Value : {langAlpage.money}{t('Alpage_Popup')[4]}</Value>
         </SubTitle>
       </Box>
       <AlpageContents 
-      viewCaution={viewCaution} setViewCaution={setViewCaution}
-      scrapOption={scrapOption} setScrapOption={setScrapOption}
-      deletedOrigin={deletedOrigin} setDeletedOrigin={setDeletedOrigin}
-      scrapDisable={scrapDisable} setScrapDisable={setScrapDisable}
+        viewCaution={viewCaution} setViewCaution={setViewCaution}
+        scrapOption={scrapOption} setScrapOption={setScrapOption}
+        deletedOrigin={deletedOrigin} setDeletedOrigin={setDeletedOrigin}
+        scrapDisable={scrapDisable} setScrapDisable={setScrapDisable}
       />
       {showRefund === true &&
-      <Refund showRefund={showRefund} setShowRefund={setShowRefund}/>
+        <Refund showRefund={showRefund} setShowRefund={setShowRefund}/>
       }
       { scrapComplete === true &&
-      <CompleteMySlideWrap onClick={()=>{setScrapComplete(false)}}>
-        <SlideConfirmBox>
-          <ConfirmText>원 알록 순자러버님의</ConfirmText>
-          <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
-          <ConfirmText>글이 퍼가기 <span>완료</span>되었습니다.</ConfirmText>
-        </SlideConfirmBox>
-      </CompleteMySlideWrap>
+        <CompleteMySlideWrap onClick={()=>{setScrapComplete(false)}}>
+          <SlideConfirmBox>
+            <ConfirmText>{t('Alpage_Text')[0]} 순자러버님{t('Your')}</ConfirmText>
+            <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
+            <ConfirmText>{t('MyDalog')[0]}<span>{t('MyDalog')[1]}</span>{t('MyDalog')[2]}</ConfirmText>
+          </SlideConfirmBox>
+        </CompleteMySlideWrap>
       }
       { scrapDisable === true &&
-      <CompleteMySlideWrap onClick={()=>{setScrapDisable(false)}}>
-        <SlideConfirmBox>
-          <ConfirmText>나의 <span>알록</span>은 퍼가기 하실 수 없습니다.</ConfirmText>
-        </SlideConfirmBox>
-      </CompleteMySlideWrap>
+        <CompleteMySlideWrap onClick={()=>{setScrapDisable(false)}}>
+          <SlideConfirmBox>
+            <ConfirmText>{t('MyAlog')[0]}<span>{t('MyAlog')[1]}</span>{t('MyAlog')[2]}</ConfirmText>
+          </SlideConfirmBox>
+        </CompleteMySlideWrap>
       }
       { deletedOrigin === true &&
-      <CompleteMySlideWrap onClick={()=>{setDeletedOrigin(false)}}>
-        <SlideConfirmBox>
-          <ConfirmText>순자러버님의</ConfirmText>
-          <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
-          <ConfirmText>원 알록이 <span>삭제</span>되었습니다.</ConfirmText>
-        </SlideConfirmBox>
-      </CompleteMySlideWrap>
+        <CompleteMySlideWrap onClick={()=>{setDeletedOrigin(false)}}>
+          <SlideConfirmBox>
+            <ConfirmText>순자러버님{t('Your')}</ConfirmText>
+            <ConfirmText>'알통은 무엇인가? 그것에 대해 알아봅시다.'</ConfirmText>
+            <ConfirmText>{t('MyPost')[0]}<span>{t('MyPost')[1]}</span>{t('MyPost')[2]}</ConfirmText>
+          </SlideConfirmBox>
+        </CompleteMySlideWrap>
       }
     </>
   );

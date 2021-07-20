@@ -1,8 +1,10 @@
 import React, { useState} from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 function MyAlogGroupMove({existence, setMyAlogMove}) {
 
+    const {t} = useTranslation();
     const myGroupList = [
         {
             id:1, 
@@ -45,9 +47,9 @@ function MyAlogGroupMove({existence, setMyAlogMove}) {
             {existence
                 ? <MyGroupMoveWrap onClick={()=>{setMyAlogMove(false);}}>
                     <MovePopup onClick={(e)=>{e.stopPropagation();}}>
-                        <MovePopupTitle>이동하기</MovePopupTitle>
+                        <MovePopupTitle>{t('Group_Move')[0]}</MovePopupTitle>
                         <MoveContentsBox>
-                            <ContentsEl>'강아지를 키워보자' 글을 이동합니다.</ContentsEl>
+                            <ContentsEl>'강아지를 키워보자' {t('Group_Move')[1]}</ContentsEl>
                         </MoveContentsBox>
                         <MoveGroupBox>
                             {groupArray.map((list)=>
@@ -58,12 +60,12 @@ function MyAlogGroupMove({existence, setMyAlogMove}) {
                             )}
                         </MoveGroupBox>
                         <MoveGroupSaveBtnBox>
-                            <button>이동</button>
-                            <button onClick={()=>{setMyAlogMove(false);}}>취소</button>
+                            <button>{t('Group_Move')[0]}</button>
+                            <button onClick={()=>{setMyAlogMove(false);}}>{t('Cancel')}</button>
                         </MoveGroupSaveBtnBox>
                     </MovePopup>
                 </MyGroupMoveWrap>
-                : <NoMyGroupAlert onClick={()=>{setMyAlogMove(false);}}>이동할 수 있는 그룹이 없습니다.</NoMyGroupAlert>
+                : <NoMyGroupAlert onClick={()=>{setMyAlogMove(false);}}>{t('Group_Move')[2]}</NoMyGroupAlert>
             }
         </>
     );

@@ -6,9 +6,12 @@ import AlogProfile from '../alogprofile/AlogProfile';
 import MyMainAlogSlide from '../alogmain/myAlogMain/MyMainAlogSlide';
 import NewGroupPopup from '../alogPage/NewGroupPopup';
 import InGroupFolder from '../alogPage/InGroupFolder';
+import { useTranslation } from 'react-i18next';
 
 function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setMyAlogSlide, myMainAlogSlide, sample, opened, setOpened, bgSetting, setBgSetting, setShowBgEdit, showBgEdit}) {
 
+    const {t} = useTranslation();
+    const listMenu = [t('Alog_Folder')[0], t('Alog_Folder')[1]]
     const groupSample = [
         {
             id:1,
@@ -55,7 +58,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
             bgimg: 'bg05.jpg'
         }
     ];
-    const [mySelect, setMySelect] = useState('게시글'); // 게시글 별, 그룹 별 옵션
+    const [mySelect, setMySelect] = useState(listMenu[0]); // 게시글 별, 그룹 별 옵션
     const [showNewGroup, setShowNewGroup] = useState(false);
     const slideCount = myAlogSlideSample.length; //대문글 개수
 
@@ -67,7 +70,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 setCheckList={setCheckList} 
                 setMyAlogSlide={setMyAlogSlide}
                 mySelect={mySelect} setMySelect={setMySelect}
-                sample={sample}
+                sample={sample} listMenu={listMenu}
             />
             <Route path="/personalMain" exact render={()=>
                 <>
@@ -76,6 +79,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                         sample={sample} 
                         groupSample={groupSample}
                         mySelect={mySelect}
+                        listMenu={listMenu}
                     />
                 </>
             }/>
@@ -87,6 +91,7 @@ function AlogPersonalMain ({setNewGroup, newGroup, setCheckList, checkList, setM
                 bgSetting={bgSetting} setBgSetting={setBgSetting}
                 setShowNewGroup={setShowNewGroup} showNewGroup={showNewGroup}
                 setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
+                listMenu={listMenu}
             />}
         </>
     );

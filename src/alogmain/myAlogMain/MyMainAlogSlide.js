@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import AlogSlider from '../alogslider/AlogSlider';
+import { useTranslation } from 'react-i18next';
 
 function MyMainAlogSlide({content, count}) {
+
+    const {t} = useTranslation();
+
     return (
         count === 0
             ? <DefaultSlideBox>
-                <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
-                <DefaultSlideEl>지정된 대문 글이 없습니다.<br/>대문글을 설정 해 주세요.</DefaultSlideEl>
+                <DefaultSlideEl>{t('MyAlog_Slide')[0]}<br/>{t('MyAlog_Slide')[1]}</DefaultSlideEl>
+                <DefaultSlideEl>{t('MyAlog_Slide')[0]}<br/>{t('MyAlog_Slide')[1]}</DefaultSlideEl>
             </DefaultSlideBox>
             : <MyMainAlogSlideDiv>
                 <AlogSlider content={content} count={count}/>

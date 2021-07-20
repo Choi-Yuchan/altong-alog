@@ -1,14 +1,17 @@
 import { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next';
 
 const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
+
+    const {t} = useTranslation();
     const checkEl = useRef();
     const history = useHistory();
 
     const closePopup = (e) => {
         if(checkEl.current.checked === false){
-            window.alert("동의하기를 체크해주세요!");
+            window.alert(t('Please_Check'));
             e.preventDefault();
         }
         if(checkEl.current.checked === true) 
@@ -21,29 +24,27 @@ const EditCaution = ({showWritingEdit, setShowWritingEdit}) => {
                     <CloseBtn>X</CloseBtn>
                 </CloseBtnBox>
                 <PopupArticle>
-                    <PopupTitle>수정 전 주의사항</PopupTitle>
-                    <PopupSubtitle>1) 수정시 지불 금액</PopupSubtitle>
+                    <PopupTitle>{t('Change_Revision')}</PopupTitle>
+                    <PopupSubtitle>{t('Change_Notice_01')}</PopupSubtitle>
                     <PopupPara> 
-                        ㈜알통은 원작자의 무분별한 글 수정을 방지하기 위해 1회 수정당 <RedText>100알</RedText>을 차감하고 있습니다.
+                        {t('Change_Notice_01_Content')[0]}<RedText>{t('Change_Notice_01_Content')[1]}</RedText>{t('Change_Notice_01_Content')[2]}
                     </PopupPara>
-                    <PopupSubtitle>2) 최초 수정 후 환불조치</PopupSubtitle>
+                    <PopupSubtitle>{t('Change_Notice_02')}</PopupSubtitle>
                     <PopupPara>
-                        ㈜알통은 고객이 어떤 이유에서든 구매한 글에 만족하지 않을 경우 <RedText>환불</RedText>을 보장해 드립니다. 대부분의 달록글에
-                        대해서는 이 환불 정책이 적용됩니다. 수정이 최초 1회 발생 할 시, 다른 퍼간 회원으로 하여금 달록글에 대하여 환불 조치가 
-                        발생할 수 있습니다. 그러니 수정을 하실 때는 신중하게 부탁드립니다.
+                        {t('Change_Notice_02_Content')}
                     </PopupPara>
-                    <PopupSubtitle>3) 제재</PopupSubtitle>
+                    <PopupSubtitle>{t('Change_Notice_03')}</PopupSubtitle>
                     <PopupPara>
-                        타당한 이유 없이 계속 반복하여 글이 수정될 경우 이 또한 ㈜알통 정책에 따라 제재 되며, 활동 시 불이익을 받을 수 있습니다.
+                        {t('Change_Notice_03_Content')}
                     </PopupPara>
-                    <PopupSubtitle>4) 글 수정 후</PopupSubtitle>
+                    <PopupSubtitle>{t('Change_Notice_04')}</PopupSubtitle>
                     <PopupPara>
-                        나의 '알록'글을 퍼간 사람이 있을 경우, 퍼간 사람의 글 또한 자동으로 알림과 동시에 수정된 내용으로 업데이트됨을 유의하여 주세요.
+                        {t('Change_Notice_04_Content')}
                     </PopupPara>
                 </PopupArticle>
 
-                <CheckBoxLabel> <CheckBox ref={checkEl} type="checkbox"/>모든 내용을 이해하였으며, 이에 동의합니다.</CheckBoxLabel>
-                <EditBtn to="/writing" onClick={closePopup}>수정하기</EditBtn>
+                <CheckBoxLabel> <CheckBox ref={checkEl} type="checkbox"/>{t('Read_Agree')}</CheckBoxLabel>
+                <EditBtn to="/writing" onClick={closePopup}>{t('Modify')}</EditBtn>
             </PopupContainer>
 
     )
