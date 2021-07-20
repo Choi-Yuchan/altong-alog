@@ -1,8 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import NoticeHunData from '../dummydata/NoticeHunData.json';
 import TimeToggle from '../components/function/TimeToggle';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+const NoticeHun  = ({dummyData, setDummyData}) => {
+    
+    const {t} = useTranslation();
+    const onRemove = (id) => {
+        setDummyData({...dummyData, hunAl: dummyData.hunAl.filter(data => data.id !== id)})
+    }
+
+    return(
+        <>
+            <TopTitle>{t('Received_Al')[0]}</TopTitle>
+            <GrayContents>
+                <Member>{t('Received_Al')[1]}</Member><Contents>{t('Received_Al')[2]}</Contents><Dates>{t('Received_Al')[3]}</Dates>
+            </GrayContents>
+            {dummyData.hunAl.map((hunAl)=>
+                <Elements state={hunAl.state} key={hunAl.id} >{/* 클릭 시 해당 내용 확인으로 간주, 삭제*/}
+                    <Account>
+                        <Photo src={hunAl.profileImg}/>
+                        <Wrap>
+                            <Grade>{hunAl.grade}</Grade>
+                            <Nickname>{hunAl.account}</Nickname>
+                            <Direct to={hunAl.href}>{hunAl.direct}</Direct>
+                        </Wrap>
+                    </Account>
+                    <Hun>{hunAl.hun.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}{hunAl.al}</Hun>
+                    <Day>{TimeToggle(hunAl.date)}</Day>
+                    <Close onClick={()=>{onRemove(hunAl.id)}}>X</Close>
+                </Elements>
+            )}
+        </>
+    )
+};
+
+export default NoticeHun;
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -18,7 +52,7 @@ const GrayContents = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: flex-start;
     margin-bottom:10px;
     padding:25px;
@@ -49,7 +83,7 @@ const Elements = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.state == true ? "flex" : "none"};
+    display:flex;
     align-items: center;
     margin-bottom:10px;
     padding:13px;
@@ -160,61 +194,3 @@ const Close = styled.div`
         margin-left:0px;
      }
 `;
-const NoticeHun  = ({onRemoveHun, usersHun}) => {
-    
-    const alarm = NoticeHunData.ko.alarm;
-    const Title = NoticeHunData.ko.hunTitle;
-    const hunArray = NoticeHunData.ko.hunArray;
-
-    const [HunAl, setHunAl] = useState(hunArray);
-    function change(i) {
-        const states = [...hunArray];
-        states[i].state = false;
-        states[i].popState = true;
-        setHunAl( states );
-    }
-    const [show, setShow] = useState(hunArray);
-    function CloseWindow(i) {
-        const states = [...hunArray];
-        states[i].state = false;
-        setShow( states );
-    }
-
-    hunArray.sort(function(a,b){
-        return b.date - a.date
-      });
-
-    return(
-        <>
-        <TopTitle>{alarm}</TopTitle>
-        <GrayContents>
-            <Member>{Title.member}</Member><Contents>{Title.give}</Contents><Dates>{Title.date}</Dates>
-        </GrayContents>
-        {
-            usersHun.map((hunAl, i)=>{
-                return(
-                    <>
-                    { show &&
-                    <Elements state={hunAl.state} key={hunAl.id} onClick={ () => { change(i); onRemoveHun(hunAl.id)} }>{/* 클릭 시 해당 내용 확인으로 간주, 삭제*/}
-                        <Account>
-                            <Photo src={hunAl.profileImg}/>
-                            <Wrap>
-                                <Grade>{hunAl.grade}</Grade>
-                                <Nickname>{hunAl.account}</Nickname>
-                                <Direct to={hunAl.href}>{hunAl.direct}</Direct>
-                            </Wrap>
-                        </Account>
-                        <Hun>{hunAl.hun.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}{hunAl.al}</Hun>
-                        <Day>{TimeToggle(hunAl.date)}</Day>
-                        <Close onClick={ (e) => { e.stopPropagation(); CloseWindow(i); } }>X</Close>
-                    </Elements>
-                    }
-                    </>
-                );
-            })
-        }
-        </>
-    )
-};
-
-export default NoticeHun;

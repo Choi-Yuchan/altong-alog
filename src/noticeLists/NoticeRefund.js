@@ -1,7 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import NoticeRefundData from '../dummydata/NoticeRefundData.json';
 import NoticeRefund_Contents from './NoticeRefund_Contents';
+import { useTranslation } from 'react-i18next';
+
+const NoticeRefund  = ({dummyData, setDummyData}) => {
+
+    const {t} = useTranslation();
+    const onRemove = (id) => {
+        setDummyData({...dummyData, refund: dummyData.refund.filter(data => data.id !== id)})
+    }
+
+    return(
+        <>
+        <TopTitle>{t('Notification')[0]}</TopTitle>
+        <GrayContents>{t('Revised_Post')[0]}<GrayContentsCount>{dummyData.refund.length}</GrayContentsCount>{t('Revised_Post')[1]}</GrayContents>
+            {
+                dummyData.refund.map((refund)=>{
+                    return(
+                        <NoticeRefund_Contents key={refund.id} refund={refund} selected={refund.id} onRemove={onRemove}></NoticeRefund_Contents>
+                    )
+                })
+            }
+        </>
+    )
+};
+
+export default NoticeRefund;
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -20,7 +44,7 @@ const GrayContents = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: flex-start;
     margin-bottom:10px;
     padding:13px 13px 13px 80px;
@@ -33,29 +57,3 @@ const GrayContents = styled.div`
         font-size: 14px;
     }
 `;
-
-const NoticeRefund  = ({onRemoveRefund, usersRefund, setUsersRefund, whyArray}) => {
-
-    const alarm = NoticeRefundData.ko.alarm;
-    const Title = NoticeRefundData.ko.refundTitle;
-
-    usersRefund.sort(function(a,b){
-        return b.date - a.date
-      });
-
-    return(
-        <>
-        <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{usersRefund.length}</GrayContentsCount>{Title.Back}</GrayContents>
-            {
-                usersRefund.map((refund)=>{
-                    return(
-                        <NoticeRefund_Contents key={refund.id} to={refund.href} refund={refund} onRemoveRefund={onRemoveRefund} whyArray={whyArray}></NoticeRefund_Contents>
-                    )
-                })
-            }
-        </>
-    )
-};
-
-export default NoticeRefund;

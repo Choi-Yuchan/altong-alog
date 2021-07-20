@@ -1,7 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoticeModifyData from '../dummydata/NoticeModifyData.json';
 import NoticeModify_Contents from './NoticeModify_Contents';
+import { useTranslation } from 'react-i18next';
+
+const NoticeModify  = ({dummyData, setDummyData}) => {
+    
+    const {t} = useTranslation();
+    const onRemove = (id) => {
+        setDummyData({...dummyData, modify: dummyData.modify.filter(data => data.id !== id)})
+    }
+
+    return(
+        <Wrap>
+        <TopTitle>{t('Notification')[0]}</TopTitle>
+        <GrayContents>{t('Revised_Post')[0]}<GrayContentsCount>{dummyData.modify.length}</GrayContentsCount>{t('Revised_Post')[1]}</GrayContents>
+        {dummyData.modify.map((modify)=>{
+            return(
+                <NoticeModify_Contents key={modify.id} modify={modify} onRemove={onRemove} selected={modify.id}></NoticeModify_Contents>
+            )})
+        }
+        </Wrap>
+    )
+};
+
+export default NoticeModify;
 
 const Wrap = styled.div`
     width:100%; height:100%;
@@ -24,7 +46,7 @@ const GrayContents = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: flex-start;
     margin-bottom:10px;
     padding:13px 13px 13px 80px;
@@ -37,31 +59,3 @@ const GrayContents = styled.div`
         font-size: 14px;
     }
 `;
-
-const NoticeModify  = ({onRemoveModify, usersModify, setUserModify}) => {
-    
-    const alarm = NoticeModifyData.ko.alarm;
-    const Title = NoticeModifyData.ko.modifyTitle;
-
-    usersModify.sort(function(a,b){
-        return b.date - a.date
-      });
-
-    return(
-        <Wrap>
-        <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{usersModify.length}</GrayContentsCount>{Title.Back}</GrayContents>
-        {
-            usersModify.map((modify, number)=>{
-                return(
-                    <>
-                    <NoticeModify_Contents key={modify.id} modify={modify} number={number} onRemoveModify={onRemoveModify} usersModify={usersModify} setUserModify={setUserModify}></NoticeModify_Contents>
-                    </>
-                )
-            })
-        }
-        </Wrap>
-    )
-};
-
-export default NoticeModify;

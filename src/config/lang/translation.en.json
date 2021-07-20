@@ -35,6 +35,8 @@
     "Messages_Placeholder": ["Enter what you want to say to", ""],
     "Notice_Mento": ["Mentors / Mentees", "Mentors", "Mentees", "Alog", "Dalog", "Send a message", "Delete", "people", "", "Go to AlogDalog "],
 
+    "Message_Sand": ["is the recipient.", "Cancel", "Send"],
+
     "Profile_Image": "My Knowledge Powerhouse",
     "Profile_Activities": "Activities",
     "Profile_Intro": "Welcome to my AlogDalog",
@@ -49,5 +51,12 @@
     "Alog_Setting": ["Presented", "Set up your profile", "Set background", "About me", "Up to 30 characters including spaces", "Enter hashtags", "Per tag up to 10 letters can be entered", "Background color", "From mine", "Find", "Preview"],
 
     "Save": "Save",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+
+    "FormatDate": ["Just now", "seconds ago", "minutes ago", "hours ago", "years ago", "months ago", "days ago"],
+    
+    "Refund_Reason": ["Refund notice", "requested refund and we inform you", "the refund has been processed on", ".", "Reason for refund", "Confirm"],
+    "Refund_Text": "Leave a message if any.",
+
+    "Reason": ["Copyright infringement", "Harmful", "Pranky", "Repetitive", "Cussing", "Non-information/knowledge", "Defamation", "Others"]
 }

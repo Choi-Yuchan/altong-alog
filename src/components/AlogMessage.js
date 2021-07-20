@@ -1,23 +1,24 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 function AlogMessage ({close, setClose, List}) {
-    const sendTo = "님께 쪽지 보내기 ";
-    const cancel = "취소";
-    const sentBtn = "보내기";
+
+    const {t} = useTranslation();
+
     return (
         <>
             { close ?
             <Wrap onClick={()=>{setClose(false)}}>
                 <Frame onClick={(e) => e.stopPropagation()}>
-                    <Title><Nickname>{List.nickname}</Nickname> {sendTo}</Title>
+                    <Title><Nickname>{List.nickname}</Nickname> {t('Message_Sand')[0]}</Title>
                     <Form action="#">
                     <TxtArea></TxtArea>
                     </Form>
                     <ButtonFrame>
-                        <Cancel onClick={ () => { setClose(!close) } }>{cancel}</Cancel>
-                        <Send onClick={ () => { setClose(!close) }}>{sentBtn}</Send>
+                        <Cancel onClick={ () => { setClose(!close) } }>{t('Message_Sand')[1]}</Cancel>
+                        <Send onClick={ () => { setClose(!close) }}>{t('Message_Sand')[2]}</Send>
                     </ButtonFrame>
                 </Frame>
             </Wrap>

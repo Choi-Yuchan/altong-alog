@@ -4,41 +4,14 @@ import { Link } from 'react-router-dom';
 import AlogMessage from '../components/AlogMessage';
 import { useTranslation } from 'react-i18next';
 
-const NoticeMentoContents  = ({mentoList, onRemoveMento, body, setBody}) => {
+function NoticeMentoContents({mentoList, onRemove, body, setBody}) {
 
     const {t} = useTranslation();
-    const IconsName = {
-            title:"멘토 / 멘티",
-            mento:"멘토",
-            menti:"멘티",
-            myMento:"내 멘토",
-            myMenti:"내 멘티",
-            Delete:"삭제",
-            message:"쪽지 보내기",
-            people:"명",
-            haveAlog:"보유 알록 수",
-            haveDalog:"보유 달록 수",
-            haveMento:"멘토 수",
-            haveMenti:"멘티 수",
-            many:"개",
-            direct:"알록달록 바로가기 >"    
-    }
-    const deletes = IconsName.Delete;
-    const message = IconsName.message;
-
-    function confirmModal({mentoList, onRemoveMento}) {
-        if (window.confirm(`${mentoList.nickname}` + "님을 정말 삭제하시겠습니까?")) {
-            onRemoveMento(mentoList.id);
+    const confirmModal = ({mentoList, onRemove}) => {
+        if (window.confirm(`${mentoList.nickname}` + t('Messages_Alert')[0])) {
+            onRemove(mentoList.id);
         } 
      }
-    const people = IconsName.people;
-    const haveAlog = IconsName.haveAlog;
-    const haveDalog = IconsName.haveDalog;
-    const haveMento = IconsName.haveMento;
-    const haveMenti = IconsName.haveMenti;
-    const many = IconsName.many;
-    const direct = IconsName.direct;
-
     const [show, setShow] = useState(false);
     const [close, setClose] = useState(false);
     useEffect(()=>{
@@ -47,47 +20,46 @@ const NoticeMentoContents  = ({mentoList, onRemoveMento, body, setBody}) => {
         }
     }, [body, show])
     
-          return (
-                <MentoContents>    
-                    <Contents>
-                        <LeftSide>
-                            <Wrap>
-                                <Photo src={mentoList.profileImg} alt="profile" />  
-                                <div>
-                                    <Grade>{mentoList.grade}</Grade>
-                                    <Nickname>{mentoList.nickname}</Nickname>
-                                </div>
-                            </Wrap>
-                                <Direct to="/personalMain">{direct}</Direct>
-                        </LeftSide>
-                        <RightSide>
-                            <Wrap2>
-                                <Upper>{haveAlog} <Space><span>{mentoList.haveAlog.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{many}</Space></Upper>
-                                <Below>{haveDalog} <Space><span>{mentoList.haveDalog.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{many}</Space></Below>
-                            </Wrap2>
-                            <Line></Line>
-                            <Wrap2>
-                                <Upper>{haveMento} <Space><span>{mentoList.mento.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{people}</Space></Upper>
-                                <Below>{haveMenti} <Space><span>{mentoList.menti.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{people}</Space></Below>
-                            </Wrap2>
-                        </RightSide>
-                        <Dot src={process.env.PUBLIC_URL + '/images/dot.png'} onClick={(e)=>{setShow(true); setBody(false); e.stopPropagation();}}></Dot>
-                        </Contents>
-                        {
-                            show === true && 
-                            <Pop onClick={(e)=>{e.stopPropagation();}}>
-                                <Word onClick={()=>{confirmModal({mentoList, onRemoveMento});}}>
-                                    <Icon src={process.env.PUBLIC_URL + '/images/delete.png'}></Icon><Delete>{deletes}</Delete>
-                                </Word>
-                                <Word onClick={()=>{setClose(true); setShow(false)}}>
-                                    <Icon src={process.env.PUBLIC_URL + '/images/icon_message.png'}></Icon>{message}
-                                </Word>
-                            </Pop>
-                        }
-                        <AlogMessage close={close} setClose={setClose} List={mentoList}></AlogMessage>
-            </MentoContents>
-          )
-    };
+    return (
+        <MentoContents>    
+            <Contents>
+                <LeftSide>
+                    <Wrap>
+                        <Photo src={process.env.PUBLIC_URL + mentoList.profileImg} alt="profile" />  
+                        <div>
+                            <Grade>{t('Grade')[mentoList.grade]}</Grade>
+                            <Nickname>{mentoList.nickname}</Nickname>
+                        </div>
+                    </Wrap>
+                        <Direct to="/personalMain">{t('Notice_Mento')[9]}</Direct>
+                </LeftSide>
+                <RightSide>
+                    <Wrap2>
+                        <Upper>{t('Notice_Mento')[3]} <Space><span>{mentoList.haveAlog.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{t('Notice_Mento')[8]}</Space></Upper>
+                        <Below>{t('Notice_Mento')[4]} <Space><span>{mentoList.haveDalog.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{t('Notice_Mento')[8]}</Space></Below>
+                    </Wrap2>
+                    <Line></Line>
+                    <Wrap2>
+                        <Upper>{t('Notice_Mento')[1]} <Space><span>{mentoList.mento.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{t('Notice_Mento')[7]}</Space></Upper>
+                        <Below>{t('Notice_Mento')[2]} <Space><span>{mentoList.menti.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>{t('Notice_Mento')[7]}</Space></Below>
+                    </Wrap2>
+                </RightSide>
+                <Dot src={process.env.PUBLIC_URL + '/images/dot.png'} onClick={(e)=>{setShow(true); setBody(false); e.stopPropagation();}}></Dot>
+                </Contents>
+                {show === true && 
+                    <Pop onClick={(e)=>{e.stopPropagation();}}>
+                        <Word onClick={()=>{confirmModal({mentoList, onRemove});}}>
+                            <Icon src={process.env.PUBLIC_URL + '/images/delete.png'}></Icon><Delete>{t('Notice_Mento')[6]}</Delete>
+                        </Word>
+                        <Word onClick={()=>{setClose(true); setShow(false)}}>
+                            <Icon src={process.env.PUBLIC_URL + '/images/icon_message.png'}></Icon>{t('Notice_Mento')[5]}
+                        </Word>
+                    </Pop>
+                }
+                <AlogMessage close={close} setClose={setClose} List={mentoList}></AlogMessage>
+    </MentoContents>
+    )
+};
 
 export default NoticeMentoContents;
 

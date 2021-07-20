@@ -2,13 +2,51 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import TimeToggle from '../components/function/TimeToggle';
+import { useTranslation } from 'react-i18next';
+
+const NoticeRefund_Contents = ({refund, selected, onRemove}) => {
+
+    const {t} = useTranslation();
+    const [show, setShow] = useState(true);
+    const [open, setOpen] = useState(false);
+
+    return(
+        <>
+            <Contents onClick={()=>{ setOpen(true)}}>
+                <LogoDiv><Logo src={ refund.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
+                    <Sentences>
+                       <MainSentences>{refund.title}</MainSentences>
+                       <SubSentences>{refund.word}</SubSentences>
+                       </Sentences>
+                    <LanDiv>
+                        <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
+                        onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
+                    </LanDiv>
+            </Contents>
+            { open === true &&
+                <Wrap>
+                    <Close onClick={()=>{setOpen(false)}}>X</Close>
+                    <Content>
+                        <Title>{t('Refund_Reason')[0]}</Title>
+                        <Word><Thick>'{refund.nickname}'</Thick>{t('Refund_Reason')[1]}<Thick>{refund.title}</Thick>{t('Refund_Reason')[2]} {TimeToggle(refund.date)}{t('Refund_Reason')[3]}</Word>
+                        <Why>{t('Refund_Reason')[4]}: {t('Reason')[0]}</Why>
+                        <AreaWrap><Area placeholder={t('Refund_Text')}></Area></AreaWrap>
+                        <CheckBox><CheckBtn onClick={()=>{onRemove(selected); setOpen(false);}}>{t('Refund_Reason')[5]}</CheckBtn></CheckBox> {/* 클릭 시 해당 환불처리 된 컨텐츠로 이동                         */}
+                    </Content>
+                </Wrap>   
+            }
+        </>
+    )
+};
+
+export default NoticeRefund_Contents;
 
     const Contents = styled(Link)`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: center;
     margin-bottom:10px;
     padding:13px 13px 13px 30px;
@@ -187,56 +225,3 @@ const Close = styled.div`
         padding-right: 40px;
     }
 `;
-
-
-const NoticeRefund_Contents = ({refund, to, onRemoveRefund, whyArray}) => {
-    const language = {
-        notice : "환불알림", 
-        who : "님의",
-        because : "요청에 의해",
-        time : "일자로 환불처리 되었음을 알려 드립니다.",
-        word: "글이",
-        check : "확인",
-        reason : "환불 사유",
-    }   
-    const notice = language.notice;
-    const who = language.who;
-    const because = language.because;
-    const time = language.time;
-    const check = language.check;
-    const word = language.word;
-    const reason = language.reason;
-
-    const [show, setShow] = useState(true);
-    const [open, setOpen] = useState(false);
-
-    return(
-        <>
-            <Contents onClick={()=>{ setOpen(true)}}>
-                <LogoDiv><Logo src={ refund.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
-                    <Sentences>
-                       <MainSentences>{refund.title}</MainSentences>
-                       <SubSentences>{refund.word}</SubSentences>
-                       </Sentences>
-                    <LanDiv>
-                        <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
-                        onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
-                    </LanDiv>
-            </Contents>
-            { open === true &&
-                    <Wrap>
-                    <Close onClick={()=>{setOpen(false)}}>X</Close>
-                    <Content>
-                        <Title>{notice}</Title>
-                        <Word><Thick>'{refund.nickname}'</Thick>{who} {because} <Thick>{refund.title}</Thick>{word} {TimeToggle(refund.date)}{time}</Word>
-                        <Why>{reason}: {whyArray[0]}</Why>
-                        <AreaWrap><Area placeholder="남기실 말씀이 있으면 입력해주세요."></Area></AreaWrap>
-                        <CheckBox><CheckBtn onClick={()=>{ onRemoveRefund(refund.id)}}>{check}</CheckBtn></CheckBox> {/* 클릭 시 해당 환불처리 된 컨텐츠로 이동                         */}
-                    </Content>
-                    </Wrap>   
-            }
-        </>
-    )
-};
-
-export default NoticeRefund_Contents;

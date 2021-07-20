@@ -1,6 +1,85 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TimeToggle from '../components/function/TimeToggle';
+import { useTranslation } from 'react-i18next';
+
+const NoticeMessagePop  = ({onRemove, setPop, usersMessage, setMessage, number, message}) => {
+
+    const {t} = useTranslation();
+    const [change, setChange] = useState(true);
+    const [sendTextValue, setSendTextValue] = useState('');
+    function confirmDeleteModal() {
+        if (window.confirm(t('Messages_Alert')[0])) {
+            onRemove(usersMessage.id);
+            setPop(false);
+        } 
+    }
+    function confirmBanModal() {
+        if (window.confirm(`${usersMessage.account}` + t('Messages_Alert')[1])) {
+            // 해당 계정 차단
+        } 
+    }
+    const onChange = (e) => {
+        setSendTextValue(e.target.value)
+    }
+    
+    return(
+        <Wrap onClick={(e) => {e.preventDefault(); setPop(false);}}>
+            <Popup onClick={(e) => e.stopPropagation()}>
+                <Head>
+                    <Profile>
+                        <ProfileImgWrap>
+                            <ProfileImg src={usersMessage.profileImg}></ProfileImg>
+                        </ProfileImgWrap>
+                        <Right>
+                            <Accounts><AccountBold>{usersMessage.account} </AccountBold></Accounts>
+                            <Date>{TimeToggle(usersMessage.date)}</Date>
+                        </Right>
+                    </Profile>
+                    <Closes onClick={(e) => { e.preventDefault(); setPop(false); }}>X</Closes>
+                </Head>
+                <AreaWrap>
+                    <Area value={usersMessage.word} readOnly />
+                </AreaWrap>
+                <Icons>
+                    <Icon onClick={()=>{confirmDeleteModal();}}>
+                        <IconImg1 src={process.env.PUBLIC_URL + '/images/trash.png'}></IconImg1>
+                        <Words>{t('Messages_Popup')[0]}</Words>{/* 클릭 시 해당 쪽지 삭제 */}
+                    </Icon>
+                    <Icon onClick={()=>{confirmBanModal();}}>
+                        <IconImg2 src={process.env.PUBLIC_URL + '/images/van.png'}></IconImg2>
+                        <Word>{t('Messages_Popup')[1]}</Word> {/* 클릭 시 해당아이디 차단 */}
+                    </Icon>
+                    <Language src={ change ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'}  
+                    onClick={ (e) => { e.preventDefault(); setChange(!change);}}></Language>{/* 클릭 시 번역 */}
+                </Icons>
+                <SendWrap>
+                    <SendArea value={sendTextValue} onChange={onChange} placeholder={ t('Messages_Placeholder')[0] + usersMessage.account + t('Messages_Placeholder')[1]}></SendArea>
+                    <SendBtn onClick={ (e) => {e.preventDefault(); setPop(false);}}>
+                        <IconImg2 src={process.env.PUBLIC_URL + '/images/message.png'}></IconImg2>
+                        <Words>{t('Messages_Popup')[2]}</Words>{/* 클릭 시 작성 내용 해당 아이디로 전송 */}
+                    </SendBtn>
+                </SendWrap>
+                <RightArrow src={process.env.PUBLIC_URL + '/images/right_Arrow.png'} onClick={()=>{
+                    if (message >= number) {
+                        setMessage(number);
+                    } else {
+                        setMessage(count => count + 1);
+                    }
+                }}></RightArrow> {/* 클릭 시  하나 더 최신 쪽지 표시*/ }
+                <LeftArrow src={process.env.PUBLIC_URL + '/images/left_Arrow.png'} onClick={()=>{
+                    if (message === 0) {
+                        setMessage(0);
+                    } else {
+                        setMessage(count => count - 1);
+                    }
+                }}></LeftArrow>{/* 클릭 시  하나 이전 쪽지 표시*/ }
+            </Popup>  
+        </Wrap> 
+    )
+};
+
+export default NoticeMessagePop;
 
 const Wrap = styled.div`
     width:100%; height:100vh;
@@ -187,116 +266,3 @@ const LeftArrow = styled.img`
         display:block;
      }
 `;
-const NoticeMessagePop  = ({onRemoveMessage, pop, setPop, usersMessage, setMessage, number, message}) => {
-    const IconsName = {
-        ko : {
-            sent:"님이 보냄",
-            delete:"삭제",
-            van:"차단",
-            send:"보내기",
-            translate:"번역"
-        }
-    }
-    const deleteIcon = IconsName.ko.delete;
-    const vanIcon = IconsName.ko.van;
-    const sent = IconsName.ko.sent;
-    const send = IconsName.ko.send;
-
-    const [change, setChange] = useState(true);
-
-    function confirmDeleteModal() {
-        if (window.confirm(`${usersMessage.account}` + "님의 정말 삭제하시겠습니까?")) {
-            onRemoveMessage(usersMessage.id);
-            setPop(!pop);
-        } 
-    }
-    function confirmBanModal() {
-        if (window.confirm(`${usersMessage.account}` + "님을 정말 차단하시겠습니까?")) {
-            // 해당 계정 차단
-        } 
-    }
-    
-    return(
-        <>
-        {   
-            pop === true &&
-            <>
-            <Wrap onClick={ 
-                (e) => {
-                    e.preventDefault();
-                    setPop(!pop);
-                }
-            }></Wrap>
-                <Popup>
-                    <Head>
-                        <Profile>
-                            <ProfileImgWrap>
-                                <ProfileImg src={usersMessage.profileImg}></ProfileImg>
-                            </ProfileImgWrap>
-                            <Right>
-                                <Accounts><AccountBold>{usersMessage.account} </AccountBold>{sent}</Accounts>
-                                <Date>{TimeToggle(usersMessage.date)}</Date>
-                            </Right>
-                        </Profile>
-                        <Closes onClick={ 
-                            (e) => {
-                                e.preventDefault();
-                                setPop(!pop);
-                            }
-                        }>X</Closes>
-                    </Head>
-                    <AreaWrap>
-                        <Area>{usersMessage.word}</Area>
-                    </AreaWrap>
-                    <Icons>
-                        <Icon onClick={()=>{confirmDeleteModal();}}>
-                            <IconImg1 src={process.env.PUBLIC_URL + '/images/trash.png'}></IconImg1>
-                            <Words>{deleteIcon}</Words>{/* 클릭 시 해당 쪽지 삭제 */}
-                        </Icon>
-                        <Icon onClick={()=>{confirmBanModal();}}>
-                            <IconImg2 src={process.env.PUBLIC_URL + '/images/van.png'}></IconImg2>
-                            <Word>{vanIcon}</Word> {/* 클릭 시 해당아이디 차단 */}
-                        </Icon>
-                        <Language src={ change ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'}  
-                        onClick={ 
-                            (e) => {
-                                e.preventDefault();
-                                setChange(!change);
-                            }
-                        }></Language>{/* 클릭 시 번역 */}
-                    </Icons>
-                    <SendWrap>
-                        <SendArea placeholder={usersMessage.account +" 님께 보내실 내용을 입력해 주세요."}></SendArea>
-                        <SendBtn onClick={ 
-                            (e) => {
-                                e.preventDefault();
-                                setPop(!pop);
-                            }
-                        }>
-                            <IconImg2 src={process.env.PUBLIC_URL + '/images/message.png'}></IconImg2>
-                            <Words>{send}</Words>{/* 클릭 시 작성 내용 해당 아이디로 전송 */}
-                        </SendBtn>
-                    </SendWrap>
-                    <RightArrow src={process.env.PUBLIC_URL + '/images/right_Arrow.png'} onClick={()=>{
-                        if (message >= number) {
-                            setMessage(number);
-                        } else {
-                            setMessage(count => count + 1);
-                        }
-                    }}></RightArrow> {/* 클릭 시  하나 더 최신 쪽지 표시*/ }
-                    <LeftArrow src={process.env.PUBLIC_URL + '/images/left_Arrow.png'} onClick={()=>{
-                        if (message === 0) {
-                            setMessage(0);
-                        } else {
-                            setMessage(count => count - 1);
-                        }
-                    }}></LeftArrow>{/* 클릭 시  하나 이전 쪽지 표시*/ }
-                </Popup>   
-            </>
-        }
-        
-        </>
-    )
-};
-
-export default NoticeMessagePop;

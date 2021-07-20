@@ -1,55 +1,46 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeMentoContents from './NoticeMentoContents';
-import NoticeMentiContents from './NoticeMentiContents';
 import { useTranslation } from 'react-i18next';
 
-const NoticeMento  = ({onRemoveMento, usersMento, onRemoveMenti, usersMenti, body, setBody}) => {
+function NoticeMento({dummyData, setDummyData, body, setBody}) {
 
     const {t} = useTranslation();
     const [show, setShow] = useState("mento");
-    const [name, changeName] = useState(0);
-    const [open, setOpen] = useState(true);
+    const onRemoveMento = (id) => {
+        setDummyData({...dummyData, mento: dummyData.mento.filter(data => data.id !== id)})
+    }
+    const onRemoveMentee = (id) => {
+        setDummyData({...dummyData, mentee: dummyData.mentee.filter(data => data.id !== id)})
+    }
 
-    function TabContent({name, onRemoveMento, usersMento, body, setBody, onRemoveMenti, usersMenti}){
 
-        if (name === 0){
-            return(
-                    <>
-                    <Total>{t('Notice_Mento')[1]} <TotalNum>{usersMento.length}</TotalNum>{t('Notice_Mento')[7]}</Total>
-                    {
-                        usersMento.map((mentoList)=>{
-                            return(
-                                 <NoticeMentoContents mentoList={mentoList} onRemoveMento={onRemoveMento} usersMento={usersMento} body={body} setBody={setBody}/>       
-                                )
-                        })
-                    }
-                    </>                
-            )
-        }else if (name === 1){
-          return (
-                <>
-                <Total>{t('Notice_Mento')[2]} <TotalNum>{usersMenti.length}</TotalNum>{t('Notice_Mento')[7]}</Total>
-                {
-                    usersMenti.map((mentiList)=>{
-                        return(
-                            <NoticeMentiContents mentiList={mentiList} onRemoveMenti={onRemoveMenti} usersMenti={usersMenti} body={body} setBody={setBody}/>       
-                            )
-                    })
-                }
-                </> 
-            )
+    const TabContent = ({show, onRemoveMento, onRemoveMentee, body, setBody}) => {
+        if (show === "mento"){
+            return(<>
+                    <Total>{t('Notice_Mento')[1]} <TotalNum>{dummyData.mento.length}</TotalNum>{t('Notice_Mento')[7]}</Total>
+                    {dummyData.mento.map((mentoList)=>
+                        <NoticeMentoContents key={mentoList.id} mentoList={mentoList} onRemove={onRemoveMento} body={body} setBody={setBody}/>       
+                    )}
+            </>)
+        } else if (show === "mentee") {
+            return (<>
+                <Total>{t('Notice_Mento')[2]} <TotalNum>{dummyData.mentee.length}</TotalNum>{t('Notice_Mento')[7]}</Total>
+                {dummyData.mentee.map((mentiList)=>
+                    <NoticeMentoContents key={mentiList.id} mentoList={mentiList} onRemove={onRemoveMentee} body={body} setBody={setBody}/>       
+                )}
+            </>)
         } 
     }
 
     return(
         <>
-        <TopTitle>{t('Notice_Mento')[0]}</TopTitle>
-        <Frame>
-            <MentoBox show={show} onClick={()=>{setShow("mento"); changeName(0)}}>{t('Notice_Mento')[1]}</MentoBox>
-            <MentiBox show={show} onClick={()=>{setShow("menti"); changeName(1)}}>{t('Notice_Mento')[2]}</MentiBox>
-        </Frame>
-        <TabContent body={body} setBody={setBody} name={name} onRemoveMento={onRemoveMento} usersMento={usersMento} onRemoveMenti={onRemoveMenti} usersMenti={usersMenti} open={open} setOpen={setOpen}></TabContent>
+            <TopTitle>{t('Notice_Mento')[0]}</TopTitle>
+            <Frame>
+                <MentoBox show={show} onClick={()=>{setShow("mento")}}>{t('Notice_Mento')[1]}</MentoBox>
+                <MentiBox show={show} onClick={()=>{setShow("mentee")}}>{t('Notice_Mento')[2]}</MentiBox>
+            </Frame>
+            <TabContent body={body} setBody={setBody} show={show} onRemoveMento={onRemoveMento} onRemoveMentee={onRemoveMentee}></TabContent>
         </>
     )
 };
@@ -87,8 +78,8 @@ const MentoBox = styled.div`
 const MentiBox = styled.div`
     font-size: 14px;
     width:40%; height:50px;
-    border-bottom:${props => props.show === "menti" ? "3px solid #fd0031" : "none" };
-    color:${props => props.show === "menti" ? "#fd0031" : "#000" };
+    border-bottom:${props => props.show === "mentee" ? "3px solid #fd0031" : "none" };
+    color:${props => props.show === "mentee" ? "#fd0031" : "#000" };
     font-weight: bold;
     line-height: 4;
     text-align: center;

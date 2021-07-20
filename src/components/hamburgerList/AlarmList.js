@@ -1,227 +1,196 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { stop } from '../function/stop';
 import { Link } from 'react-router-dom';
-import NoticeData from '../../dummydata/NoticeData.json';
-import NoticeHunData from '../../dummydata/NoticeHunData.json';
-import NoticeMessageData from '../../dummydata/NoticeMessageData.json';
-import NoticeModifyData from '../../dummydata/NoticeModifyData.json';
-import NoticePasteData from '../../dummydata/NoticePasteData.json';
-import NoticeRefundData from '../../dummydata/NoticeRefundData.json';
-import NoticeReplyData from '../../dummydata/NoticeReplyData.json';
 import { useTranslation } from 'react-i18next';
+import FormatDateAsText from '../function/FormatDateAsText';
 
-export const AlarmList = ({title, arrow, closeNav, usersRefund, usersHun, usersModify, usersReply, usersPaste, usersMento, usersMessage}) => {
+function AlarmList({dummyData, setDummyData}) {
 
-    const {t} = useTranslation();
-    const [isActive, setIsActive] = useState(false);
-    const [alarmClose, setAlarmClose] = useState(true);
-    const OpenList = (e) => {
-        e.preventDefault();
-        setIsActive(!isActive);
-    };
-
-    const alarmArray = NoticeData.ko.alarmArray;
-    const [alarm, setAlarm] = useState(alarmArray);
-    function hide(i) {
-        const state = [...alarmArray];
-        state[i].state = false;
-        setAlarm( state );
-    }
-
-    const notice = NoticeData.ko.notice;
-    const [turn, setTurn] = useState(notice);
-    function hideNotice(){
-        setTurn({...turn, state:false});
-    }
-
-    alarmArray.sort(function(a,b){
-        return a.time - b.time
-      });
-    
+    const {t} = useTranslation();   
     // 각 배열 컨턴츠 갯수 
-    const replyArray = NoticeReplyData.ko.ReplyArray;
-    const hunArray = NoticeHunData.ko.hunArray;
-    const pasteArray = NoticePasteData.ko.pasteArray;
-    const messageArray = NoticeMessageData.ko.messageArray;
+    const [slideDown, setSlideDown] = useState(false);
+    const noticeLength = dummyData.notice.count;
+    const refundLength = dummyData.refund.length;
+    const replyLength = dummyData.reply.length;
+    const hunLength = dummyData.hunAl.length;
+    const modifyLength = dummyData.modify.length;
+    const takeLength = dummyData.take.length;
+    const messageLength = dummyData.message.length;
+    const mentoLength = dummyData.mento.length;
 
-    const refundLength = usersRefund.length;
-    const replyLength = usersReply.length;
-    const hunLength = usersHun.length;
-    const modifyLength = usersModify.length;
-    const pasteLength = usersPaste.length;
-    const messageLength = usersMessage.length;
-    const mentoLength = usersMento.length;
-
-    alarm[0].Count = refundLength;
-    alarm[1].Count = pasteLength;
-    alarm[2].Count = modifyLength;
-    alarm[3].Count = messageLength;
-    alarm[4].Count = hunLength;
-    alarm[5].Count = replyLength;
-    alarm[6].Count = mentoLength;
 
     return(  
-        <ActiveList onClick={OpenList} >
-            <ListTitle>{title}<Arrow src={arrow}></Arrow></ListTitle>
-            {isActive ? 
-            (<ShowContent>
-                <>
-                {
-                alarmClose &&
-                 <>
-                <NotiAlarm onClick={(e)=>{stop(e); closeNav();}} count={turn.Count} href="http://www.altong.com/default/cs/notice/notice?Page=1" state={turn.state}>
-                <AlarmNotice>
-                    <AlarmText>
-                        {turn.Front} <Count>{turn.Count}</Count>{turn.Back}
-                    </AlarmText>
-                    <CloseButton onClick={(e) => { hideNotice(); stop(e); e.preventDefault() }}>x</CloseButton>
-                </AlarmNotice>            
-                <AlarmTime>{turn.time}{turn.minutes}</AlarmTime>
-                 </NotiAlarm>
-                 {
-                    alarm.map((alarm, i) => { return(
-                        <>
-                        { alarm.state && 
-                            <Alarm onClick={(e)=>{stop(e); closeNav(); hide(i)}} key={alarm.id} count={alarm.Count} to={alarm.href} state={alarm.state} >
-                                <AlarmNotice>
-                                    <AlarmText>
-                                        {alarm.Front} <Count>{alarm.Count}</Count>{alarm.Back}
-                                    </AlarmText>
-                                    <CloseButton onClick={(e) => {stop(e); e.preventDefault(); hide(i)}}>x</CloseButton>
-                                </AlarmNotice>            
-                                <AlarmTime>{alarm.time}{alarm.minutes}</AlarmTime>
-                            </Alarm>
-                        }
-                        </>
-                        )
-                    })
-                }
-                </>
-                }
-                <All to="/notice"  onClick={()=>{ closeNav(); }}>{t('View_All')}</All>
-                </>
-            </ShowContent>):(
-                <Content></Content>
-            )}       
+        <ActiveList>
+            <NavTitle onClick={()=>{setSlideDown(!slideDown)}}>{t('Notification')[0]}<ArrowImg src={process.env.PUBLIC_URL + '/images/arrow.png'} trans={slideDown} /></NavTitle>
+            <AlarmScrollBox slide={slideDown}>
+                <AlarmBox>
+                    {noticeLength > 0 &&
+                        <NoticeAlarm href="http://www.altong.com/default/cs/notice/notice?Page=1">
+                            <NoticeText>{t('New_Notice')[0]} <span>{noticeLength}</span>{t('New_Notice')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.notice.date)}</NoticeDate>
+                        </NoticeAlarm>
+                    }
+                    {refundLength > 0 &&
+                        <AlarmContentsMenu to="/notice/refund" >
+                            <NoticeText>{t('New_Refund')[0]} <span>{refundLength}</span>{t('New_Refund')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.refund[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>
+                    }
+                    {takeLength > 0 &&
+                        <AlarmContentsMenu to="/notice/paste" >
+                            <NoticeText>{t('New_Take')[0]} <span>{takeLength}</span>{t('New_Take')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.take[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                 
+                    }
+                    {modifyLength > 0 &&
+                        <AlarmContentsMenu to="/notice/modify" >
+                            <NoticeText>{t('New_Revise')[0]} <span>{modifyLength}</span>{t('New_Revise')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.modify[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                   
+                    }
+                    {messageLength > 0 &&
+                        <AlarmContentsMenu to="/notice/message" >
+                            <NoticeText>{t('New_Message')[0]} <span>{messageLength}</span>{t('New_Message')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.message[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                  
+                    }
+                    {hunLength > 0 &&
+                        <AlarmContentsMenu to="/notice/hun" >
+                            <NoticeText>{t('New_HunAl')[0]} <span>{hunLength}</span>{t('New_HunAl')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.hunAl[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                 
+                    }
+                    {replyLength > 0 &&
+                        <AlarmContentsMenu to="/notice/reply" >
+                            <NoticeText><span>{replyLength}</span>{t('New_Reply')}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.reply[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                    
+                    }
+                    {mentoLength > 0 &&
+                        <AlarmContentsMenu to="/notice/mento" >
+                            <NoticeText>{t('New_Mentees')[0]} <span>{mentoLength}</span>{t('New_Mentees')[1]}</NoticeText>
+                            <NoticeDate>{FormatDateAsText(dummyData.mento[0].date)}</NoticeDate>
+                        </AlarmContentsMenu>                   
+                    }
+                    <AllPageMoveBtn to="/notice">{t('View_All')}</AllPageMoveBtn>
+                </AlarmBox>
+            </AlarmScrollBox>
         </ActiveList>   
     )
 } 
 
+export default AlarmList;
+
 const ActiveList = styled.li`
-    padding: 0.625rem 0;
-    font-size:1rem;
     border-top:1px solid #f0f0f0;
     width:100%;
-    cursor:pointer;
-    
-    :last-child{
-        border-bottom:1px solid #f0f0f0;
-    }
 `;
-
-const ListTitle = styled.p`
-    position: relative;
-    :hover,:active,:focus{
-    color:#FF4A4A;
-    font-weight:bold;
-    }
-`;
-
-const Content = styled.div`
-    max-height:140px;
-    background-color:#eee;
-    padding:0.625em 0.5em;
-    margin-top:0.625rem;
-    overflow:scroll;
-    display:none;
-    height:140px;
-    
-    ::-webkit-scrollbar {
-    display: none; 
-}
-    @media (min-width: 480px){
-        max-height:300px;
-    }
-`;
-
-const ShowContent = styled(Content)`
-    display:block;
-`;
-const Alarm = styled(Link)`
-    color:#333;
-    background-color:#fefefe;
-    border:1px solid #707070;
-    border-radius: 15px;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
-    flex-direction:column;
-    padding:0.625em 0.5em;
-    margin-bottom:10px;
-`;
-
-const NotiAlarm = styled.a`
-    color:#333;
-    background-color:#F8D3D3;
-    border-radius: 15px;
-    display:${ props => props.count !== 0 && props.state == true ? "flex" : "none"};
-    flex-direction:column;
-    padding:0.625em 0.5em;
-    margin-bottom:10px;
-`;
-
-const AlarmNotice = styled.div`
+const NavTitle = styled.span`
+    height:40px;
+    width:100%;
     display:flex;
-    position:relative;
+    justify-content:center;
     align-items:center;
-    width:100%;
+    position:relative;
+    cursor:pointer;
 `;
-const AlarmText = styled.div`
-    width:100%;
-    font-size:0.7rem;
-    text-align:left;
-    line-height: 3; 
-    height: 2em;
-    padding-left:5px;
-    @media all and (min-width:800px){
-        font-size:0.8rem;
-        padding-left:10px;  
-    }
-`;
-
-const AlarmTime = styled.p`
-    font-size:0.625rem;
-    text-align:right;
-    margin-top:5px;
-`;
-const CloseButton = styled.div`
-    color:#888;
-    width:0.5rem;
-    height:0.5rem;
-    position:absolute;
-    right:0; top:-5px;
-`;
-
-const Count = styled.span`
-    color:#fd0031;
-    font-weight:bold;
-`;
-
-const Arrow = styled.img`
+const ArrowImg = styled.img`
     position:absolute;
     right:30px;
     width:20px;
-    transform:rotate(90deg);
+    transform:rotate(${({trans})=>trans ? '270deg':'90deg'});
+    transition:all 0.3s;
 `;
+const AlarmBox = styled.div`
+    background:#eee;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-bottom: 10px;
+`;
+const NoticeAlarm = styled.a`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:13px;
+    font-weight:normal;
+    width:85%;
+    height:60px;
+    box-sizing:border-box;
+    border-radius:10px;
+    position:relative;
+    background:#f8d3d3;
+    color:#555;
+    margin-top:10px;
+    cursor:pointer;
+`;
+const NoticeAlarmClose = styled.i`
+    position:absolute;
+    top:3px;
+    right:7px;
+    font-size:11px;
+    cursor:pointer;
 
-const All = styled(Link)`
-    border-radius:20px;
-    background:#fefefe;
-    font-size:10px;
-    color:#333;
-    text-decoration:none;
-    display:block;
-    width:30%;
-    height:20px;
-    line-height: 1.8;
-    margin:15px auto 0;
+    ::after {
+        content:"";
+        width:13px;
+        height:13px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+`;
+const NoticeText = styled.span`
+    span {
+        color:#fd0031;
+        font-weight:bold;
+    }
+`;
+const NoticeDate = styled.span`
+    position:absolute;
+    bottom:3px;
+    right:7px;
+    font-size:11px;
+`;
+const AlarmContentsMenu = styled(Link)`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:13px;
+    font-weight:normal;
+    width:85%;
+    height:60px;
+    box-sizing:border-box;
+    border-radius:10px;
+    position:relative;
+    background:#f8d3d3;
+    color:#555;
+    margin-top:10px;
+    cursor:pointer;
+    background:#fff;
+    border:1px solid #999;
+`;
+const AlarmScrollBox = styled.div`
+    height:${({slide})=> slide ? '150px': '0px'};
+    overflow-y:scroll;
+    transition:all 0.3s;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+
+    ::-webkit-scrollbar {
+        display:none;
+    }
+`;
+const AllPageMoveBtn = styled(Link)`
+    margin-top:10px;
+    background:#fff;
+    border:1px solid #999;
+    border-radius:30px;
+    font-size:12px;
+    cursor:pointer;
+    padding:5px 20px;
+    color:#999;
 `;

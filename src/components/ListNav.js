@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AlarmList } from './hamburgerList/AlarmList';
+import AlarmList from './hamburgerList/AlarmList';
 import { MentoList } from './hamburgerList/MentoList';
 import { VisitedList } from './hamburgerList/VisitedList';
 import { UpdateList} from './hamburgerList/UpdateList';
@@ -23,12 +23,12 @@ const AlogList = styled.ul`
     font-weight:bold;
 `;
 
-const ListNav = ({title, arrow, closeNav, usersRefund, usersModify, usersReply, usersPaste, usersHun, usersMessage, usersMento}) => {
+const ListNav = ({title, arrow, closeNav, dummyData, setDummyData}) => {
 
     return(
         <Partition>
             <AlogList>
-                <AlarmList title={title[0]} arrow={arrow} closeNav={closeNav} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersMento={usersMento} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage}></AlarmList>
+                <AlarmList dummyData={dummyData} setDummyData={setDummyData} />
                 <UpdateList title={title[1]} arrow={arrow} closeNav={closeNav}></UpdateList>
                 <MentoList title={title[2]} arrow={arrow} closeNav={closeNav}></MentoList>
                 <VisitedList title={title[3]} arrow={arrow} closeNav={closeNav}></VisitedList>  

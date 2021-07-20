@@ -1,7 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import NoticePasteData from '../dummydata/NoticePasteData.json';
 import NoticePaste_Contents from './NoticePaste_Contents';
+import { useTranslation } from 'react-i18next';
+
+const NoticePaste  = ({dummyData, setDummyData}) => {
+    
+    const {t} = useTranslation();
+    const onRemove = (id) => {
+        setDummyData({...dummyData, take: dummyData.take.filter(data => data.id !== id)})
+    }
+
+    return(
+        <>
+            <TopTitle>{t('Notification')[0]}</TopTitle>
+            <GrayContents>{t('Reposted_Alogs')[0]}<GrayContentsCount>{dummyData.take.length}</GrayContentsCount>{t('Reposted_Alogs')[1]}</GrayContents>
+            {dummyData.take.map((take)=>{
+                return(
+                    <NoticePaste_Contents key={take.id} take={take} selected={take.id} onRemove={onRemove}></NoticePaste_Contents>
+                )})
+            }
+        </>
+    )
+};
+
+export default NoticePaste;
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -20,7 +42,7 @@ const GrayContents = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: flex-start;
     margin-bottom:10px;
     padding:13px 13px 13px 80px;
@@ -33,27 +55,3 @@ const GrayContents = styled.div`
         font-size: 14px;
     }
 `;
-
-const NoticePaste  = ({onRemovePaste, usersPaste}) => {
-    
-    const alarm = NoticePasteData.ko.alarm;
-    const Title = NoticePasteData.ko.pasteTitle;
-    const pasteArray = NoticePasteData.ko.pasteArray;
-
-    return(
-        <>
-        <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{usersPaste.length}</GrayContentsCount>{pasteArray.Back}</GrayContents>
-        {
-            usersPaste.map((Paste)=>{
-                return(
-                    <NoticePaste_Contents key={Paste.id} to={Paste.href} paste={Paste} onRemovePaste={onRemovePaste}></NoticePaste_Contents>
-                )
-            })
-        }
-        
-        </>
-    )
-};
-
-export default NoticePaste;

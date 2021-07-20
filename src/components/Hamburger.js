@@ -7,7 +7,7 @@ import i18n from '../config/lang/i18n';
 import { useTranslation } from 'react-i18next';
 
 
-function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, usersModify, usersReply, usersPaste, usersMessage, usersMento}) {
+function Hamburger({naviRef, isActive, setIsActive, dummyData, setDummyData}) {
 
   const {t} = useTranslation();
   const langHamburger = {
@@ -71,13 +71,7 @@ function Hamburger({naviRef, isActive, setIsActive, usersHun, usersRefund, users
         title={listTitle}
         arrow={listTitleArrow} 
         closeNav={closeNav}
-        usersRefund={usersRefund} 
-        usersModify={usersModify}
-        usersReply={usersReply}
-        usersPaste={usersPaste}
-        usersMento={usersMento}
-        usersMessage={usersMessage}
-        usersHun={usersHun}
+        dummyData={dummyData} setDummyData={setDummyData}
         />
         <Statistic 
         total={visitorCount.total} 

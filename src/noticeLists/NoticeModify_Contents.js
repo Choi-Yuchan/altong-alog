@@ -2,14 +2,61 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import TimeToggle from '../components/function/TimeToggle';
+import { useTranslation } from 'react-i18next';
 
+const NoticeModify_Contents = ({modify, onRemove, selected}) => {
+    const language = {
+        notice : "수정알림", 
+        who : "님께서",
+        because : "글을 수정함에 따라",
+        time : "일자로 글 내용이 변경되었음을 알려 드립니다.",
+        check : "수정내용 확인하기"
+    }    
+    const notice = language.notice;
+    const who = language.who;
+    const because = language.because;
+    const time = language.time;
+    const check = language.check;
+
+    const [show, setShow] = useState(true);
+    const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
+
+    return(
+            <>
+            <Contents onClick={()=>{ setOpen(true)} }>
+                <LogoDiv><Logo src={ modify.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
+                    <Sentences>
+                       <MainSentences>{modify.title}</MainSentences>
+                       <SubSentences>{modify.word}</SubSentences>
+                       </Sentences>
+                    <LanDiv>
+                        <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
+                        onClick={(e)=>{e.preventDefault(); e.stopPropagation(); setShow(!show)}}></Language>
+                    </LanDiv>
+            </Contents>
+                { open === true &&
+                    <Wrap>
+                    <Close onClick={()=>{setOpen(false)}}>X</Close>
+                    <Content>
+                        <Title>{notice}</Title>
+                        <Word><Thick>'{modify.nickname}'</Thick>{who} <Thick>{modify.title}</Thick>{because} {TimeToggle(modify.date)}{time}</Word>
+                        <CheckBox><CheckBtn onClick={()=>{onRemove(selected); setOpen(false);}}>{check}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
+                    </Content>
+                    </Wrap>   
+                }
+            </>
+    )
+};
+
+export default NoticeModify_Contents;
 
 const Contents = styled(Link)`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: center;
     margin-bottom:10px;
     padding:13px 13px 13px 30px;
@@ -162,48 +209,3 @@ const Close = styled.div`
         padding-right: 40px;
     }
 `;
-const NoticeModify_Contents = ({modify, to, onRemoveModify}) => {
-    const language = {
-        notice : "수정알림", 
-        who : "님께서",
-        because : "글을 수정함에 따라",
-        time : "일자로 글 내용이 변경되었음을 알려 드립니다.",
-        check : "수정내용 확인하기"
-    }    
-    const notice = language.notice;
-    const who = language.who;
-    const because = language.because;
-    const time = language.time;
-    const check = language.check;
-
-    const [show, setShow] = useState(true);
-    const [open, setOpen] = useState(false);
-
-    return(
-            <>
-            <Contents onClick={()=>{ setOpen(true)} }>
-                <LogoDiv><Logo src={ modify.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
-                    <Sentences>
-                       <MainSentences>{modify.title}</MainSentences>
-                       <SubSentences>{modify.word}</SubSentences>
-                       </Sentences>
-                    <LanDiv>
-                        <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
-                        onClick={(e)=>{e.preventDefault(); e.stopPropagation(); setShow(!show)}}></Language>
-                    </LanDiv>
-            </Contents>
-                { open === true &&
-                    <Wrap>
-                    <Close onClick={()=>{setOpen(false)}}>X</Close>
-                    <Content>
-                        <Title>{notice}</Title>
-                        <Word><Thick>'{modify.nickname}'</Thick>{who} <Thick>{modify.title}</Thick>{because} {TimeToggle(modify.date)}{time}</Word>
-                        <CheckBox><CheckBtn to={modify.href} onClick={()=>{ onRemoveModify(modify.id);}}>{check}</CheckBtn></CheckBox>{/* 클릭 시 수정 된 컨텐츠로 이동 */}
-                    </Content>
-                    </Wrap>   
-                }
-            </>
-    )
-};
-
-export default NoticeModify_Contents;

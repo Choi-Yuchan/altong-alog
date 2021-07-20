@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from 'styled-components';
 import React, { useState, useRef, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import AlogMain from './domain/AlogMain';
 import AlogMainSearch from './domain/AlogMainSearch';
 import AlogPersonalMain from './domain/AlogPersonalMain';
@@ -14,26 +14,10 @@ import AlogWrite from './domain/AlogWrite';
 import ScrollToTop from './components/function/ScrollToTop';
 import './style/App.css';
 import Notice from './domain/Notice';
-import NoticePaste from './noticeLists/NoticePaste';
-import NoticeReply from './noticeLists/NoticeReply';
-import NoticeRefund from './noticeLists/NoticeRefund';
-import NoticeModify from './noticeLists/NoticeModify';
-import NoticeMessage from './noticeLists/NoticeMessage';
-import NoticeMento from './noticeLists/NoticeMento';
-import NoticeHun from './noticeLists/NoticeHun';
-import NoticeRefundData from './dummydata/NoticeRefundData.json'; 
-import NoticeModifyData from './dummydata/NoticeModifyData.json'; 
-import NoticeReplyData from './dummydata/NoticeReplyData.json'; 
-import NoticePasteData from './dummydata/NoticePasteData.json'; 
-import NoticeMessageData from './dummydata/NoticeMessageData.json'; 
-import NoticeMentoData from './dummydata/NoticeMentoData.json'; 
-import NoticeMentiData from './dummydata/NoticeMentiData.json'; 
-import NoticeHunData from './dummydata/NoticeHunData.json'; 
+import NoticeDummy from './dummydata/NoticeDummy.json';
 
 
 function AlogDalog() {
-  const [shows, setShows] = useState(false);
-  const clicks = () => { setShows(!shows); }
   const naviRef= useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(naviRef, false);
   //AlogPage 관련 Data
@@ -125,55 +109,6 @@ function AlogDalog() {
   const [checkList, setCheckList] = useState(false); //새 그룹 만들기, 기능 설정 팝업 체크아이콘 유무
   const [opened, setOpened] = useState(false); //배경설정하기 팝업
   const [bgSetting, setBgSetting] = useState(false); //새 그룹만들기에서 배경설정 팝업 적용
-  const RefundArray = NoticeRefundData.ko.refundArray; //환불 데이터
-  const [usersRefund, setUserRefund] = useState(RefundArray);
-  const onRemoveRefund = id => {
-      setUserRefund(usersRefund.filter(user => user.id !== id));
-    };
-  const whyArray = ["저작권 위반", "유해성", "장난성", "중복성", "비속어/반말", "비 정보 지식", "음해/비방", "기타"];
-
-
-  const modifyArray = NoticeModifyData.ko.modifyArray; //수정 데이터
-  const [usersModify, setUserModify] = useState(modifyArray);
-  const onRemoveModify = id => {
-      setUserModify(usersModify.filter(user => user.id !== id));
-    };  
-
-  const ReplyArray = NoticeReplyData.ko.ReplyArray; //답변 데이터
-  const [usersReply, setUserReply] = useState(ReplyArray);
-  const onRemoveReply = id => {
-      setUserReply(usersReply.filter(user => user.id !== id));
-    };    
- 
-  const pasteArray = NoticePasteData.ko.pasteArray; //퍼가기 데이터
-  const [usersPaste, setUserPaste] = useState(pasteArray);
-  const onRemovePaste = id => {
-      setUserPaste(usersPaste.filter(user => user.id !== id));
-    };   
-
-  const messageArray = NoticeMessageData.ko.messageArray; // 메시지 데이터
-  const [usersMessage, setUserMessage] = useState(messageArray);
-  const onRemoveMessage = id => {
-      setUserMessage(usersMessage.filter(user => user.id !== id));
-    };  
-    
-  const mentoArray = NoticeMentoData.ko.mentoArray; // 멘토 데이터
-  const [usersMento, setUserMento] = useState(mentoArray);
-  const onRemoveMento = id => {
-      setUserMento(usersMento.filter(user => user.id !== id));
-    };  
-
-  const mentiArray = NoticeMentiData.ko.mentiArray; // 멘티 데이터
-  const [usersMenti, setUserMenti] = useState(mentiArray);
-  const onRemoveMenti = id => {
-      setUserMenti(usersMenti.filter(user => user.id !== id));
-    };  
-
-  const hunArray = NoticeHunData.ko.hunArray; // 훈훈알 데이터
-  const [usersHun, setUserHun] = useState(hunArray);
-  const onRemoveHun = id => {
-      setUserHun(usersHun.filter(user => user.id !== id));
-    };
   const [body, setBody] = useState(false);
   useEffect(()=>{
     if (body === true) {
@@ -188,65 +123,50 @@ function AlogDalog() {
   const [siren, setSiren] = useState(false);
   const [showBgEdit, setShowBgEdit] = useState(false);
 
+  const [dummyData, setDummyData] = useState(NoticeDummy);
+
   return(
     <Wrap onClick={(e)=>{setBody(true); e.stopPropagation();}}>
     <Container>
-      <AlogHeader isActive={isActive} setIsActive={setIsActive} openInput={openInput} setOpenInput={setOpenInput} text={text} setText={setText} setSearchOption={setSearchOption} />
-      <Hamburger  isActive={isActive} setIsActive={setIsActive} usersHun={usersHun} usersRefund={usersRefund} usersModify={usersModify} usersReply={usersReply} usersPaste={usersPaste} usersMessage={usersMessage} usersMento={usersMento}/>
-      <ScrollToTop>    
-      <Route exact path="/" component={AlogMain} />
-      <Route
-        path='/personalMain'
-        render={() => 
-        <AlogPersonalMain bgImg={defaultBgImg} setNewGroup={setNewGroup} newGroup={newGroup} 
-        setMyAlogSlide={setMyAlogSlide} setCheckList={setCheckList} checkList={checkList} 
-        myMainAlogSlide={myMainAlogSlide} sample={sample} opened={opened} setOpened={setOpened}
-        bgSetting={bgSetting} setBgSetting={setBgSetting} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
-        />}
+      <AlogHeader 
+        isActive={isActive} setIsActive={setIsActive} 
+        openInput={openInput} setOpenInput={setOpenInput} 
+        text={text} setText={setText} 
+        setSearchOption={setSearchOption} 
       />
-      <Route
-        path="/contents"
-        render={() => 
-        <AlogPage body={body} setBody={setBody} setNewGroup={setNewGroup} newGroup={newGroup}
-        sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
-        opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting} siren={siren} setSiren={setSiren}
-        setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
-        />}
-         />
-      <Route path="/writing" component={AlogWrite} />
-      <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
-      <Switch>
-        <Route exact path="/notice" component={Notice} />
+      <Hamburger  
+        isActive={isActive} setIsActive={setIsActive} 
+        dummyData={dummyData} setDummyData={setDummyData}
+      />
+      <ScrollToTop>    
+        <Route exact path="/" component={AlogMain} />
         <Route
-        path="/notice/paste"
-        render={() => <NoticePaste onRemovePaste={onRemovePaste} usersPaste={usersPaste} setUserPaste={setUserPaste}/>}
-         />
+          path='/personalMain'
+          render={() => 
+          <AlogPersonalMain bgImg={defaultBgImg} setNewGroup={setNewGroup} newGroup={newGroup} 
+          setMyAlogSlide={setMyAlogSlide} setCheckList={setCheckList} checkList={checkList} 
+          myMainAlogSlide={myMainAlogSlide} sample={sample} opened={opened} setOpened={setOpened}
+          bgSetting={bgSetting} setBgSetting={setBgSetting} setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
+          />}
+        />
         <Route
-        path="/notice/reply"
-        render={() => <NoticeReply onRemoveReply={onRemoveReply} usersReply={usersReply} setUserReply={setUserReply}/>}
-         />
-        <Route
-        path="/notice/refund"
-        render={() => <NoticeRefund onRemoveRefund={onRemoveRefund} usersRefund={usersRefund} setUserRefund={setUserRefund} whyArray={whyArray}/>}
-         />
-        <Route
-        path="/notice/modify"
-        render={() => <NoticeModify onRemoveModify={onRemoveModify} usersModify={usersModify} setUserModify={setUserModify}/>}
-         />
-         <Route 
-        path="/notice/message"
-        render={() => <NoticeMessage onRemoveMessage={onRemoveMessage} usersMessage={usersMessage} setUserMessage={setUserMessage}/>}
-         />
-        <Route 
-        path="/notice/hun"
-        render={() => <NoticeHun onRemoveHun={onRemoveHun} usersHun={usersHun} setUserHun={setUserHun}/>}
-         />
-        <Route 
-        path="/notice/mento"
-        render={() => <NoticeMento body={body} setBody={setBody} onRemoveMento={onRemoveMento} usersMento={usersMento} setUserMento={setUserMento} onRemoveMenti={onRemoveMenti} usersMenti={usersMenti} setUserMenti={setUserMenti}/>}
-         />     
+          path="/contents"
+          render={() => 
+          <AlogPage body={body} setBody={setBody} setNewGroup={setNewGroup} newGroup={newGroup}
+          sample={sample} checkList={checkList} myMainAlogSlide={myMainAlogSlide} setMyAlogSlide={setMyAlogSlide}
+          opened={opened} setOpened={setOpened} bgSetting={bgSetting} setBgSetting={setBgSetting} siren={siren} setSiren={setSiren}
+          setShowBgEdit={setShowBgEdit} showBgEdit={showBgEdit}
+          />}
+          />
+        <Route path="/writing" component={AlogWrite} />
+        <Route path={"/search/"+ text} render={()=> <AlogMainSearch text={text} setText={setText} searchOption={searchOption} />} />
+        <Route path="/notice" render={()=>
+          <Notice 
+            dummyData={dummyData} setDummyData={setDummyData}
+            body={body} setBody={setBody}
+          />
+        }/>
         <Route path="/domang" component={Domang} />
-      </Switch>
       </ScrollToTop>
     </Container>
     </Wrap>

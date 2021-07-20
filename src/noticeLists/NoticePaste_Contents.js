@@ -1,13 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+const NoticePaste_Contents = ({take, selected, onRemove}) => {
+
+    const [show, setShow] = useState(true);
+
+    return(
+            <Contents to="/" onClick={()=>{onRemove(selected)}}>{/* 클릭 시 해당 퍼가기 된 컨텐츠로 이동 */}
+                <LogoDiv><Logo src={ take.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
+                <Sentences>
+                    <MainSentences>{take.title}</MainSentences>
+                    <SubSentences>{take.word}</SubSentences>
+                    </Sentences>
+                <LanDiv>
+                    <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
+                    onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
+                </LanDiv>
+            </Contents>
+    )
+};
+
+export default NoticePaste_Contents;
 
 const Contents = styled(Link)`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display: flex;
     align-items: center;
     margin-bottom:10px;
     padding:13px 13px 13px 30px;
@@ -81,23 +102,3 @@ const SubSentences = styled.div`
         font-size:15px;
     }
 `;    
-const NoticePaste_Contents = ({paste, to, onRemovePaste}) => {
-
-    const [show, setShow] = useState(true);
-
-    return(
-            <Contents to = "/" onClick={()=>{onRemovePaste(paste.id)}}>{/* 클릭 시 해당 퍼가기 된 컨텐츠로 이동 */}
-                <LogoDiv><Logo src={ paste.state ? process.env.PUBLIC_URL + '/images/logo_alog.png' : process.env.PUBLIC_URL + '/images/logo_dalog.png'} /></LogoDiv>
-                    <Sentences>
-                       <MainSentences>{paste.title}</MainSentences>
-                       <SubSentences>{paste.word}</SubSentences>
-                       </Sentences>
-                    <LanDiv>
-                        <Language show={ show } src={ show ? process.env.PUBLIC_URL + '/images/language.svg' : process.env.PUBLIC_URL + '/images/language_on.svg'} 
-                        onClick={(e)=>{e.preventDefault(); setShow(!show)}}></Language>
-                    </LanDiv>
-            </Contents>
-    )
-};
-
-export default NoticePaste_Contents;

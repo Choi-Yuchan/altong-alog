@@ -2,12 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import TimeToggle from '../components/function/TimeToggle';
 
+const NoticeMessageContents  = ({text, setPop, count, setMessage, selected, onRemove}) => {
+
+    return(
+        <Elements popState={text.popState} state={text.state} onClick={ () => {setPop(true); setMessage(count);}}>
+            <Account><Photo src={text.profileImg}/><Nickname>{text.account}</Nickname></Account>
+            <Word>{text.word}</Word>
+            <Day>{TimeToggle(text.date)}</Day>
+            <Close onClick={ (e) => {e.stopPropagation();  onRemove(selected);} }>X</Close>
+        </Elements>
+    )
+};
+
+export default NoticeMessageContents;
+
 const Elements = styled.div`
     border: 1px solid #c4c4c4;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.state == true ? "flex" : "none"};
+    display:flex;
     align-items: center;
     margin-bottom:10px;
     padding:13px;
@@ -34,6 +48,7 @@ const Account = styled.div`
 `;
 const Photo = styled.img`
     width:40px; height:40px;
+    object-fit: cover;
     margin-right:5px;
     border-radius:50%;
 
@@ -93,26 +108,3 @@ const Close = styled.div`
         margin-left:0px;
      }
 `;
-
-const NoticeMessageContents  = ({text, onRemoveMessage, pop, setPop, count, setMessage}) => {
-    const IconsName = {
-        ko : {
-            sent:"님이 보냄",
-            delete:"삭제",
-            van:"차단",
-            send:"보내기",
-            translate:"번역"
-        }
-    }
-
-    return(
-        <Elements popState={text.popState} state={text.state} onClick={ () => {setPop(true); setMessage(count);}}>
-            <Account><Photo src={text.profileImg}/><Nickname>{text.account}</Nickname></Account>
-            <Word>{text.word}</Word>
-            <Day>{TimeToggle(text.date)}</Day>
-            <Close onClick={ (e) => {e.stopPropagation();  onRemoveMessage(text.id);} }>X</Close>
-        </Elements>
-    )
-};
-
-export default NoticeMessageContents;

@@ -1,7 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import NoticeReplyData from '../dummydata/NoticeReplyData.json';
 import NoticeReply_Contents from './NoticeReply_Contents';
+import { useTranslation } from 'react-i18next';
+
+const NoticeReply  = ({dummyData, setDummyData}) => {
+
+    const {t} = useTranslation();
+    const onRemove = (id) => {
+        setDummyData({...dummyData, reply: dummyData.reply.filter(data => data.id !== id)})
+    }
+
+    return(
+        <>
+            <TopTitle>{t('Notification')[0]}</TopTitle>
+            <GrayContents>{t('Post_Comment')[0]}<GrayContentsCount>{dummyData.reply.length}</GrayContentsCount>{t('Post_Comment')[1]}</GrayContents>
+            { 
+                dummyData.reply.map((reply)=>{
+                    return(
+                        <NoticeReply_Contents key={reply.id} selected={reply.id} reply={reply} onRemove={onRemove} ></NoticeReply_Contents>
+                    )
+                })
+            }
+        </>
+    )
+};
+
+export default NoticeReply;
 
 const TopTitle = styled.div`
     font-size: 18px Cabin;
@@ -20,7 +44,7 @@ const GrayContents = styled.div`
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    display:${ props => props.count !== 0 ? "flex" : "none"};
+    display:flex;
     align-items: flex-start;
     margin-bottom:10px;
     padding:13px 13px 13px 80px;
@@ -33,26 +57,3 @@ const GrayContents = styled.div`
         font-size: 14px;
     }
 `;
-
-const NoticeReply  = ({onRemoveReply, usersReply, setUserModify}) => {
-
-    const alarm = NoticeReplyData.ko.alarm;
-    const Title = NoticeReplyData.ko.ReplyTitle;
-
-    return(
-        <>
-        <TopTitle>{alarm}</TopTitle>
-        <GrayContents>{Title.Front}<GrayContentsCount>{usersReply.length}</GrayContentsCount>{Title.Back}</GrayContents>
-        { 
-            usersReply.map((reply)=>{
-                return(
-                    <NoticeReply_Contents key={reply.id} to={reply.href} reply={reply} onRemoveReply={onRemoveReply}></NoticeReply_Contents>
-                )
-            })
-        }
-        
-        </>
-    )
-};
-
-export default NoticeReply;
